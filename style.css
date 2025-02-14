@@ -6,13 +6,215 @@
 
 @font-face {
     font-family: "Barlow Condensed";
-    src: url("./assets/font/BarlowCondensed/BarlowCondensed-Medium.ttf");
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-Thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-ThinItalic.ttf") format("truetype");
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-ExtraLightItalic.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-LightItalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-MediumItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-SemiBoldItalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("./assets/font/BarlowCondensed/BarlowCondensed-ExtraBoldItalic.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-Thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
 }
 
 @font-face {
     font-family: "Montserrat";
-    src: url("./assets/font/Montserrat/Montserrat-Light.ttf");
+    src: url("./assets/font/Montserrat/Montserrat-ThinItalic.ttf") format("truetype");
+    font-weight: 100;
+    font-style: italic;
 }
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-ExtraLightItalic.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-LightItalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-MediumItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-SemiBoldItalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-ExtraBoldItalic.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/font/Montserrat/Montserrat-BlackItalic.ttf") format("truetype");
+    font-weight: 900;
+    font-style: italic;
+}
+
 
 * {
     margin: 0;
@@ -31,6 +233,30 @@ html, body{
     
 } 
 
+.navbar{
+    font-family: "Montserrat";
+    font-weight: 400;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: white;
+    margin: 0 20px;
+    transition:  text-shadow 0.2s;
+}
+
+.navbar a:hover {
+    text-shadow: -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff, 0.5px 0.5px 0 #ffffff;
+}
+
 .center{
     height: 100%;
     width: 100%; 
@@ -39,6 +265,17 @@ html, body{
     align-items: center;
     flex-flow: column;
 }
+
+.center-bottom{
+    position: absolute;
+    height: 100%;
+    width: 100%; 
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    flex-flow: column-reverse;
+}
+
 
 .pf{
     border-radius: 50%;
@@ -51,6 +288,7 @@ html, body{
 .name{
     font-size: clamp(30px, 3vw, 3vw);
     font-family: "Barlow Condensed";
+    font-weight: 600;
     letter-spacing: clamp(4px, 10px, 30px);
     padding-bottom: 10px;
 }
@@ -58,17 +296,32 @@ html, body{
 .sub-name{
     font-size: clamp(10px, 2vw, 1vw);
     font-family: "Montserrat";
+    font-weight: 400;
 }
 
 .bodyholder {
     display: flex;
     flex-direction: column;
     position: relative; /* Ensure positioning context */
-    gap: var(--section-height);
 }
 
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 3s ease-in-out; 
+}
+
+.slide.active {
+    opacity: 1;
+}
 .section {
-    position: static;
+    position: relative;
 }
 
 .background, 
@@ -77,9 +330,11 @@ html, body{
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: var(--section-height);
+    height: 100%;
     background-repeat: no-repeat;
 }
+
+
 
 .background{
     z-index: 1;
@@ -98,12 +353,62 @@ html, body{
     z-index: 3;
 }
 
+.icons-container{
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+}
+
+.social-icon{
+    min-width: 40px;
+	min-height: 40px;
+    background-size: cover;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.scroll-down{
+    display: block;
+    min-width: 20px;
+	min-height: 20px;
+	border-bottom: 2px solid white;
+	border-right: 2px solid white;
+	transform: rotate(45deg);
+    animation: animate 3s infinite;
+    margin-bottom: 30px;
+}
+
+@keyframes animate{
+	
+	0%{
+		opacity: 0;
+		transform: rotate(45deg) translate(-10px, -10px);
+	}
+	50%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+		transform: rotate(45deg) translate(10px, 10px);
+	}
+}
+
+
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
     .spotlight-mask{
         background-color: rgba(0, 0, 0, 0.7);
     }
     
+    .social-icon{
+        min-width: 30px;
+        min-height: 30px;
+        margin: 0 15px;
+    }
 }
 
 
