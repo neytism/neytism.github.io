@@ -14,16 +14,23 @@
     <div class="bodyholder">
 
         <div class="navbar">
-            <a href="">HOME</a>
-            <a href="">PROJECTS</a>
-            <a href="">ILLUSTRATIONS</a>
+            <div class="dropdown">
+                <a >PORTFOLIO</a>
+                <div class="dropdown-content">
+                    <a onclick="selectTab(event, 'tab-1')" href="javascript:void(0)">Games</a>
+                    <a onclick="selectTab(event, 'tab-2')" href="javascript:void(0)">Illustrations</a>
+                    <a onclick="selectTab(event, 'tab-3')" href="javascript:void(0)">Web Development</a>
+                </div>
+            </div>
+            <a href="#projects">ABOUT</a>
+            <a href="">CONTACT</a>
         </div>
         
         <div class="spotlight-mask"></div>
         
-        <div class="section" style="height: 100vh;">
+        <div class="section">
             
-            <div class="section-content">
+            <div class="section-content"  style="height: 100svh; width: 100vw;">
                         
                 <div class="center">
                     <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
@@ -40,49 +47,256 @@
                         <a href="https://www.google.com" class="social-icon" style="background-image: url('assets/img/ico-ig.png');"></a>
                     </div>
                 </div>
-                
+                                
                 
             </div>
             
             <div class="background slideshow-main">
-                <div class="slide" style="background-image: url('assets/img/2.png');"></div>
+                <div class="slide" style="background-image: url('assets/img/bg.webp');"></div>
                 <div class="slide" style="background-image: url('assets/img/3.png');"></div>
                 <div class="slide" style="background-image: url('assets/img/4.png');"></div>
-                <div class="slide" style="background-image: url('assets/img/bg.png');"></div>
+                <div class="slide" style="background-image: url('assets/img/2.png');"></div>
             </div>
 
         </div>
         
-        <div class="section" style="height: 70vh;">
-            
-            <div class="section-content">
-                <div class="center">
-                    <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                    <h1 class="name">NATE FLORENDO</h1>
-                    <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+        <div class="tab-group active" id="tab-1">
+
+            <div class="section" id="projects">
+                
+                <div class="section-content">
+                    <div class="center">
+                        <h1 class="name">GAME PROJECTS</h1>
+                        <h2 class="sub-name">Unity</h2>
+                    </div>
                 </div>
+                
+                <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
+    
+            </div>
+
+            <div class="section" id="projects">
+            
+                <div class="section-content blur">
+                    <div class="game-gallery-container">
+                        <div class="gallery-left">
+                            <div class="main-image-container">
+                                <img src="./assets/img/sudoku/0.png" class="main-image" id="mainImage" currentindex="0">
+                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
+                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
+                            </div>
+                            <div class="thumbnails">
+                                <img src="./assets/img/sudoku/0.png" class="thumbnail active" index=0 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/1.jpg" class="thumbnail" index=1 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/3.jpg" class="thumbnail" index=2 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/4.jpg" class="thumbnail" index=3 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/5.jpg" class="thumbnail" index=4 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/6.jpg" class="thumbnail" index=5 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/7.jpg" class="thumbnail" index=6 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/8.jpg" class="thumbnail" index=7 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/2.jpg" class="thumbnail" index=8 onclick="changeImage(this)">
+                            
+                            </div>
+                        </div>
+                        <div class="gallery-right">
+                            <h2 class="details-title">SUDOKU SHOWDOWN!</h2>
+                            <p class="details-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>
+                                <b>• Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                                • Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                                • Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="background blur" style="background-image: url(./assets/img/sudoku/0.png);"></div>
+    
             </div>
             
-            <div class="background" style="background-image: url('assets/img/bg.png');"></div>
+            
+            <div class="section" id="projects">
+            
+                <div class="section-content blur">
+                    <div class="game-gallery-container reverse">
+                        <div class="gallery-left">
+                            <div class="main-image-container">
+                                <img src="./assets/img/interweave/5.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
+                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
+                            </div>
+                            <div class="thumbnails">
+                                <img src="./assets/img/interweave/5.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/2.jpg" class="thumbnail" index=1 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/3.jpg" class="thumbnail" index=2 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/4.jpg" class="thumbnail" index=3 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/1.jpg" class="thumbnail" index=4 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/6.jpg" class="thumbnail" index=5 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/7.jpg" class="thumbnail" index=6 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/8.jpg" class="thumbnail" index=7 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/9.jpg" class="thumbnail" index=8 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/10.jpg" class="thumbnail" index=9 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/11.jpg" class="thumbnail" index=10 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/12.jpg" class="thumbnail" index=11 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/13.jpg" class="thumbnail" index=12 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/14.jpg" class="thumbnail" index=13 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/15.jpg" class="thumbnail" index=14 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/16.jpg" class="thumbnail" index=15 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/17.jpg" class="thumbnail" index=16 onclick="changeImage(this)">
+                            
+                            </div>
+                        </div>
+                        <div class="gallery-right">
+                            <h2 class="details-title">INTERWEAVE</h2>
+                            <p class="details-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>
+                                <b>• Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                                • Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                                • Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="background blur" style="background-image: url(./assets/img/interweave/8.jpg);"></div>
+    
+            </div>
 
+
+            <div class="section" id="projects">
+            
+                <div class="section-content blur">
+                    <div class="game-gallery-container">
+                        <div class="gallery-left">
+                            <div class="main-image-container">
+                                <img src="./assets/img/cupit/1.jpg" class="main-image mobile" id="mainImage" currentindex="0">
+                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
+                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
+                            </div>
+                            <div class="thumbnails">
+                                <img src="./assets/img/cupit/1.jpg" class="thumbnail mobile active" index=0 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/4.jpg" class="thumbnail mobile" index=1 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/5.jpg" class="thumbnail mobile" index=2 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/6.jpg" class="thumbnail mobile" index=3 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/3.jpg" class="thumbnail mobile" index=4 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/2.jpg" class="thumbnail mobile" index=5 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/7.jpg" class="thumbnail mobile" index=7 onclick="changeImage(this)">
+                            
+                            </div>
+                        </div>
+                        <div class="gallery-right">
+                            <h2 class="details-title">Cup It!</h2>
+                            <p class="details-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>
+                                <b>• Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                                • Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                                • Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="background blur" style="background-image: url(./assets/img/cupit/4.jpg);"></div>
+    
+            </div>
+        
+        </div>
+
+        <div class="tab-group" id="tab-2">
+
+            <div class="section" id="projects">
+            
+                <div class="section-content">
+                    <div class="center">
+                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
+                        <h1 class="name">ILLUSTRATION 1</h1>
+                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/6.png');"></div>
+    
+            </div>
+            
+    
+            <div class="section" id="projects">
+                
+                <div class="section-content">
+                    <div class="center">
+                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
+                        <h1 class="name">ILLUSTRATION 2</h1>
+                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/2.png');"></div>
+    
+            </div>
+
+            <div class="section" id="projects">
+                
+                <div class="section-content">
+                    <div class="center">
+                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
+                        <h1 class="name">ILLUSTRATION 3</h1>
+                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/2.png');"></div>
+    
+            </div>
+
+            <div class="section" id="projects">
+                
+                <div class="section-content">
+                    <div class="center">
+                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
+                        <h1 class="name">ILLUSTRATION 4</h1>
+                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/2.png');"></div>
+    
+            </div>
+        
         </div>
         
+        <div class="tab-group" id="tab-3">
 
-        <div class="section" style="height: 70vh;">
+            <div class="section" id="projects">
             
-            <div class="section-content">
-                <div class="center">
-                    <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                    <h1 class="name">NATE FLORENDO</h1>
-                    <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                <div class="section-content">
+                    <div class="center">
+                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
+                        <h1 class="name">WEB DEV 1</h1>
+                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                    </div>
                 </div>
+                
+                <div class="background" style="background-image: url('assets/img/1.png');"></div>
+    
             </div>
             
-            <div class="background" style="background-image: url('assets/img/bg.png');"></div>
-
+    
+            <div class="section" id="projects">
+                
+                <div class="section-content">
+                    <div class="center">
+                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
+                        <h1 class="name">WEB DEV 2</h1>
+                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/3.png');"></div>
+    
+            </div>
+        
         </div>
-
-        <div class="section"></div>
+        
+        
 
 
     </div>

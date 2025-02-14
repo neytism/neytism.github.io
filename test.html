@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Album</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #333;
+        }
+
+        .game-gallery-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-left {
+            flex: 2;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .gallery-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .gallery-nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .prev-button {
+            left: 10px;
+        }
+
+        .next-button {
+            right: 10px;
+        }
+        
+        .thumbnails {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar styling */
+        .thumbnails::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .thumbnails::-webkit-scrollbar-track {
+            background: #464646;
+            border-radius: 4px;
+        }
+
+        .thumbnails::-webkit-scrollbar-thumb {
+            background: #7e7e7e;
+            border-radius: 4px;
+        }
+
+        .thumbnails::-webkit-scrollbar-thumb:hover {
+            background: #afafaf;
+        }
+
+        .thumbnail {
+            flex: 0 0 auto; 
+            width: 100px;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: opacity 0.3s;
+        }
+
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+
+        .thumbnail.active {
+            border: 2px solid #ffffff;
+        }
+        
+        .gallery-right {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .details-title {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .details-description {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .game-gallery-container {
+                flex-direction: column;
+            }
+
+            .gallery-left, .gallery-right {
+                width: 100%;
+            }
+
+            .thumbnails {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-gallery-container">
+        <div class="gallery-left">
+            <div class="main-image-container">
+                <img src="./assets/img/samples/1.jpg" alt="Selected Image" class="main-image" id="mainImage" currentindex="0">
+                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&lt;</button>
+                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&gt;</button>
+            </div>
+            <div class="thumbnails">
+                <img src="./assets/img/samples/1.jpg" alt="Thumbnail 1" class="thumbnail active" index=0 onclick="changeImage(this)">
+                <img src="./assets/img/samples/2.jpg" alt="Thumbnail 3" class="thumbnail" index=1 onclick="changeImage(this)">
+                <img src="./assets/img/samples/3.jpg" alt="Thumbnail 4" class="thumbnail" index=2 onclick="changeImage(this)">
+                <img src="./assets/img/samples/4.jpg" alt="Thumbnail 5" class="thumbnail" index=3 onclick="changeImage(this)">
+                <img src="./assets/img/samples/5.jpg" alt="Thumbnail 6" class="thumbnail" index=4 onclick="changeImage(this)">
+                <img src="./assets/img/samples/6.jpg" alt="Thumbnail 6" class="thumbnail" index=5 onclick="changeImage(this)">
+                <img src="./assets/img/samples/7.jpg" alt="Thumbnail 6" class="thumbnail" index=6 onclick="changeImage(this)">
+            </div>
+        </div>
+        <div class="gallery-right">
+            <h2 class="details-title">Image Title</h2>
+            <p class="details-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="game-gallery-container">
+        <div class="gallery-left">
+            <div class="main-image-container">
+                <img src="./assets/img/samples/1.jpg" alt="Selected Image" class="main-image" id="mainImage" currentindex="0">
+                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&lt;</button>
+                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&gt;</button>
+            </div>
+            <div class="thumbnails">
+                <img src="./assets/img/samples/1.jpg" alt="Thumbnail 1" class="thumbnail active" index=0 onclick="changeImage(this)">
+                <img src="./assets/img/samples/2.jpg" alt="Thumbnail 3" class="thumbnail" index=1 onclick="changeImage(this)">
+                <img src="./assets/img/samples/3.jpg" alt="Thumbnail 4" class="thumbnail" index=2 onclick="changeImage(this)">
+                <img src="./assets/img/samples/4.jpg" alt="Thumbnail 5" class="thumbnail" index=3 onclick="changeImage(this)">
+                <img src="./assets/img/samples/5.jpg" alt="Thumbnail 6" class="thumbnail" index=4 onclick="changeImage(this)">
+                <img src="./assets/img/samples/6.jpg" alt="Thumbnail 6" class="thumbnail" index=5 onclick="changeImage(this)">
+                <img src="./assets/img/samples/7.jpg" alt="Thumbnail 6" class="thumbnail" index=6 onclick="changeImage(this)">
+            </div>
+        </div>
+        <div class="gallery-right">
+            <h2 class="details-title">Image Title</h2>
+            <p class="details-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function changeImage(element) {
+            const index = element.getAttribute("index");
+            const parent = element.parentNode;
+            const children = getChildList(parent);
+            
+            // Remove active class from all thumbnails
+            for (let i = 0; i < children.length; i++) {
+                children[i].classList.remove('active');
+            }
+
+            // Add active class to clicked thumbnail
+            element.classList.add('active');
+            
+            // Update main image
+            const mainImage = findSiblingById(parent, "mainImage");
+            mainImage.src = element.src;
+            mainImage.alt = element.alt;
+            mainImage.setAttribute("currentindex", index);
+
+            // Scroll thumbnail into view
+            scrollThumbnailIntoView(element);
+        }
+
+        function navigateImage(element, direction) {
+            const mainImage = element.parentElement.firstElementChild;
+            const currentIndex = parseInt(mainImage.getAttribute('currentindex'));
+            const thumbnails = element.parentElement.nextElementSibling;
+            const thumbnailsList = getChildList(thumbnails);
+            const maxIndex = thumbnailsList.length - 1;
+
+            let newIndex;
+            if (direction === 'next') {
+                newIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
+            } else {
+                newIndex = currentIndex - 1 < 0 ? maxIndex : currentIndex - 1;
+            }
+
+            // Find and click the thumbnail at the new index
+            const targetThumbnail = thumbnailsList[newIndex];
+            changeImage(targetThumbnail);
+        }
+
+        function scrollThumbnailIntoView(thumbnail) {
+            const thumbnailsContainer = thumbnail.parentNode;
+            const thumbnailRect = thumbnail.getBoundingClientRect();
+            const containerRect = thumbnailsContainer.getBoundingClientRect();
+
+            // Calculate if the thumbnail is outside the visible area
+            const isOutsideLeft = thumbnailRect.left < containerRect.left;
+            const isOutsideRight = thumbnailRect.right > containerRect.right;
+
+            if (isOutsideLeft) {
+                thumbnailsContainer.scrollLeft += thumbnailRect.left - containerRect.left - 10;
+            } else if (isOutsideRight) {
+                thumbnailsContainer.scrollLeft += thumbnailRect.right - containerRect.right + 10;
+            }
+        }
+
+        function findSiblingById(element, id) {
+            const parent = element.parentElement.parentElement;
+            return parent.querySelector('#' + id);
+        }
+
+        function getChildList(parent) {
+            return Array.from(parent.children);
+        }
+            
+    </script>
+</body>
+</html>
