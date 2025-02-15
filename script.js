@@ -150,3 +150,17 @@ function getChildList(parent) {
     return Array.from(parent.children);
 }
     
+
+const thumbnailContainers = document.querySelectorAll('.thumbnails');
+
+// Loop through each thumbnail container
+thumbnailContainers.forEach(thumbnails => {
+    // Add mouse wheel event listener
+    thumbnails.addEventListener('wheel', function(event) {
+        // Prevent default vertical scroll
+        event.preventDefault();
+        
+        // Scroll horizontally based on the vertical scroll delta
+        thumbnails.scrollLeft += event.deltaY; // Use deltaY for vertical scroll input
+    });
+});
