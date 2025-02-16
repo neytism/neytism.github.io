@@ -142,6 +142,7 @@ html, body, a, button{
     max-height:250px;
     width: auto;
     height: auto;
+    z-index: 200;
 }
 
 .name{
@@ -452,8 +453,7 @@ html, body, a, button{
     height: 20px;
     border-radius: 50%;
     background-color: white;
-    z-index: 300;
-    mix-blend-mode: difference;
+    z-index: 150 ;
   }
   
 
