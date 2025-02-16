@@ -94,7 +94,7 @@ class Vector {
   let autoMovePosition = new Vector(window.innerWidth / 2, window.innerHeight / 2);
   let autoMoveVelocity = new Vector(getRandom(-2, 2), getRandom(-2, 2));
   let autiMoveMultiplier = 1.25;
-  const MOUSE_TIMEOUT = 3000; 
+  let mouseTimeOut = 0; 
   const AUTO_MOVE_SPEED = 5;
   
   const AUTO_MOVE_BOUNDARY_PADDING = 150;
@@ -118,6 +118,7 @@ class Vector {
     }
     
     update();
+  
   }
   
   
@@ -160,6 +161,8 @@ class Vector {
  
   function inputMove(e) {
     if (e.type == "touchmove") e.preventDefault();
+
+    mouseTimeOut = 30000;
     
     var x, y;
     if (e.type.indexOf("mouse") >= 0) {
@@ -232,7 +235,7 @@ class Vector {
     if (count < total) create();
   
     const currentTime = Date.now();
-    if (currentTime - lastMouseMoveTime > MOUSE_TIMEOUT) {
+    if (currentTime - lastMouseMoveTime > mouseTimeOut) {
       updateAutoMove();
       mouseVec.x = autoMovePosition.x;
       mouseVec.y = autoMovePosition.y;
