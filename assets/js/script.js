@@ -29,16 +29,6 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// dont do if mobile
-if (window.innerWidth >= 768) {
-    
-    window.addEventListener('mousemove', function (e) {
-        mouseX = e.pageX;
-        mouseY = e.pageY - window.scrollY;
-    });
-    
-    animate()
-}
 
 const slides = document.querySelectorAll('.slide');
 let currentSlide = 0;
@@ -49,9 +39,12 @@ function showNextSlide() {
     slides[currentSlide].classList.add('active');
 }
 
-setInterval(showNextSlide, 7500);
+if(slides.length > 0){
+    setInterval(showNextSlide, 5000);
 
-slides[currentSlide].classList.add('active');
+    slides[currentSlide].classList.add('active');
+}
+
 
 let currentTabId = "tab-1";
 
@@ -164,3 +157,128 @@ thumbnailContainers.forEach(thumbnails => {
         thumbnails.scrollLeft += event.deltaY; // Use deltaY for vertical scroll input
     });
 });
+
+
+const $bigBall = document.querySelector('.cursor-ball-big-container');
+const $smallBall = document.querySelector('.cursor-ball-small-container');
+const $hoverables = document.querySelectorAll('.hoverable, a, button');
+
+$bigBall.style.opacity = 0;
+$smallBall.style.opacity = 0;
+
+let cursorVisible = false;
+
+// Move the cursor
+function onMouseMove(e) {
+
+if (!cursorVisible) {
+    $bigBall.style.opacity = 1;
+    $smallBall.style.opacity = 1;
+    cursorVisible = true; // Set the flag to true after showing the balls
+    }
+
+  TweenMax.to($bigBall, .4, {
+    x: e.clientX - 15,
+    y: e.clientY - 15
+  })
+  
+  TweenMax.to($smallBall, .1, {
+    x: e.clientX - 5,
+    y: e.clientY - 5
+  })
+  
+}
+
+// Hover an element
+function onMouseHover() {
+  TweenMax.to($bigBall, .3, {
+    scale: 3
+  })
+}
+
+function onMouseHoverOut() {
+  TweenMax.to($bigBall, .3, {
+    scale: 1
+  })
+}
+
+// custom cursor end
+
+
+function addHoverEventToLinks() {
+    // Select all <a> elements on the page
+    const links = document.querySelectorAll('a');
+
+    links.forEach(link => {
+        // Get the ddcid attribute value
+        const ddcid = link.getAttribute('ddcid');
+
+        if (ddcid) {
+            const dropdownElement = document.getElementById(ddcid);
+
+            if (dropdownElement) {
+                // Add mouseover event listener to <a>
+                link.addEventListener('mouseover', () => {
+                    showDropdown(link, dropdownElement);
+                });
+
+                // Add mouseover event listener to dropdown content
+                dropdownElement.addEventListener('mouseover', () => {
+                    showDropdown(link, dropdownElement);
+                });
+
+                // Add mouseout event listener to <a>
+                link.addEventListener('mouseout', (e) => {
+                    hideDropdown(e, link, dropdownElement);
+                });
+
+                // Add mouseout event listener to dropdown content
+                dropdownElement.addEventListener('mouseout', (e) => {
+                    hideDropdown(e, link, dropdownElement);
+                });
+            }
+        }
+    });
+
+    function showDropdown(link, dropdownElement) {
+        // Add the "open-dropdown" class
+        dropdownElement.classList.add('open-dropdown');
+
+        // Position the dropdown element just below the <a>
+        const rect = link.getBoundingClientRect();
+        dropdownElement.style.top = `${rect.bottom}px`;
+        dropdownElement.style.left = `${rect.left}px`;
+    }
+
+    function hideDropdown(event, link, dropdownElement) {
+        // Check if the mouse is leaving both the link and the dropdown
+        const relatedTarget = event.relatedTarget;
+        if (!link.contains(relatedTarget) && !dropdownElement.contains(relatedTarget)) {
+            dropdownElement.classList.remove('open-dropdown');
+        }
+    }
+}
+
+// Call the function to activate hover events
+addHoverEventToLinks();
+
+// dont do if mobile
+if (window.innerWidth >= 768) {
+    
+    window.addEventListener('mousemove', function (e) {
+        mouseX = e.pageX;
+        mouseY = e.pageY - window.scrollY;
+    });
+    
+    animate();
+
+    document.body.addEventListener('mousemove', onMouseMove);
+    for (let i = 0; i < $hoverables.length; i++) {
+      $hoverables[i].addEventListener('mouseenter', onMouseHover);
+      $hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
+    }
+    
+    document.querySelector('.cursor').classList.remove("hide");
+
+}
+
