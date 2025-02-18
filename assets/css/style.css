@@ -138,6 +138,9 @@ html, body, a, button{
 
 .pf{
     border-radius: 50%;
+    object-fit: cover;
+    min-width:250px;
+    min-height:250px;
     max-width:250px;
     max-height:250px;
     width: auto;
@@ -443,6 +446,13 @@ html, body, a, button{
     
     .sub-name{
         padding: 0;
+    }
+
+    .pf{
+        min-width:200px;
+        min-height:200px;
+        max-width:200px;
+        max-height:200px;
     }
 
 }
