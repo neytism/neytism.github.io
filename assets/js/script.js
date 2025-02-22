@@ -1,52 +1,68 @@
+class GameGallery {
+    constructor(gallery, isInsideParent){
+        this.gallery = gallery;
+        this.isInsideParent = isInsideParent;
+    }
+}
+
+//spotlight
 const spotlight = document.querySelector('.spotlight-mask');
-
-let mouseX = 0;
-let mouseY = 0;
-
-// Smoothing factor
 const smoothFollow = 0.1; 
+let mouseWindowPosX = 0;
+let mouseWindowPosY = 0;
+let smoothMouseWindowPosX = mouseWindowPosX;
+let smoothMouseWindowPosY = mouseWindowPosY;
 
-// Variables to hold smoothed positions
-let smoothedX = mouseX;
-let smoothedY = mouseY;
+//slideshow
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
 
-// Function to update spotlight positions
-function updateSpotlights() {
-    // Smoothly interpolate the spotlight positions
-    smoothedX += (mouseX - smoothedX) * smoothFollow;
-    smoothedY += (mouseY - smoothedY) * smoothFollow;
+//tabs
+let currentTabId = "tab-1";
+
+//cursor
+const bigBall = document.querySelector('.cursor-ball-big-container');
+const smallBall = document.querySelector('.cursor-ball-small-container');
+const hoverables = document.querySelectorAll('.hoverable, a, button');
+let cursorVisible = false;
+
+//game image sliders
+var tempGameGalleries = document.querySelectorAll('.game-gallery-container');
+const thumbnailContainers = document.querySelectorAll('.thumbnails');
+var gameGalleries = [];
+var cardSize = { width: 0, height: 0 };
+var SCALE_X = 1.5;
+var SCALE_Y = SCALE_X * 1.25;
+var isInsideParent = false;
+let mouseGalleryPosX = 0;
+let mouseGalleryPosY = 0;
+
+
+Awake();
+
+function updateSpotlight() {
+    smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
+    smoothMouseWindowPosY += (mouseWindowPosY - smoothMouseWindowPosY) * smoothFollow;
 
     const rect = spotlight.getBoundingClientRect();
-    const xPos = ((smoothedX - rect.left) / rect.width) * 100;
-    const yPos = ((smoothedY - rect.top) / rect.height) * 100;
+    const xPos = ((smoothMouseWindowPosX - rect.left) / rect.width) * 100;
+    const yPos = ((smoothMouseWindowPosY - rect.top) / rect.height) * 100;
     document.documentElement.style.setProperty('--xPos', `${xPos}%`);
     document.documentElement.style.setProperty('--yPos', `${yPos}%`);
 
 }
 
-function animate() {
-    updateSpotlights();
-    requestAnimationFrame(animate);
+function animateSpotlight() {
+    updateSpotlight();
+    requestAnimationFrame(animateSpotlight);
 }
 
-
-const slides = document.querySelectorAll('.slide');
-let currentSlide = 0;
 
 function showNextSlide() {
     slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add('active');
 }
-
-if(slides.length > 0){
-    setInterval(showNextSlide, 5000);
-
-    slides[currentSlide].classList.add('active');
-}
-
-
-let currentTabId = "tab-1";
 
 function selectTab(event, tabId) {
     
@@ -144,65 +160,39 @@ function getChildList(parent) {
 }
     
 
-const thumbnailContainers = document.querySelectorAll('.thumbnails');
-
-// Loop through each thumbnail container
-thumbnailContainers.forEach(thumbnails => {
-    // Add mouse wheel event listener
-    thumbnails.addEventListener('wheel', function(event) {
-        // Prevent default vertical scroll
-        event.preventDefault();
-        
-        // Scroll horizontally based on the vertical scroll delta
-        thumbnails.scrollLeft += event.deltaY; // Use deltaY for vertical scroll input
-    });
-});
-
-
-const $bigBall = document.querySelector('.cursor-ball-big-container');
-const $smallBall = document.querySelector('.cursor-ball-small-container');
-const $hoverables = document.querySelectorAll('.hoverable, a, button');
-
-$bigBall.style.opacity = 0;
-$smallBall.style.opacity = 0;
-
-let cursorVisible = false;
 
 // Move the cursor
 function onMouseMove(e) {
 
-if (!cursorVisible) {
-    $bigBall.style.opacity = 1;
-    $smallBall.style.opacity = 1;
-    cursorVisible = true; // Set the flag to true after showing the balls
+    if (!cursorVisible) {
+        bigBall.style.opacity = 1;
+        smallBall.style.opacity = 1;
+        cursorVisible = true; 
     }
 
-  TweenMax.to($bigBall, .4, {
-    x: e.clientX - 15,
-    y: e.clientY - 15
-  })
-  
-  TweenMax.to($smallBall, .1, {
-    x: e.clientX - 5,
-    y: e.clientY - 5
-  })
-  
+    TweenMax.to(bigBall, .4, {
+        x: e.clientX - 15,
+        y: e.clientY - 15
+    })
+
+    TweenMax.to(smallBall, .1, {
+        x: e.clientX - 5,
+        y: e.clientY - 5
+    })
+
 }
 
-// Hover an element
 function onMouseHover() {
-  TweenMax.to($bigBall, .3, {
+  TweenMax.to(bigBall, .3, {
     scale: 3
   })
 }
 
 function onMouseHoverOut() {
-  TweenMax.to($bigBall, .3, {
+  TweenMax.to(bigBall, .3, {
     scale: 1
   })
 }
-
-// custom cursor end
 
 
 function addHoverEventToLinks() {
@@ -243,7 +233,7 @@ function addHoverEventToLinks() {
     function showDropdown(link, dropdownElement) {
         // Add the "open-dropdown" class
         dropdownElement.classList.add('open-dropdown');
-
+        
         // Position the dropdown element just below the <a>
         const rect = link.getBoundingClientRect();
         dropdownElement.style.top = `${rect.bottom}px`;
@@ -251,7 +241,6 @@ function addHoverEventToLinks() {
     }
 
     function hideDropdown(event, link, dropdownElement) {
-        // Check if the mouse is leaving both the link and the dropdown
         const relatedTarget = event.relatedTarget;
         if (!link.contains(relatedTarget) && !dropdownElement.contains(relatedTarget)) {
             dropdownElement.classList.remove('open-dropdown');
@@ -259,26 +248,96 @@ function addHoverEventToLinks() {
     }
 }
 
-// Call the function to activate hover events
-addHoverEventToLinks();
-
-// dont do if mobile
-if (window.innerWidth >= 768) {
-    
-    window.addEventListener('mousemove', function (e) {
-        mouseX = e.pageX;
-        mouseY = e.pageY - window.scrollY;
+function updateCardRotations() {
+    gameGalleries.forEach(gallery => {
+        if (gallery.isInsideParent) {
+            cardSize = {
+                width: gallery.gallery.offsetWidth || 0,
+                height: gallery.gallery.offsetHeight || 0,
+            };
+            
+            var rotationX = (mouseGalleryPosY / cardSize.height) * -(SCALE_Y * 2) + SCALE_Y;
+            var rotationY = (mouseGalleryPosX / cardSize.width) * (SCALE_X * 2) - SCALE_X;
+            
+            gallery.gallery.style.transform = `perspective(1000px) rotateX(${rotationX}deg) rotateY(${rotationY}deg) translateZ(10px)`;
+        }
     });
-    
-    animate();
 
-    document.body.addEventListener('mousemove', onMouseMove);
-    for (let i = 0; i < $hoverables.length; i++) {
-      $hoverables[i].addEventListener('mouseenter', onMouseHover);
-      $hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
-    }
-    
-    document.querySelector('.cursor').classList.remove("hide");
-
+    requestAnimationFrame(updateCardRotations);
 }
 
+// Function to reset transformations for all galleries
+function resetGalleryTransformations(gallery) {
+    gallery.gallery.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+}
+
+
+
+function Awake(){
+    bigBall.style.opacity = 0;
+    smallBall.style.opacity = 0;
+
+    
+    if(slides.length > 0){
+        setInterval(showNextSlide, 5000);
+        
+        slides[currentSlide].classList.add('active');
+    }
+    
+    thumbnailContainers.forEach(thumbnails => {
+        thumbnails.addEventListener('wheel', function (event) {
+            event.preventDefault();
+            thumbnails.scrollLeft += event.deltaY;
+        });
+    });
+    
+
+    addHoverEventToLinks();
+        
+    tempGameGalleries.forEach(gallery => {
+        let newGallery = new GameGallery(gallery,false);
+        gameGalleries.push(newGallery);
+    });
+    
+    //thing only to do if on desktop
+    if (window.innerWidth >= 768) {
+    
+        window.addEventListener('mousemove', function (e) {
+            mouseWindowPosX = e.pageX;
+            mouseWindowPosY = e.pageY - window.scrollY;
+        });
+        
+        animateSpotlight();
+        
+        document.body.addEventListener('mousemove', onMouseMove);
+        for (let i = 0; i < hoverables.length; i++) {
+          hoverables[i].addEventListener('mouseenter', onMouseHover);
+          hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
+        }
+        
+        document.querySelector('.cursor').classList.remove("hide");
+        
+        requestAnimationFrame(updateCardRotations);
+        
+        gameGalleries.forEach(gallery => {
+            var parentContainer = gallery.gallery.parentElement.parentElement; 
+            
+            parentContainer.addEventListener('mousemove', function (e) {
+                var rect = parentContainer.getBoundingClientRect();
+                mouseGalleryPosX = e.clientX - rect.left;
+                mouseGalleryPosY = e.clientY - rect.top;
+            });
+            
+            parentContainer.addEventListener('mouseenter', () => {
+                gallery.isInsideParent = true; 
+            });
+            
+            parentContainer.addEventListener('mouseleave', () => {
+                gallery.isInsideParent = false; 
+                resetGalleryTransformations(gallery); 
+            });
+        });
+        
+    }
+    
+}

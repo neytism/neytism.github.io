@@ -18,7 +18,7 @@ html, body{
     scrollbar-width: none;
     width: 100vw;
     scroll-behavior: smooth;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     color: white;
 } 
 
@@ -169,6 +169,10 @@ html, body, a, button{
     position: relative; /* positioning context */
 }
 
+.slideshow-main{
+    background-color: black;
+}
+
 .slide {
     position: absolute;
     top: 0;
@@ -212,6 +216,14 @@ html, body, a, button{
     background-position: center;
     z-index: 1;
     object-fit: cover;
+    background-color: w;
+}
+
+.spacer{
+    background-color: white;
+    color: black;
+    z-index: 3;
+    height: 100px;
 }
 
 .blur{
@@ -273,14 +285,18 @@ html, body, a, button{
 }
 
 .game-gallery-container {
-    backdrop-filter: blur(5px);
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     display: flex;
     gap: 20px;
     max-width: 1200px;
     margin: 80px auto;
     padding: 30px;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease;
+    box-shadow: 10px 10px 50px #00000044;
 }
+
+
 
 .reverse{
     flex-flow: row-reverse;
