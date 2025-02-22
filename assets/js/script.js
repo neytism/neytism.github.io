@@ -226,7 +226,7 @@ function addHoverEventToLinks() {
                 dropdownElement.addEventListener('mouseover', () => {
                     showDropdown(link, dropdownElement);
                 });
-
+                
                 // Add mouseout event listener to <a>
                 link.addEventListener('mouseout', (e) => {
                     hideDropdown(e, link, dropdownElement);
