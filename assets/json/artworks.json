@@ -1,0 +1,31 @@
+[
+    {
+      "category": "3D WORKS",
+      "title": "Switch",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "image":  ["/assets/img/3D/kb_switch.jpg","/assets/img/3D/switch.jpg","/assets/img/3D/onezo.jpg"]
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Nintendo switch",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "image":  ["/assets/img/3D/switch.jpg"]
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Psp",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "image":  ["/assets/img/3D/psp.jpg"]
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "Kyla and Blanche Menu ",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "image":  ["/assets/img/3D/kbs1.jpg"]
+    }
+  ]
+  

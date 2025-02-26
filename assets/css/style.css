@@ -26,6 +26,10 @@ html, body, a, button{
     cursor: none !important;
 }
 
+body.noscroll{
+    overflow:hidden;
+}
+
 .cursor{
     pointer-events: none;
 }
@@ -195,11 +199,18 @@ html, body, a, button{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100dvh;
     height: auto;
 }
 
 
 .section-content {
+    z-index: 3;
+    width: 100svw;
+    flex: 1;
+    display: flex;        
+    justify-content: center;
+    align-items: center; 
     position: relative;
     z-index: 2;
     padding: 40px;
@@ -207,6 +218,7 @@ html, body, a, button{
 }
 
 .background {
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -216,7 +228,6 @@ html, body, a, button{
     background-position: center;
     z-index: 1;
     object-fit: cover;
-    background-color: w;
 }
 
 .spacer{
@@ -237,11 +248,6 @@ html, body, a, button{
     background-color: rgba(0, 0, 0, var(--mask-opacity));
     z-index: 2;
     mask: radial-gradient(circle closest-side at var(--xPos) var(--yPos), rgba(0, 0, 0, calc(1 - var(--mask-circle-intensity))) 0em, rgb(0, 0, 0) 100em);
-}
-
-.section-content{
-    z-index: 3;
-    width: 100svw;
 }
 
 .icons-container{
@@ -295,8 +301,6 @@ html, body, a, button{
     transition: transform 0.2s ease;
     box-shadow: 10px 10px 50px #00000044;
 }
-
-
 
 .reverse{
     flex-flow: row-reverse;
@@ -400,6 +404,80 @@ html, body, a, button{
     padding: 20px;
 }
 
+
+.art-section {
+    padding-top: 60px;
+    margin: 0 -20px;
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.art-container{
+    padding: 20px;
+    height: auto;
+    flex: 0 0 20%;
+    display: flex;
+    flex-flow: column;
+    text-align: left;
+}
+
+.art-container.title{
+    flex: 0 0 100%; 
+    font-size: 48px; 
+    letter-spacing: 3px;
+    font-family: "Barlow Condensed";
+    font-weight: 600;
+}
+
+.img-hover-zoom {
+    overflow: hidden; 
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.img-hover-zoom img {
+    height: auto; 
+    display: block;
+    width: 100%; 
+    transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.1);
+}
+
+ 
+ .art-container h1{
+    text-transform: uppercase;
+    font-family: "Barlow Condensed";
+    font-weight: 500;
+    font-size: 16px;
+    padding-bottom: 5px;
+ }
+ 
+ .art-container h3{
+    font-family: "Montserrat";
+    font-weight: 400;
+    line-height: 1.2;
+    font-size: 12px;
+    padding-bottom: 7.5px;
+ }
+ 
+ 
+ .art-container h4 {
+    display: list-item;
+    font-family: "Montserrat";
+    font-weight: 500;
+    line-height: 1.2;
+    list-style-type: disc;
+    font-size: 12px;
+ }
+ 
+
 .details-title {
     font-family: "Barlow Condensed";
     font-weight: 600;
@@ -413,6 +491,39 @@ html, body, a, button{
     font-weight: 500;
     line-height: 1.6;
     color: #1f1f1f;
+}
+
+.selected-image-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    min-width: 100svw;
+    position: fixed;
+    z-index: 105;
+    padding: 60px;
+    background-color: rgba(8, 8, 8, 0.932);
+}
+
+.selected-image-container .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.selected-image-container .image img {
+    object-fit: contain;
+    max-height: calc(100dvh - 120px);
+    max-width: 100%;
+}
+
+.selected-image-container .close {
+    font-family: "Montserrat";
+    position: absolute;
+    padding: 25px;
+    top: 25px;
+    right: 30px;
 }
 
 @keyframes animate{
@@ -472,6 +583,51 @@ html, body, a, button{
         max-height:200px;
     }
 
+    .art-container{
+        padding: 10px;
+        flex: 0 1 50%;
+    }
+
+    .art-container.title{
+        font-size: 36px; 
+    }
+
+    .img-hover-zoom {
+        margin-bottom: 15px;
+    }
+    
+     
+    .art-container h1{
+    font-size: 18px;
+    padding-bottom: 7.5px;
+    }
+    
+    .art-container h3{
+    font-size: 12px;
+    padding-bottom: 7.5px;
+    }
+    
+    
+    .art-container h4 {
+    font-size: 12px;
+    }
+
+
+    .selected-image-container {
+        padding: 20px;
+    }
+    
+    .selected-image-container .image img {
+        height: 100%;
+        
+    }
+    
+    .selected-image-container .close {
+        top: 10px;
+        right: 15px;
+    }
+    
+    
 }
 
 .particle-circle {

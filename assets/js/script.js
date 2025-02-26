@@ -5,6 +5,10 @@ class GameGallery {
     }
 }
 
+//general
+const images = document.querySelectorAll('img');
+const divs = document.querySelectorAll('div');
+
 //spotlight
 const spotlight = document.querySelector('.spotlight-mask');
 const smoothFollow = 0.1; 
@@ -23,7 +27,7 @@ let currentTabId = "tab-1";
 //cursor
 const bigBall = document.querySelector('.cursor-ball-big-container');
 const smallBall = document.querySelector('.cursor-ball-small-container');
-const hoverables = document.querySelectorAll('.hoverable, a, button');
+let hoverables = [];
 let cursorVisible = false;
 
 //game image sliders
@@ -37,8 +41,11 @@ var isInsideParent = false;
 let mouseGalleryPosX = 0;
 let mouseGalleryPosY = 0;
 
+//image enlarge
+const selectedImageContainer = document.querySelector('.selected-image-container');
+const selectedArtContainer = document.querySelector('.selected-art-container');
+let clickableImages = [];
 
-Awake();
 
 function updateSpotlight() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
@@ -92,7 +99,7 @@ function selectTab(event, tabId) {
 }
 
 
-function changeImage(element) {
+function changeImageGameGallery(element) {
     const index = element.getAttribute("index");
     const parent = element.parentNode;
     const children = getChildList(parent);
@@ -131,7 +138,7 @@ function navigateImage(element, direction) {
 
     // Find and click the thumbnail at the new index
     const targetThumbnail = thumbnailsList[newIndex];
-    changeImage(targetThumbnail);
+    changeImageGameGallery(targetThumbnail);
 }
 
 function scrollThumbnailIntoView(thumbnail) {
@@ -266,17 +273,40 @@ function updateCardRotations() {
     requestAnimationFrame(updateCardRotations);
 }
 
-// Function to reset transformations for all galleries
 function resetGalleryTransformations(gallery) {
     gallery.gallery.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
 }
 
+function closeSelectedImageContainer(){
+    selectedImageContainer.classList.add('hide');
+    document.body.classList.remove('noscroll');
+}
 
+function closeSelectedArtContainer(){
+    selectedArtContainer.classList.add('hide');
+    document.body.classList.remove('noscroll');
+}
+
+
+function disableContextMenu(event) {
+    event.preventDefault();
+}
 
 function Awake(){
+    
+    images.forEach(image => {
+        image.addEventListener('contextmenu', disableContextMenu);
+    });
+    
+    divs.forEach(div => {
+        div.addEventListener('contextmenu', disableContextMenu);
+    });
+
     bigBall.style.opacity = 0;
     smallBall.style.opacity = 0;
-
+    
+    hoverables =  document.querySelectorAll('.hoverable, a, button');
+    clickableImages = document.querySelectorAll('.enlargeable');
     
     if(slides.length > 0){
         setInterval(showNextSlide, 5000);
@@ -298,6 +328,23 @@ function Awake(){
         let newGallery = new GameGallery(gallery,false);
         gameGalleries.push(newGallery);
     });
+
+    clickableImages.forEach(img => {
+        img.addEventListener("click", event => {
+            selectedImageContainer.classList.remove('hide');
+            selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
+            document.body.classList.add('noscroll');
+        });
+    });
+
+    const onEscapePressed = (event) => {
+        if (event.key === 'Escape') {
+            closeSelectedImageContainer();
+        }
+    };
+
+    document.addEventListener('keydown', onEscapePressed);
+    
     
     //thing only to do if on desktop
     if (window.innerWidth >= 768) {
@@ -319,8 +366,9 @@ function Awake(){
         
         requestAnimationFrame(updateCardRotations);
         
-        gameGalleries.forEach(gallery => {
-            var parentContainer = gallery.gallery.parentElement.parentElement; 
+        gameGalleries.forEach(gal => {
+            var parentContainer = gal.gallery.parentElement; 
+            //parentContainer.style.backgroundColor = "blue";
             
             parentContainer.addEventListener('mousemove', function (e) {
                 var rect = parentContainer.getBoundingClientRect();
@@ -329,15 +377,19 @@ function Awake(){
             });
             
             parentContainer.addEventListener('mouseenter', () => {
-                gallery.isInsideParent = true; 
+                gal.isInsideParent = true; 
             });
             
             parentContainer.addEventListener('mouseleave', () => {
-                gallery.isInsideParent = false; 
-                resetGalleryTransformations(gallery); 
+                gal.isInsideParent = false; 
+                resetGalleryTransformations(gal); 
             });
         });
         
     }
     
 }
+
+
+
+

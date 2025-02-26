@@ -11,6 +11,14 @@
 
 <body>
 
+    <div class="selected-image-container hide" onclick="closeSelectedImageContainer();">
+        <div class="image">
+            <img src="" />
+        </div>
+        <div class="hoverable close" onclick="closeSelectedImageContainer();">X</div>
+    </div>
+    
+    
     <div class="bodyholder">
 
         <div class="navbar">
@@ -20,6 +28,7 @@
                 <a href="https://nateflorendo.carrd.co/">Art</a>
             </div>
             <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
+            <a class="navbar-link hoverable" href="./contact.html">CONTACT</a>
         </div>
         
         
@@ -90,20 +99,20 @@
                     <div class="game-gallery-container">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/sudoku/0.png" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/sudoku/0.png" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/sudoku/0.png" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/1.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/sudoku/2.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
+                                <img src="./assets/img/sudoku/0.png" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/1.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/sudoku/2.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -130,28 +139,28 @@
                     <div class="game-gallery-container reverse">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/interweave/5.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/interweave/5.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/interweave/5.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/1.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/11.jpg" class="thumbnail hoverable" index=10 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/12.jpg" class="thumbnail hoverable" index=11 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/13.jpg" class="thumbnail hoverable" index=12 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/14.jpg" class="thumbnail hoverable" index=13 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/15.jpg" class="thumbnail hoverable" index=14 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/16.jpg" class="thumbnail hoverable" index=15 onclick="changeImage(this)">
-                                <img src="./assets/img/interweave/17.jpg" class="thumbnail hoverable" index=16 onclick="changeImage(this)">
+                                <img src="./assets/img/interweave/5.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/1.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/11.jpg" class="thumbnail hoverable" index=10 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/12.jpg" class="thumbnail hoverable" index=11 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/13.jpg" class="thumbnail hoverable" index=12 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/14.jpg" class="thumbnail hoverable" index=13 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/15.jpg" class="thumbnail hoverable" index=14 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/16.jpg" class="thumbnail hoverable" index=15 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/interweave/17.jpg" class="thumbnail hoverable" index=16 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -179,18 +188,18 @@
                     <div class="game-gallery-container">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/cupit/1.jpg" class="main-image mobile" id="mainImage" currentindex="0">
+                                <img src="./assets/img/cupit/1.jpg" class="main-image mobile enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/cupit/1.jpg" class="thumbnail mobile hoverable active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/cupit/4.jpg" class="thumbnail mobile hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/cupit/5.jpg" class="thumbnail mobile hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/cupit/6.jpg" class="thumbnail mobile hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/cupit/3.jpg" class="thumbnail mobile hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/cupit/2.jpg" class="thumbnail mobile hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/cupit/7.jpg" class="thumbnail mobile hoverable" index=7 onclick="changeImage(this)">
+                                <img src="./assets/img/cupit/1.jpg" class="thumbnail mobile hoverable active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/cupit/4.jpg" class="thumbnail mobile hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/cupit/5.jpg" class="thumbnail mobile hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/cupit/6.jpg" class="thumbnail mobile hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/cupit/3.jpg" class="thumbnail mobile hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/cupit/2.jpg" class="thumbnail mobile hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/cupit/7.jpg" class="thumbnail mobile hoverable" index=7 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -217,22 +226,22 @@
                     <div class="game-gallery-container reverse">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/pool/1.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/pool/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/pool/1.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImage(this)">
-                                <img src="./assets/img/pool/11.jpg" class="thumbnail hoverable" index=10 onclick="changeImage(this)">
+                                <img src="./assets/img/pool/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pool/11.jpg" class="thumbnail hoverable" index=10 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -261,21 +270,21 @@
                     <div class="game-gallery-container">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/mistake/1.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/mistake/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/mistake/1.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
-                                <img src="./assets/img/mistake/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImage(this)">
+                                <img src="./assets/img/mistake/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/mistake/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -305,19 +314,19 @@
                     <div class="game-gallery-container reverse">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/paper/1.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/paper/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/paper/1.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/paper/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
+                                <img src="./assets/img/paper/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/paper/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -343,20 +352,20 @@
                     <div class="game-gallery-container">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/pong/1.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/pong/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/pong/1.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/9.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/pong/8.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
+                                <img src="./assets/img/pong/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/9.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/pong/8.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -382,21 +391,21 @@
                     <div class="game-gallery-container reverse">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/reverto/1.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/reverto/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/reverto/1.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/8.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/9.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/10.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/4.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/5.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/3.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/6.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
-                                <img src="./assets/img/reverto/7.jpg" class="thumbnail hoverable" index=9 onclick="changeImage(this)">
+                                <img src="./assets/img/reverto/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/8.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/9.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/10.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/4.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/5.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/3.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/6.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/reverto/7.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -422,21 +431,21 @@
                     <div class="game-gallery-container">
                         <div class="gallery-left">
                             <div class="main-image-container">
-                                <img src="./assets/img/starship/1.jpg" class="main-image" id="mainImage" currentindex="0">
+                                <img src="./assets/img/starship/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
                                 <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
                                 <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="./assets/img/starship/1.jpg" class="thumbnail active" index=0 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/8.jpg" class="thumbnail hoverable" index=2 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/9.jpg" class="thumbnail hoverable" index=3 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/10.jpg" class="thumbnail hoverable" index=4 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/4.jpg" class="thumbnail hoverable" index=5 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/5.jpg" class="thumbnail hoverable" index=6 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/3.jpg" class="thumbnail hoverable" index=7 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/6.jpg" class="thumbnail hoverable" index=8 onclick="changeImage(this)">
-                                <img src="./assets/img/starship/7.jpg" class="thumbnail hoverable" index=9 onclick="changeImage(this)">
+                                <img src="./assets/img/starship/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/8.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/9.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/10.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/4.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/5.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/3.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/6.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
+                                <img src="./assets/img/starship/7.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
                             
                             </div>
                         </div>
@@ -572,6 +581,7 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
+    <script type="text/javascript">Awake();</script>
 </body>
 
 </html>
