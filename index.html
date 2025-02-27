@@ -11,11 +11,14 @@
 
 <body>
 
-    <div class="selected-image-container hide" onclick="closeSelectedImageContainer();">
+    <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
-            <img src="" />
+            <img  onclick="event.stopPropagation()" src="./assets/img/1.png" />
         </div>
-        <div class="hoverable close" onclick="closeSelectedImageContainer();">X</div>
+        <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
+
+        <div class="arrow prev hoverable" onclick="navigateSelectedImage(event,'prev')"></div>
+        <div class="arrow next hoverable" onclick="navigateSelectedImage(event,'next')"></div>
     </div>
     
     
@@ -24,7 +27,7 @@
         <div class="navbar">
             <a class="navbar-link hoverable" ddcid="portfolio-dropdown">PORTFOLIO</a>
             <div class="dropdown-content" id="portfolio-dropdown">
-                <a onclick="selectTab(event, 'tab-1')" href="javascript:void(0)">Games</a>
+                <a onclick="selectTab(event, 'games')" href="javascript:void(0)">Games</a>
                 <a href="https://nateflorendo.carrd.co/">Art</a>
             </div>
             <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
@@ -39,7 +42,6 @@
             <div class="section-content"  style="height: 100svh; width: 100vw;">
                         
                 <div class="center" >
-                    <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
                     <h1 class="name">NATE FLORENDO</h1>
                     <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
                 </div>
@@ -53,13 +55,8 @@
                         <a href="https://www.instagram.com/neytism" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-ig.png');"></a>
                     </div>
                 </div>
-                                
                 
             </div>
-
-            <!-- <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" class="background" >
-                <source src="./assets/videos/2.mp4" type="video/mp4">
-            </video> -->
 
             <div class="background slideshow-main">
                 <div class="slide" style="background-image: url('assets/img/bg.webp');"></div>
@@ -78,7 +75,7 @@
 
         </div>
         
-        <div class="tab-group active" id="tab-1">
+        <div class="tab-group active" id="games">
 
             <div class="section hide" id="projects">
                 
@@ -92,482 +89,10 @@
                 <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
     
             </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/sudoku/0.png" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/sudoku/0.png" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/1.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/sudoku/2.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">SUDOKU SHOWDOWN!</h2>
-                            <p class="details-description">
-                                A competitive local multiplayer party game where players race to solve a Sudoku-inspired puzzle by picking up and placing numbers correctly.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                • Developed all game elements<br>
-                                • Built a custom dialogue system<br>
-                                • Implemented a backtracking algorithm for puzzle generation
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/sudoku/0.png);"></div>
-    
-            </div>
-            
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container reverse">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/interweave/5.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/interweave/5.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/1.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/11.jpg" class="thumbnail hoverable" index=10 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/12.jpg" class="thumbnail hoverable" index=11 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/13.jpg" class="thumbnail hoverable" index=12 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/14.jpg" class="thumbnail hoverable" index=13 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/15.jpg" class="thumbnail hoverable" index=14 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/16.jpg" class="thumbnail hoverable" index=15 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/interweave/17.jpg" class="thumbnail hoverable" index=16 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">INTERWEAVE</h2>
-                            <p class="details-description">
-                                A VR horror game for Meta Quest set in a college campus where players collect clues, solve puzzles, and evade a lurking monster. Designed for an immersive and tense experience with interactive environments.<br><br>
-                                <b>• Developed using Unity and C# for Meta Quest<br>
-                                • Collaborative project<br>
-                                • Designed and modeled all 3D game elements<br>
-                                • Used Substance Painter, Photoshop, and Blender for asset creation<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/interweave/8.jpg);"></div>
-    
-            </div>
-
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/cupit/1.jpg" class="main-image mobile enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/cupit/1.jpg" class="thumbnail mobile hoverable active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/cupit/4.jpg" class="thumbnail mobile hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/cupit/5.jpg" class="thumbnail mobile hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/cupit/6.jpg" class="thumbnail mobile hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/cupit/3.jpg" class="thumbnail mobile hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/cupit/2.jpg" class="thumbnail mobile hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/cupit/7.jpg" class="thumbnail mobile hoverable" index=7 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">Cup It!</h2>
-                            <p class="details-description">
-                                A mobile game inspired by the classic party game beer pong. Players must aim, measure force and angle, and overcome obstacles to land the ball in the cup while using the fewest attempts and collecting all stars in each level.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                • Independently developed<br>
-                                • Designed and modeled all 3D game elements<br>
-                                • Utilized Unity’s physics system<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/cupit/4.jpg);"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container reverse">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/pool/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/pool/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pool/11.jpg" class="thumbnail hoverable" index=10 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">BARE MINIMUM POOL GAME</h2>
-                            <p class="details-description">
-                                A simplified 8-ball pool game with core mechanics and a functional multiple-view system. Built for a straightforward and playable experience.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                • Independently developed<br>
-                                • Implemented all 8-ball pool mechanics<br>
-                                • Utilized Unity’s physics system<br>
-                                • Designed and modeled all 3D game elements<br>
-                                • Implemented a multiple-view system
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/pool/7.jpg);"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/mistake/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/mistake/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/9.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/mistake/10.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">MISTAKE</h2>
-                            <p class="details-description">
-                                A story-driven game about morality, where players recall past events during an investigation, gather clues, and uncover the truth.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                    • Collaborative project<br>
-                                    • Lead developer and programmer<br>
-                                    • Created 3D models for the map<br>
-                                    • Utilized Pixel Crusher’s dialogue system<br>
-                                    • Handled event branching<br>
-                                    • Developed a custom sound manager<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/mistake/3.jpg);"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container reverse">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/paper/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/paper/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/paper/8.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">PAPER TOWNS</h2>
-                            <p class="details-description">
-                                A 2D top-down survival game where players defeat enemies, gain experience, and level up stats. Developed as a challenge project without using built-in physics, colliders, or vector functions.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                    • Independently developed<br>
-                                    • Created all assets<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/paper/3.jpg);"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/pong/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/pong/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/3.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/4.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/5.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/6.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/7.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/9.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/pong/8.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">PONG (DOT PRODUCT)</h2>
-                            <p class="details-description">
-                                A 2D game based on the classic Pong, developed as a challenge project without using built-in physics, colliders, or vector functions. Features both player vs. AI (with difficulty settings) and player vs. player modes.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                    • Collaborative project<br>
-                                    • Developed all aspects except the sound system and sound effects<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/pong/7.jpg);"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container reverse">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/reverto/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/reverto/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/8.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/9.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/10.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/4.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/5.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/3.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/6.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/reverto/7.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">REVERTO</h2>
-                            <p class="details-description">
-                                A 2D top-down roguelike survival game where players defeat enemies, gain experience, and level up stats. Features various enemy types and weapon options.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                    • Collaborative project<br>
-                                    • Lead developer and programmer<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/reverto/9.jpg);"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="game-gallery-container">
-                        <div class="gallery-left">
-                            <div class="main-image-container">
-                                <img src="./assets/img/starship/1.jpg" class="main-image enlargeable" id="mainImage" currentindex="0">
-                                <button class="gallery-nav-button prev-button" onclick="navigateImage(this,'prev')">&#11164;</button>
-                                <button class="gallery-nav-button next-button" onclick="navigateImage(this,'next')">&#11166;</button>
-                            </div>
-                            <div class="thumbnails">
-                                <img src="./assets/img/starship/1.jpg" class="thumbnail active" index=0 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/2.jpg" class="thumbnail hoverable" index=1 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/8.jpg" class="thumbnail hoverable" index=2 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/9.jpg" class="thumbnail hoverable" index=3 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/10.jpg" class="thumbnail hoverable" index=4 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/4.jpg" class="thumbnail hoverable" index=5 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/5.jpg" class="thumbnail hoverable" index=6 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/3.jpg" class="thumbnail hoverable" index=7 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/6.jpg" class="thumbnail hoverable" index=8 onclick="changeImageGameGallery(this)">
-                                <img src="./assets/img/starship/7.jpg" class="thumbnail hoverable" index=9 onclick="changeImageGameGallery(this)">
-                            
-                            </div>
-                        </div>
-                        <div class="gallery-right">
-                            <h2 class="details-title">STARSHIP</h2>
-                            <p class="details-description">
-                                A 2D top-down survival bullet-hell game set in space, where players battle different enemy types using various skills and characters. Includes an achievement system and save/load functionality.<br><br>
-                                <b>• Developed using Unity and C#<br>
-                                    • Collaborative project<br>
-                                    • Lead developer and programmer<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/starship/6.jpg);"></div>
-    
-            </div>
         
         </div>
-
-        <div class="tab-group" id="tab-2">
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="center">
-                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                        <h1 class="name">ILLUSTRATION 1</h1>
-                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/6.png');"></div>
-    
-            </div>
-            
-    
-            <div class="section" id="projects">
-                
-                <div class="section-content">
-                    <div class="center">
-                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                        <h1 class="name">ILLUSTRATION 2</h1>
-                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/2.png');"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-                
-                <div class="section-content">
-                    <div class="center">
-                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                        <h1 class="name">ILLUSTRATION 3</h1>
-                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/2.png');"></div>
-    
-            </div>
-
-            <div class="section" id="projects">
-                
-                <div class="section-content">
-                    <div class="center">
-                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                        <h1 class="name">ILLUSTRATION 4</h1>
-                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/2.png');"></div>
-    
-            </div>
-        
-        </div>
-        
-        <div class="tab-group" id="tab-3">
-
-            <div class="section" id="projects">
-            
-                <div class="section-content">
-                    <div class="center">
-                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                        <h1 class="name">WEB DEV 1</h1>
-                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/1.png');"></div>
-    
-            </div>
-            
-    
-            <div class="section" id="projects">
-                
-                <div class="section-content">
-                    <div class="center">
-                        <!-- <img class="pf" src="./assets/img/pf.png" alt=""><br> -->
-                        <h1 class="name">WEB DEV 2</h1>
-                        <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/3.png');"></div>
-    
-            </div>
-        
-        </div>
-        
-        
-
 
     </div>
-
-    
-    <!-- cursor -->
     
     <div class="cursor hide">
         <div class="cursor__ball cursor-ball-big-container">
@@ -581,7 +106,7 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">Awake();</script>
+    <script type="text/javascript">loadGameJson().then(() => { populateGamePortfolio(); Awake();});</script>
 </body>
 
 </html>

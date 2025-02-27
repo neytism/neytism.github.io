@@ -10,14 +10,17 @@
 </head>
 
 <body>
-
-    <div class="selected-image-container hide" onclick="closeSelectedImageContainer();">
+    
+    <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
-            <img src="./assets/img/1.png" />
+            <img  onclick="event.stopPropagation()" src="./assets/img/1.png" />
         </div>
-        <div class="hoverable close" onclick="closeSelectedImageContainer();">X</div>
-    </div>
+        <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
 
+        <div class="arrow prev hoverable" onclick="navigateSelectedImage(event,'prev')"></div>
+        <div class="arrow next hoverable" onclick="navigateSelectedImage(event,'next')"></div>
+    </div>
+    
     <div class="selected-art-container hide" style="position: absolute; display:flex; z-index: 103; min-height: 100dvh; min-width: 100dvw;">
         <div class="close hoverable" style="position: absolute; top: 0; right: 0; padding: 50px; z-index: 104;" onclick="closeSelectedArtContainer();">X</div>
         <div style="position: absolute; height: 100%; width: 100%;" onclick="closeSelectedArtContainer();"></div>
@@ -85,10 +88,9 @@
         </div>
     </div>
     
-    <script type="text/javascript" src="./assets/js/loadArtworks.js" id="rendered-js"></script>
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadJson().then(() => { populatePortfolio(); Awake();});</script>
+    <script type="text/javascript">loadArtJson().then(() => { populateArtPortfolio(); Awake();});</script>
 </body>
 
 </html>

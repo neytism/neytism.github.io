@@ -8,6 +8,9 @@ class GameGallery {
 //general
 const images = document.querySelectorAll('img');
 const divs = document.querySelectorAll('div');
+let currentSelectedContentType = "";
+let currentSelectedID = "";
+let currentSelectedIndex = "";
 
 //spotlight
 const spotlight = document.querySelector('.spotlight-mask');
@@ -31,8 +34,8 @@ let hoverables = [];
 let cursorVisible = false;
 
 //game image sliders
-var tempGameGalleries = document.querySelectorAll('.game-gallery-container');
-const thumbnailContainers = document.querySelectorAll('.thumbnails');
+var tempGameGalleries = [];
+var thumbnailContainers = [];
 var gameGalleries = [];
 var cardSize = { width: 0, height: 0 };
 var SCALE_X = 1.5;
@@ -46,6 +49,10 @@ const selectedImageContainer = document.querySelector('.selected-image-container
 const selectedArtContainer = document.querySelector('.selected-art-container');
 let clickableImages = [];
 
+//json
+const artworks = [];
+const games = [];
+let lastID = 0;
 
 function updateSpotlight() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
@@ -116,7 +123,7 @@ function changeImageGameGallery(element) {
     const mainImage = findSiblingById(parent, "mainImage");
     mainImage.src = element.src;
     mainImage.alt = element.alt;
-    mainImage.setAttribute("currentindex", index);
+    mainImage.setAttribute("index", index);
 
     // Scroll thumbnail into view
     scrollThumbnailIntoView(element);
@@ -124,7 +131,7 @@ function changeImageGameGallery(element) {
 
 function navigateImage(element, direction) {
     const mainImage = element.parentElement.firstElementChild;
-    const currentIndex = parseInt(mainImage.getAttribute('currentindex'));
+    const currentIndex = parseInt(mainImage.getAttribute('index'));
     const thumbnails = element.parentElement.nextElementSibling;
     const thumbnailsList = getChildList(thumbnails);
     const maxIndex = thumbnailsList.length - 1;
@@ -140,6 +147,32 @@ function navigateImage(element, direction) {
     const targetThumbnail = thumbnailsList[newIndex];
     changeImageGameGallery(targetThumbnail);
 }
+
+function navigateSelectedImage(event, direction) {
+    event.stopPropagation();
+    let content = null;
+
+    if (currentSelectedContentType == "art") {
+        content = artworks.find(a => a.id == currentSelectedID);
+    } else if (currentSelectedContentType == "game") {
+        content = games.find(g => g.id == currentSelectedID);
+    }
+
+    const fp = content.filePath;
+    const listOfImages = content.image;
+    const maxIndex = listOfImages.length - 1;
+    let newIndex;
+    
+    if (direction === 'next') {
+        newIndex = parseInt(currentSelectedIndex) + 1 > maxIndex ? 0 : parseInt(currentSelectedIndex) + 1;
+    } else {
+        newIndex = parseInt(currentSelectedIndex) - 1 < 0 ? maxIndex : parseInt(currentSelectedIndex) - 1;
+    }
+    
+    currentSelectedIndex = newIndex;
+    selectedImageContainer.firstElementChild.firstElementChild.src = `${fp}/${listOfImages[currentSelectedIndex]}`;
+}
+
 
 function scrollThumbnailIntoView(thumbnail) {
     const thumbnailsContainer = thumbnail.parentNode;
@@ -277,7 +310,8 @@ function resetGalleryTransformations(gallery) {
     gallery.gallery.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
 }
 
-function closeSelectedImageContainer(){
+function closeSelectedImageContainer(event){
+    event.stopPropagation();
     selectedImageContainer.classList.add('hide');
     document.body.classList.remove('noscroll');
 }
@@ -291,6 +325,281 @@ function closeSelectedArtContainer(){
 function disableContextMenu(event) {
     event.preventDefault();
 }
+
+
+function loadArtJson() {
+    return fetch('/assets/json/artworks.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(art => {
+                let id = lastID + 1;
+                art.id = id;
+                artworks.push(art);
+                lastID = id;
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function loadGameJson() {
+    return fetch('/assets/json/games.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(game => {
+                let id = lastID + 1;
+                game.id = id;
+                games.push(game);
+                lastID = id;
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+function pupulateArtInfo() {
+    const artworkId = getQueryParam('id');
+    const artwork = artworks.find(a => a.id == artworkId);
+    
+    const portfolioDiv = document.querySelector('.art-section');
+    portfolioDiv.setAttribute("contentID", artwork.id);
+    portfolioDiv.setAttribute("contentType", "art");
+    
+    const artworkTitle = document.createElement('div');
+    artworkTitle.className = 'art-container title';
+    artworkTitle.textContent = artwork.title.toUpperCase();
+    setParent(portfolioDiv, artworkTitle);
+    
+    const description = document.createElement('div');
+    description.className = 'art-container description';
+    description.textContent = `${artwork.description}`;
+    setParent(portfolioDiv, description);
+    
+    for (i = 0; i < artwork.additional.length; i++) {
+        const additionalInfo = document.createElement('div');
+        additionalInfo.className = 'art-container description';
+        additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
+        
+        if(i+1 == artwork.additional.length){
+            additionalInfo.classList.add('last-description');
+        }
+        setParent(portfolioDiv, additionalInfo);
+    }
+    
+    artwork.image.forEach(img => {
+        const artworkDiv = document.createElement('div');
+        artworkDiv.className = 'art-container artworks';
+        
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add("img-hover-zoom");
+        imageContainer.classList.add("artworks");
+        imageContainer.classList.add("hoverable");
+        setParent(artworkDiv, imageContainer);
+    
+        const image = document.createElement('img');
+        image.className = 'enlargeable';
+        image.src = `${artwork.filePath}/${img}`;
+        image.setAttribute('index',artwork.image.indexOf(img));
+        setParent(imageContainer, image);
+        
+        
+        setParent(portfolioDiv, artworkDiv);
+    });
+    
+}
+
+function populateArtPortfolio() {
+    const portfolioDiv = document.querySelector(".art-section");
+    
+    const categories = {};
+    
+    artworks.forEach(art => {
+        if (!categories[art.category]) {
+            categories[art.category] = [];
+        }
+        categories[art.category].push(art);
+    });
+
+    for (const category in categories) {
+        
+        const categoryTitle = document.createElement('div');
+        categoryTitle.className = 'art-container title';
+        categoryTitle.textContent = category;
+        setParent(portfolioDiv, categoryTitle);
+        
+        
+        categories[category].forEach(art => {
+            const artworkDiv = document.createElement('div');
+            artworkDiv.className = 'art-container';
+            
+            
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add("img-hover-zoom");
+            //imageContainer.classList.add("force-square");
+            imageContainer.classList.add("hoverable");
+            imageContainer.addEventListener('click', (e) => {
+                loadArtwork(art.id);
+            });
+
+            setParent(artworkDiv, imageContainer);
+
+            const image = document.createElement('img');
+            image.src = `${art.filePath}/${art.image[0]}`;
+            //image.classList.add("force-square");
+            
+            setParent(imageContainer, image);
+            
+            
+            const title = document.createElement('h1');
+            title.textContent = art.title;
+            setParent(artworkDiv, title);
+            
+            // const description = document.createElement('h3');
+            // description.textContent = art.description;
+            // setParent(artworkDiv, description);
+            
+            for (i = 0; i < art.additional.length; i++) {
+                const additionalInfo = document.createElement('h3');
+                additionalInfo.innerHTML = `•&nbsp;&nbsp;${art.additional[i]}`;
+                setParent(artworkDiv, additionalInfo);
+            }
+            
+            setParent(portfolioDiv, artworkDiv);
+        });
+        
+    }
+}
+
+function populateGamePortfolio(){
+    let x = 1;
+
+    const portfolioDiv = document.getElementById("games");
+    
+    games.forEach(game => {
+        const section = document.createElement('div');
+        section.classList.add('section');
+        section.setAttribute("id", "projects");
+        section.setAttribute("contentID", game.id);
+        section.setAttribute("contentType", "game");
+        setParent(portfolioDiv, section);
+
+        const sectionContent = document.createElement('div');
+        sectionContent.classList.add('section-content');
+        setParent(section, sectionContent);
+
+        const gameGalleryContainer = document.createElement('div');
+        gameGalleryContainer.classList.add('game-gallery-container');
+        if(x % 2 == 0){
+            gameGalleryContainer.classList.add('reverse');
+        }
+        setParent(sectionContent, gameGalleryContainer);
+
+        const galleryLeft = document.createElement('div');
+        galleryLeft.classList.add('gallery-left');
+        setParent(gameGalleryContainer, galleryLeft);
+
+        const mainImageContainer = document.createElement('div');
+        mainImageContainer.classList.add('main-image-container');
+        setParent(galleryLeft, mainImageContainer);
+    
+        const mainImage = document.createElement('img');
+        mainImage.classList.add('main-image');
+        if (game.isMobile == true) {mainImage.classList.add('mobile');};
+        mainImage.classList.add('enlargeable');
+        mainImage.setAttribute("id", "mainImage");
+        mainImage.setAttribute("index", "0");
+        mainImage.src = `${game.filePath}/${game.image[0]}`;
+        setParent(mainImageContainer, mainImage);
+        
+        const prevButton = document.createElement('button');
+        prevButton.classList.add('gallery-nav-button');
+        prevButton.classList.add('prev-button');
+        prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
+        prevButton.innerHTML = `&#11164`;
+        setParent(mainImageContainer, prevButton);
+
+        const nextButton = document.createElement('button');
+        nextButton.classList.add('gallery-nav-button');
+        nextButton.classList.add('next-button');
+        nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
+        nextButton.innerHTML = `&#11166`;
+        setParent(mainImageContainer, nextButton);
+
+        const thumbnailsContainer = document.createElement('div');
+        thumbnailsContainer.classList.add('thumbnails');
+        setParent(galleryLeft, thumbnailsContainer);
+
+        for (i = 0; i < game.image.length; i++) {
+            const thumbnail = document.createElement('img');
+            thumbnail.classList.add('thumbnail');
+            thumbnail.classList.add('hoverable');
+            if ( i == 0) { thumbnail.classList.add('active'); };
+            if (game.isMobile == true) {thumbnail.classList.add('mobile');};
+            thumbnail.src = `${game.filePath}/${game.image[i]}`;
+            thumbnail.setAttribute("index", i);
+            thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
+            setParent(thumbnailsContainer, thumbnail);
+        }
+        
+        const galleryRight = document.createElement('div');
+        galleryRight.classList.add('gallery-right');
+        setParent(gameGalleryContainer, galleryRight);
+
+        const gameTitle = document.createElement('h2');
+        gameTitle.classList.add('details-title');
+        gameTitle.textContent = game.title.toUpperCase();
+        setParent(galleryRight, gameTitle);
+
+        const gameDescription = document.createElement('p');
+        gameDescription.classList.add('details-description');
+        gameDescription.innerHTML = `${game.description}<br><br>`;
+        setParent(galleryRight, gameDescription);
+
+        game.additional.forEach(additionalInfo =>{
+            const gameBullets = document.createElement('p');
+            gameBullets.classList.add('details-description');
+            gameBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
+            setParent(galleryRight, gameBullets);
+        });
+        
+        const background = document.createElement('div');
+        background.classList.add('background');
+        background.style.backgroundImage = `url('${game.filePath}/${game.backgroundImage}')`
+        setParent(section, background);
+
+        x++;
+    });
+}
+
+function loadArtwork(id) {
+    const artwork = artworks.find(a => a.id === id);
+    if (artwork) {
+        window.location.href = `artwork.html?id=${id}`;
+    }
+}
+
+
+function setParent(parent, child){
+    parent.appendChild(child);
+}
+
 
 function Awake(){
     
@@ -313,6 +622,8 @@ function Awake(){
         
         slides[currentSlide].classList.add('active');
     }
+
+    thumbnailContainers = document.querySelectorAll('.thumbnails');
     
     thumbnailContainers.forEach(thumbnails => {
         thumbnails.addEventListener('wheel', function (event) {
@@ -323,6 +634,8 @@ function Awake(){
     
 
     addHoverEventToLinks();
+
+    tempGameGalleries = document.querySelectorAll('.game-gallery-container');
         
     tempGameGalleries.forEach(gallery => {
         let newGallery = new GameGallery(gallery,false);
@@ -331,6 +644,10 @@ function Awake(){
 
     clickableImages.forEach(img => {
         img.addEventListener("click", event => {
+            
+            currentSelectedID = img.closest('[contentID]').getAttribute('contentID');
+            currentSelectedContentType = img.closest('[contentType]').getAttribute('contentType');
+            currentSelectedIndex = img.getAttribute('index');
             selectedImageContainer.classList.remove('hide');
             selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
             document.body.classList.add('noscroll');
