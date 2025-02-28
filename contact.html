@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <div class="particles-holder"></div>
     <div class="bodyholder">
 
         <div class="navbar">
@@ -19,27 +18,32 @@
                 <a href="./index.html">Games</a>
                 <a href="./art.html">Art</a>
             </div>
-            <a class="navbar-link hoverable" >ABOUT ME</a>
-            <a class="navbar-link hoverable" href="./contact.html">CONTACT</a>
+            <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
+            <a class="navbar-link hoverable">CONTACT</a>
         </div>
         
         <div class="spotlight-mask"></div>
         
+        
         <div class="section">
+
+            <canvas id="canvas" style="position: fixed; height: 100svh; width: 100vw; z-index: 100; pointer-events: none;"></canvas>
             
             <div class="section-content"  style="height: 100svh; width: 100vw;">
                         
-                <div class="center">
-                    <img class="pf" src="./assets/img/pf.png" alt="">
-                    <h2 class="sub-name"><br>Hello, I am Nate, a highly passionate Game Developer and Multimedia Artist seeking a challenging role to
-                        further enhance and explore my technical knowledge in game development. With <b>5 years</b> of experience in Unity and
-                        C#, I have honed my skills in creating immersive gameplay experiences. Additionally, I possess <b>5 years</b> of
-                        experience in Blender, allowing me to bring creative visions to life through 3D modeling.<br> <br>
                 
-                        I quickly adapt to new software programs and thrive as a dedicated learner and attentive listener. Committed to
-                        optimizing gameplay and enhancing user experiences, I leverage both my creativity and technical expertise.
-                        Currently, I am pursuing a Bachelor of Science in Entertainment and Multimedia Computing with a specialization
-                        in Game Development.</h2>
+                <div class="center">
+                    
+                    
+                    <form name="gform" id="gform" enctype="text/plain" action="https://docs.google.com/forms/d/e/1FAIpQLSefIj-azeWiyDkKmMBTEJCeV-IkQhaQ5DHL1j-G-liJIysr_A/formResponse?" >
+                        <h1 class="name">GET IN TOUCH</h1>
+                        <input class="text-input" type="email" name="entry.1154180321" id="entry.1154180321" placeholder="Your Email" required>
+                        <textarea class="text-input" name="entry.766179468" id="entry.766179468" placeholder="Your Message" required></textarea>
+                        <input type="submit" value="Submit" class="submit hoverable">
+                    </form>
+                
+                    
+                    <h1 class="name hide" id="thankYou" style="letter-spacing: normal; width: 80%;">Thank you for getting in touch! I'm excited to read your message and will respond as soon as possible.</h1>
                 </div>
             
                 <div class="center-bottom">
@@ -53,26 +57,10 @@
                                 
                 
             </div>
-        
+            
+
             <div class="background" style="background-image: url('assets/img/9.png');"></div>
 
-        </div>
-        
-        <div class="tab-group active" id="tab-1">
-
-            <div class="section hide" id="projects">
-                
-                <div class="section-content">
-                    <div class="center">
-                        <h1 class="name">GAME PROJECTS</h1>
-                        <h2 class="sub-name">Unity</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
-    
-            </div>
-            
         </div>
     
     </div>
@@ -89,10 +77,37 @@
             <div class="cursor-ball-small"></div>
         </div>
     </div>
-
+    
+    <script type="text/javascript">
+        const form = document.getElementById('gform');
+        const thankYouMessage = document.getElementById('thankYou');
+        
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' 
+            })
+                .then(function () {
+                    form.style.display = 'none';
+                    
+                    thankYouMessage.classList.remove('hide');
+                    form.reset();
+                })
+                .catch(function (error) {
+                    console.error('Error submitting form:', error);
+                    alert('An error occurred while submitting the form. Please try again later.'); 
+                });
+        });
+    
+    </script>
+    
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
+    <script type="text/javascript" src="./assets/js/flyingLetters.js" id="rendered-js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript" src="./assets/js/particles.js" id="rendered-js"></script>
     <script type="text/javascript">Awake();</script>
 </body>
 

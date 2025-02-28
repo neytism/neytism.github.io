@@ -609,6 +609,40 @@ body.noscroll{
     transform: translateY(-50%); 
 }
 
+form{
+    display: flex;
+    width: 50%;
+    gap: 25px;
+    flex-flow: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.151);
+    padding: 50px;
+}
+
+form input, textarea{
+    background-color: rgba(255, 255, 255, 0.596);
+    font-family: "Montserrat";
+    border: 0px;
+    padding: 15px;
+    font-size: 18px;
+}
+
+form input{
+    height: 40px;
+}
+
+form textarea{
+    height: 200px;
+    resize: vertical;
+}
+
+form .submit{
+    height: 50px;
+    background-color: rgb(55, 153, 55);
+    color: white;
+    cursor: none;
+}
+
 
 
 @keyframes animate{
@@ -739,6 +773,12 @@ body.noscroll{
         right: 15px;
     }
     
+    form{
+        display: flex;
+        width: 100%;
+        gap: 25px;
+        padding: 25px;
+    }
     
 }
 
