@@ -136,7 +136,7 @@ function draw() {
 	requestAnimationFrame(draw);
 }
 
-var start_keys =['F' ,'U' ,'C' ,'K'];
+var start_keys =['A' ,'B' ,'C' ,'D','1','2','3','4'];
 
 function startAnimation(){
 	setTimeout(function(){
