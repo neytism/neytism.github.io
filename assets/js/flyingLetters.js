@@ -159,21 +159,26 @@ const iteration = 5;
 const rate = 15;
 
 inputs.forEach(input => {
-    let previousLength = input.value.length;
+    let previousValue = input.value;
     input.addEventListener('input', function(evt) {
-        const currentLength = this.value.length;
-        if (currentLength > previousLength) {
-            const lastChar = this.value.slice(-1);
+        const currentValue = this.value;
+        let caretPosition = this.selectionStart; 
+        
+        if (currentValue.length > previousValue.length) {
+            const lastChar = currentValue.charAt(caretPosition - 1);
             onType(lastChar); 
         }
-        previousLength = currentLength;
+        
+        previousValue = currentValue; 
+        
     });
 });
+
 
 function onType(char){
     if (char) {
         let count = 0; 
-
+        
         const intervalId = setInterval(() => {
             if (count < iteration) {
                 letters.push(getLetterFromPool(char));

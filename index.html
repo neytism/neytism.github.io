@@ -14,7 +14,7 @@
 
     <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
-            <img  onclick="event.stopPropagation()" src="./assets/img/placeholder.png" />
+            <img onerror="replaceNullImage(this)"  onclick="event.stopPropagation()" src="./assets/img/placeholder.png" />
         </div>
         <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
         

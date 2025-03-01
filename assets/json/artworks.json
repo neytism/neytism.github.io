@@ -1,20 +1,20 @@
 [
     {
       "category": "3D WORKS",
-      "title": "PC (2025)",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-      "additional":  ["Lorem ipsum dolor sit amet","Sed do eiusmod tempor"],
-      "filePath": "/assets/img/3D/pc2025",
-      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
       "title": "Switch",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       "additional":  ["Lorem ipsum dolor sit amet","Sed do eiusmod tempor"],
       "filePath": "/assets/img/3D/kb_switch",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Macro ",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+      "additional":  ["Lorem ipsum dolor sit amet","Sed do eiusmod tempor"],
+      "filePath": "/assets/img/3D/macro",
+      "media":  ["1.png","2.png","3.png"],
       "remarks": []
     },
     {
@@ -23,7 +23,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/nintendo_switch",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
       "remarks": []
     },
     {
@@ -32,7 +32,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/psp",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
       "remarks": []
     },
     {
@@ -41,7 +41,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/gameboy",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
       "remarks": []
     },
     {
@@ -50,7 +50,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/atari",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
       "remarks": []
     },
     {
@@ -59,7 +59,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/famicom",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"],
       "remarks": []
     },
     {
@@ -68,7 +68,16 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/ps1",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "PC (2025)",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+      "additional":  ["Lorem ipsum dolor sit amet","Sed do eiusmod tempor"],
+      "filePath": "/assets/img/3D/pc2025",
+      "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png"],
       "remarks": []
     },
     {
@@ -77,8 +86,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/hapon",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
-      "remarks": []
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
+      "remarks": ["quoted"]
     },
     {
       "category": "3D WORKS",
@@ -86,52 +95,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/b12",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "Almusal",
-      "description": "Made using blender",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/almusal",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "Des Valeurs Redéfinies",
-      "description": "3D and Contemporary art based on the Rene Margtitte's Les Valeurs Personnelles (1952, Oil on canvas) painting.",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/artApp",
-      "image":  ["1.png"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "pc (2020)",
-      "description": "Made using blender",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/pc2020",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "Candy Bong Z (2020)",
-      "description": "Made using blender",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/cbz2020",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "Tape Measure",
-      "description": "Made using blender",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/tape",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg"],
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"],
       "remarks": []
     },
     {
@@ -140,7 +104,16 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/room2020",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
+      "media":  ["1.png","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Almusal",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/almusal",
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
       "remarks": []
     },
     {
@@ -149,25 +122,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/pjpRender",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "Onezo",
-      "description": "Made using blender",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/onezo",
-      "image":  ["1.jpg","2.png","3.png"],
-      "remarks": []
-    },
-    {
-      "category": "3D WORKS",
-      "title": "Kharis Cafe",
-      "description": "Made using blender",
-      "additional":  ["Blender"],
-      "filePath": "/assets/img/3D/kharis",
-      "image":  ["1.png","2.png","3.png","4.png"],
+      "media":  ["1.png","2.jpg","3.jpg","4.jpg"],
       "remarks": []
     },
     {
@@ -176,7 +131,61 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/pjpCover",
-      "image":  ["1.png","2.png","3.png"],
+      "media":  ["1.png","2.png","3.png"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Candy Bong Z (2020)",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/cbz2020",
+      "media":  ["1.png","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Des Valeurs Redéfinies",
+      "description": "3D and Contemporary art based on the Rene Margtitte's Les Valeurs Personnelles (1952, Oil on canvas) painting.",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/artApp",
+      "media":  ["1.png"],
+      "remarks": ["quoted"]
+    },
+    {
+      "category": "3D WORKS",
+      "title": "pc (2020)",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/pc2020",
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "remarks": ["hide"]
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Tape Measure",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/tape",
+      "media":  ["1.png","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Onezo",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/onezo",
+      "media":  ["1.jpg","2.png","3.png"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Kharis Cafe",
+      "description": "Made using blender",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/kharis",
+      "media":  ["1.png","2.png","3.png","4.png"],
       "remarks": []
     },
     {
@@ -185,7 +194,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/redmi",
-      "image":  ["1.png","2.png"],
+      "media":  ["1.png","2.png","-wAwGYd4z1A"],
       "remarks": []
     },
     {
@@ -194,7 +203,7 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/laney",
-      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png"],
+      "media":  ["1.png","2.png","3.png","4.png","5.png","6.png"],
       "remarks": []
     },
     {
@@ -203,7 +212,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/concept art/1",
-      "image":  ["1.png","2.png","3.png","4.png","5.png"],
+      "media":  ["1.png","2.png","3.png","4.png","5.png"],
       "remarks": []
     },
     {
@@ -212,7 +221,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/concept art/2",
-      "image":  ["1.png","2.png","3.png"],
+      "media":  ["1.png","2.png","3.png"],
       "remarks": []
     },
     {
@@ -221,7 +230,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/concept art/3",
-      "image":  ["1.png","2.png"],
+      "media":  ["1.png","2.png"],
       "remarks": []
     },
     {
@@ -230,43 +239,43 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Map Design/sotu",
-      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png"],
+      "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png"],
       "remarks": []
     },
     {
       "category": "GRAPHIC DESIGN",
-      "title": "Glance Through Freelance",
+      "title": "Athena Legality Invitation",
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design",
-      "image":  ["athena.jpg"],
+      "media":  ["athena.jpg"],
       "remarks": []
     },
     {
       "category": "GRAPHIC DESIGN",
-      "title": "Glance Through Freelance",
+      "title": "Chloe Legality Invitation",
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design",
-      "image":  ["chloe.jpg"],
+      "media":  ["chloe.jpg"],
       "remarks": []
     },
     {
       "category": "GRAPHIC DESIGN",
-      "title": "Glance Through Freelance",
+      "title": "Wendi Legality Invitation",
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design",
-      "image":  ["wendi.jpg"],
+      "media":  ["wendi.jpg"],
       "remarks": []
     },
     {
       "category": "GRAPHIC DESIGN",
-      "title": "Glance Through Freelance",
+      "title": "Remix",
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design",
-      "image":  ["pup.jpg"],
+      "media":  ["pup.jpg"],
       "remarks": []
     },
     {
@@ -275,7 +284,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/knb",
-      "image":  ["1.png","2.png","3.png","4.png","5.png"],
+      "media":  ["1.png","2.png","3.png","4.png","5.png"],
       "remarks": []
     },
     {
@@ -284,7 +293,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/gtf",
-      "image":  ["1.png","2.png","3.png"],
+      "media":  ["1.png","2.png","3.png"],
       "remarks": []
     },
     {
@@ -293,7 +302,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/critmedia",
-      "image":  ["1.png","2.png","3.png","4.png"],
+      "media":  ["1.png","2.png","3.png","4.png"],
       "remarks": []
     },
     {
@@ -302,7 +311,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/omd",
-      "image":  ["2.png","1.png","3.png","4.png","5.png"],
+      "media":  ["2.png","1.png","3.png","4.png","5.png"],
       "remarks": []
     },
     {
@@ -311,7 +320,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["1.png"],
+      "media":  ["1.png"],
       "remarks": []
     },
     {
@@ -320,7 +329,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["2.jpg"],
+      "media":  ["2.jpg"],
       "remarks": []
     },
     {
@@ -329,7 +338,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["3.jpg"],
+      "media":  ["3.jpg"],
       "remarks": []
     },
     {
@@ -338,7 +347,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["4.jpg"],
+      "media":  ["4.jpg"],
       "remarks": []
     },
     {
@@ -347,7 +356,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["5.jpg"],
+      "media":  ["5.jpg"],
       "remarks": []
     },
     {
@@ -356,7 +365,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["6.jpg"],
+      "media":  ["6.jpg"],
       "remarks": []
     },
     {
@@ -365,7 +374,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["7.jpg"],
+      "media":  ["7.jpg"],
       "remarks": []
     },
     {
@@ -374,7 +383,7 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/logo",
-      "image":  ["8.jpg"],
+      "media":  ["8.jpg"],
       "remarks": []
     },
     {
@@ -383,7 +392,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/UI/ligma",
-      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png"],
+      "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png"],
       "remarks": []
     },
     {
@@ -392,8 +401,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/komyut",
-      "image":  ["1.png","2.gif"],
-      "remarks": []
+      "media":  ["1.png","2.gif"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -401,8 +410,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/barya",
-      "image":  ["1.png"],
-      "remarks": []
+      "media":  ["1.png"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -410,8 +419,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/lone",
-      "image":  ["0.png","1.png","2.png","3.png","4.png","5.png","6.png"],
-      "remarks": []
+      "media":  ["0.png","1.png","2.png","3.png","4.png","5.png","6.png"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -419,8 +428,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/baliktanaw",
-      "image":  ["1.png","2.png","3.png","4.png","5.png"],
-      "remarks": []
+      "media":  ["1.png","2.png","3.png","4.png","5.png"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -428,8 +437,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/sunder",
-      "image":  ["1.png","2.png"],
-      "remarks": []
+      "media":  ["1.png","2.png"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -437,8 +446,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/mask",
-      "image":  ["1.png","2.png","3.png","4.png","5.png"],
-      "remarks": []
+      "media":  ["1.png","2.png","3.png","4.png","5.png"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -446,8 +455,8 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/last",
-      "image":  ["1.png","2.png"],
-      "remarks": []
+      "media":  ["1.png","2.png"],
+      "remarks": ["quoted"]
     },
     {
       "category": "DIGITAL ART",
@@ -455,7 +464,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
-      "image":  ["1.png"],
+      "media":  ["1.png"],
       "remarks": []
     },
     {
@@ -464,7 +473,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
-      "image":  ["2.jpg"],
+      "media":  ["2.jpg"],
       "remarks": []
     },
     {
@@ -473,7 +482,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
-      "image":  ["3.png"],
+      "media":  ["3.png"],
       "remarks": []
     },
     {
@@ -482,7 +491,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
-      "image":  ["4.jpg"],
+      "media":  ["4.jpg"],
       "remarks": []
     },
     {
@@ -491,7 +500,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
-      "image":  ["5.png"],
+      "media":  ["5.png"],
       "remarks": []
     },
     {
@@ -500,7 +509,7 @@
       "description": "Made using Photoshop",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
-      "image":  ["6.png"],
+      "media":  ["6.png"],
       "remarks": []
     },
     {
@@ -509,8 +518,8 @@
       "description": "Acrylic",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["1.jpg"],
-      "remarks": []
+      "media":  ["1.jpg"],
+      "remarks": ["quoted"]
     },
     {
       "category": "TRADITIONAL ART",
@@ -518,8 +527,8 @@
       "description": "Acrylic",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["2.jpg"],
-      "remarks": []
+      "media":  ["2.jpg"],
+      "remarks": ["quoted"]
     },
     {
       "category": "TRADITIONAL ART",
@@ -527,8 +536,8 @@
       "description": "Acrylic",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["3.jpg"],
-      "remarks": []
+      "media":  ["3.jpg"],
+      "remarks": ["quoted"]
     },
     {
       "category": "TRADITIONAL ART",
@@ -536,7 +545,7 @@
       "description": "Ballpoint Pens",
       "additional":  ["Adobe Photoshop"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["5.jpg"],
+      "media":  ["5.jpg","v9T-HKsKoDw"],
       "remarks": []
     },
     {
@@ -545,7 +554,7 @@
       "description": "Colored Pencils",
       "additional":  ["Colored Pencils"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["6.jpg"],
+      "media":  ["6.jpg"],
       "remarks": []
     },
     {
@@ -554,7 +563,7 @@
       "description": "Colored Pencils",
       "additional":  ["Colored Pencils"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["7.jpg"],
+      "media":  ["7.jpg"],
       "remarks": []
     },
     {
@@ -563,7 +572,7 @@
       "description": "Colored Pencils",
       "additional":  ["Colored Pencils"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["8.jpg"],
+      "media":  ["8.jpg"],
       "remarks": []
     },
     {
@@ -572,7 +581,7 @@
       "description": "Colored Pencils",
       "additional":  ["Colored Pencils"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["9.jpg"],
+      "media":  ["9.jpg"],
       "remarks": []
     },
     {
@@ -581,7 +590,241 @@
       "description": "Colored Pencils",
       "additional":  ["Colored Pencils"],
       "filePath": "/assets/img/Traditional",
-      "image":  ["10.jpg"],
+      "media":  ["10.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["1.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["2.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["3.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["4.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["5.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["6.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["7.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["8.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["9.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["10.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["11.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["12.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "PHOTOGRAPHY",
+      "title": "",
+      "description": "",
+      "additional":  [],
+      "filePath": "/assets/img/photography",
+      "media":  ["13.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Moodboard Manila 1",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["W1m-NDkQfw4"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Moodboard Manila 2",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["KyBS1Wr0TVU"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Moodboard Manila 3",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["aD7KI58XyuM"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Chloe's Legality",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["Jm8SxKHl-Qc"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Pansin Short Film",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["N5dqmDlLw38"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Gaming Video Edit Sample",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["nTRTHzHfkxg"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Sulok Cafe",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["UzIaKzjzabA"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Janel's Graduation",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["qpUgtbuKo80"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Sto. Niño De Pandacan Parish",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["SZbRYNfRo4M"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Baliktanaw Event",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["qWv2_zh6OIo"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Metasymbology AVP",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["ACCiB0KfHxE"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Estelle's Legality",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["dJoImnNWSdQ"],
+      "remarks": []
+    },
+    {
+      "category": "VIDEOGRAPHY",
+      "title": "Sneaker Youtuber Edit",
+      "description": "Colored Pencils",
+      "additional":  ["Premiere Pro"],
+      "filePath": "",
+      "media":  ["0px_5awnAPs","5tNX1zEtmm0","fRu9dv-eb3o","b7OWv9NQ83Y","LqKqcwSTbGA?si0","Dr-UXYgkZE0","MpxwEA_Negg"],
       "remarks": []
     }
     

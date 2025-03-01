@@ -10,7 +10,7 @@
             "Implemented a backtracking algorithm for puzzle generation"
         ],
         "filePath": "/assets/img/Games/sudoku",
-        "image": ["0.png", "1.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "2.jpg"],
+        "media": ["0.png", "1.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "2.jpg"],
         "backgroundImage": "0.png"
     },
     {
@@ -24,7 +24,7 @@
             "Used Substance Painter, Photoshop, and Blender for asset creation"
         ],
         "filePath": "/assets/img/Games/interweave",
-        "image": ["5.jpg", "2.jpg", "3.jpg", "4.jpg", "1.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg"],
+        "media": ["5.jpg", "2.jpg", "3.jpg", "4.jpg", "1.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg"],
         "backgroundImage": "8.jpg"
     },
     {
@@ -38,7 +38,7 @@
             "Utilized Unity’s physics system"
         ],
         "filePath": "/assets/img/Games/cupit",
-        "image": ["1.jpg", "4.jpg", "5.jpg", "6.jpg", "3.jpg", "2.jpg", "7.jpg"],
+        "media": ["1.jpg", "4.jpg", "5.jpg", "6.jpg", "3.jpg", "2.jpg", "7.jpg"],
         "backgroundImage": "4.jpg"
     },
     {
@@ -54,7 +54,7 @@
             "Implemented a multiple-view system"
         ],
         "filePath": "/assets/img/Games/pool",
-        "image": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"],
+        "media": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"],
         "backgroundImage": "7.jpg"
     },
     {
@@ -71,7 +71,7 @@
             "Developed a custom sound manager"
         ],
         "filePath": "/assets/img/Games/mistake",
-        "image": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
+        "media": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
         "backgroundImage": "3.jpg"
     },
     {
@@ -84,7 +84,7 @@
         "Created all assets"
       ],
       "filePath": "/assets/img/Games/paper",
-      "image": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"],
+      "media": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"],
       "backgroundImage": "3.jpg"
     },
     {
@@ -97,7 +97,7 @@
         "Developed all aspects except the sound system and sound effects"
       ],
       "filePath": "/assets/img/Games/pong",
-      "image": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "9.jpg", "8.jpg"],
+      "media": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "9.jpg", "8.jpg"],
       "backgroundImage": "7.jpg"
     },
     {
@@ -110,7 +110,7 @@
             "Lead developer and programmer"
         ],
         "filePath": "/assets/img/Games/reverto",
-        "image": ["1.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "4.jpg", "5.jpg", "3.jpg", "6.jpg", "7.jpg"],
+        "media": ["1.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "4.jpg", "5.jpg", "3.jpg", "6.jpg", "7.jpg"],
         "backgroundImage": "9.jpg"
     },
     {
@@ -123,7 +123,7 @@
             "Lead developer and programmer"
         ],
         "filePath": "/assets/img/Games/starship",
-        "image": ["1.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "4.jpg", "5.jpg", "3.jpg", "6.jpg", "7.jpg"],
+        "media": ["1.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "4.jpg", "5.jpg", "3.jpg", "6.jpg", "7.jpg"],
         "backgroundImage": "6.jpg"
     }
 ]

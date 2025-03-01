@@ -28,8 +28,10 @@ let currentSlide = 0;
 let currentTabId = "tab-1";
 
 //cursor
+const customCursor = document.querySelector('.cursor');
 const bigBall = document.querySelector('.cursor-ball-big-container');
 const smallBall = document.querySelector('.cursor-ball-small-container');
+let hideOnHover = [];
 let hoverables = [];
 let cursorVisible = false;
 
@@ -151,25 +153,29 @@ function navigateImage(element, direction) {
 function navigateSelectedImage(event, direction) {
     event.stopPropagation();
     let content = null;
-
+    
     if (currentSelectedContentType == "art") {
         content = artworks.find(a => a.id == currentSelectedID);
     } else if (currentSelectedContentType == "game") {
         content = games.find(g => g.id == currentSelectedID);
     }
-
+    
     const fp = content.filePath;
-    const listOfImages = content.image;
+    const listOfImages = content.media;
     const maxIndex = listOfImages.length - 1;
     let newIndex;
     
     if (direction === 'next') {
         newIndex = parseInt(currentSelectedIndex) + 1 > maxIndex ? 0 : parseInt(currentSelectedIndex) + 1;
+        
     } else {
         newIndex = parseInt(currentSelectedIndex) - 1 < 0 ? maxIndex : parseInt(currentSelectedIndex) - 1;
     }
     
     currentSelectedIndex = newIndex;
+    if(!hasFileExtension(listOfImages[currentSelectedIndex])){
+        navigateSelectedImage(event, direction);
+    }
     selectedImageContainer.firstElementChild.firstElementChild.src = `${fp}/${listOfImages[currentSelectedIndex]}`;
 }
 
@@ -203,18 +209,18 @@ function getChildList(parent) {
 
 // Move the cursor
 function onMouseMove(e) {
-
+    
     if (!cursorVisible) {
         bigBall.style.opacity = 1;
         smallBall.style.opacity = 1;
         cursorVisible = true; 
     }
-
+    
     TweenMax.to(bigBall, .4, {
         x: e.clientX - 15,
         y: e.clientY - 15
     })
-
+    
     TweenMax.to(smallBall, .1, {
         x: e.clientX - 5,
         y: e.clientY - 5
@@ -234,35 +240,34 @@ function onMouseHoverOut() {
   })
 }
 
+function hideCustomCursor(){
+    bigBall.style.opacity = 0;
+        smallBall.style.opacity = 0;
+}
+
 
 function addHoverEventToLinks() {
-    // Select all <a> elements on the page
     const links = document.querySelectorAll('a');
 
     links.forEach(link => {
-        // Get the ddcid attribute value
         const ddcid = link.getAttribute('ddcid');
 
         if (ddcid) {
             const dropdownElement = document.getElementById(ddcid);
 
             if (dropdownElement) {
-                // Add mouseover event listener to <a>
                 link.addEventListener('mouseover', () => {
                     showDropdown(link, dropdownElement);
                 });
-
-                // Add mouseover event listener to dropdown content
+                
                 dropdownElement.addEventListener('mouseover', () => {
                     showDropdown(link, dropdownElement);
                 });
                 
-                // Add mouseout event listener to <a>
                 link.addEventListener('mouseout', (e) => {
                     hideDropdown(e, link, dropdownElement);
                 });
-
-                // Add mouseout event listener to dropdown content
+                
                 dropdownElement.addEventListener('mouseout', (e) => {
                     hideDropdown(e, link, dropdownElement);
                 });
@@ -271,10 +276,8 @@ function addHoverEventToLinks() {
     });
 
     function showDropdown(link, dropdownElement) {
-        // Add the "open-dropdown" class
         dropdownElement.classList.add('open-dropdown');
         
-        // Position the dropdown element just below the <a>
         const rect = link.getBoundingClientRect();
         dropdownElement.style.top = `${rect.bottom}px`;
         dropdownElement.style.left = `${rect.left}px`;
@@ -407,12 +410,13 @@ function populateGamePortfolio(){
         setParent(galleryLeft, mainImageContainer);
     
         const mainImage = document.createElement('img');
+        mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
         mainImage.classList.add('main-image');
         if (game.isMobile == true) {mainImage.classList.add('mobile');};
         mainImage.classList.add('enlargeable');
         mainImage.setAttribute("id", "mainImage");
         mainImage.setAttribute("index", "0");
-        mainImage.src = `${game.filePath}/${game.image[0]}`;
+        mainImage.src = `${game.filePath}/${game.media[0]}`;
         setParent(mainImageContainer, mainImage);
         
         const prevButton = document.createElement('button');
@@ -433,13 +437,18 @@ function populateGamePortfolio(){
         thumbnailsContainer.classList.add('thumbnails');
         setParent(galleryLeft, thumbnailsContainer);
         
-        for (i = 0; i < game.image.length; i++) {
+        for (i = 0; i < game.media.length; i++) {
             const thumbnail = document.createElement('img');
+            thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
             thumbnail.classList.add('thumbnail');
             thumbnail.classList.add('hoverable');
             if ( i == 0) { thumbnail.classList.add('active'); };
             if (game.isMobile == true) {thumbnail.classList.add('mobile');};
-            thumbnail.src = `${game.filePath}/${game.image[i]}`;
+            if(hasFileExtension(game.media[i])){
+                thumbnail.src = `${game.filePath}/${game.media[i]}`;
+            }else{
+                thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+            }
             thumbnail.setAttribute("index", i);
             thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
             setParent(thumbnailsContainer, thumbnail);
@@ -503,9 +512,13 @@ function populateArtCategory() {
         const imgHoverZoom = document.createElement('div');
         imgHoverZoom.className = 'img-hover-zoom banner hoverable';
         setParent(artContainer, imgHoverZoom);
-
+        
         const img = document.createElement('img');
-        img.src = `${firstArtwork.filePath}/${firstArtwork.image[0]}`;
+        if(hasFileExtension(firstArtwork.media[0])){
+            img.src = `${firstArtwork.filePath}/${firstArtwork.media[0]}`;
+        }else{
+            img.src = `https://img.youtube.com/vi/${firstArtwork.media[0]}/maxresdefault.jpg`
+        }
         setParent(imgHoverZoom, img);
         
         const title = document.createElement('div');
@@ -513,7 +526,6 @@ function populateArtCategory() {
         setParent(imgHoverZoom, title);
         
     }
-    
     
 }
 
@@ -557,20 +569,24 @@ function populateArtPortfolio() {
             imageContainer.classList.add("img-hover-zoom");
             //imageContainer.classList.add("force-square");
             imageContainer.classList.add("hoverable");
-            if(art.image.length === 1){
-                
-            } else{
+            if(art.media.length !== 1 || !hasFileExtension(art.media[0])){
                 imageContainer.addEventListener('click', (e) => {
                     loadArtwork(art.id);
                 });
-            }
+            } 
            
-            
             setParent(artworkDiv, imageContainer);
             
             const image = document.createElement('img');
-            image.src = `${art.filePath}/${art.image[0]}`;
-            if(art.image.length === 1){
+            image.addEventListener('error', (e) => {replaceNullImage(image)});
+
+            if(hasFileExtension(art.media[0])){
+                image.src = `${art.filePath}/${art.media[0]}`;
+            }else{
+                image.src = `https://img.youtube.com/vi/${art.media[0]}/maxresdefault.jpg`
+            }
+
+            if(art.media.length === 1){
                 image.classList.add("enlargeable");
             } else{
                 
@@ -578,18 +594,23 @@ function populateArtPortfolio() {
             setParent(imageContainer, image);
             
             const title = document.createElement('h1');
-            title.textContent = art.title;
+            if (art.remarks.includes("quoted")) {
+                title.textContent = `"${art.title}"`;
+            } else{
+                title.textContent = art.title;
+            }
+            
             setParent(artworkDiv, title);
             
             // const description = document.createElement('h3');
             // description.textContent = art.description;
             // setParent(artworkDiv, description);
             
-            // for (i = 0; i < art.additional.length; i++) {
-            //     const additionalInfo = document.createElement('h3');
-            //     additionalInfo.innerHTML = `•&nbsp;&nbsp;${art.additional[i]}`;
-            //     setParent(artworkDiv, additionalInfo);
-            // }
+            art.additional.forEach(additional => {
+                const additionalInfo = document.createElement('h3');
+                additionalInfo.innerHTML = `•&nbsp;&nbsp;${additional}`;
+                setParent(artworkDiv, additionalInfo);
+            });
             
             setParent(portfolioDiv, artworkDiv);
         });
@@ -608,7 +629,12 @@ function pupulateArtInfo() {
     
     const artworkTitle = document.createElement('div');
     artworkTitle.className = 'art-container title';
-    artworkTitle.textContent = artwork.title.toUpperCase();
+    const t = artwork.title.toUpperCase();
+    if (artwork.remarks.includes("quoted")) {
+        artworkTitle.textContent = `"${t}"`;
+    } else{
+        artworkTitle.textContent = t;
+    }
     setParent(portfolioDiv, artworkTitle);
     
     // const description = document.createElement('div');
@@ -616,39 +642,57 @@ function pupulateArtInfo() {
     // description.textContent = `${artwork.description}`;
     // setParent(portfolioDiv, description);
     
-    // for (i = 0; i < artwork.additional.length; i++) {
-    //     const additionalInfo = document.createElement('div');
-    //     additionalInfo.className = 'art-container description';
-    //     additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
+    for (i = 0; i < artwork.additional.length; i++) {
+        const additionalInfo = document.createElement('div');
+        additionalInfo.className = 'art-container description';
+        additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
         
-    //     if(i+1 == artwork.additional.length){
-    //         additionalInfo.classList.add('last-description');
-    //     }
-    //     setParent(portfolioDiv, additionalInfo);
-    // }
+        if(i+1 == artwork.additional.length){
+            additionalInfo.classList.add('last-description');
+        }
+        setParent(portfolioDiv, additionalInfo);
+    }
     
-    artwork.image.forEach(img => {
-        const artworkDiv = document.createElement('div');
-        artworkDiv.className = 'art-container artworks';
-        
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add("img-hover-zoom");
-        imageContainer.classList.add("artworks");
-        imageContainer.classList.add("hoverable");
-        setParent(artworkDiv, imageContainer);
-    
-        const image = document.createElement('img');
-        image.className = 'enlargeable';
-        image.src = `${artwork.filePath}/${img}`;
-        image.setAttribute('index',artwork.image.indexOf(img));
-        setParent(imageContainer, image);
-        
-        
-        setParent(portfolioDiv, artworkDiv);
+    artwork.media.forEach(img => {
+            const artworkDiv = document.createElement('div');
+            artworkDiv.className = 'art-container artworks';
+            setParent(portfolioDiv, artworkDiv);
+            
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add("img-hover-zoom");
+            imageContainer.classList.add("artworks");
+            imageContainer.classList.add("hoverable");
+            setParent(artworkDiv, imageContainer);
+
+        if(hasFileExtension(img)){
+            const image = document.createElement('img');
+            image.addEventListener('error', (e) => {replaceNullImage(image)});
+            image.className = 'enlargeable';
+            image.src = `${artwork.filePath}/${img}`;
+            
+            image.setAttribute('index',artwork.media.indexOf(img));
+            setParent(imageContainer, image);
+            
+        } else{
+            
+            const youtubeContainer = document.createElement('div');
+            youtubeContainer.className = 'youtube-embed';
+            setParent(imageContainer, youtubeContainer);
+
+            const youtubeVideo = document.createElement('iframe');
+            youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
+            youtubeVideo.setAttribute('width','1080');
+            youtubeVideo.setAttribute('height','1920');
+            youtubeVideo.setAttribute('frameborder','0');
+            youtubeVideo.setAttribute('allowfullscreen','');
+            youtubeVideo.setAttribute('index',artwork.media.indexOf(img));
+            setParent(youtubeContainer, youtubeVideo);
+            
+        }
+       
     });
     
 }
-
 
 function loadArtwork(id) {
     const artwork = artworks.find(a => a.id === id);
@@ -664,6 +708,15 @@ function loadArtCategory(category) {
 
 function setParent(parent, child){
     parent.appendChild(child);
+}
+
+function replaceNullImage(img){
+    img.src = `./assets/img/null.png`;
+}
+
+function hasFileExtension(filename) {
+    const regex = /\.[^/.]+$/;
+    return regex.test(filename);
 }
 
 
@@ -717,7 +770,6 @@ function Awake(){
             selectedImageContainer.classList.remove('hide');
             selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
             document.body.classList.add('noscroll');
-            console.log(img.getAttribute('src'));
         });
     });
 
@@ -731,7 +783,7 @@ function Awake(){
     
     
     //thing only to do if on desktop
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 820) {
     
         window.addEventListener('mousemove', function (e) {
             mouseWindowPosX = e.pageX;
@@ -740,13 +792,37 @@ function Awake(){
         
         animateSpotlight();
         
+        
         document.body.addEventListener('mousemove', onMouseMove);
         for (let i = 0; i < hoverables.length; i++) {
           hoverables[i].addEventListener('mouseenter', onMouseHover);
           hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
         }
         
-        document.querySelector('.cursor').classList.remove("hide");
+        document.body.addEventListener('mouseleave', () =>{
+            bigBall.style.opacity = 0;
+            smallBall.style.opacity = 0;
+        });
+
+        document.body.addEventListener('mouseenter', () =>{
+            bigBall.style.opacity = 1;
+            smallBall.style.opacity = 1;
+        });
+        
+        hideOnHover =  document.querySelectorAll('.youtube-embed');
+
+        hideOnHover.forEach(unhoverable =>{
+            unhoverable.addEventListener('mouseenter', () =>{
+                bigBall.style.opacity = 0;
+                smallBall.style.opacity = 0;
+            });
+            unhoverable.addEventListener('mouseleave', () =>{
+                bigBall.style.opacity = 1;
+                smallBall.style.opacity = 1;
+            });
+        });
+        
+        customCursor.classList.remove("hide");
         
         requestAnimationFrame(updateCardRotations);
         
