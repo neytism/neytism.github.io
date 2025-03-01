@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Art Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/pf_small.png">
 </head>
 
 <body>
     
     <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
-            <img  onclick="event.stopPropagation()" src="./assets/img/1.png" />
+            <img  onclick="event.stopPropagation()" src="./assets/img/placeholder.png" />
         </div>
         <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
-
-        <div class="arrow prev hoverable" onclick="navigateSelectedImage(event,'prev')"></div>
-        <div class="arrow next hoverable" onclick="navigateSelectedImage(event,'next')"></div>
+        
+        <div class="arrow-container prev hoverable hide" onclick="navigateSelectedImage(event,'prev')"><div class="arrow prev" ></div></div>
+        <div class="arrow-container next hoverable hide" onclick="navigateSelectedImage(event,'next')"><div class="arrow next" ></div></div>
     </div>
     
     <div class="selected-art-container hide" style="position: absolute; display:flex; z-index: 103; min-height: 100dvh; min-width: 100dvw;">
@@ -32,7 +33,7 @@
             <a class="navbar-link hoverable" ddcid="portfolio-dropdown">PORTFOLIO</a>
             <div class="dropdown-content" id="portfolio-dropdown">
                 <a href="./index.html" href="javascript:void(0)">Games</a>
-                <a href="https://nateflorendo.carrd.co/">Art</a>
+                <a href="./art-category.html">Art</a>
             </div>
             <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
             <a class="navbar-link hoverable" href="./contact.html">CONTACT</a>

@@ -155,7 +155,7 @@ startAnimation();
 window.onresize=resize;
 
 const inputs = document.querySelectorAll('.text-input');
-const iteration = 3; 
+const iteration = 5; 
 const rate = 15;
 
 inputs.forEach(input => {

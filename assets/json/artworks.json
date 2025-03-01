@@ -1,11 +1,21 @@
 [
     {
       "category": "3D WORKS",
+      "title": "PC (2025)",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+      "additional":  ["Lorem ipsum dolor sit amet","Sed do eiusmod tempor"],
+      "filePath": "/assets/img/3D/pc2025",
+      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
       "title": "Switch",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       "additional":  ["Lorem ipsum dolor sit amet","Sed do eiusmod tempor"],
       "filePath": "/assets/img/3D/kb_switch",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -13,7 +23,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/nintendo_switch",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -21,7 +32,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/psp",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -29,7 +41,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/gameboy",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -37,7 +50,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/atari",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -45,7 +59,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/famicom",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -53,7 +68,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/ps1",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -61,7 +77,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/hapon",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -69,7 +86,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/b12",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -77,7 +95,17 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/almusal",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Des Valeurs Redéfinies",
+      "description": "3D and Contemporary art based on the Rene Margtitte's Les Valeurs Personnelles (1952, Oil on canvas) painting.",
+      "additional":  ["Blender"],
+      "filePath": "/assets/img/3D/artApp",
+      "image":  ["1.png"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -85,7 +113,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/pc2020",
-      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"]
+      "image":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -93,7 +122,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/cbz2020",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg"]
+      "image":  ["1.png","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -101,7 +131,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/tape",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg"]
+      "image":  ["1.png","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -109,7 +140,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/room2020",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"]
+      "image":  ["1.png","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -117,7 +149,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/pjpRender",
-      "image":  ["1.png","2.jpg","3.jpg","4.jpg"]
+      "image":  ["1.png","2.jpg","3.jpg","4.jpg"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -125,7 +158,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/onezo",
-      "image":  ["1.jpg","2.png","3.png"]
+      "image":  ["1.jpg","2.png","3.png"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -133,7 +167,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/kharis",
-      "image":  ["1.png","2.png","3.png","4.png"]
+      "image":  ["1.png","2.png","3.png","4.png"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -141,7 +176,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/pjpCover",
-      "image":  ["1.png","2.png","3.png"]
+      "image":  ["1.png","2.png","3.png"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -149,7 +185,8 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/redmi",
-      "image":  ["1.png","2.png"]
+      "image":  ["1.png","2.png"],
+      "remarks": []
     },
     {
       "category": "3D WORKS",
@@ -157,7 +194,80 @@
       "description": "Made using blender",
       "additional":  ["Blender"],
       "filePath": "/assets/img/3D/laney",
-      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png"]
+      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png"],
+      "remarks": []
+    },
+    {
+      "category": "CONCEPT ART",
+      "title": "Concept Art 1",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/concept art/1",
+      "image":  ["1.png","2.png","3.png","4.png","5.png"],
+      "remarks": []
+    },
+    {
+      "category": "CONCEPT ART",
+      "title": "Concept Art 2",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/concept art/2",
+      "image":  ["1.png","2.png","3.png"],
+      "remarks": []
+    },
+    {
+      "category": "CONCEPT ART",
+      "title": "Storyboard 1",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/concept art/3",
+      "image":  ["1.png","2.png"],
+      "remarks": []
+    },
+    {
+      "category": "CONCEPT ART",
+      "title": "Map Design 1",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Map Design/sotu",
+      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png"],
+      "remarks": []
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "Glance Through Freelance",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/Graphic Design",
+      "image":  ["athena.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "Glance Through Freelance",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/Graphic Design",
+      "image":  ["chloe.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "Glance Through Freelance",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/Graphic Design",
+      "image":  ["wendi.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "Glance Through Freelance",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/Graphic Design",
+      "image":  ["pup.jpg"],
+      "remarks": []
     },
     {
       "category": "GRAPHIC DESIGN",
@@ -165,7 +275,8 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/knb",
-      "image":  ["1.png","2.png","3.png","4.png","5.png"]
+      "image":  ["1.png","2.png","3.png","4.png","5.png"],
+      "remarks": []
     },
     {
       "category": "GRAPHIC DESIGN",
@@ -173,7 +284,306 @@
       "description": "Made using Illustrator",
       "additional":  ["Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/gtf",
-      "image":  ["1.png","2.png","3.png"]
+      "image":  ["1.png","2.png","3.png"],
+      "remarks": []
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "CritMedia Event",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/Graphic Design/critmedia",
+      "image":  ["1.png","2.png","3.png","4.png"],
+      "remarks": []
+    },
+    {
+      "category": "GRAPHIC DESIGN",
+      "title": "Oh! My Denim",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/Graphic Design/omd",
+      "image":  ["2.png","1.png","3.png","4.png","5.png"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "Oh! My Denim",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["1.png"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "ICT GUILD ESPORTS",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["2.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "SMHS Focused",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["3.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "Jayflow",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["4.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "Cafe Aesthetic",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["5.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "PJP Construction and Services",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["6.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "Kharis Cafe",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["7.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "LOGO DESIGN",
+      "title": "Sumulong Programming Society",
+      "description": "Made using Illustrator",
+      "additional":  ["Adobe Illustrator"],
+      "filePath": "/assets/img/logo",
+      "image":  ["8.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "UI DESIGN",
+      "title": "Concept College Library App",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/UI/ligma",
+      "image":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Komyut",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/komyut",
+      "image":  ["1.png","2.gif"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Barya Lang Po Sa Lamesa",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/barya",
+      "image":  ["1.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Lone",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/lone",
+      "image":  ["0.png","1.png","2.png","3.png","4.png","5.png","6.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Baliktanaw",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/baliktanaw",
+      "image":  ["1.png","2.png","3.png","4.png","5.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Sunder",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/sunder",
+      "image":  ["1.png","2.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Mask",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/mask",
+      "image":  ["1.png","2.png","3.png","4.png","5.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Last",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations/last",
+      "image":  ["1.png","2.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Pansin Poster",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations",
+      "image":  ["1.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Album Art 1",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations",
+      "image":  ["2.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Album Art 2",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations",
+      "image":  ["3.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Album Art 3",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations",
+      "image":  ["4.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Album Art 4",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations",
+      "image":  ["5.png"],
+      "remarks": []
+    },
+    {
+      "category": "DIGITAL ART",
+      "title": "Album Art 5",
+      "description": "Made using Photoshop",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Illustrations",
+      "image":  ["6.png"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Dangal ng Haraya",
+      "description": "Acrylic",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["1.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Aeonic",
+      "description": "Acrylic",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["2.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Ngiti Sa Likod Ng Kahirapan",
+      "description": "Acrylic",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["3.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Scorpion",
+      "description": "Ballpoint Pens",
+      "additional":  ["Adobe Photoshop"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["5.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Tony Stark",
+      "description": "Colored Pencils",
+      "additional":  ["Colored Pencils"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["6.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Liza Soberano",
+      "description": "Colored Pencils",
+      "additional":  ["Colored Pencils"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["7.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Ed Sheeran",
+      "description": "Colored Pencils",
+      "additional":  ["Colored Pencils"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["8.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "PewDiePie",
+      "description": "Colored Pencils",
+      "additional":  ["Colored Pencils"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["9.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "TRADITIONAL ART",
+      "title": "Taylor Swift",
+      "description": "Colored Pencils",
+      "additional":  ["Colored Pencils"],
+      "filePath": "/assets/img/Traditional",
+      "image":  ["10.jpg"],
+      "remarks": []
     }
+    
   ]
   

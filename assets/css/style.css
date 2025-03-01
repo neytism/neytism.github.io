@@ -406,8 +406,10 @@ body.noscroll{
 
 
 .art-section {
+    --padding-side: 250px;
     padding-top: 60px;
-    margin: 0 -20px;
+    padding-left: var(--padding-side);
+    padding-right: var(--padding-side);
     flex: 1;
     position: relative;
     display: flex;
@@ -434,12 +436,15 @@ body.noscroll{
     flex: 0 0 calc(100%/5);
 }
 
+.art-container.banner{
+    flex: 0 0 calc(100%/2);
+}
+
 .art-container.artworks{
     padding: 5px;
 }
 
 .art-container.title{
-    padding: 5px 20px;
     flex: 0 0 100%; 
     font-size: 48px; 
     letter-spacing: 3px;
@@ -478,6 +483,40 @@ body.noscroll{
 
 .img-hover-zoom:hover img {
     transform: scale(1.1);
+}
+
+.img-hover-zoom.banner{
+    max-height: 250px !important; 
+    position: relative; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: black;
+}
+
+.img-hover-zoom.banner img{
+    max-width: 100%; 
+    max-height: 100%;
+     height: auto; 
+     width: 100%; 
+     opacity: 0.5;
+     transform: scale(1.1);
+}
+
+.img-hover-zoom.banner:hover img {
+    transform: scale(1.2);
+}
+
+
+.img-hover-zoom.banner div{
+    position: absolute; 
+    color: white; 
+    text-align: center; 
+    font-size: 48px; 
+    letter-spacing: 5px;
+    font-family: 'Barlow Condensed'; 
+    font-weight: 600; 
+    text-shadow: 0px 0px 10px black;
 }
 
 .img-hover-zoom.force-square:hover img {
@@ -587,26 +626,32 @@ body.noscroll{
     right: 30px;
 }
 
-.selected-image-container .arrow {
+
+.selected-image-container .arrow-container {
     position: absolute;
     top: 50%;
-    width: 0;
-    height: 0;
-    border-style: solid;
+    padding: 25px;
+    transform: translateY(-50%);
 }
 
-.selected-image-container .prev {
+.selected-image-container .arrow-container.prev {
     left: 20px;
-    border-width: 15px 20px 15px 0;
-    border-color: transparent rgba(255, 255, 255, 0.7) transparent transparent; 
-    transform: translateY(-50%); 
 }
 
-.selected-image-container .next {
-    right: 20px;
+.selected-image-container .arrow-container.next {
+    right: 20px; 
+}
+
+.arrow.prev {
+    border-style: solid;
+    border-width: 15px 20px 15px 0;
+    border-color: transparent rgba(255, 255, 255, 0.4) transparent transparent;
+}
+
+.arrow.next {
+    border-style: solid;
     border-width: 15px 0 15px 20px;
-    border-color: transparent transparent transparent rgba(255, 255, 255, 0.7); 
-    transform: translateY(-50%); 
+    border-color: transparent transparent transparent rgba(255, 255, 255, 0.4);
 }
 
 form{
@@ -627,9 +672,20 @@ form input, textarea{
     font-size: 18px;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+    border-style: solid;
+    border-width: 3px;
+    padding: 12px;
+    border-color: rgba(255, 255, 255, 0.623);
+    box-sizing: border-box;
+}
+
 form input{
     height: 40px;
 }
+
+
 
 form textarea{
     height: 200px;
@@ -642,8 +698,6 @@ form .submit{
     color: white;
     cursor: none;
 }
-
-
 
 @keyframes animate{
 	
@@ -718,6 +772,13 @@ form .submit{
         max-height:200px;
     }
 
+    .art-section {
+        --padding-side: 0px;
+        margin: 0 -20px;
+        padding-left: var(--padding-side);
+        padding-right: var(--padding-side);
+    }
+
     .art-container{
         padding: 10px;
         flex: 0 1 calc(100%/2);
@@ -758,7 +819,20 @@ form .submit{
     font-size: 12px;
     }
 
+    .art-container.banner{
+        flex: 0 0 calc(100%);
+    }
 
+    .img-hover-zoom.banner{
+        max-height: 150px !important; 
+    }
+    
+    
+    .img-hover-zoom.banner div{
+        font-size: 32px; 
+        letter-spacing: 5px;
+    }
+    
     .selected-image-container {
         padding: 20px;
     }
@@ -779,6 +853,7 @@ form .submit{
         gap: 25px;
         padding: 25px;
     }
+    
     
 }
 

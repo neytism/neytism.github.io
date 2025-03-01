@@ -374,122 +374,9 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-function pupulateArtInfo() {
-    const artworkId = getQueryParam('id');
-    const artwork = artworks.find(a => a.id == artworkId);
-    
-    const portfolioDiv = document.querySelector('.art-section');
-    portfolioDiv.setAttribute("contentID", artwork.id);
-    portfolioDiv.setAttribute("contentType", "art");
-    
-    const artworkTitle = document.createElement('div');
-    artworkTitle.className = 'art-container title';
-    artworkTitle.textContent = artwork.title.toUpperCase();
-    setParent(portfolioDiv, artworkTitle);
-    
-    const description = document.createElement('div');
-    description.className = 'art-container description';
-    description.textContent = `${artwork.description}`;
-    setParent(portfolioDiv, description);
-    
-    for (i = 0; i < artwork.additional.length; i++) {
-        const additionalInfo = document.createElement('div');
-        additionalInfo.className = 'art-container description';
-        additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
-        
-        if(i+1 == artwork.additional.length){
-            additionalInfo.classList.add('last-description');
-        }
-        setParent(portfolioDiv, additionalInfo);
-    }
-    
-    artwork.image.forEach(img => {
-        const artworkDiv = document.createElement('div');
-        artworkDiv.className = 'art-container artworks';
-        
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add("img-hover-zoom");
-        imageContainer.classList.add("artworks");
-        imageContainer.classList.add("hoverable");
-        setParent(artworkDiv, imageContainer);
-    
-        const image = document.createElement('img');
-        image.className = 'enlargeable';
-        image.src = `${artwork.filePath}/${img}`;
-        image.setAttribute('index',artwork.image.indexOf(img));
-        setParent(imageContainer, image);
-        
-        
-        setParent(portfolioDiv, artworkDiv);
-    });
-    
-}
-
-function populateArtPortfolio() {
-    const portfolioDiv = document.querySelector(".art-section");
-    
-    const categories = {};
-    
-    artworks.forEach(art => {
-        if (!categories[art.category]) {
-            categories[art.category] = [];
-        }
-        categories[art.category].push(art);
-    });
-
-    for (const category in categories) {
-        
-        const categoryTitle = document.createElement('div');
-        categoryTitle.className = 'art-container title';
-        categoryTitle.textContent = category;
-        setParent(portfolioDiv, categoryTitle);
-        
-        
-        categories[category].forEach(art => {
-            const artworkDiv = document.createElement('div');
-            artworkDiv.className = 'art-container';
-            
-            
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add("img-hover-zoom");
-            //imageContainer.classList.add("force-square");
-            imageContainer.classList.add("hoverable");
-            imageContainer.addEventListener('click', (e) => {
-                loadArtwork(art.id);
-            });
-
-            setParent(artworkDiv, imageContainer);
-
-            const image = document.createElement('img');
-            image.src = `${art.filePath}/${art.image[0]}`;
-            //image.classList.add("force-square");
-            
-            setParent(imageContainer, image);
-            
-            
-            const title = document.createElement('h1');
-            title.textContent = art.title;
-            setParent(artworkDiv, title);
-            
-            // const description = document.createElement('h3');
-            // description.textContent = art.description;
-            // setParent(artworkDiv, description);
-            
-            for (i = 0; i < art.additional.length; i++) {
-                const additionalInfo = document.createElement('h3');
-                additionalInfo.innerHTML = `•&nbsp;&nbsp;${art.additional[i]}`;
-                setParent(artworkDiv, additionalInfo);
-            }
-            
-            setParent(portfolioDiv, artworkDiv);
-        });
-        
-    }
-}
-
 function populateGamePortfolio(){
     let x = 1;
-
+    
     const portfolioDiv = document.getElementById("games");
     
     games.forEach(game => {
@@ -503,7 +390,7 @@ function populateGamePortfolio(){
         const sectionContent = document.createElement('div');
         sectionContent.classList.add('section-content');
         setParent(section, sectionContent);
-
+        
         const gameGalleryContainer = document.createElement('div');
         gameGalleryContainer.classList.add('game-gallery-container');
         if(x % 2 == 0){
@@ -514,7 +401,7 @@ function populateGamePortfolio(){
         const galleryLeft = document.createElement('div');
         galleryLeft.classList.add('gallery-left');
         setParent(gameGalleryContainer, galleryLeft);
-
+        
         const mainImageContainer = document.createElement('div');
         mainImageContainer.classList.add('main-image-container');
         setParent(galleryLeft, mainImageContainer);
@@ -545,7 +432,7 @@ function populateGamePortfolio(){
         const thumbnailsContainer = document.createElement('div');
         thumbnailsContainer.classList.add('thumbnails');
         setParent(galleryLeft, thumbnailsContainer);
-
+        
         for (i = 0; i < game.image.length; i++) {
             const thumbnail = document.createElement('img');
             thumbnail.classList.add('thumbnail');
@@ -561,12 +448,12 @@ function populateGamePortfolio(){
         const galleryRight = document.createElement('div');
         galleryRight.classList.add('gallery-right');
         setParent(gameGalleryContainer, galleryRight);
-
+        
         const gameTitle = document.createElement('h2');
         gameTitle.classList.add('details-title');
         gameTitle.textContent = game.title.toUpperCase();
         setParent(galleryRight, gameTitle);
-
+        
         const gameDescription = document.createElement('p');
         gameDescription.classList.add('details-description');
         gameDescription.innerHTML = `${game.description}<br><br>`;
@@ -588,11 +475,190 @@ function populateGamePortfolio(){
     });
 }
 
+function populateArtCategory() {
+    const portfolioDiv = document.querySelector(".art-section");
+    portfolioDiv.setAttribute('contentType','art');
+    
+    const categories = {};
+    
+    artworks.forEach(art => {
+        if(art.remarks.includes("hide")){
+            return;
+        }
+        if (!categories[art.category]) {
+            categories[art.category] = [art];
+        }
+    });
+
+    for (const category in categories) {
+        const firstArtwork = categories[category][0];
+
+        const artContainer = document.createElement('div');
+        artContainer.className = 'art-container banner';
+        artContainer.addEventListener('click', (e) => {
+            loadArtCategory(category);
+        });
+        setParent(portfolioDiv, artContainer);
+
+        const imgHoverZoom = document.createElement('div');
+        imgHoverZoom.className = 'img-hover-zoom banner hoverable';
+        setParent(artContainer, imgHoverZoom);
+
+        const img = document.createElement('img');
+        img.src = `${firstArtwork.filePath}/${firstArtwork.image[0]}`;
+        setParent(imgHoverZoom, img);
+        
+        const title = document.createElement('div');
+        title.textContent = category;
+        setParent(imgHoverZoom, title);
+        
+    }
+    
+    
+}
+
+function populateArtPortfolio() {
+    const categoryIdentifier = getQueryParam('category');
+
+    const portfolioDiv = document.querySelector(".art-section");
+    portfolioDiv.setAttribute('contentType','art');
+    
+    const categories = {};
+    
+    artworks.forEach(art => {
+        if (art.remarks.includes("hide")) {
+            return;
+        }
+
+        if (!categoryIdentifier || art.category.toLowerCase().replace(/\s+/g, '') === categoryIdentifier) {
+            
+            if (!categories[art.category]) {
+                categories[art.category] = [];
+            }
+            
+            categories[art.category].push(art);
+        }
+    });
+    
+    for (const category in categories) {
+        
+        const categoryTitle = document.createElement('div');
+        categoryTitle.className = 'art-container title';
+        categoryTitle.textContent = category;
+        setParent(portfolioDiv, categoryTitle);
+        
+        
+        categories[category].forEach(art => {
+            const artworkDiv = document.createElement('div');
+            artworkDiv.className = 'art-container';
+            portfolioDiv.setAttribute('contentID', art.id);
+            
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add("img-hover-zoom");
+            //imageContainer.classList.add("force-square");
+            imageContainer.classList.add("hoverable");
+            if(art.image.length === 1){
+                
+            } else{
+                imageContainer.addEventListener('click', (e) => {
+                    loadArtwork(art.id);
+                });
+            }
+           
+            
+            setParent(artworkDiv, imageContainer);
+            
+            const image = document.createElement('img');
+            image.src = `${art.filePath}/${art.image[0]}`;
+            if(art.image.length === 1){
+                image.classList.add("enlargeable");
+            } else{
+                
+            }
+            setParent(imageContainer, image);
+            
+            const title = document.createElement('h1');
+            title.textContent = art.title;
+            setParent(artworkDiv, title);
+            
+            // const description = document.createElement('h3');
+            // description.textContent = art.description;
+            // setParent(artworkDiv, description);
+            
+            // for (i = 0; i < art.additional.length; i++) {
+            //     const additionalInfo = document.createElement('h3');
+            //     additionalInfo.innerHTML = `•&nbsp;&nbsp;${art.additional[i]}`;
+            //     setParent(artworkDiv, additionalInfo);
+            // }
+            
+            setParent(portfolioDiv, artworkDiv);
+        });
+        
+    }
+}
+
+
+function pupulateArtInfo() {
+    const artworkId = getQueryParam('id');
+    const artwork = artworks.find(a => a.id == artworkId);
+    
+    const portfolioDiv = document.querySelector('.art-section');
+    portfolioDiv.setAttribute("contentID", artwork.id);
+    portfolioDiv.setAttribute("contentType", "art");
+    
+    const artworkTitle = document.createElement('div');
+    artworkTitle.className = 'art-container title';
+    artworkTitle.textContent = artwork.title.toUpperCase();
+    setParent(portfolioDiv, artworkTitle);
+    
+    // const description = document.createElement('div');
+    // description.className = 'art-container description';
+    // description.textContent = `${artwork.description}`;
+    // setParent(portfolioDiv, description);
+    
+    // for (i = 0; i < artwork.additional.length; i++) {
+    //     const additionalInfo = document.createElement('div');
+    //     additionalInfo.className = 'art-container description';
+    //     additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
+        
+    //     if(i+1 == artwork.additional.length){
+    //         additionalInfo.classList.add('last-description');
+    //     }
+    //     setParent(portfolioDiv, additionalInfo);
+    // }
+    
+    artwork.image.forEach(img => {
+        const artworkDiv = document.createElement('div');
+        artworkDiv.className = 'art-container artworks';
+        
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add("img-hover-zoom");
+        imageContainer.classList.add("artworks");
+        imageContainer.classList.add("hoverable");
+        setParent(artworkDiv, imageContainer);
+    
+        const image = document.createElement('img');
+        image.className = 'enlargeable';
+        image.src = `${artwork.filePath}/${img}`;
+        image.setAttribute('index',artwork.image.indexOf(img));
+        setParent(imageContainer, image);
+        
+        
+        setParent(portfolioDiv, artworkDiv);
+    });
+    
+}
+
+
 function loadArtwork(id) {
     const artwork = artworks.find(a => a.id === id);
     if (artwork) {
         window.location.href = `artwork.html?id=${id}`;
     }
+}
+
+function loadArtCategory(category) {
+    window.location.href = `art.html?category=${category.toLowerCase().replace(/\s+/g, '')}`;
 }
 
 
@@ -651,6 +717,7 @@ function Awake(){
             selectedImageContainer.classList.remove('hide');
             selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
             document.body.classList.add('noscroll');
+            console.log(img.getAttribute('src'));
         });
     });
 
