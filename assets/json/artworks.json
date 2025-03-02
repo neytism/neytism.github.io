@@ -288,10 +288,10 @@
       "remarks": []
     },
     {
-      "category": "GRAPHIC DESIGN",
+      "category": "3D WORKS",
       "title": "Glance Through Freelance",
       "description": "Made using Illustrator",
-      "additional":  ["Made with Blender and Adobe Illustrator","Academic Project"],
+      "additional":  ["Made with Blender","Academic Project"],
       "filePath": "/assets/img/Graphic Design/gtf",
       "media":  ["1.png","2.png","3.png"],
       "remarks": []

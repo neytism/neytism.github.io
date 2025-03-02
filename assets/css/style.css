@@ -619,7 +619,7 @@ overflow: hidden;
     position: fixed;
     z-index: 105;
     padding: 60px;
-    background-color: rgba(8, 8, 8, 0.932);
+    background-color: rgba(8, 8, 8, 0.8);
 }
 
 .selected-image-container .image {
