@@ -329,6 +329,78 @@ function disableContextMenu(event) {
     event.preventDefault();
 }
 
+function generateNavBar(pageName){
+    if(!pageName) return; 
+
+    const navBar = document.createElement('div');
+    navBar.classList.add('navbar');
+    document.body.insertBefore(navBar, document.body.firstChild);
+
+    //link
+    const portfolioNavLink = document.createElement('a');
+    portfolioNavLink.classList.add('navbar-link');
+    portfolioNavLink.classList.add('hoverable');
+    portfolioNavLink.textContent = 'PORTFOLIO';
+    const portfolioDropdownID = 'portfolio-dropdown';
+    portfolioNavLink.setAttribute('ddcid', portfolioDropdownID);
+    
+    setParent(navBar,portfolioNavLink);
+
+    //dropdown
+    const portfolioDropdown = document.createElement('div');
+    portfolioDropdown.classList.add('dropdown-content');
+    portfolioDropdown.setAttribute('id', portfolioDropdownID);
+    setParent(navBar, portfolioDropdown);
+
+    //dropdown contents
+    const gamesNavLink = document.createElement('a');
+    gamesNavLink.textContent = 'Games';
+    if(pageName == 'home'){
+        gamesNavLink.classList.add('active');
+        gamesNavLink.href ='#games';
+    } else{
+        gamesNavLink.href ='./index.html';
+    }
+    setParent(portfolioDropdown, gamesNavLink);
+
+    const artsNavLink = document.createElement('a');
+    artsNavLink.textContent = 'Arts';
+    if(pageName == 'art-category'){
+        artsNavLink.classList.add('active');
+    } else if(pageName == 'art'){
+        artsNavLink.classList.add('active');
+        artsNavLink.href = './art-category.html'; 
+    } else{
+        artsNavLink.href = './art-category.html'; 
+    }
+    setParent(portfolioDropdown, artsNavLink);
+
+    //link
+    const aboutNavLink = document.createElement('a');
+    aboutNavLink.classList.add('navbar-link');
+    aboutNavLink.classList.add('hoverable');
+    aboutNavLink.textContent = 'ABOUT ME';
+    if (pageName == 'about') {
+        aboutNavLink.classList.add('active');
+    } else{
+        aboutNavLink.href = './about.html';
+    }
+    setParent(navBar,aboutNavLink);
+
+    //link
+    const contactNavLink = document.createElement('a');
+    contactNavLink.classList.add('navbar-link');
+    contactNavLink.classList.add('hoverable');
+    contactNavLink.textContent = 'CONTACT';
+    if (pageName == 'contact') {
+        contactNavLink.classList.add('active');
+    } else{
+        contactNavLink.href = './contact.html';
+    }
+    setParent(navBar,contactNavLink);
+
+}
+
 
 function loadArtJson() {
     return fetch('/assets/json/artworks.json')
@@ -721,7 +793,10 @@ function hasFileExtension(filename) {
 
 
 function Awake(){
-    
+    const pageName = document.body.getAttribute("pageName");
+
+    generateNavBar(pageName);
+
     images.forEach(image => {
         image.addEventListener('contextmenu', disableContextMenu);
     });

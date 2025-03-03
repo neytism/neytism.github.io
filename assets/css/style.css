@@ -90,6 +90,10 @@ body.noscroll{
     color: white;
 }
 
+.navbar a.active{
+    font-weight: 700;
+}
+
 .navbar a:hover {
     background-color: blue;
 }
@@ -205,6 +209,7 @@ body.noscroll{
     min-height: 100svh;
     height: auto;
 }
+
 
 
 .section-content {

@@ -10,7 +10,18 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/pf_small.png">
 </head>
 
-<body>
+<body pageName="home">
+
+    <!-- navbar template: change ddcid value-->
+    <div class="navbar hide">
+        <a class="navbar-link hoverable" ddcid="x">PORTFOLIO</a>
+        <div class="dropdown-content" id="x">
+            <a onclick="selectTab(event, 'games')" href="javascript:void(0)">Games</a>
+            <a href="./art-category.html">Art</a>
+        </div>
+        <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
+        <a class="navbar-link hoverable" href="./contact.html">CONTACT</a>
+    </div>
 
     <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
@@ -25,15 +36,7 @@
     
     <div class="bodyholder">
 
-        <div class="navbar">
-            <a class="navbar-link hoverable" ddcid="portfolio-dropdown">PORTFOLIO</a>
-            <div class="dropdown-content" id="portfolio-dropdown">
-                <a onclick="selectTab(event, 'games')" href="javascript:void(0)">Games</a>
-                <a href="./art-category.html">Art</a>
-            </div>
-            <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
-            <a class="navbar-link hoverable" href="./contact.html">CONTACT</a>
-        </div>
+        
         
         
         <div class="spotlight-mask"></div>

@@ -6,67 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
 
-    <title>Art Portfolio</title>
+    <title>Games</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/pf_small.png">
 </head>
 
-<body pageName="artwork">
-    
+<body pageName="games">
+
+    <!-- navbar template: change ddcid value-->
+    <div class="navbar hide">
+        <a class="navbar-link hoverable" ddcid="x">PORTFOLIO</a>
+        <div class="dropdown-content" id="x">
+            <a onclick="selectTab(event, 'games')" href="javascript:void(0)">Games</a>
+            <a href="./art-category.html">Art</a>
+        </div>
+        <a class="navbar-link hoverable" href="./about.html">ABOUT ME</a>
+        <a class="navbar-link hoverable" href="./contact.html">CONTACT</a>
+    </div>
+
     <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
-            <img onerror="replaceNullImage(this)" onclick="event.stopPropagation()" src="./assets/img/placeholder.png" />
+            <img onerror="replaceNullImage(this)"  onclick="event.stopPropagation()" src="./assets/img/3D1.jpg" />
         </div>
         <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
         
         <div class="arrow-container prev hoverable" onclick="navigateSelectedImage(event,'prev')"><div class="arrow prev" ></div></div>
         <div class="arrow-container next hoverable" onclick="navigateSelectedImage(event,'next')"><div class="arrow next" ></div></div>
     </div>
-
-    <div class="selected-art-container hide" style="position: absolute; display:flex; z-index: 103; min-height: 100dvh; min-width: 100dvw;">
-        <div class="close hoverable" style="position: absolute; top: 0; right: 0; padding: 50px; z-index: 104;" onclick="closeSelectedArtContainer();">X</div>
-        <div style="position: absolute; height: 100%; width: 100%;" onclick="closeSelectedArtContainer();"></div>
-    </div>
+    
     
     <div class="bodyholder">
+
         
         <div class="spotlight-mask"></div>
-                
-        <div class="tab-group active" id="tab-2">
+        
+        <div class="tab-group active" id="games">
 
-            <div class="section hide" id="projects">
+            <div class="section banner" id="projects">
                 
                 <div class="section-content">
                     <div class="center">
                         <h1 class="name">GAME PROJECTS</h1>
                         <h2 class="sub-name">Unity</h2>
                     </div>
+                    <div class="center-bottom">
+                        <div class="scroll-down"></div>
+                    </div>
                 </div>
                 
                 <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
     
             </div>
-
-            <div class="section" id="projects">
-            
-                <div class="section-content" style="align-items: start;">
-                    
-                    <div class="art-section"></div>
-                
-                </div>
-                
-                <div class="background" style="background-image: url(./assets/img/9.png); background-attachment: fixed;"></div>
-    
-            </div>
-            
-            
         
         </div>
 
-        
     </div>
-
-    
-    <!-- cursor -->
     
     <div class="cursor hide">
         <div class="cursor__ball cursor-ball-big-container">
@@ -77,10 +70,10 @@
             <div class="cursor-ball-small"></div>
         </div>
     </div>
-    
+
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadArtJson().then(() => { pupulateArtInfo(); Awake();});</script>
+    <script type="text/javascript">loadGameJson().then(() => { populateGamePortfolio(); Awake();});</script>
 </body>
 
 </html>
