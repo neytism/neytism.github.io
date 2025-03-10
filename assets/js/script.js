@@ -540,6 +540,11 @@ function populateGamePortfolio(){
         gameDescription.innerHTML = `${game.description}<br><br>`;
         setParent(galleryRight, gameDescription);
 
+        // const gameBullets = document.createElement('p');
+        // gameBullets.classList.add('details-description');
+        // gameBullets.innerHTML = `<b>•&nbsp;&nbsp;Duration: ${game.duration}`;
+        // setParent(galleryRight, gameBullets);
+
         game.additional.forEach(additionalInfo =>{
             const gameBullets = document.createElement('p');
             gameBullets.classList.add('details-description');

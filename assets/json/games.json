@@ -3,6 +3,7 @@
         "title": "Sudoku Showdown!",
         "isMobile": false,
         "description": "A competitive local multiplayer party game where players race to solve a Sudoku-inspired puzzle by picking up and placing numbers correctly.",
+        "duration": "1 month" ,
         "additional": [
             "Developed using Unity and C#",
             "Developed all game elements",
@@ -17,6 +18,7 @@
         "title": "Interweave",
         "isMobile": false,
         "description": "A VR horror game for Meta Quest set in a college campus where players collect clues, solve puzzles, and evade a lurking monster. Designed for an immersive and tense experience with interactive environments.",
+        "duration": "3 months" ,
         "additional": [
             "Developed using Unity and C# for Meta Quest",
             "Collaborative project",
@@ -31,6 +33,7 @@
         "title": "Cup It!",
         "isMobile": true,
         "description": "A mobile game inspired by the classic party game beer pong. Players must aim, measure force and angle, and overcome obstacles to land the ball in the cup while using the fewest attempts and collecting all stars in each level.",
+        "duration": "2 Weeks" ,
         "additional": [
             "Developed using Unity and C#",
             "Independently developed",
@@ -45,6 +48,7 @@
         "title": "Bare Minimum Pool Game",
         "isMobile": false,
         "description": "A simplified 8-ball pool game with core mechanics and a functional multiple-view system. Built for a straightforward and playable experience.",
+        "duration": "2 Weeks" ,
         "additional": [
             "Developed using Unity and C#",
             "Independently developed",
@@ -61,6 +65,7 @@
         "title": "Mistake",
         "isMobile": false,
         "description": "A story-driven game about morality, where players recall past events during an investigation, gather clues, and uncover the truth.",
+        "duration": "3 Weeks" ,
         "additional": [
             "Developed using Unity and C#",
             "Collaborative project",
@@ -78,6 +83,7 @@
       "title": "Paper Towns",
       "isMobile": false,
       "description": "A 2D top-down survival game where players defeat enemies, gain experience, and level up stats. Developed as a challenge project without using built-in physics, colliders, or vector functions.",
+      "duration": "1 Week" ,
       "additional": [
         "Developed using Unity and C#",
         "Independently developed",
@@ -91,6 +97,7 @@
       "title": "Pong (Dot Product)",
       "isMobile": false,
       "description": "A 2D game based on the classic Pong, developed as a challenge project without using built-in physics, colliders, or vector functions. Features both player vs. AI (with difficulty settings) and player vs. player modes.",
+      "duration": "1 Week" ,
       "additional": [
         "Developed using Unity and C#",
         "Collaborative project",
@@ -104,6 +111,7 @@
         "title": "REVERTO",
         "isMobile": "false",
         "description": "A 2D top-down roguelike survival game where players defeat enemies, gain experience, and level up stats. Features various enemy types and weapon options.",
+        "duration": "2 Weeks" ,
         "additional": [
             "Developed using Unity and C#",
             "Collaborative project",
@@ -117,6 +125,7 @@
         "title": "STARSHIP",
         "isMobile": "false",
         "description": "A 2D top-down survival bullet-hell game set in space, where players battle different enemy types using various skills and characters. Includes an achievement system and save/load functionality.",
+        "duration": "2 Weeks" ,
         "additional": [
             "Developed using Unity and C#",
             "Collaborative project",
