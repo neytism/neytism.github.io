@@ -139,7 +139,14 @@ body.noscroll{
     width: 100% !important; 
     bottom: 0;
     left: 0;
-    
+}
+
+.center-bottom .additional-info{
+    padding: 15px 5px;
+    flex: 0 0 100%; 
+    font-size: 14px; 
+    font-family: "Montserrat";
+    font-weight: 400;
 }
 
 
@@ -896,5 +903,15 @@ form .submit{
     z-index: 150 ;
   }
   
-
+.credits{
+    position: fixed;
+    z-index: 1500;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-50%);
+    padding: 10px;
+    font-family: "Montserrat";
+    font-size: 12px;
+    opacity: 20%;
+}
 
