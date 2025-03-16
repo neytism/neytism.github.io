@@ -3,16 +3,16 @@
       "category": "3D WORKS",
       "title": "Switch",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/kb_switch",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg"],
-      "remarks": []
+      "remarks": ["featured"]
     },
     {
       "category": "3D WORKS",
       "title": "Macro ",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/macro",
       "media":  ["1.png","2.png","3.png"],
       "remarks": []
@@ -21,7 +21,7 @@
       "category": "3D WORKS",
       "title": "Nintendo switch",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/nintendo_switch",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
       "remarks": []
@@ -30,7 +30,7 @@
       "category": "3D WORKS",
       "title": "PSP",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/psp",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"],
       "remarks": []
@@ -39,16 +39,16 @@
       "category": "3D WORKS",
       "title": "Gameboy",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/gameboy",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
-      "remarks": []
+      "remarks": ["featured"]
     },
     {
       "category": "3D WORKS",
       "title": "Atari",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/atari",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
       "remarks": []
@@ -57,7 +57,7 @@
       "category": "3D WORKS",
       "title": "Famicom",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/famicom",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"],
       "remarks": []
@@ -66,7 +66,7 @@
       "category": "3D WORKS",
       "title": "ps1",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/ps1",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
       "remarks": []
@@ -75,16 +75,16 @@
       "category": "3D WORKS",
       "title": "PC (2025)",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/pc2025",
       "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png"],
-      "remarks": []
+      "remarks": ["featured"]
     },
     {
       "category": "3D WORKS",
       "title": "Hapon",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/hapon",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
       "remarks": ["quoted"]
@@ -93,7 +93,7 @@
       "category": "3D WORKS",
       "title": "B12",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/b12",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"],
       "remarks": []
@@ -102,7 +102,7 @@
       "category": "3D WORKS",
       "title": "Room (2020)",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/room2020",
       "media":  ["1.png","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg"],
       "remarks": []
@@ -111,10 +111,10 @@
       "category": "3D WORKS",
       "title": "Almusal",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project","Featured in Phillipine Star"],
+      "additional":  ["Made with Blender","Featured in Phillipine Star"],
       "filePath": "/assets/img/3D/almusal",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg"],
-      "remarks": []
+      "remarks": ["featured"]
     },
     {
       "category": "3D WORKS",
@@ -138,7 +138,7 @@
       "category": "3D WORKS",
       "title": "Candy Bong Z (2020)",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/cbz2020",
       "media":  ["1.png","2.jpg","3.jpg","4.jpg"],
       "remarks": []
@@ -147,7 +147,7 @@
       "category": "3D WORKS",
       "title": "Des Valeurs Redéfinies",
       "description": "3D and Contemporary art based on the Rene Margtitte's Les Valeurs Personnelles (1952, Oil on canvas) painting.",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/artApp",
       "media":  ["1.png"],
       "remarks": ["quoted"]
@@ -156,7 +156,7 @@
       "category": "3D WORKS",
       "title": "pc (2020)",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/pc2020",
       "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
       "remarks": ["hide"]
@@ -192,7 +192,7 @@
       "category": "3D WORKS",
       "title": "Redmi Note 11 Pro",
       "description": "Made using blender",
-      "additional":  ["Made with Blender","Personal Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/3D/redmi",
       "media":  ["1.png","2.png","-wAwGYd4z1A"],
       "remarks": []
@@ -210,7 +210,7 @@
       "category": "CONCEPT ART",
       "title": "Concept Art 1",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Rebelle Pro", "Academic Project"],
+      "additional":  ["Made with Rebelle Pro"],
       "filePath": "/assets/img/concept art/1",
       "media":  ["1.png","2.png","3.png","4.png","5.png"],
       "remarks": []
@@ -219,7 +219,7 @@
       "category": "CONCEPT ART",
       "title": "Concept Art 2",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Rebelle Pro", "Academic Project"],
+      "additional":  ["Made with Rebelle Pro"],
       "filePath": "/assets/img/concept art/2",
       "media":  ["1.png","2.png","3.png"],
       "remarks": []
@@ -228,7 +228,7 @@
       "category": "CONCEPT ART",
       "title": "Storyboard 1",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Rebelle Pro", "Academic Project"],
+      "additional":  ["Made with Rebelle Pro"],
       "filePath": "/assets/img/concept art/3",
       "media":  ["1.png","2.png"],
       "remarks": []
@@ -237,7 +237,7 @@
       "category": "CONCEPT ART",
       "title": "Map Design 1",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Academic Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Map Design/sotu",
       "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png"],
       "remarks": []
@@ -291,7 +291,7 @@
       "category": "3D WORKS",
       "title": "Glance Through Freelance",
       "description": "Made using Illustrator",
-      "additional":  ["Made with Blender", "Academic Project"],
+      "additional":  ["Made with Blender"],
       "filePath": "/assets/img/Graphic Design/gtf",
       "media":  ["1.png","2.png","3.png"],
       "remarks": []
@@ -300,7 +300,7 @@
       "category": "GRAPHIC DESIGN",
       "title": "CritMedia Event",
       "description": "Made using Illustrator",
-      "additional":  ["Made with Blender and Adobe Illustrator", "Academic Project"],
+      "additional":  ["Made with Blender and Adobe Illustrator"],
       "filePath": "/assets/img/Graphic Design/critmedia",
       "media":  ["1.png","2.png","3.png","4.png"],
       "remarks": []
@@ -390,7 +390,7 @@
       "category": "UI DESIGN",
       "title": "Concept College Library App",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Illustrator", "Academic Project"],
+      "additional":  ["Made with Adobe Illustrator"],
       "filePath": "/assets/img/UI/ligma",
       "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png"],
       "remarks": []
@@ -399,16 +399,16 @@
       "category": "DIGITAL ART",
       "title": "Komyut",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Personal Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/komyut",
       "media":  ["1.png","2.gif"],
-      "remarks": ["quoted"]
+      "remarks": ["quoted", "featured"]
     },
     {
       "category": "DIGITAL ART",
       "title": "Barya Lang Po Sa Lamesa",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Academic Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/barya",
       "media":  ["1.png"],
       "remarks": ["quoted"]
@@ -417,7 +417,7 @@
       "category": "DIGITAL ART",
       "title": "Lone",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Personal Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/lone",
       "media":  ["0.png","1.png","2.png","3.png","4.png","5.png","6.png"],
       "remarks": ["quoted"]
@@ -426,7 +426,7 @@
       "category": "DIGITAL ART",
       "title": "Baliktanaw",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Personal Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/baliktanaw",
       "media":  ["1.png","2.png","3.png","4.png","5.png"],
       "remarks": ["quoted"]
@@ -435,7 +435,7 @@
       "category": "DIGITAL ART",
       "title": "Sunder",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Personal Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/sunder",
       "media":  ["1.png","2.png"],
       "remarks": ["quoted"]
@@ -444,7 +444,7 @@
       "category": "DIGITAL ART",
       "title": "Mask",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Personal Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/mask",
       "media":  ["1.png","2.png","3.png","4.png","5.png"],
       "remarks": ["quoted"]
@@ -453,7 +453,7 @@
       "category": "DIGITAL ART",
       "title": "Last",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Personal Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations/last",
       "media":  ["1.png","2.png"],
       "remarks": ["quoted"]
@@ -462,7 +462,7 @@
       "category": "DIGITAL ART",
       "title": "Pansin Poster",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Photoshop", "Academic Project"],
+      "additional":  ["Made with Adobe Photoshop"],
       "filePath": "/assets/img/Illustrations",
       "media":  ["1.png"],
       "remarks": []
@@ -537,7 +537,7 @@
       "additional":  ["Acrylic on canvas"],
       "filePath": "/assets/img/Traditional",
       "media":  ["3.jpg"],
-      "remarks": ["quoted"]
+      "remarks": ["quoted", "featured"]
     },
     {
       "category": "TRADITIONAL ART",

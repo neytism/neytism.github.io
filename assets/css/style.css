@@ -74,6 +74,7 @@ body.noscroll{
 .half-screen{
     height: 100svh; 
     width: 50vw !important;
+    min-width: 900px;
 }
 
 
@@ -170,14 +171,24 @@ body.noscroll{
 .pf{
     border-radius: 50%;
     object-fit: cover;
-    min-width:250px;
-    min-height:250px;
-    max-width:250px;
-    max-height:250px;
     width: auto;
     height: auto;
     z-index: 200;
 }
+
+.pf.square{
+    min-width:250px;
+    min-height:250px;
+    max-width:250px;
+    max-height:250px;
+}
+
+.pf.wide{
+    border-radius: 0;
+    max-height:400px;
+    min-height:400px;
+}
+
 
 .name{
     font-size: clamp(30px, 3vw, 3vw);
@@ -285,7 +296,7 @@ body.noscroll{
     background-position: center;
     z-index: 1;
     object-fit: cover;
-    background-color: #3a3a3a;
+    background-color: #272727;
 }
 
 .spacer{
@@ -361,6 +372,11 @@ body.noscroll{
     box-shadow: 10px 10px 50px #00000044;
 }
 
+.game-gallery-container.featured{
+    max-width: 100%;
+    margin: 0px auto;
+}
+
 .reverse{
     flex-flow: row-reverse;
 }
@@ -395,6 +411,8 @@ body.noscroll{
     height: 100%;
     font-size: 20px;
     transition: color 0.75s, background-color 0.75s;
+    font-family: "Montserrat";
+    font-weight: 600;
 }
 
 .gallery-nav-button:hover {
@@ -449,6 +467,10 @@ body.noscroll{
     transition: opacity 0.3s;
 }
 
+.featured .thumbnail {
+    width: 100px;
+}
+
 .thumbnail:hover {
     opacity: 0.8;
 }
@@ -477,6 +499,18 @@ body.noscroll{
     align-items: flex-start;
 }
 
+.featured.art-section {
+    padding-top: 0px;
+    padding-left: 0;
+    padding-right: 0;
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 .art-container{
     padding: 20px;
     height: auto;
@@ -484,6 +518,11 @@ body.noscroll{
     display: flex;
     flex-flow: column;
     text-align: left;
+}
+
+.featured .art-container{
+    padding: 10px;
+    flex: 0 1 calc(100%/3);
 }
 
 .art-container.desc-group{
@@ -596,7 +635,7 @@ overflow: hidden;
     transform: translate(-50%, -50%) scale(1.1); 
 }
  
-.img-hover-zoom.force-square{
+.img-hover-zoom.force-square{ 
     aspect-ratio : 1 / 1;
     position: relative;
 }
@@ -664,6 +703,22 @@ overflow: hidden;
     font-weight: 500;
     line-height: 1.6;
     color: #1f1f1f;
+}
+
+.featured .details-title {
+    font-family: "Barlow Condensed";
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #000000;
+}
+
+.featured .details-description {
+    font-family: "Montserrat";
+    font-weight: 500;
+    line-height: 1.3;
+    color: #1f1f1f;
+    font-size: 14px;
 }
 
 .selected-image-container {
@@ -856,6 +911,92 @@ opacity: 1;
     border-radius: 0px;
 }
 
+.clock-holder{
+    width: 100%;
+    padding: 60px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.clock {
+    padding: 20px;
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+    background-color: #00000048;
+    box-shadow: -14px 20px 41px -1px rgba(0, 0, 0, 0.75), 20px -14px 41px -1px rgba(255, 255, 255, 0.4), -14px 20px 41px -1px rgba(0, 0, 0, 0.75) inset, 20px -14px 41px -1px rgba(255, 255, 255, 0.25) inset;
+    -webkit-box-shadow: -14px 20px 41px -1px rgba(0, 0, 0, 0.75), 20px -14px 41px -1px rgba(255, 255, 255, 0.4), -14px 20px 41px -1px rgba(0, 0, 0, 0.75) inset, 20px -14px 41px -1px rgba(255, 255, 255, 0.25) inset;
+    -moz-box-shadow: -14px 20px 41px -1px rgba(0, 0, 0, 0.75), 20px -14px 41px -1px rgba(255, 255, 255, 0.4), -14px 20px 41px -1px rgba(0, 0, 0, 0.75) inset, 20px -14px 41px -1px rgba(255, 255, 255, 0.25) inset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock h1{
+    font-size: 80px;
+    font-family: "Montserrat";
+    font-weight: 600;
+}
+
+.clock h3{
+    text-transform: lowercase;
+    padding: 30px 0px;
+    font-size: 15px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.callingCard {
+    --multiplier: 0.5;
+    height: calc(600px * var(--multiplier));
+    width: calc(1050px * var(--multiplier));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 2px solid rgb(107, 107, 107);
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+    position: relative;
+}
+
+.callingCard-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.front {
+    background-image: url('/assets/img/ccf.png');
+}
+
+.back {
+    background-image: url('/assets/img/ccb.png');
+
+}
+
+.callingCard img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.prevent-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 821px) {
     html, body, a, button{
@@ -885,7 +1026,7 @@ opacity: 1;
     }
 
     .background{
-        background-color: #3a3a3a;
+        background-color: #313131;
     }
     
     .social-icon{
@@ -922,13 +1063,18 @@ opacity: 1;
     }
     
 
-    .pf{
+    .pf.square{
         min-width:200px;
         min-height:200px;
         max-width:200px;
         max-height:200px;
     }
-
+    
+    .pf.wide{
+        max-height:200px;
+        min-height:200px;
+    }
+    
     .art-section {
         --padding-side: 0px;
         margin: 0 -20px;
@@ -939,6 +1085,11 @@ opacity: 1;
     .art-container{
         padding: 10px;
         flex: 0 1 calc(100%/2);
+    }
+
+    .featured .art-container{
+        padding: 10px;
+        flex: 0 1 calc(100%/1);
     }
 
     .art-container.artworks{
@@ -1014,6 +1165,7 @@ opacity: 1;
     .half-screen{
         height: 100svh; 
         width: 100vw !important;
+        min-width: 0px;
     }
     
     .word-list{
@@ -1028,7 +1180,29 @@ opacity: 1;
         max-width: 60vw;
     }
     
+    .clock {
+        background-color: #00000000;
+        padding: 0px;
+        width: 100%;
+        box-shadow: -14px 20px 41px -1px rgba(0, 0, 0, 0);
+        -webkit-box-shadow: -14px 20px 41px -1px rgba(0, 0, 0, 0);
+        -moz-box-shadow: -14px 20px 41px -1px rgba(0, 0, 0, 0);
+
+    }
     
+    .clock-holder{
+        width: 100%;
+        padding: 0px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+    }
+
+    .callingCard {
+        --multiplier: 0.3;
+        border-radius: 7px;
+        border: 1px solid rgb(107, 107, 107);
+    }
     
 }
 
@@ -1062,4 +1236,3 @@ opacity: 1;
     transform: translateY(-50%);
     padding: 0px 6px;
 }
-

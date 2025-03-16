@@ -57,13 +57,14 @@
                 </div>
             
                 <div class="center-bottom">
-                    <!-- <div class="scroll-down"></div> -->
+                    <div class="scroll-down"></div>
                     <div class="icons-container">
                         <a href="https://www.linkedin.com/in/nateflorendo" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-linkedin.png');"></a>
                         <a href="https://github.com/neytism" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-github.png');"></a>
                         <a href="https://neytism.itch.io" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-itch.png');"></a>
                         <a href="https://www.instagram.com/neytism" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-ig.png');"></a>
                     </div>
+                    
                 </div>
                 
             </div>
@@ -87,9 +88,9 @@
         
         <div class="tab-group active" id="games">
 
-            <div class="section hide" id="projects">
+            <div class="section hide" id="projects" style="min-height: fit-content;">
                 
-                <div class="section-content">
+                <div class="section-content" >
                     <div class="center">
                         <h1 class="name">GAME PROJECTS</h1>
                         <h2 class="sub-name">Unity</h2>
@@ -99,6 +100,86 @@
                 <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
     
             </div>
+            
+            <div class="section" style="min-height: fit-content;" id="featured-games">
+            
+                <div class="section-content half-screen">
+                    <div class="left" style="text-align: left; ">
+                        <h1 class="about-title" style=" padding: 0px;"><br>FEATURED GAMES</h1>
+                        <h1 class="about-desc" style=" padding: 0px;"><br>A selection of my favorite game projects, developed using Unity and C#. I leverage my skills in Illustration, 3D modeling, animation, and UI/UX design to deliver captivating gameplay experiences and visually stunning game worlds.</h1>
+                    </div> 
+                </div>
+                <div class="background"></div>
+            
+            </div>
+            
+
+            <div class="section"  style="min-height: fit-content;">
+            
+                <div class="section-content half-screen">
+                    <div class="left" style="text-align: left; ">
+                        <h1 class="about-title hoverable" style=" padding: 0px; font-size: 18px;" onclick="window.location.href = 'games.html'"><br><u>More of my games here!</u></u></h1>
+                    </div> 
+                </div>
+                <div class="background"></div>
+            
+            </div>
+        
+        
+        </div>
+
+        <div class="tab-group active" id="games">
+
+        
+            <div class="section"  style="min-height: fit-content;">
+            
+                <div class="section-content half-screen">
+                            
+                    <div class="left" style="text-align: left; ">
+                        <h1 class="about-title" style=" padding: 0px;"><br>FEATURED ARTWORKS</h1>
+                        <h1 class="about-desc" style=" padding: 0px;"><br>A selection of my favorite 3D artworks and graphic designs, showcasing my skills in Blender, Maya, Substance Painter, Photoshop, and Illustrator. These projects demonstrate my ability to create visually compelling assets for games, product mockups, and promotional materials.</h1>
+                    </div> 
+                    
+                </div>
+            
+                <div class="background"></div>
+            
+            </div>
+            
+            <div class="section" id="projects" style="min-height: fit-content;">
+                <div class="section-content half-screen">
+                    <div class="art-section featured" contentType="art" id="featured-artworks">
+                      </div>
+                      
+                </div>
+                <div class="background"></div>
+            </div>   
+            
+            <div class="section" style="min-height: fit-content;">
+            
+                <div class="section-content half-screen">
+                    <div class="left" style="text-align: left; ">
+                        <h1 class="about-title hoverable" style=" padding: 0px 0 50px 0; font-size: 18px;" onclick="window.location.href = 'art-category.html'"><br><u>More of my artworks here!</u></u></h1>
+                    </div> 
+                </div>
+                <div class="background"></div>
+            
+            </div>
+
+            <div class="section" style="min-height: fit-content;" id="featured-games">
+            
+                <div class="section-content half-screen">
+                    <div class="left" style="text-align: left; ">
+                        <h1 class="about-title" style=" padding: 0px;"><br>LET'S COLLABORATE!</h1>
+                        <h1 class="about-desc" style=" padding: 0px 0 0px 0;"><br>nateflorendo@gmail.com</h1>
+                        <h1 class="about-desc hoverable" style=" padding: 0px 0 0px 0;" onclick="window.location.href = 'about.html'"><br>-> know more about me</h1>
+                        <h1 class="about-desc hoverable" style=" padding: 0px 0 50px 0;" onclick="window.location.href = 'contact.html'"><br>-> contact</h1>
+                    </div> 
+                </div>
+                <div class="background" style="background-image: url('assets/img/topo.png');"></div>
+            
+            </div>
+            
         
         </div>
 
@@ -116,7 +197,7 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadGameJson().then(() => { Awake();});</script>
+    <script type="text/javascript">loadGameJson().then(() => { loadArtJson().then(()=> { populateFeaturedWorks(); Awake(); })});</script>
 </body>
 
 </html>

@@ -57,7 +57,8 @@ let spanIndex = -1;
 //json
 const artworks = [];
 const games = [];
-let lastID = 0;
+let lastGameID = 0;
+let lastArtID = 0;
 
 function updateSpotlight() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
@@ -442,10 +443,10 @@ function loadArtJson() {
         })
         .then(data => {
             data.forEach(art => {
-                let id = lastID + 1;
+                let id = lastArtID + 1;
                 art.id = id;
                 artworks.push(art);
-                lastID = id;
+                lastArtID = id;
             });
         })
         .catch(error => {
@@ -463,10 +464,10 @@ function loadGameJson() {
         })
         .then(data => {
             data.forEach(game => {
-                let id = lastID + 1;
+                let id = lastGameID + 1;
                 game.id = id;
                 games.push(game);
-                lastID = id;
+                lastGameID = id;
             });
         })
         .catch(error => {
@@ -479,12 +480,203 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
+function populateFeaturedWorks(){
+    let x = 1;
+    
+    var lastGameDiv = document.getElementById("featured-games");
+    
+    games.forEach(game => {
+
+        if(game.remarks.includes("hide")){
+            return;
+        }
+
+        if(!game.remarks.includes("featured")){
+            return;
+        }
+
+        const section = document.createElement('div');
+        section.classList.add('section');
+        section.setAttribute("id", "projects");
+        section.setAttribute("contentID", game.id);
+        section.setAttribute("contentType", "game");
+        section.style.minHeight = 'fit-content';
+        lastGameDiv.insertAdjacentElement('afterend', section);
+        lastGameDiv = section;
+
+        const sectionContent = document.createElement('div');
+        sectionContent.classList.add('section-content');
+        sectionContent.classList.add('half-screen');
+        setParent(section, sectionContent);
+        
+        const gameGalleryContainer = document.createElement('div');
+        gameGalleryContainer.classList.add('game-gallery-container');
+        if(x % 2 == 0){
+            gameGalleryContainer.classList.add('reverse');
+        }
+        gameGalleryContainer.classList.add('featured');
+        setParent(sectionContent, gameGalleryContainer);
+
+        const galleryLeft = document.createElement('div');
+        galleryLeft.classList.add('gallery-left');
+        setParent(gameGalleryContainer, galleryLeft);
+        
+        const mainImageContainer = document.createElement('div');
+        mainImageContainer.classList.add('main-image-container');
+        setParent(galleryLeft, mainImageContainer);
+    
+        const mainImage = document.createElement('img');
+        mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
+        mainImage.classList.add('main-image');
+        if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+        mainImage.classList.add('enlargeable');
+        mainImage.setAttribute("id", "mainImage");
+        mainImage.setAttribute("index", "0");
+        mainImage.src = `${game.filePath}/${game.media[0]}`;
+        setParent(mainImageContainer, mainImage);
+        
+        const prevButton = document.createElement('button');
+        prevButton.classList.add('gallery-nav-button');
+        prevButton.classList.add('prev-button');
+        prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
+        prevButton.innerHTML = `←`;
+        setParent(mainImageContainer, prevButton);
+
+        const nextButton = document.createElement('button');
+        nextButton.classList.add('gallery-nav-button');
+        nextButton.classList.add('next-button');
+        nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
+        nextButton.innerHTML = `→`;
+        setParent(mainImageContainer, nextButton);
+
+        const thumbnailsContainer = document.createElement('div');
+        thumbnailsContainer.classList.add('thumbnails');
+        setParent(galleryLeft, thumbnailsContainer);
+        
+        for (i = 0; i < game.media.length; i++) {
+            const thumbnail = document.createElement('img');
+            thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
+            thumbnail.classList.add('thumbnail');
+            thumbnail.classList.add('hoverable');
+            if ( i == 0) { thumbnail.classList.add('active'); };
+            if (game.isMobile == true) {thumbnail.classList.add('mobile');};
+            if(hasFileExtension(game.media[i])){
+                thumbnail.src = `${game.filePath}/${game.media[i]}`;
+            }else{
+                thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+            }
+            thumbnail.setAttribute("index", i);
+            thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
+            setParent(thumbnailsContainer, thumbnail);
+        }
+        
+        const galleryRight = document.createElement('div');
+        galleryRight.classList.add('gallery-right');
+        setParent(gameGalleryContainer, galleryRight);
+        
+        const gameTitle = document.createElement('h2');
+        gameTitle.classList.add('details-title');
+        gameTitle.textContent = game.title.toUpperCase();
+        setParent(galleryRight, gameTitle);
+        
+        const gameDescription = document.createElement('p');
+        gameDescription.classList.add('details-description');
+        gameDescription.innerHTML = `${game.description}<br><br>`;
+        setParent(galleryRight, gameDescription);
+
+        game.additional.forEach(additionalInfo =>{
+            const gameBullets = document.createElement('p');
+            gameBullets.classList.add('details-description');
+            gameBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
+            setParent(galleryRight, gameBullets);
+        });
+        
+        const background = document.createElement('div');
+        background.classList.add('background');
+        setParent(section, background);
+
+        x++;
+    });
+
+    var featuredArtParent = document.getElementById("featured-artworks");
+
+    artworks.forEach(art => {
+
+        if(art.remarks.includes("hide")){
+            return;
+        }
+
+        if(!art.remarks.includes("featured")){
+            return;
+        }
+
+        const artworkDiv = document.createElement('div');
+        artworkDiv.className = 'art-container';
+        artworkDiv.setAttribute("contentID", art.id);
+        artworkDiv.setAttribute("contentType", "art");
+
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add("img-hover-zoom");
+        // imageContainer.classList.add("force-square");
+        imageContainer.classList.add("hoverable");
+        if (art.media.length !== 1 || !hasFileExtension(art.media[0])) {
+            imageContainer.addEventListener('click', (e) => {
+                loadArtwork(art.id);
+            });
+        }
+
+        setParent(artworkDiv, imageContainer);
+
+        const image = document.createElement('img');
+        image.addEventListener('error', (e) => { replaceNullImage(image) });
+
+        if (hasFileExtension(art.media[0])) {
+            image.src = `${art.filePath}/${art.media[0]}`;
+        } else {
+            image.src = `https://img.youtube.com/vi/${art.media[0]}/maxresdefault.jpg`
+        }
+
+        if (art.media.length === 1) {
+            image.classList.add("enlargeable");
+        } else {
+
+        }
+        setParent(imageContainer, image);
+
+        const title = document.createElement('h1');
+        if (art.remarks.includes("quoted")) {
+            title.textContent = `"${art.title}"`;
+        } else {
+            title.textContent = art.title;
+        }
+
+        setParent(artworkDiv, title);
+
+        // const description = document.createElement('h3');
+        // description.textContent = art.description;
+        // setParent(artworkDiv, description);
+
+        art.additional.forEach(additional => {
+            const additionalInfo = document.createElement('h3');
+            additionalInfo.innerHTML = `•&nbsp;&nbsp;${additional}`;
+            setParent(artworkDiv, additionalInfo);
+        });
+
+        setParent(featuredArtParent, artworkDiv);
+    });
+}
+
 function populateGamePortfolio(){
     let x = 1;
     
     const portfolioDiv = document.getElementById("games");
     
     games.forEach(game => {
+
+        if(game.remarks.includes("hide")){
+            return;
+        }
+
         const section = document.createElement('div');
         section.classList.add('section');
         section.setAttribute("id", "projects");
@@ -514,7 +706,7 @@ function populateGamePortfolio(){
         const mainImage = document.createElement('img');
         mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
         mainImage.classList.add('main-image');
-        if (game.isMobile == true) {mainImage.classList.add('mobile');};
+        if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
         mainImage.classList.add('enlargeable');
         mainImage.setAttribute("id", "mainImage");
         mainImage.setAttribute("index", "0");
@@ -918,7 +1110,8 @@ function Awake(){
 
     document.addEventListener('keydown', onEscapePressed);
     
-   
+    
+    
     
     //thing only to do if on desktop
     if (window.innerWidth >= 820) {
@@ -932,6 +1125,7 @@ function Awake(){
         
         
         document.body.addEventListener('mousemove', onMouseMove);
+
         for (let i = 0; i < hoverables.length; i++) {
           hoverables[i].addEventListener('mouseenter', onMouseHover);
           hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
@@ -987,7 +1181,3 @@ function Awake(){
     }
     
 }
-
-
-
-

@@ -11,17 +11,21 @@
 </head>
 
 <body pageName="about">
+   
+    
+    
     <div class="particles-holder"></div>
     <div class="bodyholder">
 
         <div class="spotlight-mask"></div>
+        
         
         <div class="section">
             
             <div class="section-content half-screen" >
                         
                 <div class="center" >
-                    <img class="pf" src="./assets/img/pf.png" alt="" style="display: block;">
+                    <img class="pf square" src="./assets/img/pf.png" alt="" style="display: block;">
                     <h2 class="about-title fade-text" style="min-width: fit-content;">
                         <br>Hello, I am Nate  Florendo.<br>I create<span>&nbsp;Games.</span><span>&nbsp;Art.</span><span>&nbsp;Web Applications.</span><span>&nbsp;3D Models.</span><span>&nbsp;Creative Solutions.</span><span>&nbsp;it.</span><span>.</span>
 
@@ -32,6 +36,7 @@
             
                 <div class="center-bottom">
                     <div class="scroll-down"></div>
+                    <div class="additional-info">[ scroll ]</div>
                 </div>
                                 
                 
@@ -43,7 +48,21 @@
         
         <div class="tab-group active" id="tab-1">
             
+            <div class="section"  style="min-height: fit-content;">
             
+                <div class="section-content half-screen" >
+                            
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 80px 0; ">
+                        <div id="callingCard" class="callingCard prevent-select hoverable" onclick="flipCard()">
+                            <div id="front" class="callingCard-face front"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            
+                <div class="background"></div>
+            
+            </div>
             
             <div class="section"  style="min-height: fit-content;">
             
@@ -207,8 +226,29 @@
                 <div class="background"></div>
             
             </div>
+            
+            <div class="section"  style="min-height: fit-content;">
+            
+                <div class="section-content" style="min-height: calc(100svh - 100px)">
+                
+                    <div class="center">
+                        <div class="clock-holder">
+                            <div class="clock">
+                                <h3>My Current Local Time</h3>
+                                <h1 id="time">00:00</h1>
+                                <h3 id="availability">I'm probably not sleeping, hit me up.</h3>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            
+                <div class="background"></div>
+            
+            </div>
            
-
+            
             <div class="section"  style=" min-height: 100px;">
             
                 <div class="section-content"  style="width: 100vw;">
@@ -253,6 +293,43 @@
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
     <script type="text/javascript" src="./assets/js/particles.js" id="rendered-js"></script>
+    <script type="text/javascript" src="./assets/js/callingCard.js" id="rendered-js"></script>
+    <script type="text/javascript">
+        const updateTimeAndAvailability = () => {
+            
+            const timeElement = document.getElementById('time');
+            var availabilityElement = document.getElementById('availability');
+            
+            const now = new Date();
+            const options = { 
+                timeZone: 'Asia/Manila', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: false 
+            };
+            const currentTime = now.toLocaleTimeString('en-US', options);
+            timeElement.textContent = currentTime;
+            const hour = now.getHours(); 
+
+            const wakeUpHour = 10; 
+            const sleepHour = 23;
+            const wakeUpTime = `${wakeUpHour}:00 AM`;
+
+            if (hour >= sleepHour || hour < wakeUpHour) {
+                
+                availabilityElement.innerHTML = `I'm probably sleeping, <br> hit me up after ${wakeUpTime} tomorrow.`;
+            } else {
+                availabilityElement.innerHTML = "I'm probably not sleeping, <u>hit me up.";
+                availabilityElement.className = 'hoverable';
+                availabilityElement.addEventListener('click', () => {window.location.href = 'contact.html';});
+            }
+        };
+        
+        
+        updateTimeAndAvailability();
+        setInterval(updateTimeAndAvailability, 60000);
+        
+    </script>
     <script type="text/javascript">Awake();</script>
 </body>
 
