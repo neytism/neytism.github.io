@@ -51,6 +51,9 @@ const selectedImageContainer = document.querySelector('.selected-image-container
 const selectedArtContainer = document.querySelector('.selected-art-container');
 let clickableImages = [];
 
+var spans = [];
+let spanIndex = -1;
+
 //json
 const artworks = [];
 const games = [];
@@ -204,7 +207,7 @@ function findSiblingById(element, id) {
 function getChildList(parent) {
     return Array.from(parent.children);
 }
-    
+
 
 
 // Move the cursor
@@ -329,12 +332,40 @@ function disableContextMenu(event) {
     event.preventDefault();
 }
 
+function showNextSpan() {
+    ++spanIndex;
+    const currentSpan = spans[spanIndex % spans.length];
+    
+    spans.forEach(span => span.classList.remove('show'));
+    
+    currentSpan.classList.add('show');
+    
+    setTimeout(() => {
+      currentSpan.classList.remove('show');
+      setTimeout(showNextSpan, 1000);
+    }, 2000);
+  }
+  
+
+
 function generateNavBar(pageName){
     if(!pageName) return; 
 
     const navBar = document.createElement('div');
     navBar.classList.add('navbar');
     document.body.insertBefore(navBar, document.body.firstChild);
+
+     //link
+     const homeNavLink = document.createElement('a');
+     homeNavLink.classList.add('navbar-link');
+     homeNavLink.classList.add('hoverable');
+     homeNavLink.textContent = 'HOME';
+     if (pageName == 'home') {
+         homeNavLink.classList.add('active');
+     } else{
+         homeNavLink.href = './index.html';
+     }
+     setParent(navBar,homeNavLink);
 
     //link
     const portfolioNavLink = document.createElement('a');
@@ -355,11 +386,10 @@ function generateNavBar(pageName){
     //dropdown contents
     const gamesNavLink = document.createElement('a');
     gamesNavLink.textContent = 'Games';
-    if(pageName == 'home'){
+    if(pageName == 'games'){
         gamesNavLink.classList.add('active');
-        gamesNavLink.href ='#games';
     } else{
-        gamesNavLink.href ='./index.html';
+        gamesNavLink.href ='./games.html';
     }
     setParent(portfolioDropdown, gamesNavLink);
 
@@ -379,7 +409,7 @@ function generateNavBar(pageName){
     const aboutNavLink = document.createElement('a');
     aboutNavLink.classList.add('navbar-link');
     aboutNavLink.classList.add('hoverable');
-    aboutNavLink.textContent = 'ABOUT ME';
+    aboutNavLink.textContent = 'ABOUT';
     if (pageName == 'about') {
         aboutNavLink.classList.add('active');
     } else{
@@ -797,10 +827,37 @@ function hasFileExtension(filename) {
 }
 
 
-function Awake(){
-    const pageName = document.body.getAttribute("pageName");
 
+function Awake(){
+    
+    const pageName = document.body.getAttribute("pageName");
+    
+    if (pageName == 'about'){
+        spans = document.querySelectorAll('.fade-text span');
+        showNextSpan();
+    }
     generateNavBar(pageName);
+    
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    
+    today = mm + ' / ' + dd + ' / ' + yyyy;
+    
+    var extraText = document.createElement('div');
+    extraText.classList.add('credits');
+    extraText.classList.add('bot-l');
+    extraText.innerHTML = today;
+
+    document.body.insertBefore(extraText, document.body.firstChild);
+
+    var credits = document.createElement('div');
+    credits.classList.add('credits');
+    credits.classList.add('bot-r');
+    credits.innerHTML = 'Designed & Developed by Nate Florendo';
+
+    document.body.insertBefore(credits, document.body.firstChild);
 
     images.forEach(image => {
         image.addEventListener('contextmenu', disableContextMenu);
@@ -861,6 +918,7 @@ function Awake(){
 
     document.addEventListener('keydown', onEscapePressed);
     
+   
     
     //thing only to do if on desktop
     if (window.innerWidth >= 820) {

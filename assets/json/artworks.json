@@ -291,7 +291,7 @@
       "category": "3D WORKS",
       "title": "Glance Through Freelance",
       "description": "Made using Illustrator",
-      "additional":  ["Made with Blender","Academic Project"],
+      "additional":  ["Made with Blender", "Academic Project"],
       "filePath": "/assets/img/Graphic Design/gtf",
       "media":  ["1.png","2.png","3.png"],
       "remarks": []
@@ -300,7 +300,7 @@
       "category": "GRAPHIC DESIGN",
       "title": "CritMedia Event",
       "description": "Made using Illustrator",
-      "additional":  ["Made with Blender and Adobe Illustrator","Academic Project"],
+      "additional":  ["Made with Blender and Adobe Illustrator", "Academic Project"],
       "filePath": "/assets/img/Graphic Design/critmedia",
       "media":  ["1.png","2.png","3.png","4.png"],
       "remarks": []
@@ -390,7 +390,7 @@
       "category": "UI DESIGN",
       "title": "Concept College Library App",
       "description": "Made using Photoshop",
-      "additional":  ["Made with Adobe Illustrator","Academic Project"],
+      "additional":  ["Made with Adobe Illustrator", "Academic Project"],
       "filePath": "/assets/img/UI/ligma",
       "media":  ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png"],
       "remarks": []

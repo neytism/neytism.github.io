@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Nate Florendo</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/pf_small.png">
+    <link rel="icon" type="image/x-icon" href="./assets/img/neytism_logo_mark.png">
 </head>
 
 <body pageName="home">
-
-    <div class="credits">Website Developed by Nate Florendo</div>
+    
+    
     <!-- navbar template: change ddcid value-->
     <div class="navbar hide">
         <a class="navbar-link hoverable" ddcid="x">PORTFOLIO</a>
@@ -47,12 +47,17 @@
             <div class="section-content"  style="height: 100svh; width: 100vw;">
                         
                 <div class="center" >
-                    <h1 class="name">NATE FLORENDO</h1>
+                   <div style="position: absolute;">
+                     <h1 class="name">NATE FLORENDO</h1>
                     <h2 class="sub-name">Game Developer & Multimedia Artist</h2>
+                   </div>
+                   <div  class="hide" style="position: absolute;">
+                    <img style=" max-width: 10vw;" src="assets/img/neytism_logo_mark.png" alt="">
+                  </div>
                 </div>
             
                 <div class="center-bottom">
-                    <div class="scroll-down"></div>
+                    <!-- <div class="scroll-down"></div> -->
                     <div class="icons-container">
                         <a href="https://www.linkedin.com/in/nateflorendo" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-linkedin.png');"></a>
                         <a href="https://github.com/neytism" target="_blank" rel="noopener noreferrer" class="social-icon hoverable" style="background-image: url('assets/img/ico-github.png');"></a>
@@ -111,7 +116,7 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadGameJson().then(() => { populateGamePortfolio(); Awake();});</script>
+    <script type="text/javascript">loadGameJson().then(() => { Awake();});</script>
 </body>
 
 </html>
