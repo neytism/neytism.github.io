@@ -108,7 +108,7 @@ class Vector {
     centerVec = new Vector(window.innerWidth / 2, window.innerHeight / 2);
     mouseVec = new Vector();
     window.addEventListener("mousemove", inputMove);
-    window.addEventListener("touchmove", inputMove, { passive: false });
+    window.addEventListener("touchmove", inputMove, { passive: true });
     if (window.innerWidth <= 768) {
     
         mouseThreshold /= 1.5;
