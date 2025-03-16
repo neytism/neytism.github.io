@@ -5,7 +5,7 @@ var cardSize = { width: 0, height: 0 };
 var SCALE_X = 10;
 var SCALE_Y = 10;
 var isFlipped = false;
-var cursorInDocument = false;
+var cursorInDocument = true;
 
 function updateCardRotation() {
     var rect = callingCard.getBoundingClientRect();
