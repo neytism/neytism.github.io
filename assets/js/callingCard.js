@@ -8,17 +8,12 @@ var isFlipped = false;
 var cursorInDocument = true;
 
 function updateCardRotation() {
-    var rect = callingCard.getBoundingClientRect();
     
     cardSize = {
         width: callingCard.offsetWidth || 0,
         height: callingCard.offsetHeight || 0,
     };
     
-    if (mousePosition.x === 0 && mousePosition.y === 0) {
-        mousePosition.x = rect.width / 2;
-        mousePosition.y = rect.height / 2;
-    }
     
     if(cursorInDocument){
         var rotationX = (mousePosition.y / cardSize.height) * -(SCALE_Y * 2) + SCALE_Y;
