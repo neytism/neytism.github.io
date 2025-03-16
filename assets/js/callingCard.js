@@ -65,4 +65,8 @@ document.body.addEventListener('mouseenter', () => {
     cursorInDocument = true;
 });
 
+callingCard.addEventListener('mouseenter', () => {
+    cursorInDocument = true;
+});
+
 requestAnimationFrame(updateCardRotation);
