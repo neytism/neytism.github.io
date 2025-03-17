@@ -60,6 +60,7 @@ const games = [];
 let lastGameID = 0;
 let lastArtID = 0;
 
+
 function updateSpotlight() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
     smoothMouseWindowPosY += (mouseWindowPosY - smoothMouseWindowPosY) * smoothFollow;
@@ -252,13 +253,15 @@ function hideCustomCursor(){
 
 function addHoverEventToLinks() {
     const links = document.querySelectorAll('a');
-
+    
+    
+    
     links.forEach(link => {
         const ddcid = link.getAttribute('ddcid');
-
+        
         if (ddcid) {
             const dropdownElement = document.getElementById(ddcid);
-
+            
             if (dropdownElement) {
                 link.addEventListener('mouseover', () => {
                     showDropdown(link, dropdownElement);
@@ -278,6 +281,7 @@ function addHoverEventToLinks() {
             }
         }
     });
+    
 
     function showDropdown(link, dropdownElement) {
         dropdownElement.classList.add('open-dropdown');
@@ -286,7 +290,7 @@ function addHoverEventToLinks() {
         dropdownElement.style.top = `${rect.bottom}px`;
         dropdownElement.style.left = `${rect.left}px`;
     }
-
+    
     function hideDropdown(event, link, dropdownElement) {
         const relatedTarget = event.relatedTarget;
         if (!link.contains(relatedTarget) && !dropdownElement.contains(relatedTarget)) {
@@ -294,6 +298,72 @@ function addHoverEventToLinks() {
         }
     }
 }
+
+function addShuffleEventToLinks() {
+    const links = document.querySelectorAll('.shuffle');
+    
+    function getTextNodes(element) {
+        const walker = document.createTreeWalker(
+            element, 
+            NodeFilter.SHOW_TEXT, 
+            null, 
+            false
+        );
+        const textNodes = [];
+        let node;
+        while ((node = walker.nextNode())) {
+            textNodes.push(node);
+        }
+        return textNodes;
+    }
+
+    links.forEach(link => {
+        link.setAttribute('data-original-html', link.innerHTML);
+        
+        link.addEventListener('mouseenter', () => {
+            shuffleLetters(link);
+        });
+        
+        link.addEventListener('mouseout', () => {
+            if (link.shuffleTimeout) clearTimeout(link.shuffleTimeout);
+            link.innerHTML = link.getAttribute('data-original-html');
+        });
+    });
+
+    function shuffleLetters(linkElement) {
+        const shuffleIterations = 5;
+        const delay = 50;
+        let iteration = 0;
+        
+        const textNodes = getTextNodes(linkElement);
+        const originalSegments = textNodes.map(tn => tn.nodeValue);
+        const fullText = originalSegments.join('');
+
+        function shuffle() {
+            const shuffled = [...fullText].sort(() => Math.random() - 0.5).join('');
+            
+            let charIndex = 0;
+            textNodes.forEach((node, i) => {
+                const segmentLength = originalSegments[i].length;
+                node.nodeValue = shuffled.substr(charIndex, segmentLength);
+                charIndex += segmentLength;
+            });
+
+            iteration++;
+            
+            if (iteration < shuffleIterations) {
+                linkElement.shuffleTimeout = setTimeout(shuffle, delay);
+            } else {
+                textNodes.forEach((node, i) => {
+                    node.nodeValue = originalSegments[i];
+                });
+            }
+        }
+        
+        shuffle();
+    }
+}
+
 
 function updateCardRotations() {
     gameGalleries.forEach(gallery => {
@@ -360,6 +430,7 @@ function generateNavBar(pageName){
      const homeNavLink = document.createElement('a');
      homeNavLink.classList.add('navbar-link');
      homeNavLink.classList.add('hoverable');
+     homeNavLink.classList.add('shuffle');
      homeNavLink.textContent = 'HOME';
      if (pageName == 'home') {
          homeNavLink.classList.add('active');
@@ -372,6 +443,7 @@ function generateNavBar(pageName){
     const portfolioNavLink = document.createElement('a');
     portfolioNavLink.classList.add('navbar-link');
     portfolioNavLink.classList.add('hoverable');
+    portfolioNavLink.classList.add('shuffle');
     portfolioNavLink.textContent = 'PORTFOLIO';
     const portfolioDropdownID = 'portfolio-dropdown';
     portfolioNavLink.setAttribute('ddcid', portfolioDropdownID);
@@ -386,6 +458,7 @@ function generateNavBar(pageName){
 
     //dropdown contents
     const gamesNavLink = document.createElement('a');
+    gamesNavLink.classList.add('shuffle');
     gamesNavLink.textContent = 'Games';
     if(pageName == 'games'){
         gamesNavLink.classList.add('active');
@@ -395,6 +468,7 @@ function generateNavBar(pageName){
     setParent(portfolioDropdown, gamesNavLink);
 
     const artsNavLink = document.createElement('a');
+    artsNavLink.classList.add('shuffle');
     artsNavLink.textContent = 'Arts';
     if(pageName == 'art-category'){
         artsNavLink.classList.add('active');
@@ -410,6 +484,7 @@ function generateNavBar(pageName){
     const aboutNavLink = document.createElement('a');
     aboutNavLink.classList.add('navbar-link');
     aboutNavLink.classList.add('hoverable');
+    aboutNavLink.classList.add('shuffle');
     aboutNavLink.textContent = 'ABOUT';
     if (pageName == 'about') {
         aboutNavLink.classList.add('active');
@@ -422,6 +497,7 @@ function generateNavBar(pageName){
     const contactNavLink = document.createElement('a');
     contactNavLink.classList.add('navbar-link');
     contactNavLink.classList.add('hoverable');
+    contactNavLink.classList.add('shuffle');
     contactNavLink.textContent = 'CONTACT';
     if (pageName == 'contact') {
         contactNavLink.classList.add('active');
@@ -717,14 +793,14 @@ function populateGamePortfolio(){
         prevButton.classList.add('gallery-nav-button');
         prevButton.classList.add('prev-button');
         prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
-        prevButton.innerHTML = `&#11164`;
+        prevButton.innerHTML = `←`;
         setParent(mainImageContainer, prevButton);
 
         const nextButton = document.createElement('button');
         nextButton.classList.add('gallery-nav-button');
         nextButton.classList.add('next-button');
         nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
-        nextButton.innerHTML = `&#11166`;
+        nextButton.innerHTML = `→`;
         setParent(mainImageContainer, nextButton);
 
         const thumbnailsContainer = document.createElement('div');
@@ -821,6 +897,7 @@ function populateArtCategory() {
         setParent(imgHoverZoom, img);
         
         const title = document.createElement('div');
+        title.classList.add('shuffle');
         title.textContent = category;
         setParent(imgHoverZoom, title);
         
@@ -1028,6 +1105,7 @@ function Awake(){
         spans = document.querySelectorAll('.fade-text span');
         showNextSpan();
     }
+    
     generateNavBar(pageName);
     
     var today = new Date();
@@ -1123,6 +1201,7 @@ function Awake(){
         
         animateSpotlight();
         
+        addShuffleEventToLinks();
         
         document.body.addEventListener('mousemove', onMouseMove);
 

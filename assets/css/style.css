@@ -233,6 +233,10 @@ body.noscroll{
     font-weight: 600;
 }
 
+.about-left{
+    text-align: left; 
+    padding-bottom: 40px;
+}
 
 .bodyholder {
     display: flex;
@@ -977,7 +981,7 @@ opacity: 1;
 }
 
 .front {
-    background-image: url('/assets/img/ccf.png');
+    background-image: url('/assets/img/ccf.gif');
 }
 
 .back {
@@ -1060,6 +1064,10 @@ opacity: 1;
 
     .about-desc{
         font-size: clamp(13px, 2vw, 1vw);
+    }
+
+    .about-left{
+        padding-bottom: 0;
     }
     
 
@@ -1173,7 +1181,7 @@ opacity: 1;
     }
 
     .icon-list img{
-        width: calc(calc(100% / 4) - 10px);
+        width: calc(calc(100% / 5) - 10px);
     }
     
     .center .logo img{

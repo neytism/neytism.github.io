@@ -16,8 +16,15 @@ function updateCardRotation() {
     
     
     if(cursorInDocument){
+
+        const maxRotationX = 45;
+        const maxRotationY = 45;
+
         var rotationX = (mousePosition.y / cardSize.height) * -(SCALE_Y * 2) + SCALE_Y;
         var rotationY = ((mousePosition.x / cardSize.width) * (SCALE_X * 2) - SCALE_X);
+
+        rotationX = Math.max(-maxRotationX, Math.min(rotationX, maxRotationX));
+        rotationY = Math.max(-maxRotationY, Math.min(rotationY, maxRotationY));
         
         if (isFlipped) {
             rotationY += 180;
@@ -25,7 +32,7 @@ function updateCardRotation() {
         
         callingCard.style.transform = `perspective(1000px) rotateX(${rotationX}deg) rotateY(${rotationY}deg) translateZ(10px)`;
     } else{
-
+        
         if(isFlipped){
             callingCard.style.transform = 'perspective(1000px) rotateY(180deg)';
         } else{

@@ -17,7 +17,7 @@ function Letter(char) {
     this.path = getRandomPath(this.x);
     this.rotate = Math.floor((Math.random() * Math.PI) + 1);
     this.percent = 0;
-    this.font = this.size + "px Arial";
+    this.font = this.size + "px Montserrat";
 }
 
 Letter.prototype.draw = function() {
@@ -136,7 +136,7 @@ function draw() {
 	requestAnimationFrame(draw);
 }
 
-var start_keys =['A' ,'B' ,'C' ,'D','1','2','3','4'];
+var start_keys =['M' ,'S' ,'I' ,'T','Y','E','N'];
 
 function startAnimation(){
 	setTimeout(function(){

@@ -68,7 +68,7 @@
             
                 <div class="section-content half-screen" >
                             
-                    <div class="left" style="text-align: left; padding-bottom: 40px;">
+                    <div class="left about-left">
                         <h1 class="about-title">Who Am I, Anyway?</h1>
                         <h2 class="about-desc"> I’m a dedicated game developer and multimedia artist 
                             with a passion for creating meaningful and engaging digital experiences. With skills in 
@@ -90,7 +90,7 @@
             
                 <div class="section-content half-screen" >
                             
-                    <div class="left" style="text-align: left; padding-bottom: 40px;">
+                    <div class="left about-left">
                         
                         <h1 class="about-title">Why me?&nbsp;&nbsp;↓</h1>
                         <h2 class="about-desc"> <b>> Versatile Skillset</h2>
@@ -117,18 +117,18 @@
             
                 <div class="section-content half-screen" >
                             
-                    <div class="left" style="text-align: left; padding-bottom: 40px;">
+                    <div class="left about-left">
                         
                         <h1 class="about-title">What do I know?&nbsp;&nbsp;↓</h1>
                         <div class="word-list">
-                            <p>Game Development</p>
-                            <p>3D Modeling</p>
-                            <p>3D Texturing</p>
-                            <p>Graphic Design</p>
-                            <p>Web Development</p>
-                            <p>UI Design</p>
-                            <p>Illustration</p>
-                            <p>Video Editing</p>
+                            <p class="shuffle">Game Development</p>
+                            <p class="shuffle">3D Modeling</p>
+                            <p class="shuffle">3D Texturing</p>
+                            <p class="shuffle">Graphic Design</p>
+                            <p class="shuffle">Web Development</p>
+                            <p class="shuffle">UI Design</p>
+                            <p class="shuffle">Illustration</p>
+                            <p class="shuffle">Video Editing</p>
                         </div>
                         <div class="icon-list">
                             <img src="assets/img/ico-unity.png" title="Unity">
@@ -160,18 +160,18 @@
             
                 <div class="section-content half-screen" >
                             
-                    <div class="left" style="text-align: left; padding-bottom: 40px;">
+                    <div class="left about-left">
                         
                         <h1 class="about-title">Where Have I Put My Skills to Work?&nbsp;&nbsp;↓</h1>
-                        <h2 class="about-desc"> <b>> Singapore International School of Bangkok</h2>
+                        <h2 class="about-desc"> <b>> Singapore International School of Bangkok (2022)</h2>
                         <h2 class="about-desc" style="padding-left: 25px;"> - Freelance Artist as 3D Artist</h2>
                         <h2 class="about-desc" style="padding-left: 25px;"> - Created the storyboards, 3D models, and animations for booths used at an event.<br><br></h2>
                         
-                        <h2 class="about-desc"> <b>> Coolab Concepts Studio</h2>
+                        <h2 class="about-desc"> <b>> Coolab Concepts Studio (2022)</h2>
                         <h2 class="about-desc" style="padding-left: 25px;"> - Freelance Artist as 3D Artist</h2>
                         <h2 class="about-desc" style="padding-left: 25px;"> - Created the 3D mockups of client products.<br><br></h2>
                         
-                        <h2 class="about-desc"> <b>> Tagline Group of Companies</h2>
+                        <h2 class="about-desc"> <b>> Tagline Group of Companies (2019)</h2>
                         <h2 class="about-desc" style="padding-left: 25px;"> - Freelance Artist as Editor, Photographer, and Videographer</h2>
                         <h2 class="about-desc" style="padding-left: 25px;"> - Responsible for the production of publication materials and event coverage.<br><br></h2>
                     </div> 
@@ -186,7 +186,7 @@
             
                 <div class="section-content half-screen" >
                             
-                    <div class="left" style="text-align: left; padding-bottom: 40px;">
+                    <div class="left about-left">
                         
                         <h1 class="about-title">What have I managed to pull off?&nbsp;&nbsp;↓</h1>
                         <h2 class="about-desc"> <b>> Gawad Inabel CIITzen Trailblazer Award (2024)</h2>
@@ -212,11 +212,13 @@
             
                 <div class="section-content half-screen" >
                             
-                    <div class="left" style="text-align: left; padding-bottom: 40px;">
+                    <div class="left about-left">
                         
                         <h1 class="about-title">Where Did I Learn This Stuff?&nbsp;&nbsp;↓</h1>
-                        <h2 class="about-desc"> <b>> Bachelor of Science in Entertainment and Multimedia Computing</h2>
-                        <h2 class="about-desc" style="padding-left: 25px;"> - CIIT College of Arts and Technology</h2>
+                        <h2 class="about-desc"> <b>> Bachelor of Science in Entertainment and Multimedia Computing (2021 - 2026)</h2>
+                        <h2 class="about-desc" style="padding-left: 25px;"> - CIIT College of Arts and Technology<br><br></h2>
+                        <h2 class="about-desc"> <b>> Technical-Vocational Livelihood: Information and Communication Technology (2019 - 2020)</h2>
+                        <h2 class="about-desc" style="padding-left: 25px;"> - Sumulong Memorial High School</h2>
                     </div> 
                 
 
@@ -317,7 +319,7 @@
 
             if (hour >= sleepHour || hour < wakeUpHour) {
                 
-                availabilityElement.innerHTML = `I'm probably sleeping, <br> hit me up after ${wakeUpTime} tomorrow.`;
+                availabilityElement.innerHTML = `I'm probably sleeping, <br> hit me up after ${wakeUpTime}.`;
             } else {
                 availabilityElement.innerHTML = "I'm probably not sleeping, <u>hit me up.";
                 availabilityElement.className = 'hoverable';
