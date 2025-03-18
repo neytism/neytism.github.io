@@ -12,6 +12,7 @@ const divs = document.querySelectorAll('div');
 let currentSelectedContentType = "";
 let currentSelectedID = "";
 let currentSelectedIndex = "";
+let lastScrollY = window.scrollY;
 
 //spotlight
 const spotlight = document.querySelector('.spotlight-mask');
@@ -426,15 +427,35 @@ function generateNavBar(pageName){
     const navBar = document.createElement('div');
     navBar.classList.add('navbar');
     document.body.insertBefore(navBar, document.body.firstChild);
-
+    
+    lastScrollY = window.scrollY;
+    const upwardScrollThreshold = 200;   
+let accumulatedUpwardScroll = 0;
+    
     window.addEventListener("scroll", () => {
-        if (window.scrollY > (window.innerHeight)) { //scrolled
-            navBar.classList.add("no-click");
-            navBar.classList.add("navbar-hide");
+        const currentScrollY = window.scrollY;
+    
+        if (currentScrollY > window.innerHeight) {
+            if (currentScrollY < lastScrollY) { // Scrolling upward
+                accumulatedUpwardScroll += lastScrollY - currentScrollY;
+    
+                if (accumulatedUpwardScroll >= upwardScrollThreshold) {
+                    navBar.classList.remove("no-click");
+                    navBar.classList.remove("navbar-hide");
+                    accumulatedUpwardScroll = 0; // Reset
+                }
+            } else { // Scrolling downward
+                navBar.classList.add("no-click");
+                navBar.classList.add("navbar-hide");
+                accumulatedUpwardScroll = 0; // Reset 
+            }
         } else {
             navBar.classList.remove("no-click");
             navBar.classList.remove("navbar-hide");
+            accumulatedUpwardScroll = 0; // Reset
         }
+    
+        lastScrollY = currentScrollY;
     });
     
 

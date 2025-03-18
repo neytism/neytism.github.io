@@ -980,8 +980,16 @@ opacity: 1;
     font-weight: 400;
 }
 
+.calling-card-container{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    padding: 100px 0; 
+}
+
 .callingCard {
-    --multiplier: 0.5;
+    --multiplier: 0.6;
     height: calc(600px * var(--multiplier));
     width: calc(1050px * var(--multiplier));
     display: flex;
