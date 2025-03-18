@@ -89,8 +89,14 @@ body.noscroll{
     justify-content: center;
     align-items: center;
     flex-flow: row;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
+.navbar.navbar-hide {
+    opacity:0;
+}
+  
 .navbar-link{
     mix-blend-mode: difference;
     padding: 20px !important;
@@ -167,13 +173,28 @@ body.noscroll{
     font-weight: 400;
 }
 
+.scroll-container-snap{
+    scroll-snap-type: x mandatory;
+}
+
+.scroll-item-snap{
+    scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
 
 .pf{
-    border-radius: 50%;
     object-fit: cover;
     width: auto;
     height: auto;
     z-index: 200;
+}
+
+.round{
+    border-radius: 50%;
+}
+
+.bnw{
+    filter: grayscale(100%);
 }
 
 .pf.square{
@@ -184,10 +205,17 @@ body.noscroll{
 }
 
 .pf.wide{
-    border-radius: 0;
-    max-height:400px;
-    min-height:400px;
+    border-radius: 25px;
+    max-width: 90svw;
+    max-height:300px;
+    min-height:300px;
+    transition: border-radius 0.3s ease;
 }
+
+.pf.wide:hover{
+    border-radius: 0px;
+}
+
 
 
 .name{
@@ -960,11 +988,15 @@ opacity: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 25px;
     border: 2px solid rgb(107, 107, 107);
     transform-style: preserve-3d;
-    transition: transform 0.1s ease, background-color 0.1s ease;
+    transition: transform 0.1s ease, border-radius 0.3s ease;
     position: relative;
+}
+
+.callingCard:hover {
+    border-radius: 0px;
 }
 
 .callingCard-face {
@@ -981,7 +1013,7 @@ opacity: 1;
 }
 
 .front {
-    background-image: url('/assets/img/ccf.gif');
+    background-image: url('/assets/img/ccf3.gif');
 }
 
 .back {
@@ -999,6 +1031,40 @@ opacity: 1;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.scroll-to-top{
+    display: flex;
+    mix-blend-mode: difference;
+    color: #000000;
+    background-color: rgb(255, 255, 255); 
+    position: fixed; 
+    height: 40px; 
+    width: 70px; 
+    align-items: center;
+    justify-content: center; 
+    z-index: 500; 
+    bottom: 30px; 
+    right: 30px;
+    font-size: 12px;
+    font-family: "Montserrat";
+    font-weight: 600;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out ;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+  }
+  
+  .scroll-to-top:hover {
+    background-color: blue;
+    color: white;
+  }
+
+
+.no-click{
+    pointer-events: none;
 }
 
 /* MEDIA QUERIES */

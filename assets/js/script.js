@@ -6,6 +6,7 @@ class GameGallery {
 }
 
 //general
+const creditText = 'Designed & Developed by Nate Florendo'
 const images = document.querySelectorAll('img');
 const divs = document.querySelectorAll('div');
 let currentSelectedContentType = "";
@@ -425,6 +426,17 @@ function generateNavBar(pageName){
     const navBar = document.createElement('div');
     navBar.classList.add('navbar');
     document.body.insertBefore(navBar, document.body.firstChild);
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > (window.innerHeight)) { //scrolled
+            navBar.classList.add("no-click");
+            navBar.classList.add("navbar-hide");
+        } else {
+            navBar.classList.remove("no-click");
+            navBar.classList.remove("navbar-hide");
+        }
+    });
+    
 
      //link
      const homeNavLink = document.createElement('a');
@@ -1095,6 +1107,13 @@ function hasFileExtension(filename) {
     return regex.test(filename);
 }
 
+function scrollToTop(){
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+}
+
 
 
 function Awake(){
@@ -1108,24 +1127,29 @@ function Awake(){
     
     generateNavBar(pageName);
     
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
+    var scrollToTopButton = document.createElement('div');
+    scrollToTopButton.innerText = '[ TOP ]'
+    scrollToTopButton.classList.add('hoverable');
+    scrollToTopButton.classList.add('scroll-to-top');
+    scrollToTopButton.classList.add('shuffle');
+    document.body.insertBefore(scrollToTopButton, document.body.firstChild);
     
-    today = mm + ' / ' + dd + ' / ' + yyyy;
+    scrollToTopButton.addEventListener("click", scrollToTop);
     
-    var extraText = document.createElement('div');
-    extraText.classList.add('credits');
-    extraText.classList.add('bot-l');
-    extraText.innerHTML = today;
-
-    document.body.insertBefore(extraText, document.body.firstChild);
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > (window.innerHeight)) { 
+          scrollToTopButton.classList.remove("no-click");
+          scrollToTopButton.classList.add("show");
+        } else {
+            scrollToTopButton.classList.add("no-click");
+            scrollToTopButton.classList.remove("show");
+        }
+    });
 
     var credits = document.createElement('div');
     credits.classList.add('credits');
     credits.classList.add('bot-r');
-    credits.innerHTML = 'Designed & Developed by Nate Florendo';
+    credits.innerHTML = creditText;
 
     document.body.insertBefore(credits, document.body.firstChild);
 

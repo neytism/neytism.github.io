@@ -18,27 +18,21 @@
     <div class="bodyholder">
 
         <div class="spotlight-mask"></div>
-        
-        
-        <div class="section">
+
+        <div class="section"  >
             
             <div class="section-content half-screen" >
                         
-                <div class="center" >
-                    <img class="pf square" src="./assets/img/pf.png" alt="" style="display: block;">
-                    <h2 class="about-title fade-text" style="min-width: fit-content;">
-                        <br>Hello, I am Nate  Florendo.<br>I create<span>&nbsp;Games.</span><span>&nbsp;Art.</span><span>&nbsp;Web Applications.</span><span>&nbsp;3D Models.</span><span>&nbsp;Creative Solutions.</span><span>&nbsp;it.</span><span>.</span>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </h2>
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 80px 0; ">
+                    <div id="callingCard" class="callingCard prevent-select hoverable" onclick="flipCard()">
+                        <div id="front" class="callingCard-face front"></div>
+                    </div>
                 </div>
-            
+
                 <div class="center-bottom">
                     <div class="scroll-down"></div>
                     <div class="additional-info">[ scroll ]</div>
                 </div>
-                                
                 
             </div>
         
@@ -46,47 +40,32 @@
         
         </div>
         
-        <div class="tab-group active" id="tab-1">
+        
+        <div class="section" style="min-height: fit-content !important;">
             
-            <div class="section"  style="min-height: fit-content;">
-            
-                <div class="section-content half-screen" >
-                            
-                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 80px 0; ">
-                        <div id="callingCard" class="callingCard prevent-select hoverable" onclick="flipCard()">
-                            <div id="front" class="callingCard-face front"></div>
-                        </div>
-                    </div>
-                    
-                </div>
-            
-                <div class="background"></div>
-            
-            </div>
-            
-            <div class="section"  style="min-height: fit-content;">
-            
-                <div class="section-content half-screen" >
-                            
-                    <div class="left about-left">
-                        <h1 class="about-title">Who Am I, Anyway?</h1>
-                        <h2 class="about-desc"> I’m a dedicated game developer and multimedia artist 
-                            with a passion for creating meaningful and engaging digital experiences. With skills in 
-                            game development, 3D modeling, and web design, I enjoy combining creativity and technical 
-                            expertise to bring ideas to life. I value collaboration, adaptability, 
-                            and always seek opportunities to learn and improve.</h2>
+            <div class="section-content half-screen" >
                         
-                    </div> 
-
-
-                    
+                <div class="left about-left" >
+                    <img class="pf wide bnw" src="./assets/img/pf_wide.png" alt="" style="display: block;">
+                    <h2 class="about-title fade-text" style="min-width: fit-content !important;">
+                        <br>Hello, I am Nate  Florendo.<br>I create<span>&nbsp;Games.</span><span>&nbsp;Art.</span><span>&nbsp;Web Applications.</span><span>&nbsp;3D Models.</span><span>&nbsp;Creative Solutions.</span><span>&nbsp;it.</span><span>.</span>
+                        
+                    </h2>
+                    <h2 class="about-desc"> I’m a dedicated game developer and multimedia artist 
+                        with a passion for creating meaningful and engaging digital experiences. With skills in 
+                        game development, 3D modeling, and web design, I enjoy combining creativity and technical 
+                        expertise to bring ideas to life. I value collaboration, adaptability, 
+                        and always seek opportunities to learn and improve.</h2>
                 </div>
-            
-                <div class="background"></div>
-            
             </div>
+        
+            <div class="background"></div>
+        
+        </div>
+        
+        <div class="tab-group active" id="tab-1">
 
-            <div class="section"  style="min-height: fit-content;">
+            <div class="section"  style="min-height: fit-content !important;">
             
                 <div class="section-content half-screen" >
                             
@@ -113,7 +92,7 @@
             </div>
             
 
-            <div class="section"  style="min-height: fit-content;">
+            <div class="section"  style="min-height: fit-content !important;">
             
                 <div class="section-content half-screen" >
                             
@@ -156,7 +135,7 @@
             
             </div>
 
-            <div class="section"  style="min-height: fit-content;">
+            <div class="section"  style="min-height: fit-content !important;">
             
                 <div class="section-content half-screen" >
                             
@@ -182,7 +161,7 @@
             
             </div>
 
-            <div class="section"  style="min-height: fit-content;">
+            <div class="section"  style="min-height: fit-content !important;">
             
                 <div class="section-content half-screen" >
                             
@@ -208,7 +187,7 @@
             
             </div>
             
-            <div class="section"  style="min-height: fit-content;">
+            <div class="section"  style="min-height: fit-content !important;">
             
                 <div class="section-content half-screen" >
                             
@@ -229,7 +208,7 @@
             
             </div>
             
-            <div class="section"  style="min-height: fit-content;">
+            <div class="section"  style="min-height: fit-content !important;">
             
                 <div class="section-content" style="min-height: calc(100svh - 100px)">
                 
@@ -238,7 +217,7 @@
                             <div class="clock">
                                 <h3>My Current Local Time</h3>
                                 <h1 id="time">00:00</h1>
-                                <h3 id="availability">I'm probably not sleeping, hit me up.</h3>
+                                <h3 id="availability">I'm probably not sleeping,hit me up.</h3>
                             </div>
                             
                         </div>
@@ -294,7 +273,7 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript" src="./assets/js/particles.js" id="rendered-js"></script>
+    <!-- <script type="text/javascript" src="./assets/js/particles.js" id="rendered-js"></script> -->
     <script type="text/javascript" src="./assets/js/callingCard.js" id="rendered-js"></script>
     <script type="text/javascript">
         const updateTimeAndAvailability = () => {
@@ -319,9 +298,9 @@
 
             if (hour >= sleepHour || hour < wakeUpHour) {
                 
-                availabilityElement.innerHTML = `I'm probably sleeping, <br> hit me up after ${wakeUpTime}.`;
+                availabilityElement.innerHTML = `I'm probably sleeping, <br> please reach out after ${wakeUpTime}.`;
             } else {
-                availabilityElement.innerHTML = "I'm probably not sleeping, <u>hit me up.";
+                availabilityElement.innerHTML = "I'm available. <u><span class='shuffle'>Feel free to contact me.</span></u>";
                 availabilityElement.className = 'hoverable';
                 availabilityElement.addEventListener('click', () => {window.location.href = 'contact.html';});
             }
