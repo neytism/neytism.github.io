@@ -44,40 +44,41 @@
         <div class="spotlight-mask"></div>
         
         <div class="tab-group active" id="games">
-            
-            <div class="section banner" id="projects">
-                
+
+            <div class="section hide" id="projects" contentID="gameID" contentType="game">
                 <div class="section-content">
-                    <div class="center">
-                        <div class="logo">
-                            <img src="assets/img/neytism_games_logo.png" alt="">
-                          </div>
-                    </div>
-                    <div class="center-bottom">
-                        <div class="scroll-down"></div>
-                        <div class="additional-info">[ scroll ]</div>
+                    <div class="game-gallery-container">
+                        <div class="gallery-left">
+                            <div class="main-image-container">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="main-image enlargeable" id="mainImage" index="0">
+                                <button class="gallery-nav-button prev-button">←</button>
+                                <button class="gallery-nav-button next-button">→</button>
+                            </div>
+                            <div class="thumbnails">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
+                            </div>
+                        </div>
+                        <div class="gallery-right">
+                            <h2 class="details-title">GAME TITLE</h2>
+                            <p class="details-description">Game description here.<br><br></p>
+                            <p class="details-description"><b>•&nbsp;&nbsp;</b>Additional info 1</p>
+                            <p class="details-description"><b>•&nbsp;&nbsp;</b>Additional info 2</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
-    
+                <div class="background" style="background-image: url('/assets/img/Games/mistake/3.jpg')"></div>
             </div>
         
         </div>
 
         <div class="tab-group active">
-
-            <div class="section" style="min-height: fit-content;">
-                
-                <div class="section-content"  style="padding: 100px 0px;">
-                    <div class="center">
-                        <h1 class="name">MORE GAMES TO COME!</h1>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/topo.png');"></div>
-    
-            </div>
         
         </div>
     
@@ -97,7 +98,7 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadGameJson().then(() => { populateGamePortfolio(); Awake();});</script>
+    <script type="text/javascript">loadGameJson().then(() => { populateGameInfo(); Awake();});</script>
 </body>
 
 </html>

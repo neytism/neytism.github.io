@@ -50,7 +50,7 @@ let mouseGalleryPosY = 0;
 
 //image enlarge
 const selectedImageContainer = document.querySelector('.selected-image-container');
-const selectedArtContainer = document.querySelector('.selected-art-container');
+const selectedArtContainer = document.querySelector('.selected-grid-item-container');
 let clickableImages = [];
 
 var spans = [];
@@ -720,7 +720,7 @@ function populateFeaturedWorks(){
         }
 
         const artworkDiv = document.createElement('div');
-        artworkDiv.className = 'art-container';
+        artworkDiv.className = 'grid-item-container art';
         artworkDiv.setAttribute("contentID", art.id);
         artworkDiv.setAttribute("contentType", "art");
 
@@ -773,6 +773,165 @@ function populateFeaturedWorks(){
 
         setParent(featuredArtParent, artworkDiv);
     });
+}
+
+function populateGamePortfolioTest(){
+    
+    const portfolioDiv = document.querySelector(".art-section");
+
+    const categoryTitle = document.createElement('div');
+    categoryTitle.className = 'grid-item-container title';
+    setParent(portfolioDiv, categoryTitle)
+    
+    games.forEach(game => {
+
+        if (game.remarks.includes("hide")) {
+            return;
+        }
+
+        const gameDiv = document.createElement('div');
+        gameDiv.className = 'grid-item-container game'
+        setParent(portfolioDiv, gameDiv)
+
+        const imageContainer = document.createElement('div'); 
+        imageContainer.className = 'img-hover-zoom hoverable';
+        imageContainer.addEventListener('click', (e) => {
+            loadGame(game.id);
+        });
+        setParent(gameDiv, imageContainer)
+        
+        const image = document.createElement('img'); 
+        image.className = 'game-preview enlargeable';
+        image.src = `${game.filePath}/${game.media[0]}`;
+        setParent(imageContainer, image);
+        
+        const gameTitle = document.createElement('h1'); 
+        gameTitle.textContent = game.title.toUpperCase();
+        setParent(gameDiv, gameTitle)
+    
+        //game.additional.length
+        for (let i = 0; i < 1; i++) {
+            const additionalInfo = document.createElement('h3');
+            additionalInfo.innerHTML = `•&nbsp;&nbsp;${game.additional[i]}`;
+            setParent(gameDiv, additionalInfo);
+        }
+    
+    
+    });
+
+}
+
+function populateGameInfo(){
+    const gameId = getQueryParam('id');
+    const game = games.find(a => a.id == gameId);
+    
+    const portfolioDiv = document.getElementById("games");
+
+    if(game.remarks.includes("hide")){
+        return;
+    }
+
+    const section = document.createElement('div');
+    section.classList.add('section');
+    section.setAttribute("id", "projects");
+    section.setAttribute("contentID", game.id);
+    section.setAttribute("contentType", "game");
+    setParent(portfolioDiv, section);
+
+    const sectionContent = document.createElement('div');
+    sectionContent.classList.add('section-content');
+    setParent(section, sectionContent);
+    
+    const gameGalleryContainer = document.createElement('div');
+    gameGalleryContainer.classList.add('game-gallery-container');
+    if(x % 2 == 0){
+        gameGalleryContainer.classList.add('reverse');
+    }
+    setParent(sectionContent, gameGalleryContainer);
+
+    const galleryLeft = document.createElement('div');
+    galleryLeft.classList.add('gallery-left');
+    setParent(gameGalleryContainer, galleryLeft);
+    
+    const mainImageContainer = document.createElement('div');
+    mainImageContainer.classList.add('main-image-container');
+    setParent(galleryLeft, mainImageContainer);
+
+    const mainImage = document.createElement('img');
+    mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
+    mainImage.classList.add('main-image');
+    if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+    mainImage.classList.add('enlargeable');
+    mainImage.setAttribute("id", "mainImage");
+    mainImage.setAttribute("index", "0");
+    mainImage.src = `${game.filePath}/${game.media[0]}`;
+    setParent(mainImageContainer, mainImage);
+    
+    const prevButton = document.createElement('button');
+    prevButton.classList.add('gallery-nav-button');
+    prevButton.classList.add('prev-button');
+    prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
+    prevButton.innerHTML = `←`;
+    setParent(mainImageContainer, prevButton);
+
+    const nextButton = document.createElement('button');
+    nextButton.classList.add('gallery-nav-button');
+    nextButton.classList.add('next-button');
+    nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
+    nextButton.innerHTML = `→`;
+    setParent(mainImageContainer, nextButton);
+
+    const thumbnailsContainer = document.createElement('div');
+    thumbnailsContainer.classList.add('thumbnails');
+    setParent(galleryLeft, thumbnailsContainer);
+    
+    for (i = 0; i < game.media.length; i++) {
+        const thumbnail = document.createElement('img');
+        thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
+        thumbnail.classList.add('thumbnail');
+        thumbnail.classList.add('hoverable');
+        if ( i == 0) { thumbnail.classList.add('active'); };
+        if (game.isMobile == true) {thumbnail.classList.add('mobile');};
+        if(hasFileExtension(game.media[i])){
+            thumbnail.src = `${game.filePath}/${game.media[i]}`;
+        }else{
+            thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+        }
+        thumbnail.setAttribute("index", i);
+        thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
+        setParent(thumbnailsContainer, thumbnail);
+    }
+    
+    const galleryRight = document.createElement('div');
+    galleryRight.classList.add('gallery-right');
+    setParent(gameGalleryContainer, galleryRight);
+    
+    const gameTitle = document.createElement('h2');
+    gameTitle.classList.add('details-title');
+    gameTitle.textContent = game.title.toUpperCase();
+    setParent(galleryRight, gameTitle);
+    
+    const gameDescription = document.createElement('p');
+    gameDescription.classList.add('details-description');
+    gameDescription.innerHTML = `${game.description}<br><br>`;
+    setParent(galleryRight, gameDescription);
+
+    // const gameBullets = document.createElement('p');
+    // gameBullets.classList.add('details-description');
+    // gameBullets.innerHTML = `<b>•&nbsp;&nbsp;Duration: ${game.duration}`;
+    // setParent(galleryRight, gameBullets);
+
+    game.additional.forEach(additionalInfo =>{
+        const gameBullets = document.createElement('p');
+        gameBullets.classList.add('details-description');
+        gameBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
+        setParent(galleryRight, gameBullets);
+    });
+    
+    const background = document.createElement('div');
+    background.classList.add('background');
+    background.style.backgroundImage = `url('${game.filePath}/${game.backgroundImage}')`
+    setParent(section, background);
 }
 
 function populateGamePortfolio(){
@@ -911,7 +1070,7 @@ function populateArtCategory() {
         const firstArtwork = categories[category][0];
 
         const artContainer = document.createElement('div');
-        artContainer.className = 'art-container banner';
+        artContainer.className = 'grid-item-container banner';
         artContainer.addEventListener('click', (e) => {
             loadArtCategory(category);
         });
@@ -964,15 +1123,15 @@ function populateArtPortfolio() {
     for (const category in categories) {
         
         const categoryTitle = document.createElement('div');
-        categoryTitle.className = 'art-container title';
+        categoryTitle.className = 'grid-item-container title';
         categoryTitle.textContent = category;
         setParent(portfolioDiv, categoryTitle);
         
         
         categories[category].forEach(art => {
             const artworkDiv = document.createElement('div');
-            artworkDiv.className = 'art-container';
-            portfolioDiv.setAttribute('contentID', art.id);
+            artworkDiv.className = 'grid-item-container art';
+            artworkDiv.setAttribute('contentID', art.id);
             
             const imageContainer = document.createElement('div');
             imageContainer.classList.add("img-hover-zoom");
@@ -1037,7 +1196,7 @@ function pupulateArtInfo() {
     portfolioDiv.setAttribute("contentType", "art");
     
     const artworkTitle = document.createElement('div');
-    artworkTitle.className = 'art-container title';
+    artworkTitle.className = 'grid-item-container title';
     const t = artwork.title.toUpperCase();
     if (artwork.remarks.includes("quoted")) {
         artworkTitle.textContent = `"${t}"`;
@@ -1047,13 +1206,13 @@ function pupulateArtInfo() {
     setParent(portfolioDiv, artworkTitle);
     
     // const description = document.createElement('div');
-    // description.className = 'art-container description';
+    // description.className = 'grid-item-container description';
     // description.textContent = `${artwork.description}`;
     // setParent(portfolioDiv, description);
     
     for (i = 0; i < artwork.additional.length; i++) {
         const additionalInfo = document.createElement('div');
-        additionalInfo.className = 'art-container description';
+        additionalInfo.className = 'grid-item-container description';
         additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
         
         if(i+1 == artwork.additional.length){
@@ -1064,7 +1223,7 @@ function pupulateArtInfo() {
     
     artwork.media.forEach(img => {
             const artworkDiv = document.createElement('div');
-            artworkDiv.className = 'art-container artworks';
+            artworkDiv.className = 'grid-item-container artwork';
             setParent(portfolioDiv, artworkDiv);
             
             const imageContainer = document.createElement('div');
@@ -1072,7 +1231,7 @@ function pupulateArtInfo() {
             imageContainer.classList.add("artworks");
             imageContainer.classList.add("hoverable");
             setParent(artworkDiv, imageContainer);
-
+        
         if(hasFileExtension(img)){
             const image = document.createElement('img');
             image.addEventListener('error', (e) => {replaceNullImage(image)});
@@ -1110,8 +1269,15 @@ function loadArtwork(id) {
     }
 }
 
+function loadGame(id) {
+    const game = games.find(a => a.id === id);
+    if (game) {
+        window.location.href = `game.html?id=${id}`;
+    }
+}
+
 function loadArtCategory(category) {
-    window.location.href = `art.html?category=${category.toLowerCase().replace(/\s+/g, '')}`;
+    window.location.href = `art-gallery.html?category=${category.toLowerCase().replace(/\s+/g, '')}`;
 }
 
 
