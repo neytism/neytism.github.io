@@ -1340,6 +1340,8 @@ function Awake(){
 
     document.body.insertBefore(credits, document.body.firstChild);
 
+
+
     images.forEach(image => {
         image.addEventListener('contextmenu', disableContextMenu);
     });
@@ -1469,5 +1471,10 @@ function Awake(){
         });
         
     }
+
+     
+    const grainEffect = document.createElement('div');
+    grainEffect.className = 'grain-overlay';
+    document.body.insertBefore(grainEffect, document.body.firstChild);
     
 }

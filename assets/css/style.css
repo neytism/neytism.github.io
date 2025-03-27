@@ -331,6 +331,31 @@ body.noscroll{
     background-color: #272727;
 }
 
+.grain-overlay {
+    content: "";
+    position: fixed;
+    width: 200vw;
+    height: 200vh;
+    left: -50%;
+    top: -50%;
+    z-index: 2000 !important;
+    pointer-events: none;
+    opacity: 0.3; 
+    background-image: url('/assets/img/noise.png');
+    
+    animation: grain 1s steps(10, jump-none) infinite;
+}
+
+@keyframes grain{
+    0%, 100% { transform:  translate(0,0);}
+    10% { transform: translate(-20%, 0%); }
+    30% { transform: translate(0%, 15%); }
+    50% { transform: translate(-18%, 0%); }
+    70% { transform: translate(0%, 9%); }
+    90% { transform: translate(-10%, 0%); }
+}
+
+
 .spacer{
     background-color: white;
     color: black;
