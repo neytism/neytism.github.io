@@ -72,11 +72,9 @@ body.noscroll{
 }
 
 .half-screen{
-    height: 100svh; 
     width: 50vw !important;
     min-width: 900px;
 }
-
 
 .navbar{
     font-family: "Montserrat";
