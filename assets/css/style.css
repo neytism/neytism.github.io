@@ -205,7 +205,7 @@ body.noscroll{
 }
 
 .pf.wide{
-    border-radius: 25px;
+    border-radius: 0px;
     max-width: 90svw;
     max-height:300px;
     min-height:300px;
@@ -213,7 +213,7 @@ body.noscroll{
 }
 
 .pf.wide:hover{
-    border-radius: 0px;
+    border-radius: 25px;
 }
 
 
@@ -300,6 +300,10 @@ body.noscroll{
     align-items: center;
     min-height: 100svh;
     height: auto;
+}
+
+.fit-content{
+    min-height: fit-content !important;
 }
 
 
@@ -559,6 +563,7 @@ body.noscroll{
 }
 
 .thumbnail {
+    position: relative;
     flex: 0 0 auto; 
     width: 150px;
     aspect-ratio: 16/9;
@@ -568,6 +573,7 @@ body.noscroll{
     opacity: 1;
     transition: outline 0.3s ease-out, opacity 0.3s ease-out;
 }
+
 
 .featured .thumbnail {
     width: 100px;
@@ -672,7 +678,7 @@ body.noscroll{
     padding-bottom: 25px !important;
 }
 
-.img-hover-zoom {
+.grid-content {
     overflow: hidden; 
     margin-bottom: 10px;
 }
@@ -683,12 +689,12 @@ body.noscroll{
 }
 
 
-.img-hover-zoom img, video {
+.grid-content img, video {
     position: relative;
     display: block;
     height: auto; 
     width: 100%; 
-    transition: transform 0.5s ease;
+    
 }
 
 .game-preview.image-preview{
@@ -700,7 +706,7 @@ body.noscroll{
 }
 
 
-.img-hover-zoom.artworks{
+.grid-content.artworks{
     margin-bottom: 0px !important;
 }
 
@@ -718,23 +724,26 @@ height: 100%;
 overflow: hidden;
 }
 
-.img-hover-zoom:hover img {
+.hover-zoom{
+    transition: transform 0.5s ease;
+}
+
+.hover-zoom:hover {
     transform: scale(1.1);
 }
 
-.img-hover-zoom.game img {
+.grid-content.game img {
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s;
+    transition: opacity 0.5s;
 }
 
 
-.img-hover-zoom.game:hover img {
-    transform: scale(1);
+.grid-content.game:hover img {
     opacity: 1;
 }
 
 
-.img-hover-zoom.banner{
+.grid-content.banner{
     max-height: 250px !important; 
     position: relative; 
     display: flex; 
@@ -743,21 +752,16 @@ overflow: hidden;
     background-color: black;
 }
 
-.img-hover-zoom.banner img{
+.grid-content.banner img{
     max-width: 100%; 
     max-height: 100%;
-     height: auto; 
-     width: 100%; 
-     opacity: 0.5;
-     transform: scale(1.1);
-}
-
-.img-hover-zoom.banner:hover img {
-    transform: scale(1.2);
+    height: auto; 
+    width: 100%; 
+    opacity: 0.5;
 }
 
 
-.img-hover-zoom.banner div{
+.grid-content.banner div{
     position: absolute; 
     color: white; 
     text-align: center; 
@@ -768,16 +772,16 @@ overflow: hidden;
     text-shadow: 0px 0px 10px black;
 }
 
-.img-hover-zoom.force-square:hover img {
+.grid-content.force-square:hover img {
     transform: translate(-50%, -50%) scale(1.1); 
 }
  
-.img-hover-zoom.force-square{ 
+.grid-content.force-square{ 
     aspect-ratio : 1 / 1;
     position: relative;
 }
  
-.img-hover-zoom.force-square img{
+.grid-content.force-square img{
     height: 100%;
     width: auto; 
     position: absolute;
@@ -1003,6 +1007,7 @@ opacity: 1;
 }
 
 .word-list{
+    white-space: pre-wrap;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -1011,19 +1016,41 @@ opacity: 1;
 }
 
 .word-list p{
-    font-size: clamp(18px, 2vw, 1vw);
+    font-size: clamp(18px, 32px, 18px);
     font-family: "Montserrat";
     font-weight: 600;
     padding: 10px 20px;
-    border-radius: 25px;
+    border-radius: 0;
     color: black;
     background-color: white;
     transition: border-radius 0.5s;
 }
 
 .word-list p:hover{
-    border-radius: 0px;
+    border-radius: 50px;
 }
+
+
+
+.word-list.game{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 5px;
+    padding-bottom: 0px;
+    padding-top: 5px;
+}
+
+.word-list.game p{
+    font-size: 12px;
+    font-family: "Montserrat";
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 0px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.596);
+}
+
 
 
 .icon-list{
@@ -1036,12 +1063,12 @@ opacity: 1;
 .icon-list img{
     width: calc(calc(100% / 8) - 10px);
     height: auto;
-    border-radius: 15px;
+    border-radius: 0px;
     transition: border-radius 0.5s;
 }
 
 .icon-list img:hover{
-    border-radius: 0px;
+    border-radius: 15px;
 }
 
 .clock-holder{
@@ -1142,22 +1169,24 @@ opacity: 1;
     user-select: none;
 }
 
-.scroll-to-top{
+.floating-button{
     display: flex;
     mix-blend-mode: difference;
     color: #000000;
     background-color: rgb(255, 255, 255); 
-    position: fixed; 
-    height: 40px; 
-    width: 70px; 
+    padding: 10px 15px;
     align-items: center;
     justify-content: center; 
-    z-index: 500; 
-    bottom: 30px; 
-    right: 30px;
     font-size: 12px;
     font-family: "Montserrat";
     font-weight: 600;
+}
+
+.scroll-to-top{
+    z-index: 500; 
+    bottom: 30px; 
+    right: 30px;
+    position: fixed; 
     opacity: 0; 
     transition: opacity 0.5s ease-in-out ;
 }
@@ -1165,15 +1194,50 @@ opacity: 1;
 .scroll-to-top.show {
     opacity: 1;
   }
+
+.red{
+    background-color: red !important;
+}
   
-  .scroll-to-top:hover {
+.floating-button:hover {
     background-color: blue;
     color: white;
-  }
+}
+
+.page-nav-button{
+    max-width: fit-content;
+    position: absolute;
+}
+
+.page-nav-button.prev{
+    left:0;
+}
+
+.page-nav-button.next{
+    right:0;
+}
+
+.page-nav-button.more{
+    transform: translateX(50%);
+    right: 50%;
+}
+
 
 
 .no-click{
     pointer-events: none;
+}
+
+.testimonial{
+    text-align: left; 
+    border: solid 1px white; 
+    padding: 50px;
+    border-radius: 0;
+    transition: border-radius 0.5s ease, transform 0.1s ease;
+}
+
+.testimonial:hover{
+    border-radius: 20px;
 }
 
 /* MEDIA QUERIES */
@@ -1327,7 +1391,7 @@ opacity: 1;
         font-size: 36px; 
     }
 
-    .img-hover-zoom {
+    .grid-content {
         margin-bottom: 15px;
     }
     
@@ -1351,12 +1415,12 @@ opacity: 1;
         flex: 0 0 calc(100%);
     }
 
-    .img-hover-zoom.banner{
+    .grid-content.banner{
         max-height: 150px !important; 
     }
     
     
-    .img-hover-zoom.banner div{
+    .grid-content.banner div{
         font-size: 32px; 
         letter-spacing: 5px;
     }

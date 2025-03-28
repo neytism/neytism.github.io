@@ -3,9 +3,16 @@
         "title": "Interweave",
         "description": "A VR horror game for Meta Quest set in a college campus where players collect clues, solve puzzles, and evade a lurking monster. Designed for an immersive and tense experience with interactive environments.",
         "year": "2023",
-        "duration": "3 months" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["3D Artist","Developer"],
+        "duration": "3 months",
+        "tools": [
+            "Unity",
+            "C#",
+            "VR"
+        ],
+        "roles": [
+            "3D Artist",
+            "Developer"
+        ],
         "additional": [
             "Developed using Unity and C# for Meta Quest",
             "Collaborative project",
@@ -13,19 +20,59 @@
             "Used Substance Painter, Photoshop, and Blender for asset creation"
         ],
         "filePath": "/assets/img/Games/interweave",
-        "media": ["preview.jpg", "5.jpg", "2.jpg", "3.jpg", "4.jpg", "1.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg"],
+        "media": [
+            "preview.jpg",
+            "5.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "1.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "11.jpg",
+            "12.jpg",
+            "13.jpg",
+            "14.jpg",
+            "15.jpg",
+            "16.jpg",
+            "17.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "_w3Hb-fkYJU",
-        "platforms": ["Windows, Meta Quest"],
-        "remarks": ["featured"]
+        "platforms": [
+            "Windows, Meta Quest"
+        ],
+        "collaborators": {
+            "EJ Andres": "https://www.linkedin.com/in/ediel-justine-andres-3a349234a/",
+            "Jayem Lasquite": "https://www.linkedin.com/in/jay-lasquite/",
+            "Jairus Manglal-lan": "https://www.linkedin.com/in/jairus-paul-manglal-lan/",
+            "Kyle Logdat": "https://www.linkedin.com/in/kyle-derikk-logdat-141121221/",
+            "Christa Ramos": "https://www.linkedin.com/in/christa-ramos-1ab618221/",
+            "Joshua Castillo": "",
+            "Adrielle Casem": "https://www.linkedin.com/in/cinnamint/",
+            "Leeron Abaca": "https://www.linkedin.com/in/leeron-abaca-01a54a329/",
+            "Germaine Keane Salaysay": "",
+            "Karlo Marko Iniego": ""
+        },
+        "remarks": [
+            "featured"
+        ]
     },
     {
         "title": "Sudoku Showdown!",
         "description": "A competitive local multiplayer party game where players race to solve a Sudoku-inspired puzzle by picking up and placing numbers correctly.",
         "year": "2024",
-        "duration": "1 month" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["Solo Developer"],
+        "duration": "1 month",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Solo Developer"
+        ],
         "additional": [
             "Developed using Unity and C#",
             "Developed all game elements",
@@ -33,19 +80,39 @@
             "Implemented a backtracking algorithm for puzzle generation"
         ],
         "filePath": "/assets/img/Games/sudoku",
-        "media": ["preview.jpg", "1.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "2.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "2.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "bZ7m_ZNF-HA",
-        "platforms": ["Windows"],
-        "remarks": []
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {},
+        "remarks": [
+            "solo"
+        ]
     },
     {
         "title": "Cup It!",
         "description": "A mobile game inspired by the classic party game beer pong. Players must aim, measure force and angle, and overcome obstacles to land the ball in the cup while using the fewest attempts and collecting all stars in each level.",
         "year": "2024",
-        "duration": "2 Weeks" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["Solo Developer"],
+        "duration": "2 Weeks",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Solo Developer"
+        ],
         "additional": [
             "Developed using Unity and C#",
             "Independently developed",
@@ -53,19 +120,40 @@
             "Utilized Unity’s physics system"
         ],
         "filePath": "/assets/img/Games/cupit",
-        "media": ["preview.jpg", "1.jpg", "4.jpg", "5.jpg", "6.jpg", "3.jpg", "2.jpg", "7.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "3.jpg",
+            "2.jpg",
+            "7.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "l82RmyH5yV4",
-        "platforms": ["Android"],
-        "remarks": ["mobile", "featured"]
+        "platforms": [
+            "Android"
+        ],
+        "collaborators": {},
+        "remarks": [
+            "mobile",
+            "featured",
+            "solo"
+        ]
     },
     {
         "title": "Bare Minimum Pool Game",
         "description": "A simplified 8-ball pool game with core mechanics and a functional multiple-view system. Built for a straightforward and playable experience.",
         "year": "2024",
-        "duration": "2 Weeks" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["Solo Developer"],
+        "duration": "2 Weeks",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Solo Developer"
+        ],
         "additional": [
             "Developed using Unity and C#",
             "Independently developed",
@@ -75,19 +163,45 @@
             "Implemented a multiple-view system"
         ],
         "filePath": "/assets/img/Games/pool",
-        "media": ["preview.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "11.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "1HBL1cXFMdg",
-        "platforms": ["Windows"],
-        "remarks": ["featured"]
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {},
+        "remarks": [
+            "featured",
+            "solo"
+        ]
     },
     {
         "title": "Mistake",
         "description": "A story-driven game about morality, where players recall past events during an investigation, gather clues, and uncover the truth.",
         "year": "2023",
-        "duration": "3 Weeks" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["Lead Developer", "Level Designer", "3D Artist"],
+        "duration": "3 Weeks",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Lead Developer",
+            "Level Designer",
+            "3D Artist"
+        ],
         "additional": [
             "Developed using Unity and C#",
             "Collaborative project",
@@ -98,88 +212,191 @@
             "Developed a custom sound manager"
         ],
         "filePath": "/assets/img/Games/mistake",
-        "media": ["preview.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "1XYnYmXjSPE",
-        "platforms": ["Windows"],
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {
+            "Janmar Cornejo": "https://github.com/LocalPitza"
+        },
         "remarks": []
     },
     {
-      "title": "Paper Towns",
-      "description": "A 2D top-down survival game where players defeat enemies, gain experience, and level up stats. Developed as a challenge project without using built-in physics, colliders, or vector functions.",
-      "year": "2023",
-      "duration": "1 Week" ,
-      "tools": ["Unity","C#"] ,
-      "roles": ["Solo Developer"],
-      "additional": [
-        "Developed using Unity and C#",
-        "Independently developed",
-        "Created all assets"
-      ],
-      "filePath": "/assets/img/Games/paper",
-      "media": ["preview.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"],
-      "backgroundImage": "blur.jpg",
-      "videoLink": "wigKNQ7FdeE",
-      "platforms": ["Windows"],
-      "remarks": []
+        "title": "Paper Towns",
+        "description": "A 2D top-down survival game where players defeat enemies, gain experience, and level up stats. Developed as a challenge project without using built-in physics, colliders, or vector functions.",
+        "year": "2023",
+        "duration": "1 Week",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Solo Developer"
+        ],
+        "additional": [
+            "Developed using Unity and C#",
+            "Independently developed",
+            "Created all assets"
+        ],
+        "filePath": "/assets/img/Games/paper",
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg"
+        ],
+        "backgroundImage": "blur.jpg",
+        "videoLink": "wigKNQ7FdeE",
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {},
+        "remarks": [
+            "solo"
+        ]
     },
     {
-      "title": "Pong (Dot Product)",
-      "description": "A 2D game based on the classic Pong, developed as a challenge project without using built-in physics, colliders, or vector functions. Features both player vs. AI (with difficulty settings) and player vs. player modes.",
-      "year": "2024",
-      "duration": "1 Week" ,
-      "tools": ["Unity","C#"] ,
-      "roles": ["Lead Developer"],
-      "additional": [
-        "Developed using Unity and C#",
-        "Collaborative project",
-        "Developed all aspects except the sound system and sound effects"
-      ],
-      "filePath": "/assets/img/Games/pong",
-      "media": ["preview.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "9.jpg", "8.jpg"],
-      "backgroundImage": "blur.jpg",
-      "videoLink": "PD8iCitcK5s",
-      "platforms": ["Windows"],
-      "remarks": []
+        "title": "Pong (Dot Product)",
+        "description": "A 2D game based on the classic Pong, developed as a challenge project without using built-in physics, colliders, or vector functions. Features both player vs. AI (with difficulty settings) and player vs. player modes.",
+        "year": "2024",
+        "duration": "1 Week",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Lead Developer"
+        ],
+        "additional": [
+            "Developed using Unity and C#",
+            "Collaborative project",
+            "Developed all aspects except the sound system and sound effects"
+        ],
+        "filePath": "/assets/img/Games/pong",
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "9.jpg",
+            "8.jpg"
+        ],
+        "backgroundImage": "blur.jpg",
+        "videoLink": "PD8iCitcK5s",
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {
+            "EJ Andres": "https://www.linkedin.com/in/ediel-justine-andres-3a349234a/"
+        },
+        "remarks": []
     },
     {
         "title": "Drift",
         "description": "A 2D top-down classic racing game, developed as a challenge project implementing AI in other racers. Players can select difficulty for variation, with leaderboards for tracking. Features include drifting and responsive driving controls.",
         "year": "2023",
         "duration": "2 Weeks",
-        "tools": ["Unity","C#"] ,
-        "roles": ["Lead Developer"],
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Lead Developer"
+        ],
         "additional": [
-          "Developed using Unity and C#",
-          "Collaborative project",
-           "Lead developer and programmer",
-          "Implemented checkpoints and A* pathfinding for AI"
+            "Developed using Unity and C#",
+            "Collaborative project",
+            "Lead developer and programmer",
+            "Implemented checkpoints and A* pathfinding for AI"
         ],
         "filePath": "/assets/img/Games/drift",
-        "media": ["preview.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "eh9ibyNcouU",
-        "platforms": ["Windows"],
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {
+            "John Elisha Cruz": "",
+            "Jairus Manglal-lan": "",
+            "Lechar Lascieras": ""
+        },
         "remarks": []
-      }
-      ,
+    },
     {
         "title": "REVERTO",
         "description": "A 2D top-down roguelike survival game where players defeat enemies, gain experience, and level up stats. Features various enemy types and weapon options.",
         "year": "2023",
-        "duration": "2 Weeks" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["Lead Developer"],
+        "duration": "2 Weeks",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Lead Developer"
+        ],
         "additional": [
             "Developed using Unity and C#",
             "Collaborative project",
             "Lead developer and programmer"
         ],
         "filePath": "/assets/img/Games/reverto",
-        "media": ["preview.jpg", "1.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "4.jpg", "5.jpg", "3.jpg", "6.jpg", "7.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "4.jpg",
+            "5.jpg",
+            "3.jpg",
+            "6.jpg",
+            "7.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "Z8oxjz9YEDw",
-        "platforms": ["Windows"],
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {
+            "Christa Ramos": "",
+            "Joshua Castillo": ""
+        },
         "remarks": []
     },
     {
@@ -187,40 +404,82 @@
         "description": "A customizable scoreboard tool designed for basketball games, developed as a challenge project to enhance Unity UI skills. This solo project includes a tutorial for easy use and features shortcut keys for efficient operation. Users can configure various settings such as colors, time, names, and logos for a personalized experience.",
         "year": "2023",
         "duration": "2 Weeks",
-        "tools": ["Unity","C#"] ,
-        "roles": ["Solo Developer"],
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Solo Developer"
+        ],
         "additional": [
-          "Developed using Unity and C#",
-          "Solo project focusing on Unity UI",
-          "Includes tutorial for user guidance",
-          "Features shortcut keys for ease of use",
-          "Highly customizable with settings for colors, time, names, and logo"
+            "Developed using Unity and C#",
+            "Solo project focusing on Unity UI",
+            "Includes tutorial for user guidance",
+            "Features shortcut keys for ease of use",
+            "Highly customizable with settings for colors, time, names, and logo"
         ],
         "filePath": "/assets/img/Games/scoreboard",
-        "media": ["preview.jpg", "5.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"],
+        "media": [
+            "preview.jpg",
+            "5.jpg",
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "tKYEvGEc9oI",
-        "platforms": ["Windows"],
-        "remarks": []
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {},
+        "remarks": [
+            "solo"
+        ]
     },
     {
         "title": "STARSHIP",
         "description": "A 2D top-down survival bullet-hell game set in space, where players battle different enemy types using various skills and characters. Includes an achievement system and save/load functionality.",
         "year": "2022",
-        "duration": "2 Weeks" ,
-        "tools": ["Unity","C#"] ,
-        "roles": ["Lead Developer"],
+        "duration": "2 Weeks",
+        "tools": [
+            "Unity",
+            "C#"
+        ],
+        "roles": [
+            "Lead Developer"
+        ],
         "additional": [
             "Developed using Unity and C#",
             "Collaborative project",
             "Lead developer and programmer"
         ],
         "filePath": "/assets/img/Games/starship",
-        "media": ["preview.jpg", "1.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "4.jpg", "5.jpg", "3.jpg", "6.jpg", "7.jpg"],
+        "media": [
+            "preview.jpg",
+            "1.jpg",
+            "2.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "4.jpg",
+            "5.jpg",
+            "3.jpg",
+            "6.jpg",
+            "7.jpg"
+        ],
         "backgroundImage": "blur.jpg",
         "videoLink": "vV66O74kHH0",
-        "platforms": ["Windows"],
+        "platforms": [
+            "Windows"
+        ],
+        "collaborators": {
+            "Kyo Matias": "https://www.linkedin.com/in/kyle-christiane-matias-9496a3228/"
+        },
         "remarks": []
-      }
-      
+    }
 ]

@@ -124,13 +124,13 @@ function changeImageGameGallery(element) {
     for (let i = 0; i < children.length; i++) {
         children[i].classList.remove('active');
     }
-
+    
     // Add active class to clicked thumbnail
     element.classList.add('active');
     
     const mainImage = findSiblingById(parent, "mainImage");
     const mainYoutube = findSiblingById(parent, "mainYoutube");
-
+    
     if(element.hasAttribute('youtube')){
         mainImage.classList.add('hide');
         mainYoutube.classList.remove('hide');
@@ -144,13 +144,13 @@ function changeImageGameGallery(element) {
         mainImage.classList.remove('hide');
         mainImage.src = element.src;
         mainImage.alt = element.alt;
-        mainYoutube.firstElementChild.src = '';
+        mainYoutube.firstElementChild.src = mainYoutube.firstElementChild.src;
         
     }
-
+    
     mainYoutube.setAttribute("index", index);
     mainImage.setAttribute("index", index);
-
+    
     // Scroll thumbnail into view
     scrollThumbnailIntoView(element);
 }
@@ -161,14 +161,14 @@ function navigateImage(element, direction) {
     const thumbnails = element.parentElement.nextElementSibling;
     const thumbnailsList = getChildList(thumbnails);
     const maxIndex = thumbnailsList.length - 1;
-
+    
     let newIndex;
     if (direction === 'next') {
         newIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
     } else {
         newIndex = currentIndex - 1 < 0 ? maxIndex : currentIndex - 1;
     }
-
+    
     // Find and click the thumbnail at the new index
     const targetThumbnail = thumbnailsList[newIndex];
     changeImageGameGallery(targetThumbnail);
@@ -512,7 +512,10 @@ let accumulatedUpwardScroll = 0;
     gamesNavLink.textContent = 'Games';
     if(pageName == 'games'){
         gamesNavLink.classList.add('active');
-    } else{
+    } else if(pageName == 'game'){
+        gamesNavLink.classList.add('active');
+        gamesNavLink.href ='./game-gallery.html';
+    }else{
         gamesNavLink.href ='./game-gallery.html';
     }
     setParent(portfolioDropdown, gamesNavLink);
@@ -668,12 +671,12 @@ function populateFeaturedWorks(){
         setParent(mainImageContainer, youtubeContainer);
         
         const youtubeVideo = document.createElement('iframe');
-        // youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
-        // youtubeVideo.setAttribute('width','1080');
-        // youtubeVideo.setAttribute('height','1920');
-        // youtubeVideo.setAttribute('frameborder','0');
-        // youtubeVideo.setAttribute('allowfullscreen','');
-        // youtubeVideo.setAttribute('index',"0");
+        youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
+        youtubeVideo.setAttribute('width','1080');
+        youtubeVideo.setAttribute('height','1920');
+        youtubeVideo.setAttribute('frameborder','0');
+        youtubeVideo.setAttribute('allowfullscreen','');
+        youtubeVideo.setAttribute('index',"0");
         setParent(youtubeContainer, youtubeVideo);
         
         const isAutoPlayYTVid = false;
@@ -683,11 +686,11 @@ function populateFeaturedWorks(){
             youtubeContainer.classList.add('hide');
             mainImage.classList.remove('hide');
         } else{
-            // youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
+            youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
 
             if(isAutoPlayYTVid){
-                // youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
-                // youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
+                youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
+                youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
             }
             
             mainImage.classList.add('hide');
@@ -776,7 +779,7 @@ function populateFeaturedWorks(){
         artworkDiv.setAttribute("contentType", "art");
 
         const imageContainer = document.createElement('div');
-        imageContainer.classList.add("img-hover-zoom");
+        imageContainer.classList.add("grid-content");
         // imageContainer.classList.add("force-square");
         imageContainer.classList.add("hoverable");
         if (art.media.length !== 1 || !hasFileExtension(art.media[0])) {
@@ -788,6 +791,7 @@ function populateFeaturedWorks(){
         setParent(artworkDiv, imageContainer);
 
         const image = document.createElement('img');
+        image.classList.add("hover-zoom");
         image.addEventListener('error', (e) => { replaceNullImage(image) });
 
         if (hasFileExtension(art.media[0])) {
@@ -833,6 +837,20 @@ function populateGamePortfolioTest(){
     const categoryTitle = document.createElement('div');
     categoryTitle.className = 'grid-item-container title';
     setParent(portfolioDiv, categoryTitle)
+
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const videoHolder = entry.target.querySelector('.video-preview');
+            if (entry.isIntersecting) {
+                videoHolder.play();
+            } else {
+                videoHolder.pause();
+            }
+        });
+    }, {
+        //when at least 10% of the video is visible
+        threshold: 0.2
+    });
     
     games.forEach(game => {
 
@@ -845,7 +863,7 @@ function populateGamePortfolioTest(){
         setParent(portfolioDiv, gameDiv)
 
         const imageContainer = document.createElement('div'); 
-        imageContainer.className = 'img-hover-zoom game hoverable';
+        imageContainer.className = 'grid-content game hoverable';
         imageContainer.addEventListener('click', (e) => {
             loadGame(game.id);
         });
@@ -879,14 +897,44 @@ function populateGamePortfolioTest(){
         const gameTitle = document.createElement('h1'); 
         gameTitle.textContent = game.title.toUpperCase();
         setParent(gameDiv, gameTitle)
-    
+
+        const tagsList = document.createElement('div');
+        tagsList.className = 'word-list game';
+        setParent(gameDiv, tagsList);
+
+        game.tools.forEach(tool => {
+            const toolText = document.createElement('p');
+            toolText.className = 'shuffle';
+            toolText.textContent = tool;
+            setParent(tagsList, toolText)
+        });
+        
+        if(game.remarks.includes("solo")){
+            const projectType = document.createElement('p');
+            projectType.className = 'shuffle';
+            projectType.textContent = "Solo Project";
+            setParent(tagsList, projectType)
+        } else{
+            game.roles.forEach(role => {
+                const roleText = document.createElement('p');
+                roleText.className = 'shuffle';
+                roleText.textContent = role;
+                setParent(tagsList, roleText)
+            });
+        }
+
+        
+       
+
         //game.additional.length
-        var maxInfo = 1;
+        var maxInfo = 0;
         for (let i = 0; i < maxInfo; i++) {
             const additionalInfo = document.createElement('h3');
             additionalInfo.innerHTML = `•&nbsp;&nbsp;${game.additional[i]}`;
             setParent(gameDiv, additionalInfo);
         }   
+
+        videoObserver.observe(gameDiv);
     
     });
 
@@ -1121,7 +1169,110 @@ function populateGameInfo(){
         setParent(youtubeContainerInfo, youtubeVideoInfo);
 
     }
+
+    if(!game.remarks.includes("solo")){
+        const collaboratorsDiv = document.createElement('div');
+        collaboratorsDiv.classList.add('game-details-container');
+        collaboratorsDiv.classList.add('game-info');
+        collaboratorsDiv.style.flexDirection = 'column';
+        setParent(gameGalleryContainer, collaboratorsDiv);
+        
+        const collaboratorsTitle = document.createElement('p');
+        collaboratorsTitle.classList.add('details-description');
+        collaboratorsTitle.innerHTML = `<b><br><br>${"COLLABORATORS"}`;
+        setParent(collaboratorsDiv, collaboratorsTitle);
     
+        const collaboratorList = document.createElement('div');
+        collaboratorList.className = 'word-list';
+        collaboratorList.style.justifyContent = 'left';
+        setParent(collaboratorsDiv, collaboratorList);
+        
+        const collaborators = game.collaborators;
+
+        Object.entries(collaborators).forEach(([name, url]) => {
+            const collaboratorText = document.createElement('p');
+            collaboratorText.className = 'shuffle';
+            if(url != ""){
+                collaboratorText.classList.add('hoverable');
+                collaboratorText.innerHTML = `<u>${name}</u>`;
+                collaboratorText.addEventListener('click', (e) =>{
+                    window.open(url, '_blank');
+                });
+            }else{
+                collaboratorText.textContent = name;
+            }
+            
+            setParent(collaboratorList, collaboratorText);
+        });
+                
+        
+    }
+    
+    const pageNavDiv = document.createElement('div');
+    pageNavDiv.classList.add('game-details-container');
+    pageNavDiv.classList.add('game-info');
+    pageNavDiv.style.flexDirection = 'column';
+    setParent(gameGalleryContainer, pageNavDiv);
+    
+    const spacer = document.createElement('p');
+    spacer.classList.add('details-description');
+    spacer.innerHTML = ``;
+    setParent(pageNavDiv, spacer);
+    
+    const pageNavButtonHolder = document.createElement('div');
+    pageNavButtonHolder.style.flex = '1';
+    pageNavButtonHolder.style.position = 'relative';
+    pageNavButtonHolder.style.minHeight = '40px';
+    setParent(pageNavDiv, pageNavButtonHolder);
+
+    const moreGameButton = document.createElement('div');
+    moreGameButton.innerText = '[ BACK TO GALLERY ]'
+    moreGameButton.classList.add('hoverable');
+    moreGameButton.classList.add('page-nav-button');
+    moreGameButton.classList.add('more');
+    moreGameButton.classList.add('floating-button');
+    moreGameButton.classList.add('shuffle');
+    setParent(pageNavButtonHolder, moreGameButton);
+
+    moreGameButton.addEventListener('click', (e) => {
+        window.location.href = '/game-gallery.html';
+    });
+    
+    if(gameId != 1){
+        const prevGameButton = document.createElement('div');
+        prevGameButton.innerText = '[ PREV ]'
+        prevGameButton.classList.add('hoverable');
+        prevGameButton.classList.add('page-nav-button');
+        prevGameButton.classList.add('prev');
+        prevGameButton.classList.add('floating-button');
+        prevGameButton.classList.add('shuffle');
+        setParent(pageNavButtonHolder, prevGameButton);
+        
+        prevGameButton.addEventListener('click', (e) => {
+            loadGame(game.id - 1);
+        });
+
+        prevGameButton.title = games.find(a => a.id == game.id - 1).title;
+    }
+
+    if(gameId != games.length){
+        const nextGameButton = document.createElement('div');
+        nextGameButton.innerText = '[ NEXT ]'
+        nextGameButton.classList.add('hoverable');
+        nextGameButton.classList.add('page-nav-button');
+        nextGameButton.classList.add('next');
+        nextGameButton.classList.add('floating-button');
+        nextGameButton.classList.add('shuffle');
+        setParent(pageNavButtonHolder, nextGameButton);
+        
+        nextGameButton.addEventListener('click', (e) => {
+            loadGame(game.id + 1);
+        });
+
+        nextGameButton.title = games.find(a => a.id == game.id + 1).title;
+    }
+    
+    console.log(gameId);
     const background = document.createElement('div');
     background.classList.add('background');
     background.classList.add('game-info');
@@ -1309,10 +1460,12 @@ function populateArtCategory() {
         setParent(portfolioDiv, artContainer);
 
         const imgHoverZoom = document.createElement('div');
-        imgHoverZoom.className = 'img-hover-zoom banner hoverable';
+        imgHoverZoom.className = 'grid-content banner hoverable';
+        
         setParent(artContainer, imgHoverZoom);
         
         const img = document.createElement('img');
+        img.classList.add("hover-zoom");
         if(hasFileExtension(firstArtwork.media[0])){
             img.src = `${firstArtwork.filePath}/${firstArtwork.media[0]}`;
         }else{
@@ -1366,7 +1519,7 @@ function populateArtPortfolio() {
             artworkDiv.setAttribute('contentID', art.id);
             
             const imageContainer = document.createElement('div');
-            imageContainer.classList.add("img-hover-zoom");
+            imageContainer.classList.add("grid-content");
             //imageContainer.classList.add("force-square");
             imageContainer.classList.add("hoverable");
             if(art.media.length !== 1 || !hasFileExtension(art.media[0])){
@@ -1378,6 +1531,7 @@ function populateArtPortfolio() {
             setParent(artworkDiv, imageContainer);
             
             const image = document.createElement('img');
+            image.classList.add("hover-zoom");
             image.addEventListener('error', (e) => {replaceNullImage(image)});
 
             if(hasFileExtension(art.media[0])){
@@ -1461,7 +1615,7 @@ function populateArtInfo() {
             setParent(portfolioDiv, artworkDiv);
             
             const imageContainer = document.createElement('div');
-            imageContainer.classList.add("img-hover-zoom");
+            imageContainer.classList.add("grid-content");
             imageContainer.classList.add("artworks");
             imageContainer.classList.add("hoverable");
             setParent(artworkDiv, imageContainer);
@@ -1552,6 +1706,7 @@ function Awake(){
     scrollToTopButton.innerText = '[ TOP ]'
     scrollToTopButton.classList.add('hoverable');
     scrollToTopButton.classList.add('scroll-to-top');
+    scrollToTopButton.classList.add('floating-button');
     scrollToTopButton.classList.add('shuffle');
     document.body.insertBefore(scrollToTopButton, document.body.firstChild);
     
