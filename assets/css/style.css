@@ -417,29 +417,70 @@ body.noscroll{
     display: block;
 }
 
-.game-gallery-container {
+.game-card-container {
     background-color: white;
     display: flex;
     gap: 20px;
     max-width: 1200px;
     margin: 80px auto;
     padding: 30px;
-    transform-style: preserve-3d;
-    transition: transform 0.2s ease;
     color: rgb(24, 24, 24);
     /* box-shadow: 10px 10px 50px #00000044; */
 }
 
-.game-gallery-container.featured{
+.game-card-container.featured{
+    padding: 25px 0px;
+}
+
+.card-tilt{
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease;
+}
+
+.game-info{
+    background-color: rgba(255, 255, 255, 0);
+    flex-direction: column;
+    gap: 30px;
+    color: rgb(255, 255, 255);
+}
+
+.game-images-container.game-info, .game-details-container.game-info{
+    padding: 0 8%;
+}
+
+.game-details-container.game-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.game-details-main.game-info{
+    flex: 2;
+}
+
+.game-details-primary.game-info{
+    padding-left: 25px;
+    flex: 1;
+    min-width: fit-content;
+    border-left: solid 1px rgba(255, 255, 255, 0.3);
+}
+
+.background.game-info{
+    filter: brightness(75%);
+    position: fixed;
+}
+
+.game-card-container.featured{
     max-width: 100%;
     margin: 0px auto;
+    background-color: #00000000;
+    color: white !important;
 }
 
 .reverse{
     flex-flow: row-reverse;
 }
 
-.gallery-left {
+.game-images-container {
     flex: 2;
 }
 
@@ -522,8 +563,8 @@ body.noscroll{
     width: 150px;
     aspect-ratio: 16/9;
     object-fit: cover;
-    outline:5px solid rgba(187, 158, 158, 0);
-    outline-offset:-5px;
+    outline: 3px solid rgba(255, 255, 255, 0);
+    outline-offset: -3px;
     opacity: 1;
     transition: outline 0.3s ease-out, opacity 0.3s ease-out;
 }
@@ -537,10 +578,10 @@ body.noscroll{
 }
 
 .thumbnail.active {
-    outline: 5px solid rgb(117, 117, 117);
+    outline: 3px solid rgb(255, 255, 255);
 }
 
-.gallery-right {
+.game-details-container {
     text-align: left;
     flex: 1;
     padding: 20px;
@@ -586,6 +627,7 @@ body.noscroll{
 
 .grid-item-container.game{
     flex: 0 1 calc(100%/3);
+    position: relative;
 }
 
 .featured .grid-item-container{
@@ -633,7 +675,6 @@ body.noscroll{
 .img-hover-zoom {
     overflow: hidden; 
     margin-bottom: 10px;
-    
 }
 
 .game-preview{
@@ -641,15 +682,26 @@ body.noscroll{
     object-fit: cover;
 }
 
-.img-hover-zoom.artworks{
-    margin-bottom: 0px !important;
-}
 
-.img-hover-zoom img {
+.img-hover-zoom img, video {
+    position: relative;
     display: block;
     height: auto; 
     width: 100%; 
     transition: transform 0.5s ease;
+}
+
+.game-preview.image-preview{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 40px); 
+    object-fit: cover;
+}
+
+
+.img-hover-zoom.artworks{
+    margin-bottom: 0px !important;
 }
 
 .youtube-embed {
@@ -669,6 +721,18 @@ overflow: hidden;
 .img-hover-zoom:hover img {
     transform: scale(1.1);
 }
+
+.img-hover-zoom.game img {
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s;
+}
+
+
+.img-hover-zoom.game:hover img {
+    transform: scale(1);
+    opacity: 1;
+}
+
 
 .img-hover-zoom.banner{
     max-height: 250px !important; 
@@ -787,7 +851,6 @@ overflow: hidden;
     font-family: "Montserrat";
     font-weight: 500;
     line-height: 1.3;
-    color: #1f1f1f;
     font-size: 14px;
 }
 
@@ -1151,12 +1214,34 @@ opacity: 1;
         margin: 0 15px;
     }
     
-    .game-gallery-container {
+    .game-card-container {
         flex-direction: column;
         padding: 10px;
     }
 
-    .gallery-left, .gallery-right {
+    .game-details-container.game-info{
+        flex-direction: column;
+    }
+
+    
+    .game-details-primary.game-info{
+        padding-left: 0;
+        padding-top: 25px;
+        min-width: fit-content;
+        border-left: none;
+        border-top: solid 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .game-images-container.game-info, .game-details-container.game-info{
+        padding: 0 0;
+    }
+
+    .background.game-info{
+        filter: brightness(90%);
+    }
+    
+
+    .game-images-container, .game-details-container {
         width: 100%;
     }
     
@@ -1205,6 +1290,13 @@ opacity: 1;
     .grid-item-container{
         padding: 10px;
     }
+    
+    .game-preview.image-preview{
+        top: 10px;
+        left: 10px;
+        width: calc(100% - 20px); 
+    }
+    
 
     .grid-item-container.art{
         flex: 0 1 calc(100%/2);

@@ -38,9 +38,9 @@ let hoverables = [];
 let cursorVisible = false;
 
 //game image sliders
-var tempGameGalleries = [];
+var tempCardsTilt = [];
 var thumbnailContainers = [];
-var gameGalleries = [];
+var CardsTilt = [];
 var cardSize = { width: 0, height: 0 };
 var SCALE_X = 1.5;
 var SCALE_Y = SCALE_X * 1.25;
@@ -128,10 +128,27 @@ function changeImageGameGallery(element) {
     // Add active class to clicked thumbnail
     element.classList.add('active');
     
-    // Update main image
     const mainImage = findSiblingById(parent, "mainImage");
-    mainImage.src = element.src;
-    mainImage.alt = element.alt;
+    const mainYoutube = findSiblingById(parent, "mainYoutube");
+
+    if(element.hasAttribute('youtube')){
+        mainImage.classList.add('hide');
+        mainYoutube.classList.remove('hide');
+        const segments = element.src.split('/');
+        const extractedId = segments[4];
+
+        mainYoutube.firstElementChild.src = `https://www.youtube.com/embed/${extractedId}`;
+
+    } else{
+        mainYoutube.classList.add('hide');
+        mainImage.classList.remove('hide');
+        mainImage.src = element.src;
+        mainImage.alt = element.alt;
+        mainYoutube.firstElementChild.src = '';
+        
+    }
+
+    mainYoutube.setAttribute("index", index);
     mainImage.setAttribute("index", index);
 
     // Scroll thumbnail into view
@@ -368,7 +385,7 @@ function addShuffleEventToLinks() {
 
 
 function updateCardRotations() {
-    gameGalleries.forEach(gallery => {
+    CardsTilt.forEach(gallery => {
         if (gallery.isInsideParent) {
             cardSize = {
                 width: gallery.gallery.offsetWidth || 0,
@@ -496,7 +513,7 @@ let accumulatedUpwardScroll = 0;
     if(pageName == 'games'){
         gamesNavLink.classList.add('active');
     } else{
-        gamesNavLink.href ='./games.html';
+        gamesNavLink.href ='./game-gallery.html';
     }
     setParent(portfolioDropdown, gamesNavLink);
 
@@ -595,15 +612,15 @@ function populateFeaturedWorks(){
     var lastGameDiv = document.getElementById("featured-games");
     
     games.forEach(game => {
-
+        
         if(game.remarks.includes("hide")){
             return;
         }
-
+        
         if(!game.remarks.includes("featured")){
             return;
         }
-
+        
         const section = document.createElement('div');
         section.classList.add('section');
         section.setAttribute("id", "projects");
@@ -619,7 +636,8 @@ function populateFeaturedWorks(){
         setParent(section, sectionContent);
         
         const gameGalleryContainer = document.createElement('div');
-        gameGalleryContainer.classList.add('game-gallery-container');
+        gameGalleryContainer.classList.add('game-card-container');
+        gameGalleryContainer.classList.add('card-tilt');
         if(x % 2 == 0){
             gameGalleryContainer.classList.add('reverse');
         }
@@ -627,7 +645,7 @@ function populateFeaturedWorks(){
         setParent(sectionContent, gameGalleryContainer);
 
         const galleryLeft = document.createElement('div');
-        galleryLeft.classList.add('gallery-left');
+        galleryLeft.classList.add('game-images-container');
         setParent(gameGalleryContainer, galleryLeft);
         
         const mainImageContainer = document.createElement('div');
@@ -643,6 +661,38 @@ function populateFeaturedWorks(){
         mainImage.setAttribute("index", "0");
         mainImage.src = `${game.filePath}/${game.media[0]}`;
         setParent(mainImageContainer, mainImage);
+
+        const youtubeContainer = document.createElement('div');
+        youtubeContainer.className = 'youtube-embed hide';
+        youtubeContainer.setAttribute("id", "mainYoutube");
+        setParent(mainImageContainer, youtubeContainer);
+        
+        const youtubeVideo = document.createElement('iframe');
+        // youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
+        // youtubeVideo.setAttribute('width','1080');
+        // youtubeVideo.setAttribute('height','1920');
+        // youtubeVideo.setAttribute('frameborder','0');
+        // youtubeVideo.setAttribute('allowfullscreen','');
+        // youtubeVideo.setAttribute('index',"0");
+        setParent(youtubeContainer, youtubeVideo);
+        
+        const isAutoPlayYTVid = false;
+
+        if(hasFileExtension(game.media[0])){
+            mainImage.src = `${game.filePath}/${game.media[0]}`;
+            youtubeContainer.classList.add('hide');
+            mainImage.classList.remove('hide');
+        } else{
+            // youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
+
+            if(isAutoPlayYTVid){
+                // youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
+                // youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
+            }
+            
+            mainImage.classList.add('hide');
+            youtubeContainer.classList.remove('hide');
+        }
         
         const prevButton = document.createElement('button');
         prevButton.classList.add('gallery-nav-button');
@@ -673,6 +723,7 @@ function populateFeaturedWorks(){
                 thumbnail.src = `${game.filePath}/${game.media[i]}`;
             }else{
                 thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+                thumbnail.setAttribute("youtube",'');
             }
             thumbnail.setAttribute("index", i);
             thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
@@ -680,7 +731,7 @@ function populateFeaturedWorks(){
         }
         
         const galleryRight = document.createElement('div');
-        galleryRight.classList.add('gallery-right');
+        galleryRight.classList.add('game-details-container');
         setParent(gameGalleryContainer, galleryRight);
         
         const gameTitle = document.createElement('h2');
@@ -692,7 +743,7 @@ function populateFeaturedWorks(){
         gameDescription.classList.add('details-description');
         gameDescription.innerHTML = `${game.description}<br><br>`;
         setParent(galleryRight, gameDescription);
-
+        
         game.additional.forEach(additionalInfo =>{
             const gameBullets = document.createElement('p');
             gameBullets.classList.add('details-description');
@@ -703,7 +754,7 @@ function populateFeaturedWorks(){
         const background = document.createElement('div');
         background.classList.add('background');
         setParent(section, background);
-
+        
         x++;
     });
 
@@ -794,14 +845,34 @@ function populateGamePortfolioTest(){
         setParent(portfolioDiv, gameDiv)
 
         const imageContainer = document.createElement('div'); 
-        imageContainer.className = 'img-hover-zoom hoverable';
+        imageContainer.className = 'img-hover-zoom game hoverable';
         imageContainer.addEventListener('click', (e) => {
             loadGame(game.id);
         });
         setParent(gameDiv, imageContainer)
         
+        const videoHolder = document.createElement('video'); 
+        videoHolder.muted = true;
+        videoHolder.autoplay = true;
+        videoHolder.loop = true;
+        videoHolder.className = 'game-preview video-preview';
+        setParent(imageContainer, videoHolder);
+
+        imageContainer.addEventListener('mouseover', (e) => {
+            videoHolder.pause();
+        });
+
+        imageContainer.addEventListener('mouseout', (e) => {
+            videoHolder.play();
+        });
+
+        const video = document.createElement('source'); 
+        video.src = `${game.filePath}/preview.mp4`;
+        video.setAttribute('type', 'video/mp4');
+        setParent(videoHolder, video);
+        
         const image = document.createElement('img'); 
-        image.className = 'game-preview enlargeable';
+        image.className = 'game-preview image-preview';
         image.src = `${game.filePath}/${game.media[0]}`;
         setParent(imageContainer, image);
         
@@ -810,12 +881,12 @@ function populateGamePortfolioTest(){
         setParent(gameDiv, gameTitle)
     
         //game.additional.length
-        for (let i = 0; i < 1; i++) {
+        var maxInfo = 1;
+        for (let i = 0; i < maxInfo; i++) {
             const additionalInfo = document.createElement('h3');
             additionalInfo.innerHTML = `•&nbsp;&nbsp;${game.additional[i]}`;
             setParent(gameDiv, additionalInfo);
-        }
-    
+        }   
     
     });
 
@@ -825,6 +896,8 @@ function populateGameInfo(){
     const gameId = getQueryParam('id');
     const game = games.find(a => a.id == gameId);
     
+    document.title = game.title;
+
     const portfolioDiv = document.getElementById("games");
 
     if(game.remarks.includes("hide")){
@@ -843,14 +916,18 @@ function populateGameInfo(){
     setParent(section, sectionContent);
     
     const gameGalleryContainer = document.createElement('div');
-    gameGalleryContainer.classList.add('game-gallery-container');
+    gameGalleryContainer.classList.add('game-card-container');
+    gameGalleryContainer.classList.add('game-info');
+    // gameGalleryContainer.classList.add('card-tilt');
     if(x % 2 == 0){
         gameGalleryContainer.classList.add('reverse');
     }
     setParent(sectionContent, gameGalleryContainer);
 
     const galleryLeft = document.createElement('div');
-    galleryLeft.classList.add('gallery-left');
+    galleryLeft.classList.add('game-images-container');
+    galleryLeft.classList.add('game-info');
+    galleryLeft.classList.add('card-tilt');
     setParent(gameGalleryContainer, galleryLeft);
     
     const mainImageContainer = document.createElement('div');
@@ -866,6 +943,39 @@ function populateGameInfo(){
     mainImage.setAttribute("index", "0");
     mainImage.src = `${game.filePath}/${game.media[0]}`;
     setParent(mainImageContainer, mainImage);
+
+    const youtubeContainer = document.createElement('div');
+    youtubeContainer.className = 'youtube-embed hide';
+    youtubeContainer.setAttribute("id", "mainYoutube");
+    setParent(mainImageContainer, youtubeContainer);
+    
+    const youtubeVideo = document.createElement('iframe');
+    youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
+    youtubeVideo.setAttribute('width','1080');
+    youtubeVideo.setAttribute('height','1920');
+    youtubeVideo.setAttribute('frameborder','0');
+    youtubeVideo.setAttribute('allowfullscreen','');
+    youtubeVideo.setAttribute('index',"0");
+    setParent(youtubeContainer, youtubeVideo);
+    
+    const isAutoPlayYTVid = false;
+    
+    if(hasFileExtension(game.media[0])){
+        mainImage.src = `${game.filePath}/${game.media[0]}`;
+        youtubeContainer.classList.add('hide');
+        mainImage.classList.remove('hide');
+    } else{
+        youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
+        
+        if(isAutoPlayYTVid){
+            youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
+            youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
+        }
+        
+        mainImage.classList.add('hide');
+        youtubeContainer.classList.remove('hide');
+    }
+        
     
     const prevButton = document.createElement('button');
     prevButton.classList.add('gallery-nav-button');
@@ -896,6 +1006,7 @@ function populateGameInfo(){
             thumbnail.src = `${game.filePath}/${game.media[i]}`;
         }else{
             thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+            thumbnail.setAttribute("youtube",'');
         }
         thumbnail.setAttribute("index", i);
         thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
@@ -903,18 +1014,23 @@ function populateGameInfo(){
     }
     
     const galleryRight = document.createElement('div');
-    galleryRight.classList.add('gallery-right');
+    galleryRight.classList.add('game-details-container');
+    galleryRight.classList.add('game-info');
     setParent(gameGalleryContainer, galleryRight);
+
+    const mainDetails = document.createElement('div');
+    mainDetails.className = 'game-details-main game-info';
+    setParent(galleryRight, mainDetails);
     
     const gameTitle = document.createElement('h2');
     gameTitle.classList.add('details-title');
     gameTitle.textContent = game.title.toUpperCase();
-    setParent(galleryRight, gameTitle);
+    setParent(mainDetails, gameTitle);
     
     const gameDescription = document.createElement('p');
     gameDescription.classList.add('details-description');
     gameDescription.innerHTML = `${game.description}<br><br>`;
-    setParent(galleryRight, gameDescription);
+    setParent(mainDetails, gameDescription);
 
     // const gameBullets = document.createElement('p');
     // gameBullets.classList.add('details-description');
@@ -925,13 +1041,94 @@ function populateGameInfo(){
         const gameBullets = document.createElement('p');
         gameBullets.classList.add('details-description');
         gameBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
-        setParent(galleryRight, gameBullets);
+        setParent(mainDetails, gameBullets);
     });
+    
+    const primaryDetails = document.createElement('div');
+    primaryDetails.className = 'game-details-primary game-info';
+    setParent(galleryRight, primaryDetails);
+
+    const year = document.createElement('p');
+    year.classList.add('details-description');
+    year.innerHTML = `<b>YEAR</b><br>${game.year}<br><br>`;
+    setParent(primaryDetails, year);
+
+    const tools = document.createElement('p');
+    tools.classList.add('details-description');
+    var toolsStr = "";
+    
+    for (i = 0; i < game.tools.length; i++) {
+        toolsStr = toolsStr + game.tools[i];
+        if (i < game.tools.length - 1) {
+            toolsStr = toolsStr + ', ';
+        }
+    }
+    
+    tools.innerHTML = `<b>TOOL</b><br>${toolsStr}<br><br>`;
+    setParent(primaryDetails, tools);
+
+    const roles = document.createElement('p');
+    roles.classList.add('details-description');
+    var rolesStr = "";
+    
+    for (i = 0; i < game.roles.length; i++) {
+        rolesStr = rolesStr + game.roles[i];
+        if (i < game.roles.length - 1) {
+            rolesStr = rolesStr + ', ';
+        }
+    }
+    
+    roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
+    setParent(primaryDetails, roles);
+
+    const platforms = document.createElement('p');
+    platforms.classList.add('details-description');
+    var platformsStr = "";
+    
+    for (i = 0; i < game.platforms.length; i++) {
+        platformsStr = platformsStr + game.platforms[i];
+        if (i < game.platforms.length - 1) {
+            platformsStr = platformsStr + ', ';
+        }
+    }
+    
+    platforms.innerHTML = `<b>PLATFORM</b><br>${platformsStr}<br><br>`;
+    setParent(primaryDetails, platforms);
+
+    if(game.videoLink != ""){
+
+        const youtubeLinkDiv = document.createElement('div');
+        youtubeLinkDiv.classList.add('game-details-container');
+        youtubeLinkDiv.classList.add('game-info');
+        youtubeLinkDiv.style.flexDirection = 'column';
+        setParent(gameGalleryContainer, youtubeLinkDiv);
+
+        const youtubeTitle = document.createElement('p');
+        youtubeTitle.classList.add('details-description');
+        youtubeTitle.innerHTML = `<b>${"GAMEPLAY VIDEO"}`;
+        setParent(youtubeLinkDiv, youtubeTitle);
+
+        const youtubeContainerInfo = document.createElement('div');
+        youtubeContainerInfo.className = 'youtube-embed';
+        setParent(youtubeLinkDiv, youtubeContainerInfo);
+
+        const youtubeVideoInfo = document.createElement('iframe');
+        youtubeVideoInfo.src = `https://www.youtube.com/embed/${game.videoLink}`;
+        youtubeVideoInfo.setAttribute('width','1080');
+        youtubeVideoInfo.setAttribute('height','1920');
+        youtubeVideoInfo.setAttribute('frameborder','0');
+        youtubeVideoInfo.setAttribute('allowfullscreen','');
+        setParent(youtubeContainerInfo, youtubeVideoInfo);
+
+    }
     
     const background = document.createElement('div');
     background.classList.add('background');
+    background.classList.add('game-info');
     background.style.backgroundImage = `url('${game.filePath}/${game.backgroundImage}')`
     setParent(section, background);
+
+    
 }
 
 function populateGamePortfolio(){
@@ -957,14 +1154,15 @@ function populateGamePortfolio(){
         setParent(section, sectionContent);
         
         const gameGalleryContainer = document.createElement('div');
-        gameGalleryContainer.classList.add('game-gallery-container');
+        gameGalleryContainer.classList.add('game-card-container');
+        gameGalleryContainer.classList.add('card-tilt');
         if(x % 2 == 0){
             gameGalleryContainer.classList.add('reverse');
         }
         setParent(sectionContent, gameGalleryContainer);
 
         const galleryLeft = document.createElement('div');
-        galleryLeft.classList.add('gallery-left');
+        galleryLeft.classList.add('game-images-container');
         setParent(gameGalleryContainer, galleryLeft);
         
         const mainImageContainer = document.createElement('div');
@@ -976,10 +1174,43 @@ function populateGamePortfolio(){
         mainImage.classList.add('main-image');
         if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
         mainImage.classList.add('enlargeable');
+        mainImage.classList.add('hide');
         mainImage.setAttribute("id", "mainImage");
         mainImage.setAttribute("index", "0");
-        mainImage.src = `${game.filePath}/${game.media[0]}`;
         setParent(mainImageContainer, mainImage);
+
+        const youtubeContainer = document.createElement('div');
+        youtubeContainer.className = 'youtube-embed hide';
+        youtubeContainer.setAttribute("id", "mainYoutube");
+        setParent(mainImageContainer, youtubeContainer);
+
+        const youtubeVideo = document.createElement('iframe');
+        youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
+        youtubeVideo.setAttribute('width','1080');
+        youtubeVideo.setAttribute('height','1920');
+        youtubeVideo.setAttribute('frameborder','0');
+        youtubeVideo.setAttribute('allowfullscreen','');
+        youtubeVideo.setAttribute('index',"0");
+        setParent(youtubeContainer, youtubeVideo);
+        
+        const isAutoPlayYTVid = false;
+
+        if(hasFileExtension(game.media[0])){
+            mainImage.src = `${game.filePath}/${game.media[0]}`;
+            youtubeContainer.classList.add('hide');
+            mainImage.classList.remove('hide');
+        } else{
+            youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
+
+            if(isAutoPlayYTVid){
+                youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
+                youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
+            }
+            
+            mainImage.classList.add('hide');
+            youtubeContainer.classList.remove('hide');
+        }
+        
         
         const prevButton = document.createElement('button');
         prevButton.classList.add('gallery-nav-button');
@@ -1010,6 +1241,7 @@ function populateGamePortfolio(){
                 thumbnail.src = `${game.filePath}/${game.media[i]}`;
             }else{
                 thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+                thumbnail.setAttribute("youtube",'');
             }
             thumbnail.setAttribute("index", i);
             thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
@@ -1017,7 +1249,7 @@ function populateGamePortfolio(){
         }
         
         const galleryRight = document.createElement('div');
-        galleryRight.classList.add('gallery-right');
+        galleryRight.classList.add('game-details-container');
         setParent(gameGalleryContainer, galleryRight);
         
         const gameTitle = document.createElement('h2');
@@ -1187,9 +1419,11 @@ function populateArtPortfolio() {
 }
 
 
-function pupulateArtInfo() {
+function populateArtInfo() {
     const artworkId = getQueryParam('id');
     const artwork = artworks.find(a => a.id == artworkId);
+
+    document.title = artwork.title;
     
     const portfolioDiv = document.querySelector('.art-section');
     portfolioDiv.setAttribute("contentID", artwork.id);
@@ -1374,11 +1608,11 @@ function Awake(){
 
     addHoverEventToLinks();
 
-    tempGameGalleries = document.querySelectorAll('.game-gallery-container');
+    tempCardsTilt = document.querySelectorAll('.card-tilt');
         
-    tempGameGalleries.forEach(gallery => {
+    tempCardsTilt.forEach(gallery => {
         let newGallery = new GameGallery(gallery,false);
-        gameGalleries.push(newGallery);
+        CardsTilt.push(newGallery);
     });
 
     clickableImages.forEach(img => {
@@ -1450,7 +1684,7 @@ function Awake(){
         
         requestAnimationFrame(updateCardRotations);
         
-        gameGalleries.forEach(gal => {
+        CardsTilt.forEach(gal => {
             var parentContainer = gal.gallery.parentElement; 
             //parentContainer.style.backgroundColor = "blue";
             

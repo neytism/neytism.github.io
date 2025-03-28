@@ -44,28 +44,32 @@
         <div class="spotlight-mask"></div>
         
         <div class="tab-group active" id="games">
-
+            
             <div class="section hide" id="projects" contentID="gameID" contentType="game">
                 <div class="section-content">
-                    <div class="game-gallery-container">
-                        <div class="gallery-left">
+                    <div class="game-card-container card-tilt">
+                        <div class="game-images-container">
                             <div class="main-image-container">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="main-image enlargeable" id="mainImage" index="0">
+                                <img src="/assets/img/Games/mistake/1.jpg" class="main-image hide enlargeable" id="mainImage" index="0">
+                                <div class="youtube-embed">
+                                    <iframe width="1080" height="1920" frameborder="0" allowfullscreen allow="autoplay; encrypted-media;" 
+                                    src="https://www.youtube.com/embed/_w3Hb-fkYJU?autoplay=1&mute=1"></iframe>
+                                </div>
                                 <button class="gallery-nav-button prev-button">←</button>
                                 <button class="gallery-nav-button next-button">→</button>
                             </div>
                             <div class="thumbnails">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable active" index="0">
-                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
+                                <img src="https://img.youtube.com/vi/_w3Hb-fkYJU/maxresdefault.jpg" class="thumbnail hoverable active" index="0">
+                                <img src="/assets/img/Games/mistake/2.jpg" class="thumbnail hoverable" index="1">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="2">
+                                <img src="/assets/img/Games/mistake/4.jpg" class="thumbnail hoverable" index="3">
+                                <img src="/assets/img/Games/mistake/5.jpg" class="thumbnail hoverable" index="4">
+                                <img src="/assets/img/Games/mistake/6.jpg" class="thumbnail hoverable" index="5">
+                                <img src="/assets/img/Games/mistake/7.jpg" class="thumbnail hoverable" index="6">
+                                <img src="/assets/img/Games/mistake/8.jpg" class="thumbnail hoverable" index="7">
                             </div>
                         </div>
-                        <div class="gallery-right">
+                        <div class="game-details-container">
                             <h2 class="details-title">GAME TITLE</h2>
                             <p class="details-description">Game description here.<br><br></p>
                             <p class="details-description"><b>•&nbsp;&nbsp;</b>Additional info 1</p>
@@ -74,6 +78,49 @@
                     </div>
                 </div>
                 <div class="background" style="background-image: url('/assets/img/Games/mistake/3.jpg')"></div>
+            </div>
+            
+            <div class="section hide" id="projects" contentID="gameID" contentType="game">
+                <div class="section-content">
+                    <div class="game-card-container game-info">
+                        <div class="game-images-container game-info">
+                            <div class="main-image-container">
+                                <img src="/assets/img/Games/mistake/1.jpg" class="main-image enlargeable" id="mainImage" index="0">
+                                <button class="gallery-nav-button prev-button">←</button>
+                                <button class="gallery-nav-button next-button">→</button>
+                            </div>
+                            <div class="thumbnails">
+                                <img src="/assets/img/Games/mistake/1.jpg" class="thumbnail hoverable active" index="0">
+                                <img src="/assets/img/Games/mistake/3.jpg" class="thumbnail hoverable" index="1">
+                                <img src="/assets/img/Games/mistake/4.jpg" class="thumbnail hoverable" index="2">
+                                <img src="/assets/img/Games/mistake/5.jpg" class="thumbnail hoverable" index="3">
+                                <img src="/assets/img/Games/mistake/6.jpg" class="thumbnail hoverable" index="4">
+                                <img src="/assets/img/Games/mistake/7.jpg" class="thumbnail hoverable" index="5">
+                                <img src="/assets/img/Games/mistake/8.jpg" class="thumbnail hoverable" index="6">
+                                <img src="/assets/img/Games/mistake/9.jpg" class="thumbnail hoverable" index="7">
+                            </div>
+                        </div>
+                        <div class="game-details-container game-info">
+                            <div class="game-details-main game-info">
+                                <h2 class="details-title">GAME TITLE</h2>
+                                <p class="details-description">Game description here.<br><br></p>
+                                <p class="details-description"><b>•&nbsp;&nbsp;Additional info 1</b></p>
+                                <p class="details-description"><b>•&nbsp;&nbsp;Additional info 2</b></p>
+    
+                                <p class="details-description"><br><b>Additional info 2</b></p>
+                            </div>
+
+                            <div class="game-details-primary game-info">
+                                <p class="details-description"><b>•&nbsp;&nbsp;Additional info 1</b></p>
+                                <p class="details-description"><b>•&nbsp;&nbsp;Additional info 2</b></p>
+    
+                                <p class="details-description"><br><b>Additional info 2</b></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="background game-info" style="background-image: url('/assets/img/Games/cupit/blur.jpg')"></div>
             </div>
         
         </div>
@@ -98,7 +145,11 @@
 
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadGameJson().then(() => { populateGameInfo(); Awake();});</script>
+    <script type="text/javascript">loadGameJson().then(() => {
+            populateGameInfo();
+            Awake();
+        });
+    </script>
 </body>
 
 </html>
