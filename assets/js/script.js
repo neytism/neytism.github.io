@@ -6,7 +6,7 @@ class GameGallery {
 }
 
 //redirect
-const debugMode = false;
+const debugMode = true;
 
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
@@ -1568,15 +1568,28 @@ function populateArtPortfolio() {
             
             setParent(artworkDiv, title);
             
+            if(art.tools.length > 0){
+                const tagsList = document.createElement('div');
+                tagsList.className = 'word-list game';
+                setParent(artworkDiv, tagsList);
+                
+                art.tools.forEach(tool => {
+                    const toolText = document.createElement('p');
+                    toolText.className = 'shuffle';
+                    toolText.textContent = tool;
+                    setParent(tagsList, toolText)
+                });
+            }
+            
             // const description = document.createElement('h3');
             // description.textContent = art.description;
             // setParent(artworkDiv, description);
             
-            art.additional.forEach(additional => {
-                const additionalInfo = document.createElement('h3');
-                additionalInfo.innerHTML = `•&nbsp;&nbsp;${additional}`;
-                setParent(artworkDiv, additionalInfo);
-            });
+            // art.additional.forEach(additional => {
+            //     const additionalInfo = document.createElement('h3');
+            //     additionalInfo.innerHTML = `•&nbsp;&nbsp;${additional}`;
+            //     setParent(artworkDiv, additionalInfo);
+            // });
             
             setParent(portfolioDiv, artworkDiv);
         });
@@ -1693,7 +1706,13 @@ function goToPage(pageName, key, value){
     
     if(key){url = `${url}?${key}=${value}`;}
     
-    window.location.href = url;
+    var fadeEffect = document.querySelector('.fade-overlay');
+    fadeEffect.classList.remove('fadeOut');
+    fadeEffect.classList.add('fadeIn');
+    
+    setTimeout(() => {
+        window.location.href = url;
+    }, 750);
 }
 
 
@@ -1888,8 +1907,7 @@ function Awake(){
         });
         
     }
-
-     
+         
     const grainEffect = document.createElement('div');
     grainEffect.className = 'grain-overlay';
     document.body.insertBefore(grainEffect, document.body.firstChild);

@@ -337,6 +337,44 @@ body.noscroll{
     background-color: #272727;
 }
 
+.fade-overlay{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000 !important;
+    pointer-events: none;
+    background-color: #111111;    
+}
+
+.fade-overlay.fadeIn{
+    animation: 0.75s ease-out 0s 1 fadeIn;
+    animation-fill-mode: forwards;  
+}
+
+.fade-overlay.fadeOut{
+    animation: 0.75s ease-in 0s 1 fadeOut;
+    animation-fill-mode: forwards;  
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 .grain-overlay {
     content: "";
     position: fixed;
@@ -344,7 +382,7 @@ body.noscroll{
     height: 200vh;
     left: -50%;
     top: -50%;
-    z-index: 2000 !important;
+    z-index: 2001 !important;
     pointer-events: none;
     opacity: 0.3; 
     background-image: url('/assets/img/noise.png');
@@ -631,6 +669,7 @@ body.noscroll{
 
 .grid-item-container.art{
     flex: 0 1 calc(100%/4);
+    padding-bottom: 30px;
 }
 
 .grid-item-container.game{
