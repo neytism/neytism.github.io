@@ -5,6 +5,9 @@ class GameGallery {
     }
 }
 
+//redirect
+const debugMode = false;
+
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
 const images = document.querySelectorAll('img');
@@ -61,7 +64,6 @@ const artworks = [];
 const games = [];
 let lastGameID = 0;
 let lastArtID = 0;
-
 
 function updateSpotlight() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
@@ -485,7 +487,7 @@ let accumulatedUpwardScroll = 0;
      if (pageName == 'home') {
          homeNavLink.classList.add('active');
      } else{
-         homeNavLink.href = './index.html';
+         homeNavLink.addEventListener('click', () =>{ goToPage('index');});
      }
      setParent(navBar,homeNavLink);
 
@@ -514,9 +516,9 @@ let accumulatedUpwardScroll = 0;
         gamesNavLink.classList.add('active');
     } else if(pageName == 'game'){
         gamesNavLink.classList.add('active');
-        gamesNavLink.href ='./game-gallery.html';
+        gamesNavLink.addEventListener('click', () =>{ goToPage('game-gallery');});
     }else{
-        gamesNavLink.href ='./game-gallery.html';
+        gamesNavLink.addEventListener('click', () =>{ goToPage('game-gallery');});
     }
     setParent(portfolioDropdown, gamesNavLink);
 
@@ -527,9 +529,9 @@ let accumulatedUpwardScroll = 0;
         artsNavLink.classList.add('active');
     } else if(pageName == 'art'){
         artsNavLink.classList.add('active');
-        artsNavLink.href = './art-category.html'; 
+        artsNavLink.addEventListener('click', () =>{ goToPage('art-category');});
     } else{
-        artsNavLink.href = './art-category.html'; 
+        artsNavLink.addEventListener('click', () =>{ goToPage('art-category');});
     }
     setParent(portfolioDropdown, artsNavLink);
 
@@ -542,7 +544,7 @@ let accumulatedUpwardScroll = 0;
     if (pageName == 'about') {
         aboutNavLink.classList.add('active');
     } else{
-        aboutNavLink.href = './about.html';
+        aboutNavLink.addEventListener('click', () =>{ goToPage('about');});
     }
     setParent(navBar,aboutNavLink);
 
@@ -555,7 +557,7 @@ let accumulatedUpwardScroll = 0;
     if (pageName == 'contact') {
         contactNavLink.classList.add('active');
     } else{
-        contactNavLink.href = './contact.html';
+        contactNavLink.addEventListener('click', () =>{ goToPage('contact');});
     }
     setParent(navBar,contactNavLink);
 
@@ -1235,7 +1237,7 @@ function populateGameInfo(){
     setParent(pageNavButtonHolder, moreGameButton);
 
     moreGameButton.addEventListener('click', (e) => {
-        window.location.href = '/game-gallery.html';
+        goToPage('game-gallery');
     });
     
     if(gameId != 1){
@@ -1653,19 +1655,31 @@ function populateArtInfo() {
 function loadArtwork(id) {
     const artwork = artworks.find(a => a.id === id);
     if (artwork) {
-        window.location.href = `artwork.html?id=${id}`;
+        goToPage('artwork', 'id', id);
     }
 }
 
 function loadGame(id) {
     const game = games.find(a => a.id === id);
     if (game) {
-        window.location.href = `game.html?id=${id}`;
+        goToPage('game', 'id', id);
     }
 }
 
 function loadArtCategory(category) {
-    window.location.href = `art-gallery.html?category=${category.toLowerCase().replace(/\s+/g, '')}`;
+    goToPage('art-gallery', 'category', category.toLowerCase().replace(/\s+/g, ''));
+}
+
+function goToPage(pageName, key, value){
+    let url = pageName
+
+    if(debugMode){
+        url = `${url}.html`
+    }
+    
+    if(key){url = `${url}?${key}=${value}`;}
+    
+    window.location.href = url;
 }
 
 
