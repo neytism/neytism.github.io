@@ -1682,9 +1682,13 @@ function loadArtCategory(category) {
 
 function goToPage(pageName, key, value){
     let url = pageName
-
-    if(debugMode){
+    
+    if(debugMode && url != 'index'){
         url = `${url}.html`
+    }
+    
+    if(url == 'index'){
+        url = `/`;
     }
     
     if(key){url = `${url}?${key}=${value}`;}
