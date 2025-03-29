@@ -11,7 +11,7 @@
 </head>
 
 <body pageName="games">
-    
+
     <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
         <div class="image">
             <img onerror="replaceNullImage(this)"  onclick="event.stopPropagation()" src="./assets/img/3D1.jpg" />
@@ -53,12 +53,16 @@
                     
                     <div class="art-section" contentType="art">
                         
-                        <div class="grid-item-container game hide">
+                        <div class="grid-item-container hide game">
                             <div class="grid-content game hoverable">
                                 <video muted autoplay loop class="game-preview video-preview hide-preview enlargeable">
                                     <source src="./assets/img/Games/interweave/preview.mp4" type="video/mp4">
                                 </video>
                                 <img src="/assets/img/Games/paper/1.jpg" class="game-preview image-preview enlargeable">
+                                <div class="game-preview click-indicator">
+                                    <div>&#x2197; </div>
+                                    <div>MORE ABOUT THIS GAME</div>
+                                </div>
                             </div>
 
                             <h1>Artwork Title</h1>

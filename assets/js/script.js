@@ -895,11 +895,27 @@ function populateGamePortfolioTest(){
         image.className = 'game-preview image-preview';
         image.src = `${game.filePath}/${game.media[0]}`;
         setParent(imageContainer, image);
-        
-        const gameTitle = document.createElement('h1'); 
-        gameTitle.textContent = game.title.toUpperCase();
-        setParent(gameDiv, gameTitle)
 
+        const clickIndicator = document.createElement('div'); 
+        clickIndicator.className = 'game-preview click-indicator';
+        setParent(imageContainer, clickIndicator);
+
+        const arrowSymbol = document.createElement('div'); 
+        arrowSymbol.innerHTML = '&#x2197; ';
+        setParent(clickIndicator, arrowSymbol);
+        
+        const seeMore = document.createElement('div'); 
+        seeMore.innerHTML = `MORE INFO`;
+        setParent(clickIndicator, seeMore);
+
+        const gameTitle = document.createElement('h1'); 
+        gameTitle.className = 'hoverable';
+        gameTitle.innerHTML = `<u>${game.title.toUpperCase()}`;
+        gameTitle.addEventListener('click', (e) => {
+            loadGame(game.id);
+        });
+        setParent(gameDiv, gameTitle)
+        
         const tagsList = document.createElement('div');
         tagsList.className = 'word-list game';
         setParent(gameDiv, tagsList);
@@ -924,10 +940,7 @@ function populateGamePortfolioTest(){
                 setParent(tagsList, roleText)
             });
         }
-
         
-       
-
         //game.additional.length
         var maxInfo = 0;
         for (let i = 0; i < maxInfo; i++) {
@@ -969,9 +982,6 @@ function populateGameInfo(){
     gameGalleryContainer.classList.add('game-card-container');
     gameGalleryContainer.classList.add('game-info');
     // gameGalleryContainer.classList.add('card-tilt');
-    if(x % 2 == 0){
-        gameGalleryContainer.classList.add('reverse');
-    }
     setParent(sectionContent, gameGalleryContainer);
 
     const galleryLeft = document.createElement('div');
