@@ -2236,6 +2236,9 @@ function scrollToTop(){
 
 function Awake(){
     
+    const fadeOverlay = document.querySelector('.fade-overlay');
+    fadeOverlay.classList.add('fadeOut');
+
     const pageName = document.body.getAttribute("pageName");
     
     if (pageName == 'about'){
@@ -2408,6 +2411,4 @@ function Awake(){
     grainEffect.className = 'grain-overlay';
     document.body.insertBefore(grainEffect, document.body.firstChild);
     
-    const fadeOverlay = document.querySelector('.fade-overlay');
-    fadeOverlay.classList.add('fadeOut');
 }
