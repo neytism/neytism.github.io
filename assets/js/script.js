@@ -6,7 +6,7 @@ class GameGallery {
 }
 
 //redirect
-const debugMode = false;
+const debugMode = true;
 
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
@@ -2202,13 +2202,7 @@ function goToPage(pageName, key, value){
     
     if(key){url = `${url}?${key}=${value}`;}
     
-    var fadeEffect = document.querySelector('.fade-overlay');
-    fadeEffect.classList.remove('fadeOut');
-    fadeEffect.classList.add('fadeIn');
-    
-    setTimeout(() => {
-        window.location.href = url;
-    }, 750);
+    window.location.href = url;
 }
 
 
@@ -2412,9 +2406,3 @@ function Awake(){
     
 }
 
-
-window.addEventListener('pageshow', () => {
-    const fadeOverlay = document.querySelector('.fade-overlay');
-    fadeOverlay.classList.remove('fadeIn', 'fadeOut'); 
-    fadeOverlay.classList.add('fadeOut'); 
-});
