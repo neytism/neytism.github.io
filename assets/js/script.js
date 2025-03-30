@@ -6,7 +6,7 @@ class GameGallery {
 }
 
 //redirect
-const debugMode = true;
+const debugMode = false;
 
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
