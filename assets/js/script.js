@@ -2408,4 +2408,6 @@ function Awake(){
     grainEffect.className = 'grain-overlay';
     document.body.insertBefore(grainEffect, document.body.firstChild);
     
+    const fadeOverlay = document.querySelector('.fade-overlay');
+    fadeOverlay.classList.add('fadeOut');
 }
