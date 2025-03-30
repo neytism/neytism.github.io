@@ -2413,7 +2413,8 @@ function Awake(){
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('pageshow', () => {
     const fadeOverlay = document.querySelector('.fade-overlay');
-    fadeOverlay.classList.add('fadeOut');
+    fadeOverlay.classList.remove('fadeIn', 'fadeOut'); 
+    fadeOverlay.classList.add('fadeOut'); 
 });
