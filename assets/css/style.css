@@ -636,7 +636,8 @@ body.noscroll{
 
 .art-section {
     --padding-side: 10%;
-    padding-top: 60px;
+    padding-top: 100px;
+    padding-bottom: 100px;
     padding-left: var(--padding-side);
     padding-right: var(--padding-side);
     flex: 1;
@@ -678,6 +679,13 @@ body.noscroll{
     padding-bottom: 30px;
 }
 
+.grid-item-container.web{
+    flex: 0 1 calc(100%/2);
+    position: relative;
+    padding-bottom: 30px;
+}
+
+
 .featured .grid-item-container{
     padding: 10px;
     flex: 0 1 calc(100%/3);
@@ -698,6 +706,11 @@ body.noscroll{
 
 .grid-item-container.artwork{
     padding: 5px;
+}
+
+.grid-item-container.web{
+    flex: 0 0 calc((100% / 3) - 20px);
+    padding: 0px;
 }
 
 .grid-item-container.title{
@@ -725,7 +738,7 @@ body.noscroll{
     margin-bottom: 10px;
 }
 
-.game-preview{
+.game-preview, .web-preview{
     aspect-ratio: 16/9;
     object-fit: cover;
 }
@@ -744,6 +757,11 @@ body.noscroll{
     top: 20px;
     left: 20px;
     width: calc(100% - 40px); 
+    object-fit: cover;
+}
+
+.web-preview.image-preview{
+    width: 100%; 
     object-fit: cover;
 }
 
@@ -1537,6 +1555,11 @@ opacity: 1;
     
     .center .logo img{
         max-width: 60vw;
+    }
+
+    .grid-item-container.web{
+        flex: 0 0 calc((100% / 1) );
+        padding: 0px;
     }
     
     .clock {

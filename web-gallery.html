@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <title>Games</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/neytism_logo_mark.png">
+</head>
+
+<body pageName="webs">
+
+    <div class="fade-overlay fadeOut"></div>
+
+    <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
+        <div class="image">
+            <img onerror="replaceNullImage(this)"  onclick="event.stopPropagation()" src="./assets/img/3D1.jpg" />
+        </div>
+        <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
+        
+        <div class="arrow-container prev hoverable" onclick="navigateSelectedImage(event,'prev')"><div class="arrow prev" ></div></div>
+        <div class="arrow-container next hoverable" onclick="navigateSelectedImage(event,'next')"><div class="arrow next" ></div></div>
+    </div>
+    
+    <div class="bodyholder">
+
+        
+        <div class="spotlight-mask"></div>
+        
+        <div class="tab-group active" id="games">
+            
+            <div class="section screen-height banner" id="projects">
+                
+                <div class="section-content " >
+                    <div class="center card-tilt" >
+                        <div class="logo card-tilt">
+                            <img src="assets/img/neytism_interactive_logo.png" alt="" >
+                          </div>
+                    </div>
+                    <div class="center-bottom">
+                        <div class="scroll-down"></div>
+                        <div class="additional-info">[ scroll ]</div>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
+    
+            </div>
+
+            <div class="section" id="projects">
+            
+                <div class="section-content" style="align-items: start;">
+                    
+                    <div class="art-section" contentType="art">
+                        
+                        <div class="grid-item-container hide game">
+                            <div class="grid-content game hoverable">
+                                <video muted autoplay loop class="game-preview video-preview hide-preview enlargeable">
+                                    <source src="./assets/img/Games/interweave/preview.mp4" type="video/mp4">
+                                </video>
+                                <img src="/assets/img/Games/paper/1.jpg" class="game-preview image-preview enlargeable">
+                                <div class="game-preview click-indicator">
+                                    <div>&#x2197; </div>
+                                    <div>MORE ABOUT THIS GAME</div>
+                                </div>
+                            </div>
+
+                            <h1>Artwork Title</h1>
+                            <div class="word-list game">
+                                <p class="shuffle">Unity</p>
+                                <p class="shuffle">C#</p>
+                            </div>
+                            <!-- <h3>•&nbsp;&nbsp;Additional Information</h3>
+                            <h3>•&nbsp;&nbsp;More Additional Information</h3> -->
+                        </div>
+
+                    </div>
+                
+                </div>
+                
+                <div class="background" ></div>
+    
+            </div>
+        
+        </div>
+
+        <div class="tab-group active">
+
+            
+
+            <div class="section" style="min-height: fit-content;">
+                
+                <div class="section-content"  style="padding: 100px 0px;">
+                    <div class="center">
+                        <h1 class="name">MORE WEBSITES TO COME!</h1>
+                    </div>
+                </div>
+                
+                <div class="background" style="background-image: url('assets/img/topo.png');"></div>
+    
+            </div>
+        
+        </div>
+    
+    
+    </div>
+
+    
+    <div class="cursor hide">
+        <div class="cursor__ball cursor-ball-big-container">
+            <div class="cursor-ball-big"></div>
+        </div>
+        
+        <div class="cursor__ball cursor-ball-small-container">
+            <div class="cursor-ball-small"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
+    <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
+    <script type="text/javascript">loadWebJson().then(() => { populateWebPortfolio(); Awake();});</script>
+</body>
+
+</html>

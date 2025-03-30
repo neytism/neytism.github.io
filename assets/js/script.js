@@ -6,7 +6,7 @@ class GameGallery {
 }
 
 //redirect
-const debugMode = true;
+const debugMode = false;
 
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
@@ -62,8 +62,10 @@ let spanIndex = -1;
 //json
 const artworks = [];
 const games = [];
+const webs = [];
 let lastGameID = 0;
 let lastArtID = 0;
+let lastWebID = 0;
 
 function updateSpotlight() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
@@ -184,6 +186,8 @@ function navigateSelectedImage(event, direction) {
         content = artworks.find(a => a.id == currentSelectedID);
     } else if (currentSelectedContentType == "game") {
         content = games.find(g => g.id == currentSelectedID);
+    } else if (currentSelectedContentType == "web") {
+        content = webs.find(w => w.id == currentSelectedID);
     }
     
     const fp = content.filePath;
@@ -524,7 +528,7 @@ let accumulatedUpwardScroll = 0;
 
     const artsNavLink = document.createElement('a');
     artsNavLink.classList.add('shuffle');
-    artsNavLink.textContent = 'Arts';
+    artsNavLink.textContent = 'Artworks';
     if(pageName == 'art-category'){
         artsNavLink.classList.add('active');
     } else if(pageName == 'art'){
@@ -534,6 +538,19 @@ let accumulatedUpwardScroll = 0;
         artsNavLink.addEventListener('click', () =>{ goToPage('art-category');});
     }
     setParent(portfolioDropdown, artsNavLink);
+
+    const websitesNavLink = document.createElement('a');
+    websitesNavLink.classList.add('shuffle');
+    websitesNavLink.textContent = 'Websites';
+    if(pageName == 'webs'){
+        websitesNavLink.classList.add('active');
+    } else if(pageName == 'web'){
+        websitesNavLink.classList.add('active');
+        websitesNavLink.addEventListener('click', () =>{ goToPage('web-gallery');});
+    } else{
+        websitesNavLink.addEventListener('click', () =>{ goToPage('web-gallery');});
+    }
+    setParent(portfolioDropdown, websitesNavLink);
 
     //link
     const aboutNavLink = document.createElement('a');
@@ -599,6 +616,27 @@ function loadGameJson() {
                 game.id = id;
                 games.push(game);
                 lastGameID = id;
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function loadWebJson() {
+    return fetch('/assets/json/web.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(web => {
+                let id = lastWebID + 1;
+                web.id = id;
+                webs.push(web);
+                lastWebID = id;
             });
         })
         .catch(error => {
@@ -741,7 +779,12 @@ function populateFeaturedWorks(){
         
         const gameTitle = document.createElement('h2');
         gameTitle.classList.add('details-title');
+        gameTitle.classList.add('hoverable');
         gameTitle.textContent = game.title.toUpperCase();
+        gameTitle.style.textDecoration = 'underline';
+        gameTitle.addEventListener('click', (e)=> {
+            loadGame(game.id);
+        });
         setParent(galleryRight, gameTitle);
         
         const gameDescription = document.createElement('p');
@@ -835,11 +878,11 @@ function populateFeaturedWorks(){
 function populateGamePortfolioTest(){
     
     const portfolioDiv = document.querySelector(".art-section");
-
+    
     const categoryTitle = document.createElement('div');
     categoryTitle.className = 'grid-item-container title';
     setParent(portfolioDiv, categoryTitle)
-
+    
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const videoHolder = entry.target.querySelector('.video-preview');
@@ -863,7 +906,7 @@ function populateGamePortfolioTest(){
         const gameDiv = document.createElement('div');
         gameDiv.className = 'grid-item-container game'
         setParent(portfolioDiv, gameDiv)
-
+        
         const imageContainer = document.createElement('div'); 
         imageContainer.className = 'grid-content game hoverable';
         imageContainer.addEventListener('click', (e) => {
@@ -948,7 +991,7 @@ function populateGamePortfolioTest(){
             additionalInfo.innerHTML = `•&nbsp;&nbsp;${game.additional[i]}`;
             setParent(gameDiv, additionalInfo);
         }   
-
+        
         videoObserver.observe(gameDiv);
     
     });
@@ -998,6 +1041,7 @@ function populateGameInfo(){
     mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
     mainImage.classList.add('main-image');
     if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+    mainImage.classList.add('hoverable');
     mainImage.classList.add('enlargeable');
     mainImage.setAttribute("id", "mainImage");
     mainImage.setAttribute("index", "0");
@@ -1336,6 +1380,7 @@ function populateGamePortfolio(){
         mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
         mainImage.classList.add('main-image');
         if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+        mainImage.classList.add('hoverable');
         mainImage.classList.add('enlargeable');
         mainImage.classList.add('hide');
         mainImage.setAttribute("id", "mainImage");
@@ -1675,6 +1720,450 @@ function populateArtInfo() {
     
 }
 
+function populateWebPortfolio(){
+    
+    const portfolioDiv = document.querySelector(".art-section");
+    
+    const categoryTitle = document.createElement('div');
+    categoryTitle.className = 'grid-item-container title';
+    setParent(portfolioDiv, categoryTitle);
+    
+    webs.forEach(web => {
+
+        if (web.remarks.includes("hide")) {
+            return;
+        }
+
+        const webDiv = document.createElement('div');
+        webDiv.className = 'grid-item-container web'
+        setParent(portfolioDiv, webDiv)
+        
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add("grid-content");
+        imageContainer.classList.add("hoverable");
+        if(web.media.length !== 1 || !hasFileExtension(web.media[0])){
+            imageContainer.addEventListener('click', (e) => {
+                loadWeb(web.id);
+            });
+        } 
+        
+        setParent(webDiv, imageContainer);
+        
+        const image = document.createElement('img');
+        image.classList.add("hover-zoom");
+        image.addEventListener('error', (e) => {replaceNullImage(image)});
+
+        if(hasFileExtension(web.media[0])){
+            image.src = `${web.filePath}/${web.media[0]}`;
+        }else{
+            image.src = `https://img.youtube.com/vi/${web.media[0]}/maxresdefault.jpg`
+        }
+
+        if(web.media.length === 1){
+            image.classList.add("enlargeable");
+        } else{
+            
+        }
+
+        setParent(imageContainer, image);
+
+        const webTitle = document.createElement('h1'); 
+        webTitle.className = 'hoverable';
+        webTitle.innerHTML = `<u>${web.title.toUpperCase()}`;
+        webTitle.addEventListener('click', (e) => {
+            loadWeb(web.id);
+        });
+        setParent(webDiv, webTitle)
+        
+        const tagsList = document.createElement('div');
+        tagsList.className = 'word-list game';
+        setParent(webDiv, tagsList);
+
+        web.tools.forEach(tool => {
+            const toolText = document.createElement('p');
+            toolText.className = 'shuffle';
+            toolText.textContent = tool;
+            setParent(tagsList, toolText)
+        });
+        
+        if(web.remarks.includes("solo")){
+            const projectType = document.createElement('p');
+            projectType.className = 'shuffle';
+            projectType.textContent = "Solo Project";
+            setParent(tagsList, projectType)
+        } else{
+            web.roles.forEach(role => {
+                const roleText = document.createElement('p');
+                roleText.className = 'shuffle';
+                roleText.textContent = role;
+                setParent(tagsList, roleText)
+            });
+        }
+        
+    
+    });
+
+}
+
+function populateWebInfo(){
+    const webID = getQueryParam('id');
+    const web = webs.find(a => a.id == webID);
+    
+    document.title = web.title;
+
+    const portfolioDiv = document.getElementById("games");
+
+    if(web.remarks.includes("hide")){
+        return;
+    }
+
+    const section = document.createElement('div');
+    section.classList.add('section');
+    section.setAttribute("id", "projects");
+    section.setAttribute("contentID", web.id);
+    section.setAttribute("contentType", "web");
+    setParent(portfolioDiv, section);
+
+    const sectionContent = document.createElement('div');
+    sectionContent.classList.add('section-content');
+    setParent(section, sectionContent);
+    
+    const webGalleryContainer = document.createElement('div');
+    webGalleryContainer.classList.add('game-card-container');
+    webGalleryContainer.classList.add('game-info');
+    // gameGalleryContainer.classList.add('card-tilt');
+    setParent(sectionContent, webGalleryContainer);
+
+    const galleryLeft = document.createElement('div');
+    galleryLeft.classList.add('game-images-container');
+    galleryLeft.classList.add('game-info');
+    galleryLeft.classList.add('card-tilt');
+    setParent(webGalleryContainer, galleryLeft);
+    
+    const mainImageContainer = document.createElement('div');
+    mainImageContainer.classList.add('main-image-container');
+    setParent(galleryLeft, mainImageContainer);
+    
+    const mainImage = document.createElement('img');
+    mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
+    mainImage.classList.add('main-image');
+    if(web.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+    mainImage.classList.add('hoverable');
+    mainImage.classList.add('enlargeable');
+    mainImage.setAttribute("id", "mainImage");
+    mainImage.setAttribute("index", "0");
+    mainImage.src = `${web.filePath}/${web.media[0]}`;
+    setParent(mainImageContainer, mainImage);  
+    
+    const youtubeContainer = document.createElement('div');
+    youtubeContainer.className = 'youtube-embed hide';
+    youtubeContainer.setAttribute("id", "mainYoutube");
+    setParent(mainImageContainer, youtubeContainer);
+    
+    const youtubeVideo = document.createElement('iframe');
+    youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
+    youtubeVideo.setAttribute('width','1080');
+    youtubeVideo.setAttribute('height','1920');
+    youtubeVideo.setAttribute('frameborder','0');
+    youtubeVideo.setAttribute('allowfullscreen','');
+    youtubeVideo.setAttribute('index',"0");
+    setParent(youtubeContainer, youtubeVideo);
+    
+    const isAutoPlayYTVid = false;
+    
+    if(hasFileExtension(web.media[0])){
+        mainImage.src = `${web.filePath}/${web.media[0]}`;
+        youtubeContainer.classList.add('hide');
+        mainImage.classList.remove('hide');
+    } else{
+        youtubeVideo.src = `https://www.youtube.com/embed/${web.media[0]}`;
+        
+        if(isAutoPlayYTVid){
+            youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
+            youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
+        }
+        
+        mainImage.classList.add('hide');
+        youtubeContainer.classList.remove('hide');
+    }
+    
+    const prevButton = document.createElement('button');
+    prevButton.classList.add('gallery-nav-button');
+    prevButton.classList.add('prev-button');
+    prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
+    prevButton.innerHTML = `←`;
+    setParent(mainImageContainer, prevButton);
+
+    const nextButton = document.createElement('button');
+    nextButton.classList.add('gallery-nav-button');
+    nextButton.classList.add('next-button');
+    nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
+    nextButton.innerHTML = `→`;
+    setParent(mainImageContainer, nextButton);
+
+    const thumbnailsContainer = document.createElement('div');
+    thumbnailsContainer.classList.add('thumbnails');
+    setParent(galleryLeft, thumbnailsContainer);
+    
+    for (i = 0; i < web.media.length; i++) {
+        const thumbnail = document.createElement('img');
+        thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
+        thumbnail.classList.add('thumbnail');
+        thumbnail.classList.add('hoverable');
+        if ( i == 0) { thumbnail.classList.add('active'); };
+        if (web.isMobile == true) {thumbnail.classList.add('mobile');};
+        if(hasFileExtension(web.media[i])){
+            thumbnail.src = `${web.filePath}/${web.media[i]}`;
+        }else{
+            thumbnail.src = `https://img.youtube.com/vi/${web.media[i]}/maxresdefault.jpg`
+            thumbnail.setAttribute("youtube",'');
+        }
+        thumbnail.setAttribute("index", i);
+        thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
+        setParent(thumbnailsContainer, thumbnail);
+    }
+    
+    const galleryRight = document.createElement('div');
+    galleryRight.classList.add('game-details-container');
+    galleryRight.classList.add('game-info');
+    setParent(webGalleryContainer, galleryRight);
+
+    const mainDetails = document.createElement('div');
+    mainDetails.className = 'game-details-main game-info';
+    setParent(galleryRight, mainDetails);
+    
+    const webTitle = document.createElement('h2');
+    webTitle.classList.add('details-title');
+    webTitle.textContent = web.title.toUpperCase();
+    setParent(mainDetails, webTitle);
+    
+    const webDescription = document.createElement('p');
+    webDescription.classList.add('details-description');
+    webDescription.innerHTML = `${web.description}<br><br>`;
+    setParent(mainDetails, webDescription);
+
+    web.additional.forEach(additionalInfo =>{
+        const webBullets = document.createElement('p');
+        webBullets.classList.add('details-description');
+        webBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
+        setParent(mainDetails, webBullets);
+    });
+    
+    const primaryDetails = document.createElement('div');
+    primaryDetails.className = 'game-details-primary game-info';
+    setParent(galleryRight, primaryDetails);
+
+    const year = document.createElement('p');
+    year.classList.add('details-description');
+    year.innerHTML = `<b>YEAR</b><br>${web.year}<br><br>`;
+    setParent(primaryDetails, year);
+
+    const tools = document.createElement('p');
+    tools.classList.add('details-description');
+    var toolsStr = "";
+    
+    for (i = 0; i < web.tools.length; i++) {
+        toolsStr = toolsStr + web.tools[i];
+        if (i < web.tools.length - 1) {
+            toolsStr = toolsStr + ', ';
+        }
+    }
+    
+    tools.innerHTML = `<b>TOOL</b><br>${toolsStr}<br><br>`;
+    setParent(primaryDetails, tools);
+
+    const roles = document.createElement('p');
+    roles.classList.add('details-description');
+    var rolesStr = "";
+    
+    for (i = 0; i < web.roles.length; i++) {
+        rolesStr = rolesStr + web.roles[i];
+        if (i < web.roles.length - 1) {
+            rolesStr = rolesStr + ', ';
+        }
+    }
+    
+    roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
+    setParent(primaryDetails, roles);
+    
+    const additionalMedia = web.additionalMedia;
+
+    Object.entries(additionalMedia).forEach(([title, mediaUrls]) => {
+        const additionalMediaTitleDiv = document.createElement('div');
+        additionalMediaTitleDiv.classList.add('game-details-container');
+        additionalMediaTitleDiv.classList.add('game-info');
+        additionalMediaTitleDiv.style.flexDirection = 'column';
+        setParent(webGalleryContainer, additionalMediaTitleDiv);
+
+        const collaboratorsTitle = document.createElement('p');
+        collaboratorsTitle.classList.add('details-description');
+        collaboratorsTitle.innerHTML = `<b><br><br>${title}`;
+        setParent(additionalMediaTitleDiv, collaboratorsTitle);
+
+        const gridGalleryDiv = document.createElement('div');
+        gridGalleryDiv.classList.add('game-details-container');
+        gridGalleryDiv.classList.add('game-info');
+        gridGalleryDiv.style.flexDirection = 'row';
+        gridGalleryDiv.style.flexWrap = 'wrap';
+        setParent(webGalleryContainer, gridGalleryDiv);
+
+        mediaUrls.forEach(img => {
+        
+            const artworkDiv = document.createElement('div');
+            if(mediaUrls.length > 1){
+                artworkDiv.className = 'grid-item-container web';
+            } 
+            
+            setParent(gridGalleryDiv, artworkDiv);
+            
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add("grid-content");
+            imageContainer.classList.add("artworks");
+            //imageContainer.classList.add("hoverable");
+            setParent(artworkDiv, imageContainer);
+    
+            if (hasFileExtension(img)) {
+                const image = document.createElement('img');
+                image.addEventListener('error', (e) => { replaceNullImage(image) });
+                //image.className = 'enlargeable';
+                image.src = `${web.filePath}/${img}`;
+    
+                image.setAttribute('index', web.media.indexOf(img));
+                setParent(imageContainer, image);
+    
+            } else {
+    
+                const youtubeContainer = document.createElement('div');
+                youtubeContainer.className = 'youtube-embed';
+                setParent(imageContainer, youtubeContainer);
+    
+                const youtubeVideo = document.createElement('iframe');
+                youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
+                youtubeVideo.setAttribute('width', '1080');
+                youtubeVideo.setAttribute('height', '1920');
+                youtubeVideo.setAttribute('frameborder', '0');
+                youtubeVideo.setAttribute('allowfullscreen', '');
+                youtubeVideo.setAttribute('index', web.media.indexOf(img));
+                setParent(youtubeContainer, youtubeVideo);
+    
+            }
+        
+        });
+    });
+    
+   
+
+    if(!web.remarks.includes("solo")){
+        const collaboratorsDiv = document.createElement('div');
+        collaboratorsDiv.classList.add('game-details-container');
+        collaboratorsDiv.classList.add('game-info');
+        collaboratorsDiv.style.flexDirection = 'column';
+        setParent(webGalleryContainer, collaboratorsDiv);
+        
+        const collaboratorsTitle = document.createElement('p');
+        collaboratorsTitle.classList.add('details-description');
+        collaboratorsTitle.innerHTML = `<b><br><br>${"COLLABORATORS"}`;
+        setParent(collaboratorsDiv, collaboratorsTitle);
+    
+        const collaboratorList = document.createElement('div');
+        collaboratorList.className = 'word-list';
+        collaboratorList.style.justifyContent = 'left';
+        setParent(collaboratorsDiv, collaboratorList);
+        
+        const collaborators = web.collaborators;
+
+        Object.entries(collaborators).forEach(([name, url]) => {
+            const collaboratorText = document.createElement('p');
+            collaboratorText.className = 'shuffle';
+            if(url != ""){
+                collaboratorText.classList.add('hoverable');
+                collaboratorText.innerHTML = `<u>${name}</u>`;
+                collaboratorText.addEventListener('click', (e) =>{
+                    window.open(url, '_blank');
+                });
+            }else{
+                collaboratorText.textContent = name;
+            }
+            
+            setParent(collaboratorList, collaboratorText);
+        });
+                
+        
+    }
+
+
+    
+    const pageNavDiv = document.createElement('div');
+    pageNavDiv.classList.add('game-details-container');
+    pageNavDiv.classList.add('game-info');
+    pageNavDiv.style.flexDirection = 'column';
+    setParent(webGalleryContainer, pageNavDiv);
+    
+    const spacer = document.createElement('p');
+    spacer.classList.add('details-description');
+    spacer.innerHTML = ``;
+    setParent(pageNavDiv, spacer);
+    
+    const pageNavButtonHolder = document.createElement('div');
+    pageNavButtonHolder.style.flex = '1';
+    pageNavButtonHolder.style.position = 'relative';
+    pageNavButtonHolder.style.minHeight = '40px';
+    setParent(pageNavDiv, pageNavButtonHolder);
+
+    const moreGameButton = document.createElement('div');
+    moreGameButton.innerText = '[ BACK TO GALLERY ]'
+    moreGameButton.classList.add('hoverable');
+    moreGameButton.classList.add('page-nav-button');
+    moreGameButton.classList.add('more');
+    moreGameButton.classList.add('floating-button');
+    moreGameButton.classList.add('shuffle');
+    setParent(pageNavButtonHolder, moreGameButton);
+
+    moreGameButton.addEventListener('click', (e) => {
+        goToPage('web-gallery');
+    });
+    
+    if(webID != 1){
+        const prevGameButton = document.createElement('div');
+        prevGameButton.innerText = '[ PREV ]'
+        prevGameButton.classList.add('hoverable');
+        prevGameButton.classList.add('page-nav-button');
+        prevGameButton.classList.add('prev');
+        prevGameButton.classList.add('floating-button');
+        prevGameButton.classList.add('shuffle');
+        setParent(pageNavButtonHolder, prevGameButton);
+        
+        prevGameButton.addEventListener('click', (e) => {
+            loadWeb(web.id - 1);
+        });
+        
+        prevGameButton.title = webs.find(a => a.id == web.id - 1).title;
+    }
+    
+    if(webID != webs.length){
+        const nextGameButton = document.createElement('div');
+        nextGameButton.innerText = '[ NEXT ]'
+        nextGameButton.classList.add('hoverable');
+        nextGameButton.classList.add('page-nav-button');
+        nextGameButton.classList.add('next');
+        nextGameButton.classList.add('floating-button');
+        nextGameButton.classList.add('shuffle');
+        setParent(pageNavButtonHolder, nextGameButton);
+        
+        nextGameButton.addEventListener('click', (e) => {
+            loadWeb(web.id + 1);
+        });
+
+        nextGameButton.title = webs.find(a => a.id == web.id + 1).title;
+    }
+    
+    const background = document.createElement('div');
+    background.classList.add('background');
+    setParent(section, background);
+
+    
+}
+
 function loadArtwork(id) {
     const artwork = artworks.find(a => a.id === id);
     if (artwork) {
@@ -1686,6 +2175,13 @@ function loadGame(id) {
     const game = games.find(a => a.id === id);
     if (game) {
         goToPage('game', 'id', id);
+    }
+}
+
+function loadWeb(id) {
+    const web = webs.find(a => a.id === id);
+    if (web) {
+        goToPage('web', 'id', id);
     }
 }
 
