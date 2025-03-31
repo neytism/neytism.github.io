@@ -10,8 +10,6 @@ const debugMode = false;
 
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
-const images = document.querySelectorAll('img');
-const divs = document.querySelectorAll('div');
 let currentSelectedContentType = "";
 let currentSelectedID = "";
 let currentSelectedIndex = "";
@@ -25,31 +23,22 @@ let mouseWindowPosY = 0;
 let smoothMouseWindowPosX = mouseWindowPosX;
 let smoothMouseWindowPosY = mouseWindowPosY;
 
-//slideshow
-const slides = document.querySelectorAll('.slide');
-let currentSlide = 0;
-
 //tabs
 let currentTabId = "tab-1";
 
 //cursor
-const customCursor = document.querySelector('.cursor');
-const bigBall = document.querySelector('.cursor-ball-big-container');
-const smallBall = document.querySelector('.cursor-ball-small-container');
+var bigCursor = null;
+var smallCursor = null;
 let hideOnHover = [];
-let hoverables = [];
 let cursorVisible = false;
 
 //game image sliders
 var tempCardsTilt = [];
-var thumbnailContainers = [];
 var CardsTilt = [];
 var cardSize = { width: 0, height: 0 };
 var SCALE_X = 1.5;
 var SCALE_Y = SCALE_X * 1.25;
 var isInsideParent = false;
-let mouseGalleryPosX = 0;
-let mouseGalleryPosY = 0;
 
 //image enlarge
 const selectedImageContainer = document.querySelector('.selected-image-container');
@@ -67,27 +56,48 @@ let lastGameID = 0;
 let lastArtID = 0;
 let lastWebID = 0;
 
-function updateSpotlight() {
+function updateMousePositionValues() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
     smoothMouseWindowPosY += (mouseWindowPosY - smoothMouseWindowPosY) * smoothFollow;
-
+    
     const rect = spotlight.getBoundingClientRect();
     const xPos = ((smoothMouseWindowPosX - rect.left) / rect.width) * 100;
     const yPos = ((smoothMouseWindowPosY - rect.top) / rect.height) * 100;
-    document.documentElement.style.setProperty('--xPos', `${xPos}%`);
-    document.documentElement.style.setProperty('--yPos', `${yPos}%`);
+    
+    const roundedXPos = Math.round(xPos * 100) / 100;
+    const roundedYPos = Math.round(yPos * 100) / 100;
 
+    document.documentElement.style.setProperty('--xPos', `${roundedXPos}%`);
+    document.documentElement.style.setProperty('--yPos', `${roundedYPos}%`);
 }
 
+
 function animateSpotlight() {
-    updateSpotlight();
+    updateMousePositionValues();
     requestAnimationFrame(animateSpotlight);
 }
 
+function startSlideShow(){
+    const slideshows = document.querySelectorAll('.slideshow');
+    slideshows.forEach(slideshow => {
+        if(slideshow.childNodes.length > 0){
+            slideshow.setAttribute('totalSlides', slideshow.childNodes.length);
+            slideshow.setAttribute('currentSlide', '0');
+            
+            setInterval(()=> showNextSlide(slideshow), 5000);
+            slideshow.children[0].classList.add('active');
+        }    
+    });
+    
+}
 
-function showNextSlide() {
+function showNextSlide(slideshow) {
+    var currentSlide = parseInt(slideshow.getAttribute('currentSlide'));
+    var totalSlides = parseInt(slideshow.getAttribute('totalSlides'));
+    var slides = slideshow.children;
     slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
+    currentSlide = (currentSlide + 1) % totalSlides;
+    slideshow.setAttribute('currentSlide', currentSlide);
     slides[currentSlide].classList.add('active');
 }
 
@@ -238,54 +248,47 @@ function getChildList(parent) {
 
 
 // Move the cursor
-function onMouseMove(e) {
+function onMouseMove() {
     
     if (!cursorVisible) {
-        bigBall.style.opacity = 1;
-        smallBall.style.opacity = 1;
+        bigCursor.style.opacity = 1;
+        smallCursor.style.opacity = 1;
         cursorVisible = true; 
     }
     
-    TweenMax.to(bigBall, .4, {
-        x: e.clientX - 15,
-        y: e.clientY - 15
+    
+    TweenMax.to(bigCursor, .4, {
+        x: mouseWindowPosX - 15,
+        y: mouseWindowPosY - 15
     })
     
-    TweenMax.to(smallBall, .1, {
-        x: e.clientX - 5,
-        y: e.clientY - 5
+    TweenMax.to(smallCursor, .1, {
+        x: mouseWindowPosX - 5,
+        y: mouseWindowPosY - 5
     })
 
 }
 
 function onMouseHover() {
-  TweenMax.to(bigBall, .3, {
+  TweenMax.to(bigCursor, .3, {
     scale: 3
   })
 }
 
 function onMouseHoverOut() {
-  TweenMax.to(bigBall, .3, {
+  TweenMax.to(bigCursor, .3, {
     scale: 1
   })
 }
 
-function hideCustomCursor(){
-    bigBall.style.opacity = 0;
-        smallBall.style.opacity = 0;
-}
-
-
-function addHoverEventToLinks() {
-    const links = document.querySelectorAll('a');
-    
-    
+function addDropdownEvents() {
+    const links = document.querySelectorAll('.dropdown-parent');
     
     links.forEach(link => {
-        const ddcid = link.getAttribute('ddcid');
+        const dropDownContentID = link.getAttribute('dropDownContentID');
         
-        if (ddcid) {
-            const dropdownElement = document.getElementById(ddcid);
+        if (dropDownContentID) {
+            const dropdownElement = document.getElementById(dropDownContentID);
             
             if (dropdownElement) {
                 link.addEventListener('mouseover', () => {
@@ -322,6 +325,29 @@ function addHoverEventToLinks() {
             dropdownElement.classList.remove('open-dropdown');
         }
     }
+}
+
+function addCardTiltEvents(){
+    tempCardsTilt = document.querySelectorAll('.card-tilt');
+        
+    tempCardsTilt.forEach(gallery => {
+        let newGallery = new GameGallery(gallery,false);
+        CardsTilt.push(newGallery);
+    });
+
+    CardsTilt.forEach(gal => {
+        var parentContainer = gal.gallery.parentElement; 
+        
+        parentContainer.addEventListener('mouseenter', () => {
+            gal.isInsideParent = true; 
+        });
+        
+        parentContainer.addEventListener('mouseleave', () => {
+            gal.isInsideParent = false; 
+            gal.gallery.style.setProperty('--rotationX', '0deg');
+            gal.gallery.style.setProperty('--rotationY', '0deg');
+        });
+    });
 }
 
 function addShuffleEventToLinks() {
@@ -389,27 +415,44 @@ function addShuffleEventToLinks() {
     }
 }
 
+function addClickToEnlargeImageEvents(){
+    clickableImages = document.querySelectorAll('.enlargeable');
+    clickableImages.forEach(img => {
+        img.addEventListener("click", event => {
+            currentSelectedID = img.closest('[contentID]').getAttribute('contentID');
+            currentSelectedContentType = img.closest('[contentType]').getAttribute('contentType');
+            currentSelectedIndex = img.getAttribute('index');
+            selectedImageContainer.classList.remove('hide');
+            selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
+            document.body.classList.add('noscroll');
+        });
+    });
+}
+
 
 function updateCardRotations() {
     CardsTilt.forEach(gallery => {
         if (gallery.isInsideParent) {
+            var parentContainer = gallery.gallery.parentElement;
+            var rect = parentContainer.getBoundingClientRect();
+            
+            var mouseGalleryPosX = mouseWindowPosX - rect.left;
+            var mouseGalleryPosY = mouseWindowPosY - rect.top;
+
             cardSize = {
                 width: gallery.gallery.offsetWidth || 0,
                 height: gallery.gallery.offsetHeight || 0,
             };
-            
+
             var rotationX = (mouseGalleryPosY / cardSize.height) * -(SCALE_Y * 2) + SCALE_Y;
             var rotationY = (mouseGalleryPosX / cardSize.width) * (SCALE_X * 2) - SCALE_X;
-            
-            gallery.gallery.style.transform = `perspective(1000px) rotateX(${rotationX}deg) rotateY(${rotationY}deg) translateZ(10px)`;
+
+            gallery.gallery.style.setProperty('--rotationX', `${rotationX}deg`);
+            gallery.gallery.style.setProperty('--rotationY', `${rotationY}deg`);
         }
     });
-
+    
     requestAnimationFrame(updateCardRotations);
-}
-
-function resetGalleryTransformations(gallery) {
-    gallery.gallery.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
 }
 
 function closeSelectedImageContainer(event){
@@ -453,7 +496,7 @@ function generateNavBar(pageName){
     
     lastScrollY = window.scrollY;
     const upwardScrollThreshold = 200;   
-let accumulatedUpwardScroll = 0;
+    let accumulatedUpwardScroll = 0;
     
     window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
@@ -498,11 +541,12 @@ let accumulatedUpwardScroll = 0;
     //link
     const portfolioNavLink = document.createElement('a');
     portfolioNavLink.classList.add('navbar-link');
+    portfolioNavLink.classList.add('dropdown-parent');
     portfolioNavLink.classList.add('hoverable');
     portfolioNavLink.classList.add('shuffle');
     portfolioNavLink.textContent = 'PORTFOLIO';
     const portfolioDropdownID = 'portfolio-dropdown';
-    portfolioNavLink.setAttribute('ddcid', portfolioDropdownID);
+    portfolioNavLink.setAttribute('dropDownContentID', portfolioDropdownID);
     
     setParent(navBar,portfolioNavLink);
 
@@ -526,6 +570,8 @@ let accumulatedUpwardScroll = 0;
     }
     setParent(portfolioDropdown, gamesNavLink);
 
+    
+    
     const artsNavLink = document.createElement('a');
     artsNavLink.classList.add('shuffle');
     artsNavLink.textContent = 'Artworks';
@@ -578,6 +624,129 @@ let accumulatedUpwardScroll = 0;
     }
     setParent(navBar,contactNavLink);
 
+}
+
+function generateScrollToTopButton(){
+    var scrollToTopButton = document.createElement('div');
+    scrollToTopButton.innerText = '[ TOP ]'
+    scrollToTopButton.classList.add('hoverable');
+    scrollToTopButton.classList.add('scroll-to-top');
+    scrollToTopButton.classList.add('floating-button');
+    scrollToTopButton.classList.add('shuffle');
+    document.body.insertBefore(scrollToTopButton, document.body.firstChild);
+    
+    scrollToTopButton.addEventListener("click", scrollToTop);
+    
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > (window.innerHeight)) { 
+          scrollToTopButton.classList.remove("no-click");
+          scrollToTopButton.classList.add("show");
+        } else {
+            scrollToTopButton.classList.add("no-click");
+            scrollToTopButton.classList.remove("show");
+        }
+    });
+}
+
+function generateFixedBottomText(isDebug){
+    var credits = document.createElement('div');
+    credits.classList.add('credits');
+    credits.classList.add('bot-r');
+    credits.innerHTML = creditText;
+    
+    document.body.insertBefore(credits, document.body.firstChild);
+    
+    if(isDebug){
+        const fpsCounterDiv = document.createElement('div');
+        fpsCounterDiv.className = 'credits bot-l'
+        document.body.insertBefore(fpsCounterDiv, document.body.firstChild);
+        
+        const fps = document.createElement('div');
+        fps.setAttribute('id','fps');
+        setParent(fpsCounterDiv, fps);
+        
+        var startTime = Date.now();
+        var frame = 0;
+
+        function tick() {
+            var time = Date.now();
+            frame++;
+            if (time - startTime > 1000) {
+                fps.innerHTML = (frame / ((time - startTime) / 1000)).toFixed(1) + " fps";
+                startTime = time;
+                frame = 0;
+              }
+            window.requestAnimationFrame(tick);
+          }
+          tick();
+    }
+}
+
+function generateCustomCursor(){
+    const cursorContainer = document.createElement('div');
+    cursorContainer.className = 'cursor';
+    document.body.insertBefore(cursorContainer, document.body.firstChild);
+
+    const bigCursorContainer = document.createElement('div');
+    bigCursorContainer.className = 'cursor-ball cursor-ball-big-container';
+    setParent(cursorContainer, bigCursorContainer);
+
+    const bigCursorElement = document.createElement('div');
+    bigCursorElement.className = 'cursor-ball-big';
+    setParent(bigCursorContainer, bigCursorElement) 
+
+    const smallCursorContainer = document.createElement('div');
+    smallCursorContainer.className = 'cursor-ball cursor-ball-small-container';
+    setParent(cursorContainer, smallCursorContainer);
+
+    const smallCursorElement = document.createElement('div');
+    smallCursorElement.className = 'cursor-ball-small';
+    setParent(smallCursorContainer, smallCursorElement);
+
+    bigCursor = bigCursorContainer;
+    smallCursor = smallCursorContainer;
+
+    bigCursor.style.opacity = 0;
+    smallCursor.style.opacity = 0;
+
+    document.body.addEventListener('mousemove', onMouseMove);
+        
+    const hoverables =  document.querySelectorAll('.hoverable, a, button');
+
+    hoverables.forEach(hoverable =>{
+        hoverable.addEventListener('mouseenter', onMouseHover);
+        hoverable.addEventListener('mouseleave', onMouseHoverOut);
+    })
+    
+    document.body.addEventListener('mouseleave', () =>{
+        bigCursor.style.opacity = 0;
+        smallCursor.style.opacity = 0;
+    });
+
+    document.body.addEventListener('mouseenter', () =>{
+        bigCursor.style.opacity = 1;
+        smallCursor.style.opacity = 1;
+    });
+    
+    hideOnHover =  document.querySelectorAll('.youtube-embed');
+
+    hideOnHover.forEach(unhoverable =>{
+        unhoverable.addEventListener('mouseenter', () =>{
+            bigCursor.style.opacity = 0;
+            smallCursor.style.opacity = 0;
+        });
+        unhoverable.addEventListener('mouseleave', () =>{
+            bigCursor.style.opacity = 1;
+            smallCursor.style.opacity = 1;
+        });
+    });
+    
+}
+
+function generateGrainOverlay(){
+    const grainEffect = document.createElement('div');
+    grainEffect.className = 'grain-overlay';
+    document.body.insertBefore(grainEffect, document.body.firstChild);
 }
 
 
@@ -753,6 +922,10 @@ function populateFeaturedWorks(){
 
         const thumbnailsContainer = document.createElement('div');
         thumbnailsContainer.classList.add('thumbnails');
+        thumbnailsContainer.addEventListener('wheel', function (event) {
+            event.preventDefault();
+            thumbnailsContainer.scrollLeft += event.deltaY;
+        });
         setParent(galleryLeft, thumbnailsContainer);
         
         for (i = 0; i < game.media.length; i++) {
@@ -1097,6 +1270,10 @@ function populateGameInfo(){
 
     const thumbnailsContainer = document.createElement('div');
     thumbnailsContainer.classList.add('thumbnails');
+    thumbnailsContainer.addEventListener('wheel', function (event) {
+        event.preventDefault();
+        thumbnailsContainer.scrollLeft += event.deltaY;
+    });
     setParent(galleryLeft, thumbnailsContainer);
     
     for (i = 0; i < game.media.length; i++) {
@@ -1328,7 +1505,6 @@ function populateGameInfo(){
         nextGameButton.title = games.find(a => a.id == game.id + 1).title;
     }
     
-    console.log(gameId);
     const background = document.createElement('div');
     background.classList.add('background');
     background.classList.add('game-info');
@@ -1436,6 +1612,10 @@ function populateGamePortfolio(){
 
         const thumbnailsContainer = document.createElement('div');
         thumbnailsContainer.classList.add('thumbnails');
+        thumbnailsContainer.addEventListener('wheel', function (event) {
+            event.preventDefault();
+            thumbnailsContainer.scrollLeft += event.deltaY;
+        });
         setParent(galleryLeft, thumbnailsContainer);
         
         for (i = 0; i < game.media.length; i++) {
@@ -1903,6 +2083,10 @@ function populateWebInfo(){
 
     const thumbnailsContainer = document.createElement('div');
     thumbnailsContainer.classList.add('thumbnails');
+    thumbnailsContainer.addEventListener('wheel', function (event) {
+        event.preventDefault();
+        thumbnailsContainer.scrollLeft += event.deltaY;
+    });
     setParent(galleryLeft, thumbnailsContainer);
     
     for (i = 0; i < web.media.length; i++) {
@@ -2226,12 +2410,20 @@ function scrollToTop(){
       });
 }
 
-
+function disableAllContextMenu(){
+    const images = document.querySelectorAll('img');
+    const divs = document.querySelectorAll('div');
+    
+    images.forEach(image => {
+        image.addEventListener('contextmenu', disableContextMenu);
+    });
+    
+    divs.forEach(div => {
+        div.addEventListener('contextmenu', disableContextMenu);
+    });
+}
 
 function Awake(){
-
-    
-    
     const pageName = document.body.getAttribute("pageName");
     
     if (pageName == 'about'){
@@ -2240,97 +2432,16 @@ function Awake(){
     }
     
     generateNavBar(pageName);
+    generateScrollToTopButton();
+    generateFixedBottomText(debugMode);
+       
+    startSlideShow();
     
-    var scrollToTopButton = document.createElement('div');
-    scrollToTopButton.innerText = '[ TOP ]'
-    scrollToTopButton.classList.add('hoverable');
-    scrollToTopButton.classList.add('scroll-to-top');
-    scrollToTopButton.classList.add('floating-button');
-    scrollToTopButton.classList.add('shuffle');
-    document.body.insertBefore(scrollToTopButton, document.body.firstChild);
+    addDropdownEvents();
+    addClickToEnlargeImageEvents();
+    generateGrainOverlay();
     
-    scrollToTopButton.addEventListener("click", scrollToTop);
-    
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > (window.innerHeight)) { 
-          scrollToTopButton.classList.remove("no-click");
-          scrollToTopButton.classList.add("show");
-        } else {
-            scrollToTopButton.classList.add("no-click");
-            scrollToTopButton.classList.remove("show");
-        }
-    });
-
-    var credits = document.createElement('div');
-    credits.classList.add('credits');
-    credits.classList.add('bot-r');
-    credits.innerHTML = creditText;
-
-    document.body.insertBefore(credits, document.body.firstChild);
-
-
-
-    images.forEach(image => {
-        image.addEventListener('contextmenu', disableContextMenu);
-    });
-    
-    divs.forEach(div => {
-        div.addEventListener('contextmenu', disableContextMenu);
-    });
-
-    bigBall.style.opacity = 0;
-    smallBall.style.opacity = 0;
-    
-    hoverables =  document.querySelectorAll('.hoverable, a, button');
-    clickableImages = document.querySelectorAll('.enlargeable');
-    
-    if(slides.length > 0){
-        setInterval(showNextSlide, 5000);
-        
-        slides[currentSlide].classList.add('active');
-    }
-
-    thumbnailContainers = document.querySelectorAll('.thumbnails');
-    
-    thumbnailContainers.forEach(thumbnails => {
-        thumbnails.addEventListener('wheel', function (event) {
-            event.preventDefault();
-            thumbnails.scrollLeft += event.deltaY;
-        });
-    });
-    
-
-    addHoverEventToLinks();
-
-    tempCardsTilt = document.querySelectorAll('.card-tilt');
-        
-    tempCardsTilt.forEach(gallery => {
-        let newGallery = new GameGallery(gallery,false);
-        CardsTilt.push(newGallery);
-    });
-
-    clickableImages.forEach(img => {
-        img.addEventListener("click", event => {
-            
-            currentSelectedID = img.closest('[contentID]').getAttribute('contentID');
-            currentSelectedContentType = img.closest('[contentType]').getAttribute('contentType');
-            currentSelectedIndex = img.getAttribute('index');
-            selectedImageContainer.classList.remove('hide');
-            selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
-            document.body.classList.add('noscroll');
-        });
-    });
-
-    const onEscapePressed = (event) => {
-        if (event.key === 'Escape') {
-            closeSelectedImageContainer();
-        }
-    };
-
-    document.addEventListener('keydown', onEscapePressed);
-    
-    
-    
+    disableAllContextMenu();
     
     //thing only to do if on desktop
     if (window.innerWidth >= 820) {
@@ -2339,70 +2450,13 @@ function Awake(){
             mouseWindowPosX = e.pageX;
             mouseWindowPosY = e.pageY - window.scrollY;
         });
-        
+
+        generateCustomCursor();
         animateSpotlight();
-        
         addShuffleEventToLinks();
-        
-        document.body.addEventListener('mousemove', onMouseMove);
-
-        for (let i = 0; i < hoverables.length; i++) {
-          hoverables[i].addEventListener('mouseenter', onMouseHover);
-          hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
-        }
-        
-        document.body.addEventListener('mouseleave', () =>{
-            bigBall.style.opacity = 0;
-            smallBall.style.opacity = 0;
-        });
-
-        document.body.addEventListener('mouseenter', () =>{
-            bigBall.style.opacity = 1;
-            smallBall.style.opacity = 1;
-        });
-        
-        hideOnHover =  document.querySelectorAll('.youtube-embed');
-
-        hideOnHover.forEach(unhoverable =>{
-            unhoverable.addEventListener('mouseenter', () =>{
-                bigBall.style.opacity = 0;
-                smallBall.style.opacity = 0;
-            });
-            unhoverable.addEventListener('mouseleave', () =>{
-                bigBall.style.opacity = 1;
-                smallBall.style.opacity = 1;
-            });
-        });
-        
-        customCursor.classList.remove("hide");
-        
+        addCardTiltEvents();
         requestAnimationFrame(updateCardRotations);
-        
-        CardsTilt.forEach(gal => {
-            var parentContainer = gal.gallery.parentElement; 
-            //parentContainer.style.backgroundColor = "blue";
-            
-            parentContainer.addEventListener('mousemove', function (e) {
-                var rect = parentContainer.getBoundingClientRect();
-                mouseGalleryPosX = e.clientX - rect.left;
-                mouseGalleryPosY = e.clientY - rect.top;
-            });
-            
-            parentContainer.addEventListener('mouseenter', () => {
-                gal.isInsideParent = true; 
-            });
-            
-            parentContainer.addEventListener('mouseleave', () => {
-                gal.isInsideParent = false; 
-                resetGalleryTransformations(gal); 
-            });
-        });
-        
     }
-         
-    const grainEffect = document.createElement('div');
-    grainEffect.className = 'grain-overlay';
-    document.body.insertBefore(grainEffect, document.body.firstChild);
     
 }
 

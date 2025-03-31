@@ -31,7 +31,7 @@ body.noscroll{
    
 }
 
-.cursor__ball {
+.cursor-ball {
     position: fixed;
     top: 0;
     left: 0;
@@ -41,7 +41,7 @@ body.noscroll{
     z-index: 1999 !important;
 }
 
-.cursor__ball circle {
+.cursor-ball circle {
     fill: #f7f8fa;
 
 }
@@ -443,6 +443,9 @@ body.noscroll{
 }
 
 .card-tilt{
+    --rotationX: 0deg;
+    --rotationY: 0deg;
+    transform: perspective(1000px) rotateX(var(--rotationX)) rotateY(var(--rotationY)) translateZ(10px);
     transform-style: preserve-3d;
     transition: transform 0.2s ease;
 }
