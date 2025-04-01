@@ -46,12 +46,41 @@ var spans = [];
 let spanIndex = -1;
 
 //json
-const artworks = [];
-const games = [];
-const webs = [];
-let lastGameID = 0;
-let lastArtID = 0;
-let lastWebID = 0;
+let lastJsonID = 0;
+const portfolio = {
+    artworks: [],
+    games: [],
+    websites: []
+};
+
+function loadJson(type) {
+    const typeMap = {
+        artworks: { jsonUrl: "/assets/json/artworks.json", portfolioKey: "artworks" },
+        games: { jsonUrl: "/assets/json/games.json", portfolioKey: "games" },
+        websites: { jsonUrl: "/assets/json/websites.json", portfolioKey: "websites" }
+    };
+
+    const { jsonUrl, portfolioKey } = typeMap[type] || typeMap.artworks;
+
+    return fetch(jsonUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            let lastJsonID = 0;
+            data.forEach(item => {
+                item.id = ++lastJsonID;
+                portfolio[portfolioKey].push(item);
+            });
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+}
+
 
 function updateMousePositionValues() {
     smoothMouseWindowPosX += (mouseWindowPosX - smoothMouseWindowPosX) * smoothFollow;
@@ -179,11 +208,11 @@ function navigateSelectedImage(event, direction) {
     let content = null;
     
     if (currentSelectedContentType == "art") {
-        content = artworks.find(a => a.id == currentSelectedID);
+        content = portfolio['artworks'].find(a => a.id == currentSelectedID);
     } else if (currentSelectedContentType == "game") {
-        content = games.find(g => g.id == currentSelectedID);
+        content = portfolio['games'].find(g => g.id == currentSelectedID);
     } else if (currentSelectedContentType == "web") {
-        content = webs.find(w => w.id == currentSelectedID);
+        content = portfolio['websites'].find(w => w.id == currentSelectedID);
     }
     
     const fp = content.filePath;
@@ -491,105 +520,60 @@ function generateNavBar(pageName){
         lastScrollY = currentScrollY;
     });
     
-
-     //link
-     const homeNavLink = document.createElement('a');
-     homeNavLink.classList.add('navbar-link');
-     homeNavLink.classList.add('hoverable');
-     homeNavLink.classList.add('shuffle');
-     homeNavLink.textContent = 'HOME';
-     if (pageName == 'home') {
-         homeNavLink.classList.add('active');
-     } else{
-         homeNavLink.addEventListener('click', () =>{ goToPage('index');});
-     }
-     setParent(navBar,homeNavLink);
-
-    //link
-    const portfolioNavLink = document.createElement('a');
-    portfolioNavLink.classList.add('navbar-link');
-    portfolioNavLink.classList.add('dropdown-parent');
-    portfolioNavLink.classList.add('hoverable');
-    portfolioNavLink.classList.add('shuffle');
-    portfolioNavLink.textContent = 'PORTFOLIO';
-    const portfolioDropdownID = 'portfolio-dropdown';
-    portfolioNavLink.setAttribute('dropDownContentID', portfolioDropdownID);
+    createNavBarPrimaryButton(navBar, 'index', 'HOME', 'home', pageName);
     
-    setParent(navBar,portfolioNavLink);
+    const portfolioNavButton = createNavBarPrimaryButton(navBar, '', 'PORTFOLIO', '', pageName, 'portfolio-dropdown');
+    createNavBarDropdownButtons(portfolioNavButton, 'game-gallery', 'Games', 'games', 'game', pageName);
+    createNavBarDropdownButtons(portfolioNavButton, 'art-category', 'Artworks', 'art-category', 'art', pageName);
+    createNavBarDropdownButtons(portfolioNavButton, 'web-gallery', 'Websites', 'webs', 'web', pageName);
 
-    //dropdown
-    const portfolioDropdown = document.createElement('div');
-    portfolioDropdown.classList.add('dropdown-content');
-    portfolioDropdown.setAttribute('id', portfolioDropdownID);
-    setParent(navBar, portfolioDropdown);
+    createNavBarPrimaryButton(navBar, 'about', 'ABOUT', 'about', pageName);
+    createNavBarPrimaryButton(navBar, 'contact', 'CONTACT', 'contact', pageName);
 
-    //dropdown contents
-    const gamesNavLink = document.createElement('a');
-    gamesNavLink.classList.add('shuffle');
-    gamesNavLink.textContent = 'Games';
-    if(pageName == 'games'){
-        gamesNavLink.classList.add('active');
-    } else if(pageName == 'game'){
-        gamesNavLink.classList.add('active');
-        gamesNavLink.addEventListener('click', () =>{ goToPage('game-gallery');});
+}
+
+function createNavBarPrimaryButton(parentElement, pageFileName, buttonTextContent, pageIdentifierName, currentPageIdentifierName, dropDownID) {
+    const primaryNavLink = document.createElement('a');
+    primaryNavLink.classList.add('navbar-link');
+    primaryNavLink.classList.add('hoverable');
+    primaryNavLink.classList.add('shuffle');
+    primaryNavLink.textContent = buttonTextContent;
+    if (currentPageIdentifierName == pageIdentifierName) {
+        primaryNavLink.classList.add('active');
+    } else {
+        if(pageFileName != ""){
+            primaryNavLink.addEventListener('click', () => { goToPage(pageFileName); });
+        }  
+    }
+    setParent(parentElement, primaryNavLink);
+
+    if(dropDownID || dropDownID != ""){
+        primaryNavLink.classList.add('dropdown-parent');
+        primaryNavLink.setAttribute('dropDownContentID', dropDownID);
+        
+        const dropDownContentContainer = document.createElement('div');
+        dropDownContentContainer.classList.add('dropdown-content');
+        dropDownContentContainer.setAttribute('id', dropDownID);
+        setParent(parentElement, dropDownContentContainer);
+        return dropDownContentContainer;
+    } else{
+        return primaryNavLink;
+    }
+}
+
+function createNavBarDropdownButtons(parentElement, pageFileName, buttonTextContent, primaryPageIdentifierName, secondaryPageIdentifierName, currentPageIdentifierName){
+    const dropdownNavLink = document.createElement('a');
+    dropdownNavLink.classList.add('shuffle');
+    dropdownNavLink.textContent = buttonTextContent;
+    if(currentPageIdentifierName == primaryPageIdentifierName){
+        dropdownNavLink.classList.add('active');
+    } else if(currentPageIdentifierName == secondaryPageIdentifierName){
+        dropdownNavLink.classList.add('active');
+        dropdownNavLink.addEventListener('click', () =>{ goToPage(pageFileName);});
     }else{
-        gamesNavLink.addEventListener('click', () =>{ goToPage('game-gallery');});
+        dropdownNavLink.addEventListener('click', () =>{ goToPage(pageFileName);});
     }
-    setParent(portfolioDropdown, gamesNavLink);
-    
-    
-    const artsNavLink = document.createElement('a');
-    artsNavLink.classList.add('shuffle');
-    artsNavLink.textContent = 'Artworks';
-    if(pageName == 'art-category'){
-        artsNavLink.classList.add('active');
-    } else if(pageName == 'art'){
-        artsNavLink.classList.add('active');
-        artsNavLink.addEventListener('click', () =>{ goToPage('art-category');});
-    } else{
-        artsNavLink.addEventListener('click', () =>{ goToPage('art-category');});
-    }
-    setParent(portfolioDropdown, artsNavLink);
-
-    const websitesNavLink = document.createElement('a');
-    websitesNavLink.classList.add('shuffle');
-    websitesNavLink.textContent = 'Websites';
-    if(pageName == 'webs'){
-        websitesNavLink.classList.add('active');
-    } else if(pageName == 'web'){
-        websitesNavLink.classList.add('active');
-        websitesNavLink.addEventListener('click', () =>{ goToPage('web-gallery');});
-    } else{
-        websitesNavLink.addEventListener('click', () =>{ goToPage('web-gallery');});
-    }
-    setParent(portfolioDropdown, websitesNavLink);
-
-    //link
-    const aboutNavLink = document.createElement('a');
-    aboutNavLink.classList.add('navbar-link');
-    aboutNavLink.classList.add('hoverable');
-    aboutNavLink.classList.add('shuffle');
-    aboutNavLink.textContent = 'ABOUT';
-    if (pageName == 'about') {
-        aboutNavLink.classList.add('active');
-    } else{
-        aboutNavLink.addEventListener('click', () =>{ goToPage('about');});
-    }
-    setParent(navBar,aboutNavLink);
-
-    //link
-    const contactNavLink = document.createElement('a');
-    contactNavLink.classList.add('navbar-link');
-    contactNavLink.classList.add('hoverable');
-    contactNavLink.classList.add('shuffle');
-    contactNavLink.textContent = 'CONTACT';
-    if (pageName == 'contact') {
-        contactNavLink.classList.add('active');
-    } else{
-        contactNavLink.addEventListener('click', () =>{ goToPage('contact');});
-    }
-    setParent(navBar,contactNavLink);
-
+    setParent(parentElement, dropdownNavLink);
 }
 
 function generateScrollToTopButton(){
@@ -715,70 +699,6 @@ function generateGrainOverlay(){
     document.body.insertBefore(grainEffect, document.body.firstChild);
 }
 
-
-function loadArtJson() {
-    return fetch('/assets/json/artworks.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            data.forEach(art => {
-                let id = lastArtID + 1;
-                art.id = id;
-                artworks.push(art);
-                lastArtID = id;
-            });
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-}
-
-function loadGameJson() {
-    return fetch('/assets/json/games.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            data.forEach(game => {
-                let id = lastGameID + 1;
-                game.id = id;
-                games.push(game);
-                lastGameID = id;
-            });
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-}
-
-function loadWebJson() {
-    return fetch('/assets/json/web.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            data.forEach(web => {
-                let id = lastWebID + 1;
-                web.id = id;
-                webs.push(web);
-                lastWebID = id;
-            });
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-}
-
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
@@ -789,7 +709,7 @@ function populateFeaturedWorks(){
     
     var lastGameDiv = document.getElementById("featured-games");
     
-    games.forEach(game => {
+    portfolio['games'].forEach(game => {
         
         if(game.remarks.includes("hide")){
             return;
@@ -922,7 +842,7 @@ function populateFeaturedWorks(){
         gameTitle.textContent = game.title.toUpperCase();
         gameTitle.style.textDecoration = 'underline';
         gameTitle.addEventListener('click', (e)=> {
-            loadGame(game.id);
+            loadItem('games', game.id);
         });
         setParent(galleryRight, gameTitle);
         
@@ -946,9 +866,9 @@ function populateFeaturedWorks(){
     });
 
     var featuredArtParent = document.getElementById("featured-artworks");
-
-    artworks.forEach(art => {
-
+    
+    portfolio['artworks'].forEach(art => {
+        
         if(art.remarks.includes("hide")){
             return;
         }
@@ -968,7 +888,7 @@ function populateFeaturedWorks(){
         imageContainer.classList.add("hoverable");
         if (art.media.length !== 1 || !hasFileExtension(art.media[0])) {
             imageContainer.addEventListener('click', (e) => {
-                loadArtwork(art.id);
+                loadItem('artworks', art.id);
             });
         }
 
@@ -1036,7 +956,7 @@ function populateGamePortfolioTest(){
         threshold: 0.2
     });
     
-    games.forEach(game => {
+    portfolio['games'].forEach(game => {
 
         if (game.remarks.includes("hide")) {
             return;
@@ -1049,7 +969,7 @@ function populateGamePortfolioTest(){
         const imageContainer = document.createElement('div'); 
         imageContainer.className = 'grid-content game hoverable';
         imageContainer.addEventListener('click', (e) => {
-            loadGame(game.id);
+            loadItem('games', game.id);
         });
         setParent(gameDiv, imageContainer)
         
@@ -1094,7 +1014,7 @@ function populateGamePortfolioTest(){
         gameTitle.className = 'hoverable';
         gameTitle.innerHTML = `<u>${game.title.toUpperCase()}`;
         gameTitle.addEventListener('click', (e) => {
-            loadGame(game.id);
+            loadItem('games', game.id);
         });
         setParent(gameDiv, gameTitle)
         
@@ -1139,7 +1059,7 @@ function populateGamePortfolioTest(){
 
 function populateGameInfo(){
     const gameId = getQueryParam('id');
-    const game = games.find(a => a.id == gameId);
+    const game = portfolio['games'].find(a => a.id == gameId);
     
     document.title = game.title;
 
@@ -1148,14 +1068,14 @@ function populateGameInfo(){
     if(game.remarks.includes("hide")){
         return;
     }
-
+    
     const section = document.createElement('div');
     section.classList.add('section');
     section.setAttribute("id", "projects");
     section.setAttribute("contentID", game.id);
     section.setAttribute("contentType", "game");
     setParent(portfolioDiv, section);
-
+    
     const sectionContent = document.createElement('div');
     sectionContent.classList.add('section-content');
     setParent(section, sectionContent);
@@ -1418,65 +1338,13 @@ function populateGameInfo(){
     spacer.innerHTML = ``;
     setParent(pageNavDiv, spacer);
     
-    const pageNavButtonHolder = document.createElement('div');
-    pageNavButtonHolder.style.flex = '1';
-    pageNavButtonHolder.style.position = 'relative';
-    pageNavButtonHolder.style.minHeight = '40px';
-    setParent(pageNavDiv, pageNavButtonHolder);
-
-    const moreGameButton = document.createElement('div');
-    moreGameButton.innerText = '[ BACK TO GALLERY ]'
-    moreGameButton.classList.add('hoverable');
-    moreGameButton.classList.add('page-nav-button');
-    moreGameButton.classList.add('more');
-    moreGameButton.classList.add('floating-button');
-    moreGameButton.classList.add('shuffle');
-    setParent(pageNavButtonHolder, moreGameButton);
-
-    moreGameButton.addEventListener('click', (e) => {
-        goToPage('game-gallery');
-    });
-    
-    if(gameId != 1){
-        const prevGameButton = document.createElement('div');
-        prevGameButton.innerText = '[ PREV ]'
-        prevGameButton.classList.add('hoverable');
-        prevGameButton.classList.add('page-nav-button');
-        prevGameButton.classList.add('prev');
-        prevGameButton.classList.add('floating-button');
-        prevGameButton.classList.add('shuffle');
-        setParent(pageNavButtonHolder, prevGameButton);
-        
-        prevGameButton.addEventListener('click', (e) => {
-            loadGame(game.id - 1);
-        });
-
-        prevGameButton.title = games.find(a => a.id == game.id - 1).title;
-    }
-
-    if(gameId != games.length){
-        const nextGameButton = document.createElement('div');
-        nextGameButton.innerText = '[ NEXT ]'
-        nextGameButton.classList.add('hoverable');
-        nextGameButton.classList.add('page-nav-button');
-        nextGameButton.classList.add('next');
-        nextGameButton.classList.add('floating-button');
-        nextGameButton.classList.add('shuffle');
-        setParent(pageNavButtonHolder, nextGameButton);
-        
-        nextGameButton.addEventListener('click', (e) => {
-            loadGame(game.id + 1);
-        });
-
-        nextGameButton.title = games.find(a => a.id == game.id + 1).title;
-    }
+    createPageItemNavigator('game', pageNavDiv, game.id, portfolio['games'].length);
     
     const background = document.createElement('div');
     background.classList.add('background');
     background.classList.add('game-info');
     background.style.backgroundImage = `url('${game.filePath}/${game.backgroundImage}')`
     setParent(section, background);
-
     
 }
 
@@ -1485,8 +1353,8 @@ function populateGamePortfolio(){
     
     const portfolioDiv = document.getElementById("games");
     
-    games.forEach(game => {
-
+    portfolio['games'].forEach(game => {
+        
         if(game.remarks.includes("hide")){
             return;
         }
@@ -1643,7 +1511,7 @@ function populateArtCategory() {
     
     const categories = {};
     
-    artworks.forEach(art => {
+    portfolio['artworks'].forEach(art => {
         if(art.remarks.includes("hide")){
             return;
         }
@@ -1693,7 +1561,7 @@ function populateArtPortfolio() {
     
     const categories = {};
     
-    artworks.forEach(art => {
+    portfolio['artworks'].forEach(art => {
         if (art.remarks.includes("hide")) {
             return;
         }
@@ -1727,7 +1595,7 @@ function populateArtPortfolio() {
             imageContainer.classList.add("hoverable");
             if(art.media.length !== 1 || !hasFileExtension(art.media[0])){
                 imageContainer.addEventListener('click', (e) => {
-                    loadArtwork(art.id);
+                    loadItem('artworks', art.id);
                 });
             } 
            
@@ -1788,10 +1656,9 @@ function populateArtPortfolio() {
     }
 }
 
-
 function populateArtInfo() {
     const artworkId = getQueryParam('id');
-    const artwork = artworks.find(a => a.id == artworkId);
+    const artwork = portfolio['artworks'].find(a => a.id == artworkId);
 
     document.title = artwork.title;
     
@@ -1874,7 +1741,7 @@ function populateWebPortfolio(){
     categoryTitle.className = 'grid-item-container title';
     setParent(portfolioDiv, categoryTitle);
     
-    webs.forEach(web => {
+    portfolio['websites'].forEach(web => {
 
         if (web.remarks.includes("hide")) {
             return;
@@ -1889,7 +1756,7 @@ function populateWebPortfolio(){
         imageContainer.classList.add("hoverable");
         if(web.media.length !== 1 || !hasFileExtension(web.media[0])){
             imageContainer.addEventListener('click', (e) => {
-                loadWeb(web.id);
+                loadItem('websites', web.id);
             });
         } 
         
@@ -1917,7 +1784,7 @@ function populateWebPortfolio(){
         webTitle.className = 'hoverable';
         webTitle.innerHTML = `<u>${web.title.toUpperCase()}`;
         webTitle.addEventListener('click', (e) => {
-            loadWeb(web.id);
+            loadItem('websites', web.id);
         });
         setParent(webDiv, webTitle)
         
@@ -1946,7 +1813,7 @@ function populateWebPortfolio(){
 
 function populateWebInfo(){
     const webID = getQueryParam('id');
-    const web = webs.find(a => a.id == webID);
+    const web = portfolio['websites'].find(a => a.id == webID);
     
     document.title = web.title;
 
@@ -2231,10 +2098,7 @@ function populateWebInfo(){
             setParent(collaboratorList, collaboratorText);
         });
                 
-        
     }
-
-
     
     const pageNavDiv = document.createElement('div');
     pageNavDiv.classList.add('game-details-container');
@@ -2247,26 +2111,42 @@ function populateWebInfo(){
     spacer.innerHTML = ``;
     setParent(pageNavDiv, spacer);
     
+    createPageItemNavigator('web', pageNavDiv, web.id, portfolio['websites'].length);
+
+    const background = document.createElement('div');
+    background.classList.add('background');
+    setParent(section, background);
+
+}
+
+function createPageItemNavigator(type, parentElement, currentItemId, maxId){
     const pageNavButtonHolder = document.createElement('div');
     pageNavButtonHolder.style.flex = '1';
     pageNavButtonHolder.style.position = 'relative';
     pageNavButtonHolder.style.minHeight = '40px';
-    setParent(pageNavDiv, pageNavButtonHolder);
+    setParent(parentElement, pageNavButtonHolder);
 
-    const moreGameButton = document.createElement('div');
-    moreGameButton.innerText = '[ BACK TO GALLERY ]'
-    moreGameButton.classList.add('hoverable');
-    moreGameButton.classList.add('page-nav-button');
-    moreGameButton.classList.add('more');
-    moreGameButton.classList.add('floating-button');
-    moreGameButton.classList.add('shuffle');
-    setParent(pageNavButtonHolder, moreGameButton);
-
-    moreGameButton.addEventListener('click', (e) => {
-        goToPage('web-gallery');
-    });
+    const moreButton = document.createElement('div');
+    moreButton.innerText = '[ BACK TO GALLERY ]'
+    moreButton.classList.add('hoverable');
+    moreButton.classList.add('page-nav-button');
+    moreButton.classList.add('more');
+    moreButton.classList.add('floating-button');
+    moreButton.classList.add('shuffle');
+    setParent(pageNavButtonHolder, moreButton);
     
-    if(webID != 1){
+    moreButton.addEventListener('click', (e) => {
+        var pageFileName = "";
+        if(type == 'game') pageFileName = 'game-gallery';
+        if(type == 'web') pageFileName = 'web-gallery';
+        goToPage(pageFileName);
+    });
+
+    var itemCategory = "";
+    if(type == 'game') itemCategory = 'games';
+    if(type == 'web') itemCategory = 'websites';
+    
+    if(currentItemId != 1){
         const prevGameButton = document.createElement('div');
         prevGameButton.innerText = '[ PREV ]'
         prevGameButton.classList.add('hoverable');
@@ -2277,13 +2157,14 @@ function populateWebInfo(){
         setParent(pageNavButtonHolder, prevGameButton);
         
         prevGameButton.addEventListener('click', (e) => {
-            loadWeb(web.id - 1);
+            
+            loadItem(itemCategory, currentItemId - 1);
         });
         
-        prevGameButton.title = webs.find(a => a.id == web.id - 1).title;
+        //prevGameButton.title = itemArray.find(a => a.id == web.id - 1).title;
     }
     
-    if(webID != webs.length){
+    if(currentItemId != maxId){
         const nextGameButton = document.createElement('div');
         nextGameButton.innerText = '[ NEXT ]'
         nextGameButton.classList.add('hoverable');
@@ -2294,37 +2175,18 @@ function populateWebInfo(){
         setParent(pageNavButtonHolder, nextGameButton);
         
         nextGameButton.addEventListener('click', (e) => {
-            loadWeb(web.id + 1);
+            loadItem(itemCategory, currentItemId + 1);
         });
-
-        nextGameButton.title = webs.find(a => a.id == web.id + 1).title;
+        
+        //nextGameButton.title = portfolio['websites'].find(a => a.id == web.id + 1).title;
     }
+}
+
+function loadItem(category, id) {
+    const item = portfolio[category]?.find(a => a.id === id);
     
-    const background = document.createElement('div');
-    background.classList.add('background');
-    setParent(section, background);
-
-    
-}
-
-function loadArtwork(id) {
-    const artwork = artworks.find(a => a.id === id);
-    if (artwork) {
-        goToPage('artwork', 'id', id);
-    }
-}
-
-function loadGame(id) {
-    const game = games.find(a => a.id === id);
-    if (game) {
-        goToPage('game', 'id', id);
-    }
-}
-
-function loadWeb(id) {
-    const web = webs.find(a => a.id === id);
-    if (web) {
-        goToPage('web', 'id', id);
+    if (item) {
+        goToPage(category.slice(0, -1), 'id', id); //remove 's'
     }
 }
 
@@ -2347,7 +2209,6 @@ function goToPage(pageName, key, value){
     
     window.location.href = url;
 }
-
 
 function setParent(parent, child){
     parent.appendChild(child);
@@ -2418,4 +2279,3 @@ function Awake(){
     }
     
 }
-

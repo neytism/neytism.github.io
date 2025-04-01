@@ -265,7 +265,7 @@
     
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadGameJson().then(() => { loadArtJson().then(()=> { populateFeaturedWorks(); Awake(); })});</script>
+    <script type="text/javascript">loadJson('games').then(() => { loadJson('artworks').then(()=> { populateFeaturedWorks(); Awake(); })});</script>
 </body>
 
 </html>
