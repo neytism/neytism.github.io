@@ -270,6 +270,13 @@ body.noscroll{
     position: relative; /* positioning context */
 }
 
+.client-info-container{
+    display: flex; 
+    align-items: center; 
+    gap: 30px; 
+    padding-top: 30px;
+}
+
 .slideshow-main{
     background-color: black;
 }
@@ -517,6 +524,7 @@ body.noscroll{
     top: 50%;
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.753);
+    mix-blend-mode: difference;
     background-color: rgba(255, 255, 255, 0);
     border: none;
     width: 40px;

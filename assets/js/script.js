@@ -68,7 +68,6 @@ function updateMousePositionValues() {
     document.documentElement.style.setProperty('--yPos', `${roundedYPos}%`);
 }
 
-
 function animateSpotlight() {
     updateMousePositionValues();
     requestAnimationFrame(animateSpotlight);
@@ -102,6 +101,20 @@ function showNextSlide(slideshow) {
     
 }
 
+function showNextSpan() {
+    ++spanIndex;
+    const currentSpan = spans[spanIndex % spans.length];
+    
+    spans.forEach(span => span.classList.remove('show'));
+    
+    currentSpan.classList.add('show');
+    
+    setTimeout(() => {
+      currentSpan.classList.remove('show');
+      setTimeout(showNextSpan, 1000);
+    }, 2000);
+}
+  
 function changeImageGameGallery(element) {
     const index = element.getAttribute("index");
     const parent = element.parentNode;
@@ -192,7 +205,6 @@ function navigateSelectedImage(event, direction) {
     selectedImageContainer.firstElementChild.firstElementChild.src = `${fp}/${listOfImages[currentSelectedIndex]}`;
 }
 
-
 function scrollThumbnailIntoView(thumbnail) {
     const thumbnailsContainer = thumbnail.parentNode;
     const thumbnailRect = thumbnail.getBoundingClientRect();
@@ -217,8 +229,6 @@ function findSiblingById(element, id) {
 function getChildList(parent) {
     return Array.from(parent.children);
 }
-
-
 
 // Move the cursor
 function onMouseMove() {
@@ -298,29 +308,6 @@ function addDropdownEvents() {
             dropdownElement.classList.remove('open-dropdown');
         }
     }
-}
-
-function addCardTiltEvents(){
-    tempCardsTilt = document.querySelectorAll('.card-tilt');
-    if (tempCardsTilt === 0) return;
-    tempCardsTilt.forEach(gallery => {
-        let newGallery = new GameGallery(gallery,false);
-        CardsTilt.push(newGallery);
-    });
-
-    CardsTilt.forEach(gal => {
-        var parentContainer = gal.gallery.parentElement; 
-        
-        parentContainer.addEventListener('mouseenter', () => {
-            gal.isInsideParent = true; 
-        });
-        
-        parentContainer.addEventListener('mouseleave', () => {
-            gal.isInsideParent = false; 
-            gal.gallery.style.setProperty('--rotationX', '0deg');
-            gal.gallery.style.setProperty('--rotationY', '0deg');
-        });
-    });
 }
 
 function addShuffleEventToLinks() {
@@ -403,6 +390,28 @@ function addClickToEnlargeImageEvents(){
     });
 }
 
+function addCardTiltEvents(){
+    tempCardsTilt = document.querySelectorAll('.card-tilt');
+    if (tempCardsTilt === 0) return;
+    tempCardsTilt.forEach(gallery => {
+        let newGallery = new GameGallery(gallery,false);
+        CardsTilt.push(newGallery);
+    });
+    
+    CardsTilt.forEach(gal => {
+        var parentContainer = gal.gallery.parentElement; 
+        
+        parentContainer.addEventListener('mouseenter', () => {
+            gal.isInsideParent = true; 
+        });
+        
+        parentContainer.addEventListener('mouseleave', () => {
+            gal.isInsideParent = false; 
+            gal.gallery.style.setProperty('--rotationX', '0deg');
+            gal.gallery.style.setProperty('--rotationY', '0deg');
+        });
+    });
+}
 
 function updateCardRotations() {
     if (CardsTilt === 0) return;
@@ -441,26 +450,9 @@ function closeSelectedArtContainer(){
     document.body.classList.remove('noscroll');
 }
 
-
 function disableContextMenu(event) {
     event.preventDefault();
 }
-
-function showNextSpan() {
-    ++spanIndex;
-    const currentSpan = spans[spanIndex % spans.length];
-    
-    spans.forEach(span => span.classList.remove('show'));
-    
-    currentSpan.classList.add('show');
-    
-    setTimeout(() => {
-      currentSpan.classList.remove('show');
-      setTimeout(showNextSpan, 1000);
-    }, 2000);
-  }
-  
-
 
 function generateNavBar(pageName){
     if(!pageName) return; 
@@ -544,7 +536,6 @@ function generateNavBar(pageName){
         gamesNavLink.addEventListener('click', () =>{ goToPage('game-gallery');});
     }
     setParent(portfolioDropdown, gamesNavLink);
-
     
     
     const artsNavLink = document.createElement('a');
