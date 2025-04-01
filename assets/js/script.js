@@ -79,13 +79,15 @@ function animateSpotlight() {
 
 function startSlideShow(){
     const slideshows = document.querySelectorAll('.slideshow');
+    if (slideshows === 0) return;
     slideshows.forEach(slideshow => {
         if(slideshow.childNodes.length > 0){
-            slideshow.setAttribute('totalSlides', slideshow.childNodes.length);
+            const slides = slideshow.children;
+            slideshow.setAttribute('totalSlides', slides.length);
             slideshow.setAttribute('currentSlide', '0');
             
             setInterval(()=> showNextSlide(slideshow), 5000);
-            slideshow.children[0].classList.add('active');
+            slides[0].classList.add('active');
         }    
     });
     
@@ -95,39 +97,13 @@ function showNextSlide(slideshow) {
     var currentSlide = parseInt(slideshow.getAttribute('currentSlide'));
     var totalSlides = parseInt(slideshow.getAttribute('totalSlides'));
     var slides = slideshow.children;
+    
     slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % totalSlides;
-    slideshow.setAttribute('currentSlide', currentSlide);
+    slideshow.setAttribute('currentSlide', `${currentSlide}`);
     slides[currentSlide].classList.add('active');
+    
 }
-
-function selectTab(event, tabId) {
-    
-    event.preventDefault();
-    
-    if (tabId === currentTabId) {
-        document.getElementById(currentTabId).scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return; // Exit early
-    }
-    
-    const currentTab = document.getElementById(currentTabId);
-    
-    currentTab.classList.remove('active');
-    
-    setTimeout(() => {
-        currentTab.style.display = 'none';
-        
-        currentTabId = tabId;
-        const newTab = document.getElementById(currentTabId);
-        
-        newTab.style.display = 'block';
-        setTimeout(() => {
-            newTab.classList.add('active');
-            newTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 10); // Small timeout to ensure display is set before adding active class
-    }, 300);
-}
-
 
 function changeImageGameGallery(element) {
     const index = element.getAttribute("index");
@@ -329,7 +305,7 @@ function addDropdownEvents() {
 
 function addCardTiltEvents(){
     tempCardsTilt = document.querySelectorAll('.card-tilt');
-        
+    if (tempCardsTilt === 0) return;
     tempCardsTilt.forEach(gallery => {
         let newGallery = new GameGallery(gallery,false);
         CardsTilt.push(newGallery);
@@ -352,7 +328,7 @@ function addCardTiltEvents(){
 
 function addShuffleEventToLinks() {
     const links = document.querySelectorAll('.shuffle');
-    
+    if (links === 0) return;
     function getTextNodes(element) {
         const walker = document.createTreeWalker(
             element, 
@@ -417,6 +393,7 @@ function addShuffleEventToLinks() {
 
 function addClickToEnlargeImageEvents(){
     clickableImages = document.querySelectorAll('.enlargeable');
+    if (clickableImages === 0) return;
     clickableImages.forEach(img => {
         img.addEventListener("click", event => {
             currentSelectedID = img.closest('[contentID]').getAttribute('contentID');
@@ -431,6 +408,7 @@ function addClickToEnlargeImageEvents(){
 
 
 function updateCardRotations() {
+    if (CardsTilt === 0) return;
     CardsTilt.forEach(gallery => {
         if (gallery.isInsideParent) {
             var parentContainer = gallery.gallery.parentElement;
