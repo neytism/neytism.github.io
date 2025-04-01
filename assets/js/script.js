@@ -23,9 +23,6 @@ let mouseWindowPosY = 0;
 let smoothMouseWindowPosX = mouseWindowPosX;
 let smoothMouseWindowPosY = mouseWindowPosY;
 
-//tabs
-let currentTabId = "tab-1";
-
 //cursor
 var bigCursor = null;
 var smallCursor = null;
@@ -1944,19 +1941,12 @@ function populateWebPortfolio(){
             setParent(tagsList, toolText)
         });
         
-        if(web.remarks.includes("solo")){
-            const projectType = document.createElement('p');
-            projectType.className = 'shuffle';
-            projectType.textContent = "Solo Project";
-            setParent(tagsList, projectType)
-        } else{
-            web.roles.forEach(role => {
-                const roleText = document.createElement('p');
-                roleText.className = 'shuffle';
-                roleText.textContent = role;
-                setParent(tagsList, roleText)
-            });
-        }
+        web.roles.forEach(role => {
+            const roleText = document.createElement('p');
+            roleText.className = 'shuffle';
+            roleText.textContent = role;
+            setParent(tagsList, roleText)
+        });
         
     
     });

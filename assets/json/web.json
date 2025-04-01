@@ -4,14 +4,15 @@
         "description": "The “CIIT's Sales Handling for Organizations Portal” is a centralized web application designed to streamline sales and inventory management for Recognized Student Organizations (RSOs) at CIIT College of Arts and Technology. This innovative platform automates receipt generation, integrates a customizable Point of Sale (POS) system, and provides a unified portal for efficient transaction processing.<br><br>Accessible on both mobile and desktop, the portal enhances user experience by reducing manual processes, minimizing errors, and ensuring faster transactions. Aligned with CIIT's commitment to a paper-free environment, this solution empowers RSOs to focus on their core activities while improving satisfaction for both sellers and buyers.",
         "year": "2024",
         "tools": [
+            "HTML",
             "PHP",
             "CSS",
             "JavaScript",
             "MySQL"
         ],
         "roles": [
-            "Designer",
-            "Developer"
+            "Frontend Developer",
+            "Backend Developer"
         ],
         "additional": [
             "Gawad Inabel CIITzen Trailblazer Award (2024)",
@@ -74,5 +75,279 @@
         "remarks": [
             "featured"
         ]
+    },
+    {
+        "title": "Gizmoverse",
+        "description": "Gizmoverse is an e-commerce platform specializing in exclusive gadget accessories and custom-designed tech products. Developed as a full-stack web application using PHP, CSS, JavaScript, and MySQL, this project integrates both frontend and backend functionalities to create a seamless user experience.<br><br>The website features a <b>Home Page</b> with interactive hover effects revealing product spotlights, an <b>About Us</b> section detailing the brand’s mission, and a <b>Shop Page</b> with dynamic search functionality and product overlays displaying ratings, reviews, and purchase options. Users can manage items in a <b>Cart Page</b> with auto-checkout capabilities and proceed to a <b>Checkout Page</b> offering transaction summaries and multiple payment methods. Additional features include a <b>Contact Page</b> for feedback submission and a <b>Login/Register System</b> for user authentication.<br><br>Administrators access a <b>Dashboard</b> with CRUD operations for managing <b>Products/Inventory</b>, <b>User Accounts</b>, <b>Inquiries</b>, <b>Orders</b>, <b>Payments</b>, and <b>Deliveries</b>. The responsive design ensures accessibility across devices, while backend systems streamline inventory tracking, user management, and transaction processing. This solo project emphasizes scalability, intuitive navigation, and robust data handling for both customers and administrators.",
+        "year": "2023",
+        "tools": [
+            "HTML",
+            "PHP",
+            "CSS",
+            "JavaScript",
+            "MySQL"
+        ],
+        "roles": [
+            "Frontend Developer",
+            "Backend Developer"
+        ],
+        "additional": [
+           "Solo Project",
+            "CRUD Operations",
+            "Responsive Design",
+            "Dynamic Search Functionality",
+            "Product Rating/Review System",
+            "Multi-Page Checkout Process",
+            "Admin Dashboard with Inventory Management",
+            "User/Order/Payment Tracking"
+        ],
+        "filePath": "/assets/img/WebDev/Gizmoverse",
+        "media": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "11.jpg",
+            "12.jpg",
+            "13.jpg",
+            "14.jpg",
+            "15.jpg",
+            "17.jpg",
+            "18.jpg",
+            "19.jpg",
+            "20.jpg",
+            "21.jpg",
+            "22.jpg",
+            "34.jpg"
+        ],
+        "additionalMedia": {
+           },
+        "collaborators": {
+            "Oli Chiuco" : "",
+            "Ziyun": "",
+            "Mickey Reyes": "",
+            "Peter Santiago": ""
+        },
+        "remarks": [
+            "featured",
+            "solo"
+        ]
+    },
+    {
+        "title": "FOST Notes",
+        "description":  "FOST Notes is a streamlined web-based note-taking application inspired by Google Keep’s simplicity, designed for users seeking a minimalistic yet functional tool. Built with HTML, PHP, CSS, JavaScript, and MySQL, this full-stack project emphasizes intuitive note management and user customization.<br><br>The app allows users to create, read, update, and delete (CRUD) notes, organize them through archiving, and permanently remove entries. A dedicated profile section enables users to personalize their account by editing their profile picture, name, and bio. Developed for Katalon Testing, FOST Notes prioritizes ease of use with a clean interface that balances simplicity and functionality, ensuring quick access to essential features without clutter.",
+        "year": "2024",
+        "tools": [
+            "HTML",
+            "PHP",
+            "CSS",
+            "JavaScript",
+            "MySQL"
+        ],
+        "roles": [
+            "Lead Frontend Developer",
+            "Lead Backend Developer"
+        ],
+        "additional": [
+            "Collaborative project",
+            "CRUD Operations",
+            "Archivable Notes",
+            "Profile Customization (Picture, Name, Bio)",
+            "Minimalist Design",
+            "User-Friendly Interface",
+            "Solo Project",
+            "Developed for Katalon Testing"
+        ],
+        "filePath": "/assets/img/WebDev/Fost",
+        "media": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "11.jpg"
+        ],
+        "additionalMedia": {
+           },
+        "collaborators": {
+            "Kristan Osorio" : "",
+            "Christa Ramos": "",
+            "Kyle Logdat": "",
+            "Matthew Liu": "",
+            "Miguel Malsi": "",
+            "Michael Salvania": ""
+        },
+        "remarks": [
+            "featured"
+        ]
+    },
+    {
+        "title": "Portfolio Version 2",
+        "description": "A personal portfolio website showcasing professional experience and projects through a clean, modern design. Built with HTML, CSS, and JavaScript, it features a Home Page with introductory information, a Works Section highlighting key projects, and a Contact Page for inquiries",
+        "year": "2022",
+        "tools": [
+            "HTML",
+            "CSS"
+        ],
+        "roles": [
+            "Frontend Developer"
+        ],
+        "additional": [
+            "Solo Project",
+            "Project Showcase"
+        ],
+        "filePath": "/assets/img/WebDev/p2",
+        "media": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg"
+        ],
+        "additionalMedia": {
+           },
+        "collaborators": {
+        },
+        "remarks": [
+            "solo"
+        ]
+    },
+    {
+        "title": "Portfolio Version 1",
+        "description": "A personal portfolio website showcasing professional experience and projects using only HTML with inline CSS. Features a Home Page, Works Section, and Contact Page, demonstrating foundational web development skills through static content presentation. Developed as a solo challenge project to practice HTML structure and basic styling without external CSS files.",
+        "year": "2022",
+        "tools": [
+            "HTML"
+        ],
+        "roles": [
+            "Frontend Developer"
+        ],
+        "additional": [
+            "Solo Project",
+            "HTML-Only Challenge",
+            "Inline CSS Styling",
+            "Static Content Presentation",
+            "Basic Web Structure"
+        ],
+        "filePath": "/assets/img/WebDev/p1",
+        "media": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg"
+        ],
+        "additionalMedia": {
+           },
+        "collaborators": {
+        },
+        "remarks": [
+            "solo"
+        ]
+    },
+    {
+        "title": "Nacpan Beach Website",
+        "description": "A booking website for Nacpan Beach Resort designed to provide essential information and booking services for visitors. Built using HTML and CSS, the site features a <b>Home Page</b> with short descriptions and images of the beach, a <b>Villas/Rooms Section</b> showcasing accommodations, and a <b>Dining Section</b> displaying available food options with photos. It includes an embedded map for location guidance, a 'How to Get There' section, a <b>Gallery</b> of scenic views, and a <b>Reviews Section</b> featuring testimonials from previous guests.<br><br>Users can book rooms or tables directly through the website, making it a convenient platform for planning their stay at Nacpan Beach Resort.",
+        "year": "2022",
+        "tools": [
+            "HTML",
+            "CSS"
+        ],
+        "roles": [
+            "Frontend Developer"
+        ],
+        "additional": [
+           "Solo Project",
+            "HTML and CSS Only Challenge",
+            "Embedded Map for Location Guidance",
+            "Room/Table Booking Functionality",
+            "Gallery of Scenic Views",
+            "Official Reviews Section"
+        ],
+        "filePath": "/assets/img/WebDev/Nacpan",
+        "media": [
+           "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "11.jpg",
+            "12.jpg",
+            "13.jpg",
+            "14.jpg"
+        ],
+        "additionalMedia": {
+           },
+        "collaborators": {
+        },
+        "remarks": [
+            "solo"
+        ]
+    },
+    {
+        "title": "Deadpool Fan Website",
+        "description": "The Deadpool Fan Website is a challenge project designed to emulate a wiki-style platform dedicated to the iconic comic character, Deadpool. Built exclusively using HTML and CSS, this project showcases a visually engaging and interactive design while adhering to the constraints of not using JavaScript or other advanced frameworks.<br><br>The website features multiple pages, including a Home Page with general information about Deadpool, an About Page detailing the character's origins and history, a Community Page where users can theoretically post comments and interact with others, and a Shop Page for purchasing themed merchandise. This solo project demonstrates creativity and technical skill in crafting a dynamic user experience solely through static web technologies.",
+        "year": "2022",
+        "tools": [
+            "HTML",
+            "CSS"
+        ],
+        "roles": [
+            "Frontend Developer"
+        ],
+        "additional": [
+            "Solo project",
+            "Wiki-style fan website",
+            "Community interaction page (theoretical)",
+            "Merchandise shop page",
+            "Static web design using only HTML and CSS"
+        ],
+        "filePath": "/assets/img/WebDev/Deadpool",
+        "media": [
+           "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg",
+            "8.jpg",
+            "9.jpg",
+            "10.jpg",
+            "11.jpg",
+            "12.jpg",
+            "13.jpg",
+            "14.jpg",
+            "15.jpg"
+        ],
+        "additionalMedia": {
+           },
+        "collaborators": {
+        },
+        "remarks": [
+            "solo"
+        ]
     }
+    
 ]
