@@ -207,11 +207,11 @@ function navigateSelectedImage(event, direction) {
     event.stopPropagation();
     let content = null;
     
-    if (currentSelectedContentType == "art") {
+    if (currentSelectedContentType == "artwork") {
         content = portfolio['artworks'].find(a => a.id == currentSelectedID);
     } else if (currentSelectedContentType == "game") {
         content = portfolio['games'].find(g => g.id == currentSelectedID);
-    } else if (currentSelectedContentType == "web") {
+    } else if (currentSelectedContentType == "website") {
         content = portfolio['websites'].find(w => w.id == currentSelectedID);
     }
     
@@ -880,7 +880,7 @@ function populateFeaturedWorks(){
         const artworkDiv = document.createElement('div');
         artworkDiv.className = 'grid-item-container art';
         artworkDiv.setAttribute("contentID", art.id);
-        artworkDiv.setAttribute("contentType", "art");
+        artworkDiv.setAttribute("contentType", "artwork");
 
         const imageContainer = document.createElement('div');
         imageContainer.classList.add("grid-content");
@@ -1062,9 +1062,9 @@ function populateGameInfo(){
     const game = portfolio['games'].find(a => a.id == gameId);
     
     document.title = game.title;
-
+    
     const portfolioDiv = document.getElementById("games");
-
+    
     if(game.remarks.includes("hide")){
         return;
     }
@@ -1073,272 +1073,10 @@ function populateGameInfo(){
     section.classList.add('section');
     section.setAttribute("id", "projects");
     section.setAttribute("contentID", game.id);
-    section.setAttribute("contentType", "game");
+    section.setAttribute("contentType", 'game');
     setParent(portfolioDiv, section);
     
-    const sectionContent = document.createElement('div');
-    sectionContent.classList.add('section-content');
-    setParent(section, sectionContent);
-    
-    const gameGalleryContainer = document.createElement('div');
-    gameGalleryContainer.classList.add('game-card-container');
-    gameGalleryContainer.classList.add('game-info');
-    // gameGalleryContainer.classList.add('card-tilt');
-    setParent(sectionContent, gameGalleryContainer);
-
-    const galleryLeft = document.createElement('div');
-    galleryLeft.classList.add('game-images-container');
-    galleryLeft.classList.add('game-info');
-    galleryLeft.classList.add('card-tilt');
-    setParent(gameGalleryContainer, galleryLeft);
-    
-    const mainImageContainer = document.createElement('div');
-    mainImageContainer.classList.add('main-image-container');
-    setParent(galleryLeft, mainImageContainer);
-
-    const mainImage = document.createElement('img');
-    mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
-    mainImage.classList.add('main-image');
-    if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
-    mainImage.classList.add('hoverable');
-    mainImage.classList.add('enlargeable');
-    mainImage.setAttribute("id", "mainImage");
-    mainImage.setAttribute("index", "0");
-    mainImage.src = `${game.filePath}/${game.media[0]}`;
-    setParent(mainImageContainer, mainImage);
-
-    const youtubeContainer = document.createElement('div');
-    youtubeContainer.className = 'youtube-embed hide';
-    youtubeContainer.setAttribute("id", "mainYoutube");
-    setParent(mainImageContainer, youtubeContainer);
-    
-    const youtubeVideo = document.createElement('iframe');
-    youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
-    youtubeVideo.setAttribute('width','1080');
-    youtubeVideo.setAttribute('height','1920');
-    youtubeVideo.setAttribute('frameborder','0');
-    youtubeVideo.setAttribute('allowfullscreen','');
-    youtubeVideo.setAttribute('index',"0");
-    setParent(youtubeContainer, youtubeVideo);
-    
-    const isAutoPlayYTVid = false;
-    
-    if(hasFileExtension(game.media[0])){
-        mainImage.src = `${game.filePath}/${game.media[0]}`;
-        youtubeContainer.classList.add('hide');
-        mainImage.classList.remove('hide');
-    } else{
-        youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
-        
-        if(isAutoPlayYTVid){
-            youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
-            youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
-        }
-        
-        mainImage.classList.add('hide');
-        youtubeContainer.classList.remove('hide');
-    }
-        
-    
-    const prevButton = document.createElement('button');
-    prevButton.classList.add('gallery-nav-button');
-    prevButton.classList.add('prev-button');
-    prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
-    prevButton.innerHTML = `←`;
-    setParent(mainImageContainer, prevButton);
-
-    const nextButton = document.createElement('button');
-    nextButton.classList.add('gallery-nav-button');
-    nextButton.classList.add('next-button');
-    nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
-    nextButton.innerHTML = `→`;
-    setParent(mainImageContainer, nextButton);
-
-    const thumbnailsContainer = document.createElement('div');
-    thumbnailsContainer.classList.add('thumbnails');
-    thumbnailsContainer.addEventListener('wheel', function (event) {
-        event.preventDefault();
-        thumbnailsContainer.scrollLeft += event.deltaY;
-    });
-    setParent(galleryLeft, thumbnailsContainer);
-    
-    for (i = 0; i < game.media.length; i++) {
-        const thumbnail = document.createElement('img');
-        thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
-        thumbnail.classList.add('thumbnail');
-        thumbnail.classList.add('hoverable');
-        if ( i == 0) { thumbnail.classList.add('active'); };
-        if (game.isMobile == true) {thumbnail.classList.add('mobile');};
-        if(hasFileExtension(game.media[i])){
-            thumbnail.src = `${game.filePath}/${game.media[i]}`;
-        }else{
-            thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
-            thumbnail.setAttribute("youtube",'');
-        }
-        thumbnail.setAttribute("index", i);
-        thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
-        setParent(thumbnailsContainer, thumbnail);
-    }
-    
-    const galleryRight = document.createElement('div');
-    galleryRight.classList.add('game-details-container');
-    galleryRight.classList.add('game-info');
-    setParent(gameGalleryContainer, galleryRight);
-
-    const mainDetails = document.createElement('div');
-    mainDetails.className = 'game-details-main game-info';
-    setParent(galleryRight, mainDetails);
-    
-    const gameTitle = document.createElement('h2');
-    gameTitle.classList.add('details-title');
-    gameTitle.textContent = game.title.toUpperCase();
-    setParent(mainDetails, gameTitle);
-    
-    const gameDescription = document.createElement('p');
-    gameDescription.classList.add('details-description');
-    gameDescription.innerHTML = `${game.description}<br><br>`;
-    setParent(mainDetails, gameDescription);
-
-    // const gameBullets = document.createElement('p');
-    // gameBullets.classList.add('details-description');
-    // gameBullets.innerHTML = `<b>•&nbsp;&nbsp;Duration: ${game.duration}`;
-    // setParent(galleryRight, gameBullets);
-
-    game.additional.forEach(additionalInfo =>{
-        const gameBullets = document.createElement('p');
-        gameBullets.classList.add('details-description');
-        gameBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
-        setParent(mainDetails, gameBullets);
-    });
-    
-    const primaryDetails = document.createElement('div');
-    primaryDetails.className = 'game-details-primary game-info';
-    setParent(galleryRight, primaryDetails);
-
-    const year = document.createElement('p');
-    year.classList.add('details-description');
-    year.innerHTML = `<b>YEAR</b><br>${game.year}<br><br>`;
-    setParent(primaryDetails, year);
-
-    const tools = document.createElement('p');
-    tools.classList.add('details-description');
-    var toolsStr = "";
-    
-    for (i = 0; i < game.tools.length; i++) {
-        toolsStr = toolsStr + game.tools[i];
-        if (i < game.tools.length - 1) {
-            toolsStr = toolsStr + ', ';
-        }
-    }
-    
-    tools.innerHTML = `<b>TOOL</b><br>${toolsStr}<br><br>`;
-    setParent(primaryDetails, tools);
-
-    const roles = document.createElement('p');
-    roles.classList.add('details-description');
-    var rolesStr = "";
-    
-    for (i = 0; i < game.roles.length; i++) {
-        rolesStr = rolesStr + game.roles[i];
-        if (i < game.roles.length - 1) {
-            rolesStr = rolesStr + ', ';
-        }
-    }
-    
-    roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
-    setParent(primaryDetails, roles);
-
-    const platforms = document.createElement('p');
-    platforms.classList.add('details-description');
-    var platformsStr = "";
-    
-    for (i = 0; i < game.platforms.length; i++) {
-        platformsStr = platformsStr + game.platforms[i];
-        if (i < game.platforms.length - 1) {
-            platformsStr = platformsStr + ', ';
-        }
-    }
-    
-    platforms.innerHTML = `<b>PLATFORM</b><br>${platformsStr}<br><br>`;
-    setParent(primaryDetails, platforms);
-
-    if(game.videoLink != ""){
-
-        const youtubeLinkDiv = document.createElement('div');
-        youtubeLinkDiv.classList.add('game-details-container');
-        youtubeLinkDiv.classList.add('game-info');
-        youtubeLinkDiv.style.flexDirection = 'column';
-        setParent(gameGalleryContainer, youtubeLinkDiv);
-
-        const youtubeTitle = document.createElement('p');
-        youtubeTitle.classList.add('details-description');
-        youtubeTitle.innerHTML = `<b>${"GAMEPLAY VIDEO"}`;
-        setParent(youtubeLinkDiv, youtubeTitle);
-
-        const youtubeContainerInfo = document.createElement('div');
-        youtubeContainerInfo.className = 'youtube-embed';
-        setParent(youtubeLinkDiv, youtubeContainerInfo);
-
-        const youtubeVideoInfo = document.createElement('iframe');
-        youtubeVideoInfo.src = `https://www.youtube.com/embed/${game.videoLink}`;
-        youtubeVideoInfo.setAttribute('width','1080');
-        youtubeVideoInfo.setAttribute('height','1920');
-        youtubeVideoInfo.setAttribute('frameborder','0');
-        youtubeVideoInfo.setAttribute('allowfullscreen','');
-        setParent(youtubeContainerInfo, youtubeVideoInfo);
-
-    }
-
-    if(!game.remarks.includes("solo")){
-        const collaboratorsDiv = document.createElement('div');
-        collaboratorsDiv.classList.add('game-details-container');
-        collaboratorsDiv.classList.add('game-info');
-        collaboratorsDiv.style.flexDirection = 'column';
-        setParent(gameGalleryContainer, collaboratorsDiv);
-        
-        const collaboratorsTitle = document.createElement('p');
-        collaboratorsTitle.classList.add('details-description');
-        collaboratorsTitle.innerHTML = `<b><br><br>${"COLLABORATORS"}`;
-        setParent(collaboratorsDiv, collaboratorsTitle);
-    
-        const collaboratorList = document.createElement('div');
-        collaboratorList.className = 'word-list';
-        collaboratorList.style.justifyContent = 'left';
-        setParent(collaboratorsDiv, collaboratorList);
-        
-        const collaborators = game.collaborators;
-
-        Object.entries(collaborators).forEach(([name, url]) => {
-            const collaboratorText = document.createElement('p');
-            collaboratorText.className = 'shuffle';
-            if(url != ""){
-                collaboratorText.classList.add('hoverable');
-                collaboratorText.innerHTML = `<u>${name}</u>`;
-                collaboratorText.addEventListener('click', (e) =>{
-                    window.open(url, '_blank');
-                });
-            }else{
-                collaboratorText.textContent = name;
-            }
-            
-            setParent(collaboratorList, collaboratorText);
-        });
-                
-        
-    }
-    
-    const pageNavDiv = document.createElement('div');
-    pageNavDiv.classList.add('game-details-container');
-    pageNavDiv.classList.add('game-info');
-    pageNavDiv.style.flexDirection = 'column';
-    setParent(gameGalleryContainer, pageNavDiv);
-    
-    const spacer = document.createElement('p');
-    spacer.classList.add('details-description');
-    spacer.innerHTML = ``;
-    setParent(pageNavDiv, spacer);
-    
-    createPageItemNavigator('game', pageNavDiv, game.id, portfolio['games'].length);
+    createItemInfoSection('game', section, game, portfolio['games'].length);
     
     const background = document.createElement('div');
     background.classList.add('background');
@@ -1507,7 +1245,7 @@ function populateGamePortfolio(){
 
 function populateArtCategory() {
     const portfolioDiv = document.querySelector(".art-section");
-    portfolioDiv.setAttribute('contentType','art');
+    portfolioDiv.setAttribute('contentType','artwork');
     
     const categories = {};
     
@@ -1557,7 +1295,7 @@ function populateArtPortfolio() {
     const categoryIdentifier = getQueryParam('category');
 
     const portfolioDiv = document.querySelector(".art-section");
-    portfolioDiv.setAttribute('contentType','art');
+    portfolioDiv.setAttribute('contentType','artwork');
     
     const categories = {};
     
@@ -1659,12 +1397,12 @@ function populateArtPortfolio() {
 function populateArtInfo() {
     const artworkId = getQueryParam('id');
     const artwork = portfolio['artworks'].find(a => a.id == artworkId);
-
+    
     document.title = artwork.title;
     
     const portfolioDiv = document.querySelector('.art-section');
     portfolioDiv.setAttribute("contentID", artwork.id);
-    portfolioDiv.setAttribute("contentType", "art");
+    portfolioDiv.setAttribute("contentType", "artwork");
     
     const artworkTitle = document.createElement('div');
     artworkTitle.className = 'grid-item-container title';
@@ -1717,7 +1455,7 @@ function populateArtInfo() {
             const youtubeContainer = document.createElement('div');
             youtubeContainer.className = 'youtube-embed';
             setParent(imageContainer, youtubeContainer);
-
+            
             const youtubeVideo = document.createElement('iframe');
             youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
             youtubeVideo.setAttribute('width','1080');
@@ -1731,6 +1469,7 @@ function populateArtInfo() {
        
     });
     
+    //createPageItemNavigator('artwork', portfolioDiv, artwork.id, portfolio['artworks'].length);
 }
 
 function populateWebPortfolio(){
@@ -1827,40 +1566,49 @@ function populateWebInfo(){
     section.classList.add('section');
     section.setAttribute("id", "projects");
     section.setAttribute("contentID", web.id);
-    section.setAttribute("contentType", "web");
+    section.setAttribute("contentType", "website");
     setParent(portfolioDiv, section);
+    
+    createItemInfoSection('website', section, web, portfolio['websites'].length);
 
+    const background = document.createElement('div');
+    background.classList.add('background');
+    setParent(section, background);
+
+}
+
+function createItemInfoSection(type, parentElement, item, maxId){
+    
     const sectionContent = document.createElement('div');
     sectionContent.classList.add('section-content');
-    setParent(section, sectionContent);
+    setParent(parentElement, sectionContent);
     
-    const webGalleryContainer = document.createElement('div');
-    webGalleryContainer.classList.add('game-card-container');
-    webGalleryContainer.classList.add('game-info');
-    // gameGalleryContainer.classList.add('card-tilt');
-    setParent(sectionContent, webGalleryContainer);
-
+    const galleryContainer = document.createElement('div');
+    galleryContainer.classList.add('game-card-container');
+    galleryContainer.classList.add('game-info');
+    setParent(sectionContent, galleryContainer);
+    
     const galleryLeft = document.createElement('div');
     galleryLeft.classList.add('game-images-container');
     galleryLeft.classList.add('game-info');
     galleryLeft.classList.add('card-tilt');
-    setParent(webGalleryContainer, galleryLeft);
+    setParent(galleryContainer, galleryLeft);
     
     const mainImageContainer = document.createElement('div');
     mainImageContainer.classList.add('main-image-container');
     setParent(galleryLeft, mainImageContainer);
-    
+
     const mainImage = document.createElement('img');
     mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
     mainImage.classList.add('main-image');
-    if(web.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+    if(item.remarks.includes("mobile")){mainImage.classList.add('mobile');};
     mainImage.classList.add('hoverable');
     mainImage.classList.add('enlargeable');
     mainImage.setAttribute("id", "mainImage");
     mainImage.setAttribute("index", "0");
-    mainImage.src = `${web.filePath}/${web.media[0]}`;
-    setParent(mainImageContainer, mainImage);  
-    
+    mainImage.src = `${item.filePath}/${item.media[0]}`;
+    setParent(mainImageContainer, mainImage);
+
     const youtubeContainer = document.createElement('div');
     youtubeContainer.className = 'youtube-embed hide';
     youtubeContainer.setAttribute("id", "mainYoutube");
@@ -1877,12 +1625,12 @@ function populateWebInfo(){
     
     const isAutoPlayYTVid = false;
     
-    if(hasFileExtension(web.media[0])){
-        mainImage.src = `${web.filePath}/${web.media[0]}`;
+    if(hasFileExtension(item.media[0])){
+        mainImage.src = `${item.filePath}/${item.media[0]}`;
         youtubeContainer.classList.add('hide');
         mainImage.classList.remove('hide');
     } else{
-        youtubeVideo.src = `https://www.youtube.com/embed/${web.media[0]}`;
+        youtubeVideo.src = `https://www.youtube.com/embed/${item.media[0]}`;
         
         if(isAutoPlayYTVid){
             youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
@@ -1892,6 +1640,7 @@ function populateWebInfo(){
         mainImage.classList.add('hide');
         youtubeContainer.classList.remove('hide');
     }
+        
     
     const prevButton = document.createElement('button');
     prevButton.classList.add('gallery-nav-button');
@@ -1915,17 +1664,17 @@ function populateWebInfo(){
     });
     setParent(galleryLeft, thumbnailsContainer);
     
-    for (i = 0; i < web.media.length; i++) {
+    for (i = 0; i < item.media.length; i++) {
         const thumbnail = document.createElement('img');
         thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
         thumbnail.classList.add('thumbnail');
         thumbnail.classList.add('hoverable');
         if ( i == 0) { thumbnail.classList.add('active'); };
-        if (web.isMobile == true) {thumbnail.classList.add('mobile');};
-        if(hasFileExtension(web.media[i])){
-            thumbnail.src = `${web.filePath}/${web.media[i]}`;
+        if (item.isMobile == true) {thumbnail.classList.add('mobile');};
+        if(hasFileExtension(item.media[i])){
+            thumbnail.src = `${item.filePath}/${item.media[i]}`;
         }else{
-            thumbnail.src = `https://img.youtube.com/vi/${web.media[i]}/maxresdefault.jpg`
+            thumbnail.src = `https://img.youtube.com/vi/${item.media[i]}/maxresdefault.jpg`
             thumbnail.setAttribute("youtube",'');
         }
         thumbnail.setAttribute("index", i);
@@ -1936,45 +1685,52 @@ function populateWebInfo(){
     const galleryRight = document.createElement('div');
     galleryRight.classList.add('game-details-container');
     galleryRight.classList.add('game-info');
-    setParent(webGalleryContainer, galleryRight);
-
+    setParent(galleryContainer, galleryRight);
+    
     const mainDetails = document.createElement('div');
     mainDetails.className = 'game-details-main game-info';
     setParent(galleryRight, mainDetails);
     
-    const webTitle = document.createElement('h2');
-    webTitle.classList.add('details-title');
-    webTitle.textContent = web.title.toUpperCase();
-    setParent(mainDetails, webTitle);
+    const projectTitle = document.createElement('h2');
+    projectTitle.classList.add('details-title');
+    projectTitle.textContent = item.title.toUpperCase();
+    setParent(mainDetails, projectTitle);
     
-    const webDescription = document.createElement('p');
-    webDescription.classList.add('details-description');
-    webDescription.innerHTML = `${web.description}<br><br>`;
-    setParent(mainDetails, webDescription);
+    const gameDescription = document.createElement('p');
+    gameDescription.classList.add('details-description');
+    gameDescription.innerHTML = `${item.description}<br><br>`;
+    setParent(mainDetails, gameDescription);
 
-    web.additional.forEach(additionalInfo =>{
-        const webBullets = document.createElement('p');
-        webBullets.classList.add('details-description');
-        webBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
-        setParent(mainDetails, webBullets);
+    // const gameBullets = document.createElement('p');
+    // gameBullets.classList.add('details-description');
+    // gameBullets.innerHTML = `<b>•&nbsp;&nbsp;Duration: ${game.duration}`;
+    // setParent(galleryRight, gameBullets);
+
+    item.additional.forEach(additionalInfo =>{
+        const infoBullets = document.createElement('p');
+        infoBullets.classList.add('details-description');
+        infoBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
+        setParent(mainDetails, infoBullets);
     });
     
     const primaryDetails = document.createElement('div');
     primaryDetails.className = 'game-details-primary game-info';
     setParent(galleryRight, primaryDetails);
-
-    const year = document.createElement('p');
-    year.classList.add('details-description');
-    year.innerHTML = `<b>YEAR</b><br>${web.year}<br><br>`;
-    setParent(primaryDetails, year);
-
+    
+    if(item.year){
+        const year = document.createElement('p');
+        year.classList.add('details-description');
+        year.innerHTML = `<b>YEAR</b><br>${item.year}<br><br>`;
+        setParent(primaryDetails, year);
+    }
+    
     const tools = document.createElement('p');
     tools.classList.add('details-description');
     var toolsStr = "";
     
-    for (i = 0; i < web.tools.length; i++) {
-        toolsStr = toolsStr + web.tools[i];
-        if (i < web.tools.length - 1) {
+    for (i = 0; i < item.tools.length; i++) {
+        toolsStr = toolsStr + item.tools[i];
+        if (i < item.tools.length - 1) {
             toolsStr = toolsStr + ', ';
         }
     }
@@ -1982,93 +1738,139 @@ function populateWebInfo(){
     tools.innerHTML = `<b>TOOL</b><br>${toolsStr}<br><br>`;
     setParent(primaryDetails, tools);
 
-    const roles = document.createElement('p');
-    roles.classList.add('details-description');
-    var rolesStr = "";
-    
-    for (i = 0; i < web.roles.length; i++) {
-        rolesStr = rolesStr + web.roles[i];
-        if (i < web.roles.length - 1) {
-            rolesStr = rolesStr + ', ';
+    if(item.roles){
+        const roles = document.createElement('p');
+        roles.classList.add('details-description');
+        var rolesStr = "";
+        
+        for (i = 0; i < item.roles.length; i++) {
+            rolesStr = rolesStr + item.roles[i];
+            if (i < item.roles.length - 1) {
+                rolesStr = rolesStr + ', ';
+            }
         }
+        
+        roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
+        setParent(primaryDetails, roles);
     }
     
-    roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
-    setParent(primaryDetails, roles);
-    
-    const additionalMedia = web.additionalMedia;
-
-    Object.entries(additionalMedia).forEach(([title, mediaUrls]) => {
-        const additionalMediaTitleDiv = document.createElement('div');
-        additionalMediaTitleDiv.classList.add('game-details-container');
-        additionalMediaTitleDiv.classList.add('game-info');
-        additionalMediaTitleDiv.style.flexDirection = 'column';
-        setParent(webGalleryContainer, additionalMediaTitleDiv);
-
-        const collaboratorsTitle = document.createElement('p');
-        collaboratorsTitle.classList.add('details-description');
-        collaboratorsTitle.innerHTML = `<b><br><br>${title}`;
-        setParent(additionalMediaTitleDiv, collaboratorsTitle);
-
-        const gridGalleryDiv = document.createElement('div');
-        gridGalleryDiv.classList.add('game-details-container');
-        gridGalleryDiv.classList.add('game-info');
-        gridGalleryDiv.style.flexDirection = 'row';
-        gridGalleryDiv.style.flexWrap = 'wrap';
-        setParent(webGalleryContainer, gridGalleryDiv);
-
-        mediaUrls.forEach(img => {
+    if(item.platforms){
+        const platforms = document.createElement('p');
+        platforms.classList.add('details-description');
+        var platformsStr = "";
         
-            const artworkDiv = document.createElement('div');
-            if(mediaUrls.length > 1){
-                artworkDiv.className = 'grid-item-container web';
-            } 
-            
-            setParent(gridGalleryDiv, artworkDiv);
-            
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add("grid-content");
-            imageContainer.classList.add("artworks");
-            //imageContainer.classList.add("hoverable");
-            setParent(artworkDiv, imageContainer);
-    
-            if (hasFileExtension(img)) {
-                const image = document.createElement('img');
-                image.addEventListener('error', (e) => { replaceNullImage(image) });
-                //image.className = 'enlargeable';
-                image.src = `${web.filePath}/${img}`;
-    
-                image.setAttribute('index', web.media.indexOf(img));
-                setParent(imageContainer, image);
-    
-            } else {
-    
-                const youtubeContainer = document.createElement('div');
-                youtubeContainer.className = 'youtube-embed';
-                setParent(imageContainer, youtubeContainer);
-    
-                const youtubeVideo = document.createElement('iframe');
-                youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
-                youtubeVideo.setAttribute('width', '1080');
-                youtubeVideo.setAttribute('height', '1920');
-                youtubeVideo.setAttribute('frameborder', '0');
-                youtubeVideo.setAttribute('allowfullscreen', '');
-                youtubeVideo.setAttribute('index', web.media.indexOf(img));
-                setParent(youtubeContainer, youtubeVideo);
-    
+        for (i = 0; i < item.platforms.length; i++) {
+            platformsStr = platformsStr + item.platforms[i];
+            if (i < item.platforms.length - 1) {
+                platformsStr = platformsStr + ', ';
             }
+        }
         
-        });
-    });
+        platforms.innerHTML = `<b>PLATFORM</b><br>${platformsStr}<br><br>`;
+        setParent(primaryDetails, platforms);
+    }
     
-   
+    if(item.videoLink && item.videoLink != ""){
 
-    if(!web.remarks.includes("solo")){
+        const youtubeLinkDiv = document.createElement('div');
+        youtubeLinkDiv.classList.add('game-details-container');
+        youtubeLinkDiv.classList.add('game-info');
+        youtubeLinkDiv.style.flexDirection = 'column';
+        setParent(galleryContainer, youtubeLinkDiv);
+
+        const youtubeTitle = document.createElement('p');
+        youtubeTitle.classList.add('details-description');
+        youtubeTitle.innerHTML = `<b>${"GAMEPLAY VIDEO"}`;
+        setParent(youtubeLinkDiv, youtubeTitle);
+
+        const youtubeContainerInfo = document.createElement('div');
+        youtubeContainerInfo.className = 'youtube-embed';
+        setParent(youtubeLinkDiv, youtubeContainerInfo);
+
+        const youtubeVideoInfo = document.createElement('iframe');
+        youtubeVideoInfo.src = `https://www.youtube.com/embed/${item.videoLink}`;
+        youtubeVideoInfo.setAttribute('width','1080');
+        youtubeVideoInfo.setAttribute('height','1920');
+        youtubeVideoInfo.setAttribute('frameborder','0');
+        youtubeVideoInfo.setAttribute('allowfullscreen','');
+        setParent(youtubeContainerInfo, youtubeVideoInfo);
+
+    }
+
+    if(item.additionalMedia){
+        const additionalMedia = item.additionalMedia;
+    
+        Object.entries(additionalMedia).forEach(([title, mediaUrls]) => {
+            const additionalMediaTitleDiv = document.createElement('div');
+            additionalMediaTitleDiv.classList.add('game-details-container');
+            additionalMediaTitleDiv.classList.add('game-info');
+            additionalMediaTitleDiv.style.flexDirection = 'column';
+            setParent(galleryContainer, additionalMediaTitleDiv);
+            
+            const collaboratorsTitle = document.createElement('p');
+            collaboratorsTitle.classList.add('details-description');
+            collaboratorsTitle.innerHTML = `<b><br><br>${title}`;
+            setParent(additionalMediaTitleDiv, collaboratorsTitle);
+            
+            const gridGalleryDiv = document.createElement('div');
+            gridGalleryDiv.classList.add('game-details-container');
+            gridGalleryDiv.classList.add('game-info');
+            gridGalleryDiv.style.flexDirection = 'row';
+            gridGalleryDiv.style.flexWrap = 'wrap';
+            setParent(galleryContainer, gridGalleryDiv);
+
+            mediaUrls.forEach(img => {
+            
+                const artworkDiv = document.createElement('div');
+                if(mediaUrls.length > 1){
+                    artworkDiv.className = 'grid-item-container web';
+                } 
+                
+                setParent(gridGalleryDiv, artworkDiv);
+                
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add("grid-content");
+                imageContainer.classList.add("artworks");
+                //imageContainer.classList.add("hoverable");
+                setParent(artworkDiv, imageContainer);
+        
+                if (hasFileExtension(img)) {
+                    const image = document.createElement('img');
+                    image.addEventListener('error', (e) => { replaceNullImage(image) });
+                    //image.className = 'enlargeable';
+                    image.src = `${item.filePath}/${img}`;
+        
+                    image.setAttribute('index', item.media.indexOf(img));
+                    setParent(imageContainer, image);
+        
+                } else {
+        
+                    const youtubeContainer = document.createElement('div');
+                    youtubeContainer.className = 'youtube-embed';
+                    setParent(imageContainer, youtubeContainer);
+        
+                    const youtubeVideo = document.createElement('iframe');
+                    youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
+                    youtubeVideo.setAttribute('width', '1080');
+                    youtubeVideo.setAttribute('height', '1920');
+                    youtubeVideo.setAttribute('frameborder', '0');
+                    youtubeVideo.setAttribute('allowfullscreen', '');
+                    youtubeVideo.setAttribute('index', item.media.indexOf(img));
+                    setParent(youtubeContainer, youtubeVideo);
+        
+                }
+            
+            });
+        });
+        
+    }
+
+    if(item.collaborators && !item.remarks.includes("solo")){
         const collaboratorsDiv = document.createElement('div');
         collaboratorsDiv.classList.add('game-details-container');
         collaboratorsDiv.classList.add('game-info');
         collaboratorsDiv.style.flexDirection = 'column';
-        setParent(webGalleryContainer, collaboratorsDiv);
+        setParent(galleryContainer, collaboratorsDiv);
         
         const collaboratorsTitle = document.createElement('p');
         collaboratorsTitle.classList.add('details-description');
@@ -2080,7 +1882,7 @@ function populateWebInfo(){
         collaboratorList.style.justifyContent = 'left';
         setParent(collaboratorsDiv, collaboratorList);
         
-        const collaborators = web.collaborators;
+        const collaborators = item.collaborators;
 
         Object.entries(collaborators).forEach(([name, url]) => {
             const collaboratorText = document.createElement('p');
@@ -2097,34 +1899,31 @@ function populateWebInfo(){
             
             setParent(collaboratorList, collaboratorText);
         });
-                
+        
     }
     
+    createPageItemNavigator(type, galleryContainer, item.id, maxId);
+    
+}
+
+function createPageItemNavigator(type, parentElement, currentItemId, maxId){
+
     const pageNavDiv = document.createElement('div');
     pageNavDiv.classList.add('game-details-container');
     pageNavDiv.classList.add('game-info');
-    pageNavDiv.style.flexDirection = 'column';
-    setParent(webGalleryContainer, pageNavDiv);
+    pageNavDiv.style.flex = 'column';
+    setParent(parentElement, pageNavDiv);
     
     const spacer = document.createElement('p');
     spacer.classList.add('details-description');
     spacer.innerHTML = ``;
     setParent(pageNavDiv, spacer);
-    
-    createPageItemNavigator('web', pageNavDiv, web.id, portfolio['websites'].length);
 
-    const background = document.createElement('div');
-    background.classList.add('background');
-    setParent(section, background);
-
-}
-
-function createPageItemNavigator(type, parentElement, currentItemId, maxId){
     const pageNavButtonHolder = document.createElement('div');
     pageNavButtonHolder.style.flex = '1';
     pageNavButtonHolder.style.position = 'relative';
     pageNavButtonHolder.style.minHeight = '40px';
-    setParent(parentElement, pageNavButtonHolder);
+    setParent(pageNavDiv, pageNavButtonHolder);
 
     const moreButton = document.createElement('div');
     moreButton.innerText = '[ BACK TO GALLERY ]'
@@ -2138,13 +1937,15 @@ function createPageItemNavigator(type, parentElement, currentItemId, maxId){
     moreButton.addEventListener('click', (e) => {
         var pageFileName = "";
         if(type == 'game') pageFileName = 'game-gallery';
-        if(type == 'web') pageFileName = 'web-gallery';
+        if(type == 'artwork') pageFileName = 'art-category';
+        if(type == 'website') pageFileName = 'web-gallery';
         goToPage(pageFileName);
     });
 
     var itemCategory = "";
     if(type == 'game') itemCategory = 'games';
-    if(type == 'web') itemCategory = 'websites';
+    if(type == 'artwork') itemCategory = 'artworks';
+    if(type == 'website') itemCategory = 'websites';
     
     if(currentItemId != 1){
         const prevGameButton = document.createElement('div');
