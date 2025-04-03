@@ -391,7 +391,7 @@ body.noscroll{
     z-index: 2001 !important;
     pointer-events: none;
     background-size: 20px;
-    opacity: 0.2; 
+    opacity: 0.15; 
     mix-blend-mode: overlay;
     background-image: url('/assets/img/scan.png');
 }
@@ -1403,8 +1403,7 @@ opacity: 1;
     }
     
     .game-card-container {
-        flex-direction: column;
-        padding: 10px;
+        padding: 75px 5px 10px 5px;
     }
 
     .game-details-container.game-info{
