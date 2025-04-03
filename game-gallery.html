@@ -11,25 +11,13 @@
 </head>
 
 <body pageName="games">
-
-    
-
-    <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
-        <div class="image">
-            <img onerror="replaceNullImage(this)"  onclick="event.stopPropagation()" src="./assets/img/3D1.jpg" />
-        </div>
-        <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
-        
-        <div class="arrow-container prev hoverable" onclick="navigateSelectedImage(event,'prev')"><div class="arrow prev" ></div></div>
-        <div class="arrow-container next hoverable" onclick="navigateSelectedImage(event,'next')"><div class="arrow next" ></div></div>
-    </div>
     
     <div class="bodyholder">
 
         
         <div class="spotlight-mask"></div>
         
-        <div class="tab-group active" id="games">
+        <div class="tab-group active">
             
             <div class="section screen-height banner" id="projects">
                 
@@ -53,7 +41,7 @@
             
                 <div class="section-content" style="align-items: start;">
                     
-                    <div class="art-section" contentType="art">
+                    <div class="art-section" contentType="art"  id="games">
                         
                         <div class="grid-item-container hide game">
                             <div class="grid-content game hoverable">
@@ -88,8 +76,6 @@
 
         <div class="tab-group active">
 
-            
-
             <div class="section" style="min-height: fit-content;">
                 
                 <div class="section-content"  style="padding: 100px 0px;">
@@ -104,12 +90,11 @@
         
         </div>
     
-    
     </div>
     
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadJson('games').then(() => { populateGamePortfolioTest(); Awake();});</script>
+    <script type="text/javascript">loadJson('games').then((data) => { populateGamePortfolio(data); Awake();});</script>
 </body>
 
 </html>

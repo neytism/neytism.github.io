@@ -11,42 +11,12 @@
 </head>
 
 <body pageName="art">
-
-    
-    
-    <div class="selected-image-container hide" currentindex="0" onclick="closeSelectedImageContainer(event);">
-        <div class="image">
-            <img onclick="event.stopPropagation()" src="./assets/img/placeholder.png" />
-        </div>
-        <div class="hoverable close" onclick="closeSelectedImageContainer(event);">X</div>
-        
-        <div class="arrow-container prev hoverable hide" onclick="navigateSelectedImage(event,'prev')"><div class="arrow prev" ></div></div>
-        <div class="arrow-container next hoverable hide" onclick="navigateSelectedImage(event,'next')"><div class="arrow next" ></div></div>
-    </div>
-    
-    <div class="selected-grid-item-container hide" style="position: absolute; display:flex; z-index: 103; min-height: 100dvh; min-width: 100dvw;">
-        <div class="close hoverable" style="position: absolute; top: 0; right: 0; padding: 50px; z-index: 104;" onclick="closeSelectedArtContainer();">X</div>
-        <div style="position: absolute; height: 100%; width: 100%;" onclick="closeSelectedArtContainer();"></div>
-    </div>
     
     <div class="bodyholder">
         
         <div class="spotlight-mask"></div>
                 
         <div class="tab-group active" id="tab-2">
-
-            <div class="section hide" id="projects">
-                
-                <div class="section-content">
-                    <div class="center">
-                        <h1 class="name">GAME PROJECTS</h1>
-                        <h2 class="sub-name">Unity</h2>
-                    </div>
-                </div>
-                
-                <div class="background" style="background-image: url('assets/img/wavy2.png');"></div>
-    
-            </div>
 
             <div class="section screen-height" id="projects">
             
@@ -59,9 +29,7 @@
                 <div class="background" ></div>
     
             </div>
-            
-            
-        
+
         </div>
 
         <div class="tab-group active">
@@ -85,7 +53,7 @@
     
     <script type="text/javascript" src="./assets/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="./assets/js/script.js" id="rendered-js"></script>
-    <script type="text/javascript">loadJson('artworks').then(() => { populateArtPortfolio(); Awake();});</script>
+    <script type="text/javascript">loadJson('artworks').then((data) => { populateArtPortfolio(data); Awake();});</script>
 </body>
 
 </html>

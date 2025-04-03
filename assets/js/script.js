@@ -47,21 +47,39 @@ let spanIndex = -1;
 
 //json
 let lastJsonID = 0;
-const portfolio = {
-    artworks: [],
-    games: [],
-    websites: []
-};
+const randomString = 'Da5Ef1q7Oe'; //https://www.random.org/strings/
 
 function loadJson(type) {
     const typeMap = {
-        artworks: { jsonUrl: "/assets/json/artworks.json", portfolioKey: "artworks" },
-        games: { jsonUrl: "/assets/json/games.json", portfolioKey: "games" },
-        websites: { jsonUrl: "/assets/json/websites.json", portfolioKey: "websites" }
+        artworks: { jsonUrl: "/assets/json/artworks.json"},
+        games: { jsonUrl: "/assets/json/games.json"},
+        websites: { jsonUrl: "/assets/json/websites.json"}
     };
 
-    const { jsonUrl, portfolioKey } = typeMap[type] || typeMap.artworks;
+    const changeChecker = localStorage.getItem('changeChecker');
+    let isDataChanged = false;
+    if (changeChecker) {
+        if(changeChecker != randomString){
+            isDataChanged = true;
+            if (debugMode) console.log('updating data');
+        } else{
+            if (debugMode) console.log('no change found in data.');
+        }
+    } else{
+        if (debugMode) console.log('no data found');
+        localStorage.setItem('changeChecker', randomString)
+        isDataChanged = true;
+    }
 
+    const { jsonUrl } = typeMap[type];
+    
+    const cachedData = localStorage.getItem(type);
+    if (cachedData && !isDataChanged) {
+        console.log(`using cached json ${type}...`);
+        const portfolioList = JSON.parse(cachedData);
+        return Promise.resolve(portfolioList);
+    }
+    
     return fetch(jsonUrl)
         .then(response => {
             if (!response.ok) {
@@ -70,16 +88,36 @@ function loadJson(type) {
             return response.json();
         })
         .then(data => {
+
+            console.log(`loading new data`);
+
             let lastJsonID = 0;
+            let portfolio = [];
             data.forEach(item => {
                 item.id = ++lastJsonID;
-                portfolio[portfolioKey].push(item);
+                portfolio.push(item);
             });
+
+            if(type == "artworks"){
+                portfolio = sortByCategory(portfolio);
+            }
+            
+            localStorage.setItem(type, JSON.stringify(portfolio))
+            return portfolio;
         })
         .catch(error => {
             console.error('Fetch error:', error);
         });
 }
+
+function sortByCategory(data) {
+    return data.sort((a, b) => {
+        if (a.category < b.category) return -1;
+        if (a.category > b.category) return 1;
+        return 0; 
+    });
+}
+
 
 
 function updateMousePositionValues() {
@@ -201,37 +239,6 @@ function navigateImage(element, direction) {
     // Find and click the thumbnail at the new index
     const targetThumbnail = thumbnailsList[newIndex];
     changeImageGameGallery(targetThumbnail);
-}
-
-function navigateSelectedImage(event, direction) {
-    event.stopPropagation();
-    let content = null;
-    
-    if (currentSelectedContentType == "artwork") {
-        content = portfolio['artworks'].find(a => a.id == currentSelectedID);
-    } else if (currentSelectedContentType == "game") {
-        content = portfolio['games'].find(g => g.id == currentSelectedID);
-    } else if (currentSelectedContentType == "website") {
-        content = portfolio['websites'].find(w => w.id == currentSelectedID);
-    }
-    
-    const fp = content.filePath;
-    const listOfImages = content.media;
-    const maxIndex = listOfImages.length - 1;
-    let newIndex;
-    
-    if (direction === 'next') {
-        newIndex = parseInt(currentSelectedIndex) + 1 > maxIndex ? 0 : parseInt(currentSelectedIndex) + 1;
-        
-    } else {
-        newIndex = parseInt(currentSelectedIndex) - 1 < 0 ? maxIndex : parseInt(currentSelectedIndex) - 1;
-    }
-    
-    currentSelectedIndex = newIndex;
-    if(!hasFileExtension(listOfImages[currentSelectedIndex])){
-        navigateSelectedImage(event, direction);
-    }
-    selectedImageContainer.firstElementChild.firstElementChild.src = `${fp}/${listOfImages[currentSelectedIndex]}`;
 }
 
 function scrollThumbnailIntoView(thumbnail) {
@@ -404,7 +411,7 @@ function addShuffleEventToLinks() {
     }
 }
 
-function addClickToEnlargeImageEvents(){
+function addClickToEnlargeImageEvents() {
     clickableImages = document.querySelectorAll('.enlargeable');
     if (clickableImages === 0) return;
     clickableImages.forEach(img => {
@@ -415,9 +422,58 @@ function addClickToEnlargeImageEvents(){
             selectedImageContainer.classList.remove('hide');
             selectedImageContainer.firstElementChild.firstElementChild.src = img.getAttribute('src');
             document.body.classList.add('noscroll');
+            
+            const groupCount = img.closest('[totalImages]').getAttribute('totalImages');
+            const arrows = selectedImageContainer.querySelectorAll('.arrow-container');
+            if(parseInt(groupCount) > 1){
+                arrows.forEach(arrow => {
+                    arrow.classList.remove('hide');
+                })
+            } else{
+                arrows.forEach(arrow => {
+                    arrow.classList.add('hide');
+                })
+            }
         });
     });
 }
+
+function navigateSelectedImage(event, direction) {
+    event.stopPropagation();
+    let content = null;
+    if (currentSelectedContentType == "artwork") {
+        content = JSON.parse(localStorage.getItem('artworks')).find(a => a.id == currentSelectedID);
+    } else if (currentSelectedContentType == "game") {
+        content = JSON.parse(localStorage.getItem('games')).find(a => a.id == currentSelectedID);
+    } else if (currentSelectedContentType == "website") {
+        content = JSON.parse(localStorage.getItem('websites')).find(a => a.id == currentSelectedID);
+    }
+    
+    const fp = content.filePath;
+    const listOfImages = content.media;
+    const maxIndex = listOfImages.length - 1;
+    let newIndex;
+    
+    if (direction === 'next') {
+        newIndex = parseInt(currentSelectedIndex) + 1 > maxIndex ? 0 : parseInt(currentSelectedIndex) + 1;
+        
+    } else {
+        newIndex = parseInt(currentSelectedIndex) - 1 < 0 ? maxIndex : parseInt(currentSelectedIndex) - 1;
+    }
+    
+    currentSelectedIndex = newIndex;
+    if(!hasFileExtension(listOfImages[currentSelectedIndex])){
+        navigateSelectedImage(event, direction);
+    }
+    selectedImageContainer.firstElementChild.firstElementChild.src = `${fp}/${listOfImages[currentSelectedIndex]}`;
+}
+
+function closeSelectedImageContainer(event){
+    event.stopPropagation();
+    selectedImageContainer.classList.add('hide');
+    document.body.classList.remove('noscroll');
+}
+
 
 function addCardTiltEvents(){
     tempCardsTilt = document.querySelectorAll('.card-tilt');
@@ -468,20 +524,6 @@ function updateCardRotations() {
     requestAnimationFrame(updateCardRotations);
 }
 
-function closeSelectedImageContainer(event){
-    event.stopPropagation();
-    selectedImageContainer.classList.add('hide');
-    document.body.classList.remove('noscroll');
-}
-
-function closeSelectedArtContainer(){
-    selectedArtContainer.classList.add('hide');
-    document.body.classList.remove('noscroll');
-}
-
-function disableContextMenu(event) {
-    event.preventDefault();
-}
 
 function generateNavBar(pageName){
     if(!pageName) return; 
@@ -694,6 +736,10 @@ function generateCustomCursor(){
 }
 
 function generateGrainOverlay(){
+    const scanEffect = document.createElement('div');
+    scanEffect.className = 'scan-overlay';
+    document.body.insertBefore(scanEffect, document.body.firstChild);
+
     const grainEffect = document.createElement('div');
     grainEffect.className = 'grain-overlay';
     document.body.insertBefore(grainEffect, document.body.firstChild);
@@ -704,12 +750,12 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-function populateFeaturedWorks(){
+function populateFeaturedWorks(games, artworks, websites){
     let x = 1;
     
     var lastGameDiv = document.getElementById("featured-games");
     
-    portfolio['games'].forEach(game => {
+    games.forEach(game => {
         
         if(game.remarks.includes("hide")){
             return;
@@ -724,7 +770,9 @@ function populateFeaturedWorks(){
         section.setAttribute("id", "projects");
         section.setAttribute("contentID", game.id);
         section.setAttribute("contentType", "game");
+        section.setAttribute("totalImages", game.media.length);
         section.style.minHeight = 'fit-content';
+
         lastGameDiv.insertAdjacentElement('afterend', section);
         lastGameDiv = section;
 
@@ -748,6 +796,7 @@ function populateFeaturedWorks(){
         
         const mainImageContainer = document.createElement('div');
         mainImageContainer.classList.add('main-image-container');
+        mainImageContainer.classList.add('hoverable');
         setParent(galleryLeft, mainImageContainer);
     
         const mainImage = document.createElement('img');
@@ -759,7 +808,7 @@ function populateFeaturedWorks(){
         mainImage.setAttribute("index", "0");
         mainImage.src = `${game.filePath}/${game.media[0]}`;
         setParent(mainImageContainer, mainImage);
-
+        
         const youtubeContainer = document.createElement('div');
         youtubeContainer.className = 'youtube-embed hide';
         youtubeContainer.setAttribute("id", "mainYoutube");
@@ -839,8 +888,10 @@ function populateFeaturedWorks(){
         const gameTitle = document.createElement('h2');
         gameTitle.classList.add('details-title');
         gameTitle.classList.add('hoverable');
+        gameTitle.classList.add('shuffle');
         gameTitle.textContent = game.title.toUpperCase();
         gameTitle.style.textDecoration = 'underline';
+
         gameTitle.addEventListener('click', (e)=> {
             loadItem('games', game.id);
         });
@@ -867,76 +918,28 @@ function populateFeaturedWorks(){
 
     var featuredArtParent = document.getElementById("featured-artworks");
     
-    portfolio['artworks'].forEach(art => {
-        
-        if(art.remarks.includes("hide")){
-            return;
-        }
-
+    artworks.forEach(art => {
         if(!art.remarks.includes("featured")){
             return;
         }
 
-        const artworkDiv = document.createElement('div');
-        artworkDiv.className = 'grid-item-container art';
-        artworkDiv.setAttribute("contentID", art.id);
-        artworkDiv.setAttribute("contentType", "artwork");
+        createGridIcon(featuredArtParent, "artwork", art);
+    });
 
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add("grid-content");
-        // imageContainer.classList.add("force-square");
-        imageContainer.classList.add("hoverable");
-        if (art.media.length !== 1 || !hasFileExtension(art.media[0])) {
-            imageContainer.addEventListener('click', (e) => {
-                loadItem('artworks', art.id);
-            });
+    var featuredWebParent = document.getElementById("featured-websites");
+    
+    websites.forEach(web => {
+        if(!web.remarks.includes("featured")){
+            return;
         }
 
-        setParent(artworkDiv, imageContainer);
-
-        const image = document.createElement('img');
-        image.classList.add("hover-zoom");
-        image.addEventListener('error', (e) => { replaceNullImage(image) });
-
-        if (hasFileExtension(art.media[0])) {
-            image.src = `${art.filePath}/${art.media[0]}`;
-        } else {
-            image.src = `https://img.youtube.com/vi/${art.media[0]}/maxresdefault.jpg`
-        }
-
-        if (art.media.length === 1) {
-            image.classList.add("enlargeable");
-        } else {
-
-        }
-        setParent(imageContainer, image);
-
-        const title = document.createElement('h1');
-        if (art.remarks.includes("quoted")) {
-            title.textContent = `"${art.title}"`;
-        } else {
-            title.textContent = art.title;
-        }
-
-        setParent(artworkDiv, title);
-
-        // const description = document.createElement('h3');
-        // description.textContent = art.description;
-        // setParent(artworkDiv, description);
-
-        art.additional.forEach(additional => {
-            const additionalInfo = document.createElement('h3');
-            additionalInfo.innerHTML = `•&nbsp;&nbsp;${additional}`;
-            setParent(artworkDiv, additionalInfo);
-        });
-
-        setParent(featuredArtParent, artworkDiv);
+        createGridIcon(featuredWebParent, "website", web);
     });
 }
 
-function populateGamePortfolioTest(){
+function populateGamePortfolio(data){
     
-    const portfolioDiv = document.querySelector(".art-section");
+    const portfolioDiv = document.getElementById("games");
     
     const categoryTitle = document.createElement('div');
     categoryTitle.className = 'grid-item-container title';
@@ -952,27 +955,153 @@ function populateGamePortfolioTest(){
             }
         });
     }, {
-        //when at least 10% of the video is visible
+        //when at least 20% of the video is visible
         threshold: 0.2
     });
     
-    portfolio['games'].forEach(game => {
+    data.forEach(game => {
+        const gameDiv = createGridIcon(portfolioDiv, "game", game);
+        videoObserver.observe(gameDiv);
+    });
+}
 
-        if (game.remarks.includes("hide")) {
-            return;
+function populateGameInfo(data){
+    const gameId = getQueryParam('id');
+    const game = data.find(a => a.id == gameId);
+    document.title = game.title;
+    const portfolioDiv = document.getElementById("games");
+    if(game.remarks.includes("hide")) return;
+    
+    const section = createSection(portfolioDiv, game.id,  "game", `${game.filePath}/${game.backgroundImage}`, true);
+    section.setAttribute('totalImages', game.media.length);
+    createItemInfoSection('game', section, game, data.length);
+}
+
+function populateArtCategory(data) {
+    const portfolioDiv = document.querySelector(".art-section");
+    portfolioDiv.setAttribute('contentType','artwork');
+    let currentCat = "";
+    
+    data.forEach(artwork => {
+        if(currentCat != artwork.category){
+            const artContainer = document.createElement('div');
+            artContainer.className = 'grid-item-container banner';
+            artContainer.addEventListener('click', (e) => {
+                loadArtCategory(artwork.category);
+            });
+            setParent(portfolioDiv, artContainer);
+    
+            const imgHoverZoom = document.createElement('div');
+            imgHoverZoom.className = 'grid-content banner hoverable';
+            setParent(artContainer, imgHoverZoom);
+            
+            const img = document.createElement('img');
+            img.classList.add("hover-zoom");
+            if(hasFileExtension(artwork.media[0])){
+                img.src = `${artwork.filePath}/${artwork.media[0]}`;
+            }else{
+                img.src = `https://img.youtube.com/vi/${artwork.media[0]}/maxresdefault.jpg`
+            }
+            setParent(imgHoverZoom, img);
+            
+            const title = document.createElement('div');
+            title.classList.add('shuffle');
+            title.textContent = artwork.category;
+            setParent(imgHoverZoom, title);
         }
+        currentCat = artwork.category;
+    });
+    
+}
 
-        const gameDiv = document.createElement('div');
-        gameDiv.className = 'grid-item-container game'
-        setParent(portfolioDiv, gameDiv)
+function populateArtPortfolio(data) {
+    const categoryIdentifier = getQueryParam('category');
+    
+    const portfolioDiv = document.querySelector(".art-section");
+    portfolioDiv.setAttribute('contentType','artwork');
+    let currentCat = "";
+    
+    data.forEach(artwork => {
+        if(categoryIdentifier && categoryIdentifier != artwork.category.toLowerCase().replace(/\s+/g, '')) return;
         
-        const imageContainer = document.createElement('div'); 
-        imageContainer.className = 'grid-content game hoverable';
+        if(currentCat != artwork.category){
+            const categoryTitle = document.createElement('div');
+            categoryTitle.className = 'grid-item-container title';
+            categoryTitle.textContent = artwork.category;
+            setParent(portfolioDiv, categoryTitle);
+        }
+        currentCat = artwork.category;
+        
+        createGridIcon(portfolioDiv, "artwork", artwork);
+    });
+}
+
+function populateArtInfoTest(data){
+    const artworkId = getQueryParam('id');
+    const artwork = data.find(a => a.id == artworkId);
+    
+    document.title = artwork.title;
+    
+    const portfolioDiv = document.getElementById("artworks");
+    
+    if(artwork.remarks.includes("hide")) return;
+    
+    const section = createSection(portfolioDiv, artwork.id,  "artwork", ``, false);
+    section.setAttribute('totalImages', artwork.media.length);
+    section.classList.add('screen-height');
+    createItemInfoSection('artwork', section, artwork, data.length);
+}
+
+function populateWebPortfolio(data){
+    const portfolioDiv = document.getElementById("websites");
+    const categoryTitle = document.createElement('div');
+    categoryTitle.className = 'grid-item-container title';
+    setParent(portfolioDiv, categoryTitle);
+    data.forEach(web => {
+        createGridIcon(portfolioDiv, "website", web);
+    });
+
+}
+
+function populateWebInfo(data){
+    const webID = getQueryParam('id');
+    const web = data.find(a => a.id == webID);
+    document.title = web.title;
+    const portfolioDiv = document.getElementById("websites");
+    if(web.remarks.includes("hide")) return;
+    const section = createSection(portfolioDiv, web.id, "website");
+    section.setAttribute('totalImages', web.media.length);
+    createItemInfoSection('website', section, web, data.length);
+}
+
+function createGridIcon(parentElement, type, item){
+
+    if (item.remarks.includes("hide")) return;
+    const gridItemDiv = document.createElement('div');
+    gridItemDiv.classList.add('grid-item-container');
+    if(type == "game") gridItemDiv.classList.add('game');
+    if(type == "website") gridItemDiv.classList.add('web');
+    if(type == "artwork"){
+        gridItemDiv.classList.add('art');
+        gridItemDiv.setAttribute('contentID', item.id);
+    }
+    setParent(parentElement, gridItemDiv)
+    
+    const imageContainer = document.createElement('div'); 
+    imageContainer.classList.add('grid-content');
+    imageContainer.classList.add('hoverable');
+    if(type == "game") imageContainer.classList.add('game');
+    if(item.media.length !== 0 || !hasFileExtension(item.media[0])){
         imageContainer.addEventListener('click', (e) => {
-            loadItem('games', game.id);
+            if(type == "game") loadItem('games', item.id);
+            if(type == "website")  loadItem('websites', item.id);
+            if(type == "artwork")  loadItem('artworks', item.id);
         });
-        setParent(gameDiv, imageContainer)
-        
+    } 
+
+    setParent(gridItemDiv, imageContainer)
+    
+    if(type == "game") {
         const videoHolder = document.createElement('video'); 
         videoHolder.muted = true;
         videoHolder.autoplay = true;
@@ -980,28 +1109,36 @@ function populateGamePortfolioTest(){
         videoHolder.className = 'game-preview video-preview';
         setParent(imageContainer, videoHolder);
 
-        imageContainer.addEventListener('mouseover', (e) => {
-            videoHolder.pause();
-        });
-
-        imageContainer.addEventListener('mouseout', (e) => {
-            videoHolder.play();
-        });
-
+        imageContainer.addEventListener('mouseover', (e) => {videoHolder.pause();});
+        imageContainer.addEventListener('mouseout', (e) => {videoHolder.play();});
+    
         const video = document.createElement('source'); 
-        video.src = `${game.filePath}/preview.mp4`;
+        video.src = `${item.filePath}/preview.mp4`;
         video.setAttribute('type', 'video/mp4');
         setParent(videoHolder, video);
-        
-        const image = document.createElement('img'); 
-        image.className = 'game-preview image-preview';
-        image.src = `${game.filePath}/${game.media[0]}`;
-        setParent(imageContainer, image);
+    }
+    
+    const image = document.createElement('img'); 
+    if(type == "game") image.classList.add('game-preview');
+    if(type == "website") image.classList.add('web-preview');
+    if(type == "game") image.classList.add('image-preview');
+    if(type != "game") image.classList.add('hover-zoom');
+    image.addEventListener('error', (e) => {replaceNullImage(image)});
 
+    if(hasFileExtension(item.media[0])){
+        image.src = `${item.filePath}/${item.media[0]}`;
+    }else{
+        image.src = `https://img.youtube.com/vi/${item.media[0]}/maxresdefault.jpg`
+    }
+
+    setParent(imageContainer, image);
+    
+    if(type == "game" ) {
         const clickIndicator = document.createElement('div'); 
-        clickIndicator.className = 'game-preview click-indicator';
+        clickIndicator.classList.add('game-preview');
+        clickIndicator.classList.add('click-indicator');
         setParent(imageContainer, clickIndicator);
-
+        
         const arrowSymbol = document.createElement('div'); 
         arrowSymbol.innerHTML = '&#x2197; ';
         setParent(clickIndicator, arrowSymbol);
@@ -1009,137 +1146,128 @@ function populateGamePortfolioTest(){
         const seeMore = document.createElement('div'); 
         seeMore.innerHTML = `MORE INFO`;
         setParent(clickIndicator, seeMore);
+    }
+    
+    const title = document.createElement('h1'); 
+    title.className = 'hoverable';
+    title.className = 'shuffle';
+    if (item.remarks.includes("quoted")) {
+        title.innerHTML = `<u>"${item.title.toUpperCase()}"`;
+    } else{
+        title.innerHTML = `<u>${item.title.toUpperCase()}`;
+    }
+    title.addEventListener('click', (e) => {
+        if(type == "game") loadItem('games', item.id);
+        if(type == "website")  loadItem('websites', web.id);
+        if(type == "artwork")  loadItem('artworks', item.id);
+    });
 
-        const gameTitle = document.createElement('h1'); 
-        gameTitle.className = 'hoverable';
-        gameTitle.innerHTML = `<u>${game.title.toUpperCase()}`;
-        gameTitle.addEventListener('click', (e) => {
-            loadItem('games', game.id);
-        });
-        setParent(gameDiv, gameTitle)
-        
-        const tagsList = document.createElement('div');
-        tagsList.className = 'word-list game';
-        setParent(gameDiv, tagsList);
-
-        game.tools.forEach(tool => {
-            const toolText = document.createElement('p');
-            toolText.className = 'shuffle';
-            toolText.textContent = tool;
-            setParent(tagsList, toolText)
-        });
-        
-        if(game.remarks.includes("solo")){
+    setParent(gridItemDiv, title)
+    
+    const tagsList = document.createElement('div');
+    tagsList.classList.add('word-list');
+    tagsList.classList.add('game');
+    setParent(gridItemDiv, tagsList);
+    
+    item.tools.forEach(tool => {
+        const toolText = document.createElement('p');
+        toolText.className = 'shuffle';
+        toolText.textContent = tool;
+        setParent(tagsList, toolText)
+    });
+    
+    if(type == "game" || type == "website" ){
+        if(item.remarks.includes("solo")){
             const projectType = document.createElement('p');
             projectType.className = 'shuffle';
             projectType.textContent = "Solo Project";
             setParent(tagsList, projectType)
         } else{
-            game.roles.forEach(role => {
+            item.roles.forEach(role => {
                 const roleText = document.createElement('p');
                 roleText.className = 'shuffle';
                 roleText.textContent = role;
                 setParent(tagsList, roleText)
             });
         }
-        
-        //game.additional.length
-        var maxInfo = 0;
-        for (let i = 0; i < maxInfo; i++) {
-            const additionalInfo = document.createElement('h3');
-            additionalInfo.innerHTML = `•&nbsp;&nbsp;${game.additional[i]}`;
-            setParent(gameDiv, additionalInfo);
-        }   
-        
-        videoObserver.observe(gameDiv);
-    
-    });
+    }
 
+    return gridItemDiv;
 }
 
-function populateGameInfo(){
-    const gameId = getQueryParam('id');
-    const game = portfolio['games'].find(a => a.id == gameId);
-    
-    document.title = game.title;
-    
-    const portfolioDiv = document.getElementById("games");
-    
-    if(game.remarks.includes("hide")){
-        return;
-    }
-    
+function createSection(parentElement, contentId,  contentType, backgroundImage, isItemInfo){
     const section = document.createElement('div');
     section.classList.add('section');
     section.setAttribute("id", "projects");
-    section.setAttribute("contentID", game.id);
-    section.setAttribute("contentType", 'game');
-    setParent(portfolioDiv, section);
-    
-    createItemInfoSection('game', section, game, portfolio['games'].length);
-    
+    section.setAttribute("contentID", contentId);
+    section.setAttribute("contentType", contentType);
+    setParent(parentElement, section);
+        
     const background = document.createElement('div');
     background.classList.add('background');
-    background.classList.add('game-info');
-    background.style.backgroundImage = `url('${game.filePath}/${game.backgroundImage}')`
+    if(isItemInfo) background.classList.add('game-info');
+    if(backgroundImage) background.style.backgroundImage = `url('${backgroundImage}')`
     setParent(section, background);
-    
+
+    return section;
 }
 
-function populateGamePortfolio(){
-    let x = 1;
+function createItemInfoSection(type, parentElement, item, maxId, monoPage){
     
-    const portfolioDiv = document.getElementById("games");
+    const sectionContent = document.createElement('div');
+    sectionContent.classList.add('section-content');
+    setParent(parentElement, sectionContent);
     
-    portfolio['games'].forEach(game => {
-        
-        if(game.remarks.includes("hide")){
-            return;
+    const galleryContainer = document.createElement('div');
+    galleryContainer.classList.add('game-card-container');
+    if(monoPage && item.id % 2 == 0){
+        galleryContainer.classList.add('reverse');
+    }
+    if(!monoPage) galleryContainer.classList.add('game-info');
+    if(monoPage) galleryContainer.classList.add('card-tilt');
+    setParent(sectionContent, galleryContainer);
+    
+    const galleryLeft = document.createElement('div');
+    galleryLeft.classList.add('game-images-container');
+    if(!monoPage) galleryLeft.classList.add('game-info');
+    if(!monoPage) galleryLeft.classList.add('card-tilt');
+    setParent(galleryContainer, galleryLeft);
+    
+    if(!monoPage && type == "artwork"){
+        const bigTitle = document.createElement('div');
+        bigTitle.className = 'game-images-container title';
+        if(!monoPage) bigTitle.classList.add('game-info');
+        const t = item.title.toUpperCase();
+        if (item.remarks.includes("quoted")) {
+            bigTitle.textContent = `"${t}"`;
+        } else{
+            bigTitle.textContent = t;
         }
+        setParent(galleryContainer, bigTitle);
+        galleryContainer.classList.add("artworks");
+    }
 
-        const section = document.createElement('div');
-        section.classList.add('section');
-        section.setAttribute("id", "projects");
-        section.setAttribute("contentID", game.id);
-        section.setAttribute("contentType", "game");
-        setParent(portfolioDiv, section);
-
-        const sectionContent = document.createElement('div');
-        sectionContent.classList.add('section-content');
-        setParent(section, sectionContent);
-        
-        const gameGalleryContainer = document.createElement('div');
-        gameGalleryContainer.classList.add('game-card-container');
-        gameGalleryContainer.classList.add('card-tilt');
-        if(x % 2 == 0){
-            gameGalleryContainer.classList.add('reverse');
-        }
-        setParent(sectionContent, gameGalleryContainer);
-
-        const galleryLeft = document.createElement('div');
-        galleryLeft.classList.add('game-images-container');
-        setParent(gameGalleryContainer, galleryLeft);
-        
-        const mainImageContainer = document.createElement('div');
-        mainImageContainer.classList.add('main-image-container');
-        setParent(galleryLeft, mainImageContainer);
+    const mainImageContainer = document.createElement('div');
+    mainImageContainer.classList.add('main-image-container');
+    setParent(galleryLeft, mainImageContainer);
     
+    if(type == "game" || type == "website"){
         const mainImage = document.createElement('img');
         mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
         mainImage.classList.add('main-image');
-        if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
+        if(item.remarks.includes("mobile")){mainImage.classList.add('mobile');};
         mainImage.classList.add('hoverable');
         mainImage.classList.add('enlargeable');
-        mainImage.classList.add('hide');
         mainImage.setAttribute("id", "mainImage");
         mainImage.setAttribute("index", "0");
+        mainImage.src = `${item.filePath}/${item.media[0]}`;
         setParent(mainImageContainer, mainImage);
-
+    
         const youtubeContainer = document.createElement('div');
         youtubeContainer.className = 'youtube-embed hide';
         youtubeContainer.setAttribute("id", "mainYoutube");
         setParent(mainImageContainer, youtubeContainer);
-
+        
         const youtubeVideo = document.createElement('iframe');
         youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
         youtubeVideo.setAttribute('width','1080');
@@ -1150,14 +1278,14 @@ function populateGamePortfolio(){
         setParent(youtubeContainer, youtubeVideo);
         
         const isAutoPlayYTVid = false;
-
-        if(hasFileExtension(game.media[0])){
-            mainImage.src = `${game.filePath}/${game.media[0]}`;
+        
+        if(hasFileExtension(item.media[0])){
+            mainImage.src = `${item.filePath}/${item.media[0]}`;
             youtubeContainer.classList.add('hide');
             mainImage.classList.remove('hide');
         } else{
-            youtubeVideo.src = `https://www.youtube.com/embed/${game.media[0]}`;
-
+            youtubeVideo.src = `https://www.youtube.com/embed/${item.media[0]}`;
+            
             if(isAutoPlayYTVid){
                 youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
                 youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
@@ -1166,7 +1294,7 @@ function populateGamePortfolio(){
             mainImage.classList.add('hide');
             youtubeContainer.classList.remove('hide');
         }
-        
+            
         
         const prevButton = document.createElement('button');
         prevButton.classList.add('gallery-nav-button');
@@ -1174,14 +1302,14 @@ function populateGamePortfolio(){
         prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
         prevButton.innerHTML = `←`;
         setParent(mainImageContainer, prevButton);
-
+    
         const nextButton = document.createElement('button');
         nextButton.classList.add('gallery-nav-button');
         nextButton.classList.add('next-button');
         nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
         nextButton.innerHTML = `→`;
         setParent(mainImageContainer, nextButton);
-
+    
         const thumbnailsContainer = document.createElement('div');
         thumbnailsContainer.classList.add('thumbnails');
         thumbnailsContainer.addEventListener('wheel', function (event) {
@@ -1190,522 +1318,48 @@ function populateGamePortfolio(){
         });
         setParent(galleryLeft, thumbnailsContainer);
         
-        for (i = 0; i < game.media.length; i++) {
+        for (i = 0; i < item.media.length; i++) {
             const thumbnail = document.createElement('img');
             thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
             thumbnail.classList.add('thumbnail');
             thumbnail.classList.add('hoverable');
             if ( i == 0) { thumbnail.classList.add('active'); };
-            if (game.isMobile == true) {thumbnail.classList.add('mobile');};
-            if(hasFileExtension(game.media[i])){
-                thumbnail.src = `${game.filePath}/${game.media[i]}`;
+            if (item.isMobile == true) {thumbnail.classList.add('mobile');};
+            if(hasFileExtension(item.media[i])){
+                thumbnail.src = `${item.filePath}/${item.media[i]}`;
             }else{
-                thumbnail.src = `https://img.youtube.com/vi/${game.media[i]}/maxresdefault.jpg`
+                thumbnail.src = `https://img.youtube.com/vi/${item.media[i]}/maxresdefault.jpg`
                 thumbnail.setAttribute("youtube",'');
             }
             thumbnail.setAttribute("index", i);
             thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
             setParent(thumbnailsContainer, thumbnail);
         }
-        
-        const galleryRight = document.createElement('div');
-        galleryRight.classList.add('game-details-container');
-        setParent(gameGalleryContainer, galleryRight);
-        
-        const gameTitle = document.createElement('h2');
-        gameTitle.classList.add('details-title');
-        gameTitle.textContent = game.title.toUpperCase();
-        setParent(galleryRight, gameTitle);
-        
-        const gameDescription = document.createElement('p');
-        gameDescription.classList.add('details-description');
-        gameDescription.innerHTML = `${game.description}<br><br>`;
-        setParent(galleryRight, gameDescription);
-
-        // const gameBullets = document.createElement('p');
-        // gameBullets.classList.add('details-description');
-        // gameBullets.innerHTML = `<b>•&nbsp;&nbsp;Duration: ${game.duration}`;
-        // setParent(galleryRight, gameBullets);
-
-        game.additional.forEach(additionalInfo =>{
-            const gameBullets = document.createElement('p');
-            gameBullets.classList.add('details-description');
-            gameBullets.innerHTML = `<b>•&nbsp;&nbsp;${additionalInfo}`;
-            setParent(galleryRight, gameBullets);
-        });
-        
-        const background = document.createElement('div');
-        background.classList.add('background');
-        background.style.backgroundImage = `url('${game.filePath}/${game.backgroundImage}')`
-        setParent(section, background);
-
-        x++;
-    });
-}
-
-function populateArtCategory() {
-    const portfolioDiv = document.querySelector(".art-section");
-    portfolioDiv.setAttribute('contentType','artwork');
-    
-    const categories = {};
-    
-    portfolio['artworks'].forEach(art => {
-        if(art.remarks.includes("hide")){
-            return;
-        }
-        if (!categories[art.category]) {
-            categories[art.category] = [art];
-        }
-    });
-
-    for (const category in categories) {
-        const firstArtwork = categories[category][0];
-
-        const artContainer = document.createElement('div');
-        artContainer.className = 'grid-item-container banner';
-        artContainer.addEventListener('click', (e) => {
-            loadArtCategory(category);
-        });
-        setParent(portfolioDiv, artContainer);
-
-        const imgHoverZoom = document.createElement('div');
-        imgHoverZoom.className = 'grid-content banner hoverable';
-        
-        setParent(artContainer, imgHoverZoom);
-        
-        const img = document.createElement('img');
-        img.classList.add("hover-zoom");
-        if(hasFileExtension(firstArtwork.media[0])){
-            img.src = `${firstArtwork.filePath}/${firstArtwork.media[0]}`;
-        }else{
-            img.src = `https://img.youtube.com/vi/${firstArtwork.media[0]}/maxresdefault.jpg`
-        }
-        setParent(imgHoverZoom, img);
-        
-        const title = document.createElement('div');
-        title.classList.add('shuffle');
-        title.textContent = category;
-        setParent(imgHoverZoom, title);
-        
     }
     
-}
-
-function populateArtPortfolio() {
-    const categoryIdentifier = getQueryParam('category');
-
-    const portfolioDiv = document.querySelector(".art-section");
-    portfolioDiv.setAttribute('contentType','artwork');
-    
-    const categories = {};
-    
-    portfolio['artworks'].forEach(art => {
-        if (art.remarks.includes("hide")) {
-            return;
-        }
-
-        if (!categoryIdentifier || art.category.toLowerCase().replace(/\s+/g, '') === categoryIdentifier) {
-            
-            if (!categories[art.category]) {
-                categories[art.category] = [];
-            }
-            
-            categories[art.category].push(art);
-        }
-    });
-    
-    for (const category in categories) {
-        
-        const categoryTitle = document.createElement('div');
-        categoryTitle.className = 'grid-item-container title';
-        categoryTitle.textContent = category;
-        setParent(portfolioDiv, categoryTitle);
-        
-        
-        categories[category].forEach(art => {
-            const artworkDiv = document.createElement('div');
-            artworkDiv.className = 'grid-item-container art';
-            artworkDiv.setAttribute('contentID', art.id);
-            
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add("grid-content");
-            //imageContainer.classList.add("force-square");
-            imageContainer.classList.add("hoverable");
-            if(art.media.length !== 1 || !hasFileExtension(art.media[0])){
-                imageContainer.addEventListener('click', (e) => {
-                    loadItem('artworks', art.id);
-                });
-            } 
-           
-            setParent(artworkDiv, imageContainer);
-            
-            const image = document.createElement('img');
-            image.classList.add("hover-zoom");
-            image.addEventListener('error', (e) => {replaceNullImage(image)});
-
-            if(hasFileExtension(art.media[0])){
-                image.src = `${art.filePath}/${art.media[0]}`;
-            }else{
-                image.src = `https://img.youtube.com/vi/${art.media[0]}/maxresdefault.jpg`
-            }
-
-            if(art.media.length === 1){
-                image.classList.add("enlargeable");
-            } else{
-                
-            }
-            setParent(imageContainer, image);
-            
-            const title = document.createElement('h1');
-            if (art.remarks.includes("quoted")) {
-                title.textContent = `"${art.title}"`;
-            } else{
-                title.textContent = art.title;
-            }
-            
-            setParent(artworkDiv, title);
-            
-            if(art.tools.length > 0){
-                const tagsList = document.createElement('div');
-                tagsList.className = 'word-list game';
-                setParent(artworkDiv, tagsList);
-                
-                art.tools.forEach(tool => {
-                    const toolText = document.createElement('p');
-                    toolText.className = 'shuffle';
-                    toolText.textContent = tool;
-                    setParent(tagsList, toolText)
-                });
-            }
-            
-            // const description = document.createElement('h3');
-            // description.textContent = art.description;
-            // setParent(artworkDiv, description);
-            
-            // art.additional.forEach(additional => {
-            //     const additionalInfo = document.createElement('h3');
-            //     additionalInfo.innerHTML = `•&nbsp;&nbsp;${additional}`;
-            //     setParent(artworkDiv, additionalInfo);
-            // });
-            
-            setParent(portfolioDiv, artworkDiv);
-        });
-        
-    }
-}
-
-function populateArtInfo() {
-    const artworkId = getQueryParam('id');
-    const artwork = portfolio['artworks'].find(a => a.id == artworkId);
-    
-    document.title = artwork.title;
-    
-    const portfolioDiv = document.querySelector('.art-section');
-    portfolioDiv.setAttribute("contentID", artwork.id);
-    portfolioDiv.setAttribute("contentType", "artwork");
-    
-    const artworkTitle = document.createElement('div');
-    artworkTitle.className = 'grid-item-container title';
-    const t = artwork.title.toUpperCase();
-    if (artwork.remarks.includes("quoted")) {
-        artworkTitle.textContent = `"${t}"`;
-    } else{
-        artworkTitle.textContent = t;
-    }
-    setParent(portfolioDiv, artworkTitle);
-    
-    // const description = document.createElement('div');
-    // description.className = 'grid-item-container description';
-    // description.textContent = `${artwork.description}`;
-    // setParent(portfolioDiv, description);
-    
-    for (i = 0; i < artwork.additional.length; i++) {
-        const additionalInfo = document.createElement('div');
-        additionalInfo.className = 'grid-item-container description';
-        additionalInfo.innerHTML = `•&nbsp;&nbsp;${artwork.additional[i]}<br>`;
-        
-        if(i+1 == artwork.additional.length){
-            additionalInfo.classList.add('last-description');
-        }
-        setParent(portfolioDiv, additionalInfo);
-    }
-    
-    artwork.media.forEach(img => {
-            const artworkDiv = document.createElement('div');
-            artworkDiv.className = 'grid-item-container artwork';
-            setParent(portfolioDiv, artworkDiv);
-            
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add("grid-content");
-            imageContainer.classList.add("artworks");
-            imageContainer.classList.add("hoverable");
-            setParent(artworkDiv, imageContainer);
-        
-        if(hasFileExtension(img)){
-            const image = document.createElement('img');
-            image.addEventListener('error', (e) => {replaceNullImage(image)});
-            image.className = 'enlargeable';
-            image.src = `${artwork.filePath}/${img}`;
-            
-            image.setAttribute('index',artwork.media.indexOf(img));
-            setParent(imageContainer, image);
-            
-        } else{
-            
-            const youtubeContainer = document.createElement('div');
-            youtubeContainer.className = 'youtube-embed';
-            setParent(imageContainer, youtubeContainer);
-            
-            const youtubeVideo = document.createElement('iframe');
-            youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
-            youtubeVideo.setAttribute('width','1080');
-            youtubeVideo.setAttribute('height','1920');
-            youtubeVideo.setAttribute('frameborder','0');
-            youtubeVideo.setAttribute('allowfullscreen','');
-            youtubeVideo.setAttribute('index',artwork.media.indexOf(img));
-            setParent(youtubeContainer, youtubeVideo);
-            
-        }
-       
-    });
-    
-    //createPageItemNavigator('artwork', portfolioDiv, artwork.id, portfolio['artworks'].length);
-}
-
-function populateWebPortfolio(){
-    
-    const portfolioDiv = document.querySelector(".art-section");
-    
-    const categoryTitle = document.createElement('div');
-    categoryTitle.className = 'grid-item-container title';
-    setParent(portfolioDiv, categoryTitle);
-    
-    portfolio['websites'].forEach(web => {
-
-        if (web.remarks.includes("hide")) {
-            return;
-        }
-
-        const webDiv = document.createElement('div');
-        webDiv.className = 'grid-item-container web'
-        setParent(portfolioDiv, webDiv)
-        
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add("grid-content");
-        imageContainer.classList.add("hoverable");
-        if(web.media.length !== 1 || !hasFileExtension(web.media[0])){
-            imageContainer.addEventListener('click', (e) => {
-                loadItem('websites', web.id);
-            });
-        } 
-        
-        setParent(webDiv, imageContainer);
-        
-        const image = document.createElement('img');
-        image.classList.add("hover-zoom");
-        image.addEventListener('error', (e) => {replaceNullImage(image)});
-
-        if(hasFileExtension(web.media[0])){
-            image.src = `${web.filePath}/${web.media[0]}`;
-        }else{
-            image.src = `https://img.youtube.com/vi/${web.media[0]}/maxresdefault.jpg`
-        }
-
-        if(web.media.length === 1){
-            image.classList.add("enlargeable");
-        } else{
-            
-        }
-
-        setParent(imageContainer, image);
-
-        const webTitle = document.createElement('h1'); 
-        webTitle.className = 'hoverable';
-        webTitle.innerHTML = `<u>${web.title.toUpperCase()}`;
-        webTitle.addEventListener('click', (e) => {
-            loadItem('websites', web.id);
-        });
-        setParent(webDiv, webTitle)
-        
-        const tagsList = document.createElement('div');
-        tagsList.className = 'word-list game';
-        setParent(webDiv, tagsList);
-
-        web.tools.forEach(tool => {
-            const toolText = document.createElement('p');
-            toolText.className = 'shuffle';
-            toolText.textContent = tool;
-            setParent(tagsList, toolText)
-        });
-        
-        web.roles.forEach(role => {
-            const roleText = document.createElement('p');
-            roleText.className = 'shuffle';
-            roleText.textContent = role;
-            setParent(tagsList, roleText)
-        });
-        
-    
-    });
-
-}
-
-function populateWebInfo(){
-    const webID = getQueryParam('id');
-    const web = portfolio['websites'].find(a => a.id == webID);
-    
-    document.title = web.title;
-
-    const portfolioDiv = document.getElementById("games");
-
-    if(web.remarks.includes("hide")){
-        return;
-    }
-
-    const section = document.createElement('div');
-    section.classList.add('section');
-    section.setAttribute("id", "projects");
-    section.setAttribute("contentID", web.id);
-    section.setAttribute("contentType", "website");
-    setParent(portfolioDiv, section);
-    
-    createItemInfoSection('website', section, web, portfolio['websites'].length);
-
-    const background = document.createElement('div');
-    background.classList.add('background');
-    setParent(section, background);
-
-}
-
-function createItemInfoSection(type, parentElement, item, maxId){
-    
-    const sectionContent = document.createElement('div');
-    sectionContent.classList.add('section-content');
-    setParent(parentElement, sectionContent);
-    
-    const galleryContainer = document.createElement('div');
-    galleryContainer.classList.add('game-card-container');
-    galleryContainer.classList.add('game-info');
-    setParent(sectionContent, galleryContainer);
-    
-    const galleryLeft = document.createElement('div');
-    galleryLeft.classList.add('game-images-container');
-    galleryLeft.classList.add('game-info');
-    galleryLeft.classList.add('card-tilt');
-    setParent(galleryContainer, galleryLeft);
-    
-    const mainImageContainer = document.createElement('div');
-    mainImageContainer.classList.add('main-image-container');
-    setParent(galleryLeft, mainImageContainer);
-
-    const mainImage = document.createElement('img');
-    mainImage.addEventListener('error', (e) => {replaceNullImage(mainImage)});
-    mainImage.classList.add('main-image');
-    if(item.remarks.includes("mobile")){mainImage.classList.add('mobile');};
-    mainImage.classList.add('hoverable');
-    mainImage.classList.add('enlargeable');
-    mainImage.setAttribute("id", "mainImage");
-    mainImage.setAttribute("index", "0");
-    mainImage.src = `${item.filePath}/${item.media[0]}`;
-    setParent(mainImageContainer, mainImage);
-
-    const youtubeContainer = document.createElement('div');
-    youtubeContainer.className = 'youtube-embed hide';
-    youtubeContainer.setAttribute("id", "mainYoutube");
-    setParent(mainImageContainer, youtubeContainer);
-    
-    const youtubeVideo = document.createElement('iframe');
-    youtubeVideo.src = `https://www.youtube.com/embed/tgbNymZ7vqY`;
-    youtubeVideo.setAttribute('width','1080');
-    youtubeVideo.setAttribute('height','1920');
-    youtubeVideo.setAttribute('frameborder','0');
-    youtubeVideo.setAttribute('allowfullscreen','');
-    youtubeVideo.setAttribute('index',"0");
-    setParent(youtubeContainer, youtubeVideo);
-    
-    const isAutoPlayYTVid = false;
-    
-    if(hasFileExtension(item.media[0])){
-        mainImage.src = `${item.filePath}/${item.media[0]}`;
-        youtubeContainer.classList.add('hide');
-        mainImage.classList.remove('hide');
-    } else{
-        youtubeVideo.src = `https://www.youtube.com/embed/${item.media[0]}`;
-        
-        if(isAutoPlayYTVid){
-            youtubeVideo.setAttribute("allow","autoplay; encrypted-media;");
-            youtubeVideo.src = youtubeVideo.src + `?autoplay=1&mute=1`;
-        }
-        
-        mainImage.classList.add('hide');
-        youtubeContainer.classList.remove('hide');
-    }
-        
-    
-    const prevButton = document.createElement('button');
-    prevButton.classList.add('gallery-nav-button');
-    prevButton.classList.add('prev-button');
-    prevButton.addEventListener('click', (e) => {navigateImage(prevButton, 'prev')});
-    prevButton.innerHTML = `←`;
-    setParent(mainImageContainer, prevButton);
-
-    const nextButton = document.createElement('button');
-    nextButton.classList.add('gallery-nav-button');
-    nextButton.classList.add('next-button');
-    nextButton.addEventListener('click', (e) => {navigateImage(nextButton, 'next')});
-    nextButton.innerHTML = `→`;
-    setParent(mainImageContainer, nextButton);
-
-    const thumbnailsContainer = document.createElement('div');
-    thumbnailsContainer.classList.add('thumbnails');
-    thumbnailsContainer.addEventListener('wheel', function (event) {
-        event.preventDefault();
-        thumbnailsContainer.scrollLeft += event.deltaY;
-    });
-    setParent(galleryLeft, thumbnailsContainer);
-    
-    for (i = 0; i < item.media.length; i++) {
-        const thumbnail = document.createElement('img');
-        thumbnail.addEventListener('error', (e) => {replaceNullImage(thumbnail)});
-        thumbnail.classList.add('thumbnail');
-        thumbnail.classList.add('hoverable');
-        if ( i == 0) { thumbnail.classList.add('active'); };
-        if (item.isMobile == true) {thumbnail.classList.add('mobile');};
-        if(hasFileExtension(item.media[i])){
-            thumbnail.src = `${item.filePath}/${item.media[i]}`;
-        }else{
-            thumbnail.src = `https://img.youtube.com/vi/${item.media[i]}/maxresdefault.jpg`
-            thumbnail.setAttribute("youtube",'');
-        }
-        thumbnail.setAttribute("index", i);
-        thumbnail.addEventListener('click', (e) => {changeImageGameGallery(thumbnail)});
-        setParent(thumbnailsContainer, thumbnail);
-    }
     
     const galleryRight = document.createElement('div');
     galleryRight.classList.add('game-details-container');
-    galleryRight.classList.add('game-info');
+    if(!monoPage) galleryRight.classList.add('game-info');
     setParent(galleryContainer, galleryRight);
     
     const mainDetails = document.createElement('div');
-    mainDetails.className = 'game-details-main game-info';
+    mainDetails.className = 'game-details-main';
+    if(!monoPage) mainDetails.classList.add('game-info');
     setParent(galleryRight, mainDetails);
     
-    const projectTitle = document.createElement('h2');
-    projectTitle.classList.add('details-title');
-    projectTitle.textContent = item.title.toUpperCase();
-    setParent(mainDetails, projectTitle);
+    if(type != "artwork"){
+        const projectTitle = document.createElement('h2');
+        projectTitle.classList.add('details-title');
+        projectTitle.textContent = item.title.toUpperCase();
+        setParent(mainDetails, projectTitle);
+
+        const gameDescription = document.createElement('p');
+        gameDescription.classList.add('details-description');
+        gameDescription.innerHTML = `${item.description}<br><br>`;
+        setParent(mainDetails, gameDescription);
+    }
     
-    const gameDescription = document.createElement('p');
-    gameDescription.classList.add('details-description');
-    gameDescription.innerHTML = `${item.description}<br><br>`;
-    setParent(mainDetails, gameDescription);
-
-    // const gameBullets = document.createElement('p');
-    // gameBullets.classList.add('details-description');
-    // gameBullets.innerHTML = `<b>•&nbsp;&nbsp;Duration: ${game.duration}`;
-    // setParent(galleryRight, gameBullets);
-
     item.additional.forEach(additionalInfo =>{
         const infoBullets = document.createElement('p');
         infoBullets.classList.add('details-description');
@@ -1713,6 +1367,8 @@ function createItemInfoSection(type, parentElement, item, maxId){
         setParent(mainDetails, infoBullets);
     });
     
+    if(monoPage) return; 
+
     const primaryDetails = document.createElement('div');
     primaryDetails.className = 'game-details-primary game-info';
     setParent(galleryRight, primaryDetails);
@@ -1723,22 +1379,25 @@ function createItemInfoSection(type, parentElement, item, maxId){
         year.innerHTML = `<b>YEAR</b><br>${item.year}<br><br>`;
         setParent(primaryDetails, year);
     }
-    
-    const tools = document.createElement('p');
-    tools.classList.add('details-description');
-    var toolsStr = "";
-    
-    for (i = 0; i < item.tools.length; i++) {
-        toolsStr = toolsStr + item.tools[i];
-        if (i < item.tools.length - 1) {
-            toolsStr = toolsStr + ', ';
+
+    if(item.tools && item.tools.length > 0){
+        const tools = document.createElement('p');
+        tools.classList.add('details-description');
+        var toolsStr = "";
+
+        for (i = 0; i < item.tools.length; i++) {
+            toolsStr = toolsStr + item.tools[i];
+            if (i < item.tools.length - 1) {
+                toolsStr = toolsStr + ', ';
+            }
         }
+        
+        if(item.tools.length > 1) tools.innerHTML = `<b>TOOLS</b><br>${toolsStr}<br><br>`;
+        if(item.tools.length == 1) tools.innerHTML = `<b>TOOL</b><br>${toolsStr}<br><br>`;
+        setParent(primaryDetails, tools);
     }
     
-    tools.innerHTML = `<b>TOOL</b><br>${toolsStr}<br><br>`;
-    setParent(primaryDetails, tools);
-
-    if(item.roles){
+    if(item.roles && item.roles.length > 0){
         const roles = document.createElement('p');
         roles.classList.add('details-description');
         var rolesStr = "";
@@ -1750,7 +1409,8 @@ function createItemInfoSection(type, parentElement, item, maxId){
             }
         }
         
-        roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
+        if(item.roles.length > 1) roles.innerHTML = `<b>ROLES</b><br>${rolesStr}<br><br>`;
+        if(item.roles.length == 1) roles.innerHTML = `<b>ROLE</b><br>${rolesStr}<br><br>`;
         setParent(primaryDetails, roles);
     }
     
@@ -1769,7 +1429,59 @@ function createItemInfoSection(type, parentElement, item, maxId){
         platforms.innerHTML = `<b>PLATFORM</b><br>${platformsStr}<br><br>`;
         setParent(primaryDetails, platforms);
     }
-    
+
+    if (type == "artwork") {
+        const gridGalleryDiv = document.createElement('div');
+        gridGalleryDiv.classList.add('game-details-container');
+        gridGalleryDiv.classList.add('game-info');
+        gridGalleryDiv.style.flexDirection = 'row';
+        gridGalleryDiv.style.flexWrap = 'wrap';
+        gridGalleryDiv.style.paddingBottom = '75px';
+        setParent(galleryContainer, gridGalleryDiv);
+
+        item.media.forEach(img => {
+            const artworkDiv = document.createElement('div');
+            if (item.media.length > 1) {
+                artworkDiv.className = 'grid-item-container artworks';
+            } else{
+                artworkDiv.className = 'grid-item-container singleArtwork';
+            }
+            
+            setParent(gridGalleryDiv, artworkDiv);
+            
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add("grid-content");
+            imageContainer.classList.add("artworks");
+            imageContainer.classList.add("hoverable");
+            setParent(artworkDiv, imageContainer);
+
+
+            if (hasFileExtension(img)) {
+                const image = document.createElement('img');
+                image.addEventListener('error', (e) => { replaceNullImage(image) });
+                image.className = 'enlargeable';
+                image.src = `${item.filePath}/${img}`;
+                image.setAttribute('index', item.media.indexOf(img));
+                setParent(imageContainer, image);
+            } else {
+                const youtubeContainer = document.createElement('div');
+                youtubeContainer.className = 'youtube-embed';
+                
+                setParent(imageContainer, youtubeContainer);
+                
+                const youtubeVideo = document.createElement('iframe');
+                youtubeVideo.src = `https://www.youtube.com/embed/${img}`;
+                youtubeVideo.setAttribute('width', '1080');
+                youtubeVideo.setAttribute('height', '1920');
+                youtubeVideo.setAttribute('frameborder', '0');
+                youtubeVideo.setAttribute('allowfullscreen', '');
+                youtubeVideo.setAttribute('index', item.media.indexOf(img));
+                setParent(youtubeContainer, youtubeVideo);
+            }
+
+        });
+    }
+
     if(item.videoLink && item.videoLink != ""){
 
         const youtubeLinkDiv = document.createElement('div');
@@ -1777,7 +1489,7 @@ function createItemInfoSection(type, parentElement, item, maxId){
         youtubeLinkDiv.classList.add('game-info');
         youtubeLinkDiv.style.flexDirection = 'column';
         setParent(galleryContainer, youtubeLinkDiv);
-
+        
         const youtubeTitle = document.createElement('p');
         youtubeTitle.classList.add('details-description');
         youtubeTitle.innerHTML = `<b>${"GAMEPLAY VIDEO"}`;
@@ -1817,13 +1529,14 @@ function createItemInfoSection(type, parentElement, item, maxId){
             gridGalleryDiv.classList.add('game-info');
             gridGalleryDiv.style.flexDirection = 'row';
             gridGalleryDiv.style.flexWrap = 'wrap';
+            gridGalleryDiv.setAttribute('totalImages', 1);
             setParent(galleryContainer, gridGalleryDiv);
 
             mediaUrls.forEach(img => {
             
                 const artworkDiv = document.createElement('div');
                 if(mediaUrls.length > 1){
-                    artworkDiv.className = 'grid-item-container web';
+                    artworkDiv.className = 'grid-item-container additional-media';
                 } 
                 
                 setParent(gridGalleryDiv, artworkDiv);
@@ -1831,20 +1544,17 @@ function createItemInfoSection(type, parentElement, item, maxId){
                 const imageContainer = document.createElement('div');
                 imageContainer.classList.add("grid-content");
                 imageContainer.classList.add("artworks");
-                //imageContainer.classList.add("hoverable");
                 setParent(artworkDiv, imageContainer);
         
                 if (hasFileExtension(img)) {
                     const image = document.createElement('img');
                     image.addEventListener('error', (e) => { replaceNullImage(image) });
-                    //image.className = 'enlargeable';
                     image.src = `${item.filePath}/${img}`;
-        
+                    image.classList.add('enlargeable');
+                    image.classList.add('hoverable');
                     image.setAttribute('index', item.media.indexOf(img));
                     setParent(imageContainer, image);
-        
                 } else {
-        
                     const youtubeContainer = document.createElement('div');
                     youtubeContainer.className = 'youtube-embed';
                     setParent(imageContainer, youtubeContainer);
@@ -1857,15 +1567,14 @@ function createItemInfoSection(type, parentElement, item, maxId){
                     youtubeVideo.setAttribute('allowfullscreen', '');
                     youtubeVideo.setAttribute('index', item.media.indexOf(img));
                     setParent(youtubeContainer, youtubeVideo);
-        
                 }
-            
             });
         });
-        
     }
-
+    
     if(item.collaborators && !item.remarks.includes("solo")){
+        const collaborators = item.collaborators;
+
         const collaboratorsDiv = document.createElement('div');
         collaboratorsDiv.classList.add('game-details-container');
         collaboratorsDiv.classList.add('game-info');
@@ -1874,7 +1583,8 @@ function createItemInfoSection(type, parentElement, item, maxId){
         
         const collaboratorsTitle = document.createElement('p');
         collaboratorsTitle.classList.add('details-description');
-        collaboratorsTitle.innerHTML = `<b><br><br>${"COLLABORATORS"}`;
+        if (Object.keys(collaborators).length > 1) collaboratorsTitle.innerHTML = `<b><br><br>${"COLLABORATORS"}`;
+        if (Object.keys(collaborators).length == 1) collaboratorsTitle.innerHTML = `<b><br><br>${"COLLABORATOR"}`;
         setParent(collaboratorsDiv, collaboratorsTitle);
     
         const collaboratorList = document.createElement('div');
@@ -1882,8 +1592,6 @@ function createItemInfoSection(type, parentElement, item, maxId){
         collaboratorList.style.justifyContent = 'left';
         setParent(collaboratorsDiv, collaboratorList);
         
-        const collaborators = item.collaborators;
-
         Object.entries(collaborators).forEach(([name, url]) => {
             const collaboratorText = document.createElement('p');
             collaboratorText.className = 'shuffle';
@@ -1896,28 +1604,19 @@ function createItemInfoSection(type, parentElement, item, maxId){
             }else{
                 collaboratorText.textContent = name;
             }
-            
             setParent(collaboratorList, collaboratorText);
         });
-        
     }
-    
     createPageItemNavigator(type, galleryContainer, item.id, maxId);
-    
 }
 
 function createPageItemNavigator(type, parentElement, currentItemId, maxId){
-
+    
     const pageNavDiv = document.createElement('div');
     pageNavDiv.classList.add('game-details-container');
     pageNavDiv.classList.add('game-info');
     pageNavDiv.style.flex = 'column';
     setParent(parentElement, pageNavDiv);
-    
-    const spacer = document.createElement('p');
-    spacer.classList.add('details-description');
-    spacer.innerHTML = ``;
-    setParent(pageNavDiv, spacer);
 
     const pageNavButtonHolder = document.createElement('div');
     pageNavButtonHolder.style.flex = '1';
@@ -1958,11 +1657,8 @@ function createPageItemNavigator(type, parentElement, currentItemId, maxId){
         setParent(pageNavButtonHolder, prevGameButton);
         
         prevGameButton.addEventListener('click', (e) => {
-            
             loadItem(itemCategory, currentItemId - 1);
         });
-        
-        //prevGameButton.title = itemArray.find(a => a.id == web.id - 1).title;
     }
     
     if(currentItemId != maxId){
@@ -1978,17 +1674,18 @@ function createPageItemNavigator(type, parentElement, currentItemId, maxId){
         nextGameButton.addEventListener('click', (e) => {
             loadItem(itemCategory, currentItemId + 1);
         });
-        
-        //nextGameButton.title = portfolio['websites'].find(a => a.id == web.id + 1).title;
     }
 }
 
 function loadItem(category, id) {
-    const item = portfolio[category]?.find(a => a.id === id);
+    loadJson(category).then((data) => {
+        const item = data?.find(a => a.id === id);
     
-    if (item) {
-        goToPage(category.slice(0, -1), 'id', id); //remove 's'
-    }
+        if (item) {
+            goToPage(category.slice(0, -1), 'id', id); //remove 's'
+        }
+    });
+    
 }
 
 function loadArtCategory(category) {
@@ -1997,17 +1694,9 @@ function loadArtCategory(category) {
 
 function goToPage(pageName, key, value){
     let url = pageName
-    
-    if(debugMode && url != 'index'){
-        url = `${url}.html`
-    }
-    
-    if(url == 'index'){
-        url = `/`;
-    }
-    
+    if(debugMode && url != 'index') url = `${url}.html` 
+    if(url == 'index') url = `/`; //remove 'index' in url
     if(key){url = `${url}?${key}=${value}`;}
-    
     window.location.href = url;
 }
 
@@ -2029,6 +1718,10 @@ function scrollToTop(){
         top: 0,
         behavior: "smooth"
       });
+}
+
+function disableContextMenu(event) {
+    event.preventDefault();
 }
 
 function disableAllContextMenu(){
