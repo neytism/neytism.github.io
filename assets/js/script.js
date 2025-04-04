@@ -1703,16 +1703,7 @@ function goToPage(pageName, key, value){
     if(debugMode && url != 'index') url = `${url}.html` 
     if(url == 'index') url = `/`; //remove 'index' in url
     if(key){url = `${url}?${key}=${value}`;}
-
-    var fadeEffect = document.querySelector('.fade-overlay');
-    fadeEffect.classList.remove('fadeOut');
-    fadeEffect.classList.add('fadeIn');
-
-    setTimeout(() => {
- 
-        window.location.href = url;
- 
-    }, 400);
+    window.location.href = url;
 }
 
 function setParent(parent, child){
@@ -1786,16 +1777,6 @@ function updateMousePositionFromLocalStorage() {
     } 
 }
 
-function fadeOutOverlay(){
-    const checker = localStorage.getItem('newPage');
-
-    if (!isNaN(checker) && checker) {
-        const fadeOverlay = document.querySelector('.fade-overlay');
-        fadeOverlay.classList.add('fadeOut');
-        localStorage.setItem('newPage', false);
-    }
-}
-
 function Awake(){
     const pageName = document.body.getAttribute("pageName");
     
@@ -1813,7 +1794,7 @@ function Awake(){
     addDropdownEvents();
     addClickToEnlargeImageEvents();
     generateGrainOverlay();
-    fadeOutOverlay();
+    
     disableAllContextMenu();
     
     //thing only to do if on desktop
@@ -1829,7 +1810,6 @@ function Awake(){
         window.addEventListener("beforeunload", () => {
             localStorage.setItem('x', mouseWindowPosX);
             localStorage.setItem('y', mouseWindowPosY);
-            localStorage.setItem('newPage', true);
         });
         updateMousePositionFromLocalStorage();
         addShuffleEventToLinks();
