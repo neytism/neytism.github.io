@@ -870,7 +870,6 @@ overflow: hidden;
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    background-color: black;
 }
 
 .grid-content.banner img{
@@ -878,9 +877,8 @@ overflow: hidden;
     max-height: 100%;
     height: auto; 
     width: 100%; 
-    opacity: 0.5;
+    opacity: 0.6;
 }
-
 
 .grid-content.banner div{
     position: absolute; 
