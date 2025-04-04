@@ -18,6 +18,8 @@ let lastScrollY = window.scrollY;
 //spotlight
 const spotlight = document.querySelector('.spotlight-mask');
 const smoothFollow = 0.1; 
+
+//mouse pos
 let mouseWindowPosX = 0;
 let mouseWindowPosY = 0;
 let smoothMouseWindowPosX = mouseWindowPosX;
@@ -28,6 +30,7 @@ var bigCursor = null;
 var smallCursor = null;
 let hideOnHover = [];
 let cursorVisible = false;
+
 
 //game image sliders
 var tempCardsTilt = [];
@@ -55,7 +58,7 @@ function loadJson(type) {
         games: { jsonUrl: "/assets/json/games.json"},
         websites: { jsonUrl: "/assets/json/websites.json"}
     };
-
+    
     const changeChecker = localStorage.getItem('changeChecker');
     let isDataChanged = false;
     if (changeChecker) {
@@ -102,7 +105,7 @@ function loadJson(type) {
                 portfolio = sortByCategory(portfolio);
             }
             
-            localStorage.setItem(type, JSON.stringify(portfolio))
+            localStorage.setItem(type, JSON.stringify(portfolio));
             return portfolio;
         })
         .catch(error => {
@@ -130,7 +133,7 @@ function updateMousePositionValues() {
     
     const roundedXPos = Math.round(xPos * 100) / 100;
     const roundedYPos = Math.round(yPos * 100) / 100;
-
+    
     document.documentElement.style.setProperty('--xPos', `${roundedXPos}%`);
     document.documentElement.style.setProperty('--yPos', `${roundedYPos}%`);
 }
@@ -675,6 +678,7 @@ function generateFixedBottomText(isDebug){
 }
 
 function generateCustomCursor(){
+    
     const cursorContainer = document.createElement('div');
     cursorContainer.className = 'cursor';
     document.body.insertBefore(cursorContainer, document.body.firstChild);
@@ -697,9 +701,9 @@ function generateCustomCursor(){
 
     bigCursor = bigCursorContainer;
     smallCursor = smallCursorContainer;
-
-    bigCursor.style.opacity = 0;
-    smallCursor.style.opacity = 0;
+    
+    // bigCursor.style.opacity = 0;
+    // smallCursor.style.opacity = 0;
 
     document.body.addEventListener('mousemove', onMouseMove);
         
@@ -1693,7 +1697,9 @@ function loadArtCategory(category) {
 }
 
 function goToPage(pageName, key, value){
-    let url = pageName
+    let url = pageName;
+    localStorage.setItem('x', mouseWindowPosX);
+    localStorage.setItem('y', mouseWindowPosY);
     if(debugMode && url != 'index') url = `${url}.html` 
     if(url == 'index') url = `/`; //remove 'index' in url
     if(key){url = `${url}?${key}=${value}`;}
@@ -1737,6 +1743,40 @@ function disableAllContextMenu(){
     });
 }
 
+function updateMousePositionFromLocalStorage() {
+    if (window.innerWidth < 820) return;
+    const storedX = parseFloat(localStorage.getItem('x'));
+    const storedY = parseFloat(localStorage.getItem('y'));
+    
+    if (!isNaN(storedX) && !isNaN(storedY)) {
+        smoothMouseWindowPosX = storedX;
+        smoothMouseWindowPosY = storedY;
+        
+        const rect = spotlight.getBoundingClientRect();
+        const xPos = ((smoothMouseWindowPosX - rect.left) / rect.width) * 100;
+        const yPos = ((smoothMouseWindowPosY - rect.top) / rect.height) * 100;
+
+        const roundedXPos = Math.round(xPos * 100) / 100;
+        const roundedYPos = Math.round(yPos * 100) / 100;
+
+        document.documentElement.style.setProperty('--xPos', `${roundedXPos}%`);
+        document.documentElement.style.setProperty('--yPos', `${roundedYPos}%`);
+        
+        mouseWindowPosX = storedX;
+        mouseWindowPosY = storedY;
+            
+        TweenMax.to(bigCursor, 0, {
+            x: mouseWindowPosX - 15,
+            y: mouseWindowPosY - 15
+        })
+        
+        TweenMax.to(smallCursor, 0, {
+            x: mouseWindowPosX - 5,
+            y: mouseWindowPosY - 5
+        })
+    } 
+}
+
 function Awake(){
     const pageName = document.body.getAttribute("pageName");
     
@@ -1764,9 +1804,14 @@ function Awake(){
             mouseWindowPosX = e.pageX;
             mouseWindowPosY = e.pageY - window.scrollY;
         });
-
+        
         generateCustomCursor();
         animateSpotlight();
+        window.addEventListener("beforeunload", () => {
+            localStorage.setItem('x', mouseWindowPosX);
+            localStorage.setItem('y', mouseWindowPosY);
+        });
+        updateMousePositionFromLocalStorage();
         addShuffleEventToLinks();
         addCardTiltEvents();
         requestAnimationFrame(updateCardRotations);
