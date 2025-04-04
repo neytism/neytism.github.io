@@ -434,6 +434,11 @@ body.noscroll{
     background-size: cover;
     border-radius: 50%;
     margin: 0 10px;
+    transition: border-radius 0.5s ease;
+}
+
+.social-icon:hover{
+    border-radius: 0%;
 }
 
 .scroll-down{
@@ -1381,6 +1386,11 @@ opacity: 1;
         padding: 15px !important;
     }
 
+    .floating-button{
+        font-size: 10px;
+        padding: 7px 10px;
+    }
+    
 
     .dropdown-content a {
         padding: 15px; 
@@ -1489,30 +1499,36 @@ opacity: 1;
 
     .game-preview.click-indicator{
         top: 0px;
-        left: 10px;
-        width: calc(100% - 20px);
+        left: 15px;
+        width: calc(100% - 30px);
         background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 3%, rgba(0,0,0,0) 21%, rgba(0,0,0,0) 100%);
     }
     
     .game-preview.image-preview{
         top: 0px;
-        left: 10px;
-        width: calc(100% - 20px); 
+        left: 15px;
+        width: calc(100% - 30px); 
     }
     
 
     .grid-item-container.art{
         flex: 0 1 calc(100%/2);
+        padding: 0px 15px 30px 15px !important;
     }
     
     .grid-item-container.game{
         flex: 0 1 calc(100%/1);
+        padding: 0px 15px 30px 15px;
     }
     
-
+    
     .featured .grid-item-container{
         padding: 10px;
         flex: 0 1 calc(100%/1);
+    }
+    
+    .game-card-container.featured{
+       flex-direction: column;
     }
 
     .grid-item-container.artwork{
@@ -1611,12 +1627,12 @@ opacity: 1;
 
     .grid-item-container.web{
         flex: 0 0 calc((100% / 1) );
-        padding: 0 0 30px 0;
+        padding: 0 15px 30px 15px;
     }
 
     .grid-item-container.artworks{
         flex: 0 0 calc((100% / 1));
-        padding: 0px 0px 30px 0px;
+        padding: 0px 0px 0px 0px;
     }
     
     .clock {
@@ -1641,6 +1657,10 @@ opacity: 1;
         --multiplier: 0.3;
         border-radius: 7px;
         border: 1px solid rgb(107, 107, 107);
+    }
+
+    .section-content {
+        padding: 40px 15px 40px 15px;
     }
     
 }
