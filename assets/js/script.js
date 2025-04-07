@@ -666,8 +666,11 @@ function generateCustomCursor(){
 }
 
 function generateGrainOverlay(){
-    createNewElement('div', "first", document.body, 'scan-overlay',"", "");
     createNewElement('div', "first", document.body, 'grain-overlay',"", "");
+}
+
+function generateScanLineOverlay(){
+    createNewElement('div', "first", document.body, 'scan-overlay',"", "");
 }
 
 function getQueryParam(param) {
@@ -1407,8 +1410,8 @@ function Awake(){
     
     addDropdownEvents();
     addClickToEnlargeImageEvents();
-    generateGrainOverlay();
-    
+    //generateGrainOverlay();
+    generateScanLineOverlay();
     disableAllContextMenu();
     
     //thing only to do if on desktop
