@@ -1085,7 +1085,6 @@ form .submit{
     height: 50px;
     background-color: rgb(55, 153, 55);
     color: white;
-    cursor: none;
 }
 
 .form-title{
@@ -1364,11 +1363,16 @@ opacity: 1;
     border-radius: 20px;
 }
 
-/* MEDIA QUERIES */
-@media (min-width: 821px) {
-    html, body, a, button{
-        cursor: none !important;
-    }
+.no-cursor {
+    cursor: none !important;
+}
+
+.pointer-cursor{
+    cursor: pointer !important;
+}
+
+.default-cursor{
+    cursor: default;
 }
 
 @media (max-width: 820px) {

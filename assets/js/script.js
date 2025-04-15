@@ -6,7 +6,9 @@ class GameGallery {
 }
 
 //redirect
-const debugMode = false;
+const debugMode = true;
+
+const customCursor = false;
 
 //general
 const creditText = 'Designed & Developed by Nate Florendo'
@@ -710,7 +712,7 @@ function populateFeaturedWorks(games, artworks, websites){
         if(game.remarks.includes("mobile")){mainImage.classList.add('mobile');};
         
         const youtubeContainer = createNewElement('div', "", mainImageContainer, 'youtube-embed hide',{id:'mainYoutube'}, "");
-        const youtubeVideo = createNewElement('iframe', "", youtubeContainer, 'youtube-embed hide',{src:'https://www.youtube.com/embed/tgbNymZ7vqY', width: '1080', height: '1920', frameborder: '0', allowfullscreen: '', index: '0'}, "");
+        const youtubeVideo = createNewElement('iframe', "", youtubeContainer, 'youtube-embed hide',{src:'', width: '1080', height: '1920', frameborder: '0', allowfullscreen: '', index: '0'}, "");
         
         const isAutoPlayYTVid = false;
 
@@ -1022,7 +1024,7 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
     
         const youtubeContainer = createNewElement('div', "", mainImageContainer, 'youtube-embed hide',{id: 'mainYoutube'}, '');
         
-        const youtubeVideo = createNewElement('iframe', "", youtubeContainer, 'youtube-embed hide',{src:'https://www.youtube.com/embed/tgbNymZ7vqY', width: '1080', height: '1920', frameborder: '0', allowfullscreen: '', index: '0'}, "");
+        const youtubeVideo = createNewElement('iframe', "", youtubeContainer, 'youtube-embed hide',{src:'', width: '1080', height: '1920', frameborder: '0', allowfullscreen: '', index: '0'}, "");
         
         const isAutoPlayYTVid = false;
         
@@ -1356,15 +1358,17 @@ function updateMousePositionFromLocalStorage() {
         mouseWindowPosX = storedX;
         mouseWindowPosY = storedY;
             
-        TweenMax.to(bigCursor, 0, {
-            x: mouseWindowPosX - 15,
-            y: mouseWindowPosY - 15
-        })
-        
-        TweenMax.to(smallCursor, 0, {
-            x: mouseWindowPosX - 5,
-            y: mouseWindowPosY - 5
-        })
+        if(bigCursor){
+            TweenMax.to(bigCursor, 0, {
+                x: mouseWindowPosX - 15,
+                y: mouseWindowPosY - 15
+            })
+            
+            TweenMax.to(smallCursor, 0, {
+                x: mouseWindowPosX - 5,
+                y: mouseWindowPosY - 5
+            })
+        }
     } 
 }
 
@@ -1422,7 +1426,24 @@ function Awake(){
             mouseWindowPosY = e.pageY - window.scrollY;
         });
         
-        generateCustomCursor();
+        if(customCursor) {
+            generateCustomCursor();
+
+            document.querySelectorAll('html, body, a, button, form .submit').forEach(e => {
+                e.classList.add('no-cursor'); 
+            });
+            
+        }else{
+        
+            document.querySelectorAll('h1, h2, h3, h4, p').forEach(e => {
+                e.classList.add('default-cursor'); 
+            });
+
+            document.querySelectorAll('.hoverable, a').forEach(e => {
+                e.classList.add('pointer-cursor'); 
+            });
+
+        }
         animateSpotlight();
         window.addEventListener("beforeunload", () => {
             localStorage.setItem('x', mouseWindowPosX);
