@@ -6,7 +6,7 @@ class GameGallery {
 }
 
 //redirect
-const debugMode = true;
+const debugMode = false;
 
 const customCursor = false;
 
