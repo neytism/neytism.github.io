@@ -12,6 +12,28 @@
     },
     {
       "category": "3D WORKS",
+      "title": "Jisulife",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+      "tools": ["Blender"],
+      "roles": ["3D Artist"],
+      "additional":  ["Made using Blender 3D", "Based on Jisulife Pro1s"],
+      "filePath": "/assets/img/3D/jisu",
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
+      "title": "Mouse ",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+      "tools": ["Blender"],
+      "roles": ["3D Artist"],
+      "additional":  ["Made using Blender 3D", "Based on Attack Shark X6"],
+      "filePath": "/assets/img/3D/mouse",
+      "media":  ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"],
+      "remarks": []
+    },
+    {
+      "category": "3D WORKS",
       "title": "Macro ",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       "tools": ["Blender"],
