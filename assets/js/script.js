@@ -51,7 +51,7 @@ let spanIndex = -1;
 
 //json
 let lastJsonID = 0;
-const randomString = 'cfVxZfWxtF'; //https://www.random.org/strings/
+const randomString = 'cfVxKfWxtF'; //https://www.random.org/strings/
 
 function loadJson(type) {
     const typeMap = {
@@ -62,7 +62,7 @@ function loadJson(type) {
     
     const changeChecker = localStorage.getItem('changeChecker');
     let isDataChanged = false;
-    if (changeChecker) {
+    if (changeChecker && !debugMode) {
         if(changeChecker != randomString){
             isDataChanged = true;
             if (debugMode) console.log('updating data');
@@ -764,7 +764,7 @@ function populateFeaturedWorks(games, artworks, websites){
         gameTitle.addEventListener('click', () => loadItem('games', game.id));
         createNewElement('p', "", galleryRight, 'details-description','', `${game.description}<br><br>`);
         
-        game.additional.forEach(additionalInfo =>{
+        game.additional.slice(0, 5).forEach(additionalInfo =>{
             createNewElement('p', "", galleryRight, 'details-description','', `<b>•&nbsp;&nbsp;${additionalInfo}`);
         });
         
@@ -1203,6 +1203,34 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
                 }
             });
         });
+    }
+     
+     if(item.downloadLink[0] != "" && item.downloadLink[1] != "hide"){
+        const downloadDiv = createNewElement('div', "", galleryContainer, 'game-details-container game-info', '', '');
+        downloadDiv.style.flexDirection = 'column';
+        downloadDiv.style.marginTop = '50px';
+        if(item.collaborators && !item.remarks.includes("solo")){
+            downloadDiv.style.marginBottom = '-50px';
+        }
+        
+    
+        const downloadList = createNewElement('div', "", downloadDiv, 'word-list', '', '');
+        downloadList.style.justifyContent = 'left';
+
+        const url = item.downloadLink[0];
+        const linkText = item.downloadLink[1];
+
+        const downloadText = createNewElement('p', "", downloadList, 'shuffle', '', '');
+        downloadText.classList.add('hoverable');
+        if(linkText != ""){
+            downloadText.innerHTML = `<u>${linkText}</u>`;
+        }else{
+            downloadText.innerHTML = `<u>Download Link</u>`;
+        }
+        downloadText.addEventListener('click', () => {
+            window.open(url, '_blank');
+        });
+            
     }
     
     if(item.collaborators && !item.remarks.includes("solo")){
