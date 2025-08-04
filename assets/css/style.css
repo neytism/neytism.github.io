@@ -1184,7 +1184,7 @@ opacity: 1;
 }
 
 .icon-list img{
-    width: calc(calc(100% / 8) - 10px);
+    width: calc(calc(100% / 7) - 20px);
     height: auto;
     border-radius: 0px;
     transition: border-radius 0.5s;
