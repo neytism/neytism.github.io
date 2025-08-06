@@ -1205,7 +1205,7 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
         });
     }
      
-     if(item.downloadLink[0] != "" && item.downloadLink[1] != "hide"){
+     if(type == "game" && item.downloadLink[0] != "" && item.downloadLink[1] != "hide"){
         const downloadDiv = createNewElement('div', "", galleryContainer, 'game-details-container game-info', '', '');
         downloadDiv.style.flexDirection = 'column';
         downloadDiv.style.marginTop = '50px';
