@@ -102,6 +102,11 @@ body.noscroll{
     color: white;
 }
 
+.download{
+    text-decoration: none;
+    color: white;
+}
+
 .navbar a.active{
     font-weight: 700;
 }
