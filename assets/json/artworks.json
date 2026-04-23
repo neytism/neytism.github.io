@@ -16,7 +16,7 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       "tools": ["Blender", "Substance Painter"],
       "roles": ["3D Artist", "Texture Artist"],
-      "additional":  ["Made using Blender 3D", "Textured using Susbance Painter", "Based on Nintendo GAMEBOY Advance SP"],
+      "additional":  ["Made using Blender 3D", "Textured using Substance Painter", "Based on Nintendo GAMEBOY Advance SP"],
       "filePath": "/assets/img/3D/gbasp",
       "media": [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg", "32.jpg", "33.jpg" ],
       "remarks": []
