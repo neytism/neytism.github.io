@@ -1,5 +1,6 @@
 [
     {
+      "id": "switch",
       "category": "3D WORKS",
       "title": "Switch",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
@@ -11,6 +12,7 @@
       "remarks": ["featured"]
     },
     {
+      "id": "gameboy-advance-sp",
       "category": "3D WORKS",
       "title": "Gameboy Advance SP",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
@@ -22,6 +24,7 @@
       "remarks": []
     },
     {
+      "id": "jisulife",
       "category": "3D WORKS",
       "title": "Jisulife",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
@@ -33,6 +36,7 @@
       "remarks": []
     },
     {
+      "id": "mouse",
       "category": "3D WORKS",
       "title": "Mouse ",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
@@ -44,6 +48,7 @@
       "remarks": []
     },
     {
+      "id": "macro",
       "category": "3D WORKS",
       "title": "Macro ",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
@@ -55,6 +60,7 @@
       "remarks": []
     },
     {
+      "id": "nintendo-switch",
       "category": "3D WORKS",
       "title": "Nintendo switch",
       "description": "Made using blender",
@@ -66,6 +72,7 @@
       "remarks": []
     },
     {
+      "id": "psp",
       "category": "3D WORKS",
       "title": "PSP",
       "description": "Made using blender",
@@ -77,6 +84,7 @@
       "remarks": []
     },
     {
+      "id": "gameboy",
       "category": "3D WORKS",
       "title": "Gameboy",
       "description": "Made using blender",
@@ -88,6 +96,7 @@
       "remarks": ["featured"]
     },
     {
+      "id": "atari",
       "category": "3D WORKS",
       "title": "Atari",
       "description": "Made using blender",
@@ -99,6 +108,7 @@
       "remarks": []
     },
     {
+      "id": "famicom",
       "category": "3D WORKS",
       "title": "Famicom",
       "description": "Made using blender",
@@ -110,6 +120,7 @@
       "remarks": []
     },
     {
+      "id": "ps1",
       "category": "3D WORKS",
       "title": "ps1",
       "description": "Made using blender",
@@ -121,6 +132,7 @@
       "remarks": []
     },
     {
+      "id": "pc-2025",
       "category": "3D WORKS",
       "title": "PC (2025)",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
@@ -132,6 +144,7 @@
       "remarks": ["featured"]
     },
     {
+      "id": "hapon",
       "category": "3D WORKS",
       "title": "Hapon",
       "description": "Made using blender",
@@ -143,6 +156,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "b12",
       "category": "3D WORKS",
       "title": "B12",
       "description": "Made using blender",
@@ -154,6 +168,7 @@
       "remarks": []
     },
     {
+      "id": "room-2020",
       "category": "3D WORKS",
       "title": "Room (2020)",
       "description": "Made using blender",
@@ -165,6 +180,7 @@
       "remarks": []
     },
     {
+      "id": "almusal",
       "category": "3D WORKS",
       "title": "Almusal",
       "description": "Made using blender",
@@ -176,6 +192,7 @@
       "remarks": ["featured"]
     },
     {
+      "id": "pjp-render",
       "category": "3D WORKS",
       "title": "Pjp Render",
       "description": "Made using blender",
@@ -187,6 +204,7 @@
       "remarks": []
     },
     {
+      "id": "pjp-cover",
       "category": "3D WORKS",
       "title": "Pjp Cover",
       "description": "Made using blender",
@@ -198,6 +216,7 @@
       "remarks": []
     },
     {
+      "id": "candy-bong-z-2020",
       "category": "3D WORKS",
       "title": "Candy Bong Z (2020)",
       "description": "Made using blender",
@@ -209,6 +228,7 @@
       "remarks": []
     },
     {
+      "id": "des-valeurs-redefinies",
       "category": "3D WORKS",
       "title": "Des Valeurs Redéfinies",
       "description": "3D and Contemporary art based on the Rene Margtitte's Les Valeurs Personnelles (1952, Oil on canvas) painting.",
@@ -220,6 +240,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "pc-2020",
       "category": "3D WORKS",
       "title": "pc (2020)",
       "description": "Made using blender",
@@ -231,6 +252,7 @@
       "remarks": ["hide"]
     },
     {
+      "id": "tape-measure",
       "category": "3D WORKS",
       "title": "Tape Measure",
       "description": "Made using blender",
@@ -242,6 +264,7 @@
       "remarks": []
     },
     {
+      "id": "onezo",
       "category": "3D WORKS",
       "title": "Onezo",
       "description": "Made using blender",
@@ -253,6 +276,7 @@
       "remarks": []
     },
     {
+      "id": "kharis-cafe-3d",
       "category": "3D WORKS",
       "title": "Kharis Cafe",
       "description": "Made using blender",
@@ -264,6 +288,7 @@
       "remarks": []
     },
     {
+      "id": "redmi-note-11-pro",
       "category": "3D WORKS",
       "title": "Redmi Note 11 Pro",
       "description": "Made using blender",
@@ -275,6 +300,7 @@
       "remarks": []
     },
     {
+      "id": "coolab-studios",
       "category": "3D WORKS",
       "title": "Coolab Studios",
       "description": "Made using blender",
@@ -286,6 +312,7 @@
       "remarks": []
     },
     {
+      "id": "concept-art-1",
       "category": "CONCEPT ART",
       "title": "Concept Art 1",
       "description": "Made using Photoshop",
@@ -297,6 +324,7 @@
       "remarks": []
     },
     {
+      "id": "concept-art-2",
       "category": "CONCEPT ART",
       "title": "Concept Art 2",
       "description": "Made using Photoshop",
@@ -308,6 +336,7 @@
       "remarks": []
     },
     {
+      "id": "storyboard-1",
       "category": "CONCEPT ART",
       "title": "Storyboard 1",
       "description": "Made using Photoshop",
@@ -319,6 +348,7 @@
       "remarks": []
     },
     {
+      "id": "map-design-1",
       "category": "CONCEPT ART",
       "title": "Map Design 1",
       "description": "Made using Photoshop",
@@ -330,6 +360,7 @@
       "remarks": []
     },
     {
+      "id": "athenas-legality-invitation",
       "category": "GRAPHIC DESIGN",
       "title": "Athena's Legality Invitation",
       "description": "Made using Illustrator",
@@ -341,6 +372,7 @@
       "remarks": []
     },
     {
+      "id": "chloes-legality-invitation",
       "category": "GRAPHIC DESIGN",
       "title": "Chloe's Legality Invitation",
       "description": "Made using Illustrator",
@@ -352,6 +384,7 @@
       "remarks": []
     },
     {
+      "id": "wendis-legality-invitation",
       "category": "GRAPHIC DESIGN",
       "title": "Wendi's Legality Invitation",
       "description": "Made using Illustrator",
@@ -363,6 +396,7 @@
       "remarks": []
     },
     {
+      "id": "remix",
       "category": "GRAPHIC DESIGN",
       "title": "Remix",
       "description": "Made using Illustrator",
@@ -374,6 +408,7 @@
       "remarks": []
     },
     {
+      "id": "kyla-and-blanche",
       "category": "GRAPHIC DESIGN",
       "title": "Kyla and Blanche",
       "description": "Made using Illustrator",
@@ -385,6 +420,7 @@
       "remarks": []
     },
     {
+      "id": "glance-through-freelance",
       "category": "3D WORKS",
       "title": "Glance Through Freelance",
       "description": "Made using Illustrator",
@@ -396,6 +432,7 @@
       "remarks": []
     },
     {
+      "id": "critmedia-event",
       "category": "GRAPHIC DESIGN",
       "title": "CritMedia Event",
       "description": "Made using Illustrator",
@@ -407,6 +444,7 @@
       "remarks": []
     },
     {
+      "id": "oh-my-denim",
       "category": "GRAPHIC DESIGN",
       "title": "Oh! My Denim",
       "description": "Made using Illustrator",
@@ -418,6 +456,7 @@
       "remarks": []
     },
     {
+      "id": "oh-my-denim-logo",
       "category": "LOGO DESIGN",
       "title": "Oh! My Denim Logo",
       "description": "Made using Illustrator",
@@ -429,6 +468,7 @@
       "remarks": []
     },
     {
+      "id": "ict-guild-esports-logo",
       "category": "LOGO DESIGN",
       "title": "ICT GUILD ESPORTS Logo",
       "description": "Made using Illustrator",
@@ -440,6 +480,7 @@
       "remarks": []
     },
     {
+      "id": "smhs-focused",
       "category": "LOGO DESIGN",
       "title": "SMHS Focused",
       "description": "Made using Illustrator",
@@ -451,6 +492,7 @@
       "remarks": []
     },
     {
+      "id": "jayflow",
       "category": "LOGO DESIGN",
       "title": "Jayflow",
       "description": "Made using Illustrator",
@@ -462,6 +504,7 @@
       "remarks": []
     },
     {
+      "id": "cafe-aesthetic",
       "category": "LOGO DESIGN",
       "title": "Cafe Aesthetic",
       "description": "Made using Illustrator",
@@ -473,6 +516,7 @@
       "remarks": []
     },
     {
+      "id": "pjp-construction-and-services",
       "category": "LOGO DESIGN",
       "title": "PJP Construction and Services",
       "description": "Made using Illustrator",
@@ -484,6 +528,7 @@
       "remarks": []
     },
     {
+      "id": "logo-kharis-cafe",
       "category": "LOGO DESIGN",
       "title": "Kharis Cafe",
       "description": "Made using Illustrator",
@@ -495,6 +540,7 @@
       "remarks": []
     },
     {
+      "id": "sumulong-programming-society",
       "category": "LOGO DESIGN",
       "title": "Sumulong Programming Society",
       "description": "Made using Illustrator",
@@ -506,6 +552,7 @@
       "remarks": []
     },
     {
+      "id": "concept-college-library-app",
       "category": "UI DESIGN",
       "title": "Concept College Library App",
       "description": "Made using Photoshop",
@@ -517,6 +564,7 @@
       "remarks": []
     },
     {
+      "id": "ciit-s-h-o-p",
       "category": "UI DESIGN",
       "title": "CIIT S.H.O.P.",
       "description": "Made using Photoshop",
@@ -533,6 +581,7 @@
       "remarks": []
     },
     {
+      "id": "gizmoverse",
       "category": "UI DESIGN",
       "title": "GIZMOVERSE",
       "description": "Made using Photoshop",
@@ -549,6 +598,7 @@
       "remarks": []
     },
     {
+      "id": "deadpool-fan-website",
       "category": "UI DESIGN",
       "title": "Deadpool Fan Website",
       "description": "Made using Photoshop",
@@ -562,6 +612,7 @@
       "remarks": []
     },
     {
+      "id": "komyut",
       "category": "DIGITAL ART",
       "title": "Komyut",
       "description": "Made using Photoshop",
@@ -573,6 +624,7 @@
       "remarks": ["quoted", "featured"]
     },
     {
+      "id": "barya-lang-po-sa-lamesa",
       "category": "DIGITAL ART",
       "title": "Barya Lang Po Sa Lamesa",
       "description": "Made using Photoshop",
@@ -584,6 +636,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "lone",
       "category": "DIGITAL ART",
       "title": "Lone",
       "description": "Made using Photoshop",
@@ -595,6 +648,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "baliktanaw",
       "category": "DIGITAL ART",
       "title": "Baliktanaw",
       "description": "Made using Photoshop",
@@ -606,6 +660,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "sunder",
       "category": "DIGITAL ART",
       "title": "Sunder",
       "description": "Made using Photoshop",
@@ -617,6 +672,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "mask",
       "category": "DIGITAL ART",
       "title": "Mask",
       "description": "Made using Photoshop",
@@ -628,6 +684,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "last",
       "category": "DIGITAL ART",
       "title": "Last",
       "description": "Made using Photoshop",
@@ -639,6 +696,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "pansin-poster",
       "category": "DIGITAL ART",
       "title": "Pansin Poster",
       "description": "Made using Photoshop",
@@ -650,6 +708,7 @@
       "remarks": []
     },
     {
+      "id": "album-art-1",
       "category": "DIGITAL ART",
       "title": "Album Art 1",
       "description": "Made using Photoshop",
@@ -661,6 +720,7 @@
       "remarks": []
     },
     {
+      "id": "album-art-2",
       "category": "DIGITAL ART",
       "title": "Album Art 2",
       "description": "Made using Photoshop",
@@ -672,6 +732,7 @@
       "remarks": []
     },
     {
+      "id": "album-art-3",
       "category": "DIGITAL ART",
       "title": "Album Art 3",
       "description": "Made using Photoshop",
@@ -683,6 +744,7 @@
       "remarks": []
     },
     {
+      "id": "album-art-4",
       "category": "DIGITAL ART",
       "title": "Album Art 4",
       "description": "Made using Photoshop",
@@ -694,6 +756,7 @@
       "remarks": []
     },
     {
+      "id": "album-art-5",
       "category": "DIGITAL ART",
       "title": "Album Art 5",
       "description": "Made using Photoshop",
@@ -705,6 +768,7 @@
       "remarks": []
     },
     {
+      "id": "dangal-ng-haraya",
       "category": "TRADITIONAL ART",
       "title": "Dangal ng Haraya",
       "description": "Acrylic",
@@ -716,6 +780,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "aeonic",
       "category": "TRADITIONAL ART",
       "title": "Aeonic",
       "description": "Acrylic",
@@ -727,6 +792,7 @@
       "remarks": ["quoted"]
     },
     {
+      "id": "ngiti-sa-likod-ng-kahirapan",
       "category": "TRADITIONAL ART",
       "title": "Ngiti Sa Likod Ng Kahirapan",
       "description": "Acrylic",
@@ -738,6 +804,7 @@
       "remarks": ["quoted", "featured"]
     },
     {
+      "id": "scorpion",
       "category": "TRADITIONAL ART",
       "title": "Scorpion",
       "description": "Ballpoint Pens",
@@ -749,6 +816,7 @@
       "remarks": []
     },
     {
+      "id": "tony-stark",
       "category": "TRADITIONAL ART",
       "title": "Tony Stark",
       "description": "Colored Pencils",
@@ -760,6 +828,7 @@
       "remarks": []
     },
     {
+      "id": "liza-soberano",
       "category": "TRADITIONAL ART",
       "title": "Liza Soberano",
       "description": "Colored Pencils",
@@ -771,6 +840,7 @@
       "remarks": []
     },
     {
+      "id": "ed-sheeran",
       "category": "TRADITIONAL ART",
       "title": "Ed Sheeran",
       "description": "Colored Pencils",
@@ -782,6 +852,7 @@
       "remarks": []
     },
     {
+      "id": "pewdiepie",
       "category": "TRADITIONAL ART",
       "title": "PewDiePie",
       "description": "Colored Pencils",
@@ -793,6 +864,7 @@
       "remarks": []
     },
     {
+      "id": "taylor-swift",
       "category": "TRADITIONAL ART",
       "title": "Taylor Swift",
       "description": "Colored Pencils",
@@ -804,6 +876,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-1",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 1",
       "description": "",
@@ -815,6 +888,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-2",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 2",
       "description": "",
@@ -826,6 +900,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-3",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 3",
       "description": "",
@@ -837,6 +912,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-4",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 4",
       "description": "",
@@ -848,6 +924,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-5",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 5",
       "description": "",
@@ -859,6 +936,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-6",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 6",
       "description": "",
@@ -870,6 +948,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-7",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 7",
       "description": "",
@@ -881,6 +960,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-8",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 8",
       "description": "",
@@ -892,6 +972,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-9",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 9",
       "description": "",
@@ -903,6 +984,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-10",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 10",
       "description": "",
@@ -914,6 +996,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-11",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 11",
       "description": "",
@@ -925,6 +1008,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-12",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 12",
       "description": "",
@@ -936,6 +1020,7 @@
       "remarks": []
     },
     {
+      "id": "photoraphy-sample-13",
       "category": "PHOTOGRAPHY",
       "title": "Photoraphy Sample 13",
       "description": "",
@@ -947,6 +1032,7 @@
       "remarks": ["hide"]
     },
     {
+      "id": "moodboard-manila-1",
       "category": "VIDEOGRAPHY",
       "title": "Moodboard Manila 1",
       "description": "Colored Pencils",
@@ -958,6 +1044,7 @@
       "remarks": []
     },
     {
+      "id": "moodboard-manila-2",
       "category": "VIDEOGRAPHY",
       "title": "Moodboard Manila 2",
       "description": "Colored Pencils",
@@ -969,6 +1056,7 @@
       "remarks": []
     },
     {
+      "id": "moodboard-manila-3",
       "category": "VIDEOGRAPHY",
       "title": "Moodboard Manila 3",
       "description": "Colored Pencils",
@@ -980,6 +1068,7 @@
       "remarks": []
     },
     {
+      "id": "chloes-legality-vid",
       "category": "VIDEOGRAPHY",
       "title": "Chloe's Legality",
       "description": "Colored Pencils",
@@ -991,6 +1080,7 @@
       "remarks": []
     },
     {
+      "id": "pansin-short-film",
       "category": "VIDEOGRAPHY",
       "title": "Pansin Short Film",
       "description": "Colored Pencils",
@@ -1002,6 +1092,7 @@
       "remarks": []
     },
     {
+      "id": "gaming-video-edit-sample",
       "category": "VIDEOGRAPHY",
       "title": "Gaming Video Edit Sample",
       "description": "Colored Pencils",
@@ -1013,6 +1104,7 @@
       "remarks": []
     },
     {
+      "id": "sulok-cafe",
       "category": "VIDEOGRAPHY",
       "title": "Sulok Cafe",
       "description": "Colored Pencils",
@@ -1024,6 +1116,7 @@
       "remarks": []
     },
     {
+      "id": "janels-graduation",
       "category": "VIDEOGRAPHY",
       "title": "Janel's Graduation",
       "description": "Colored Pencils",
@@ -1035,6 +1128,7 @@
       "remarks": []
     },
     {
+      "id": "sto-nino-de-pandacan-parish",
       "category": "VIDEOGRAPHY",
       "title": "Sto. Niño De Pandacan Parish",
       "description": "Colored Pencils",
@@ -1046,6 +1140,7 @@
       "remarks": []
     },
     {
+      "id": "baliktanaw-event",
       "category": "VIDEOGRAPHY",
       "title": "Baliktanaw Event",
       "description": "Colored Pencils",
@@ -1057,6 +1152,7 @@
       "remarks": []
     },
     {
+      "id": "metasymbology-avp",
       "category": "VIDEOGRAPHY",
       "title": "Metasymbology AVP",
       "description": "Colored Pencils",
@@ -1068,6 +1164,7 @@
       "remarks": []
     },
     {
+      "id": "estelles-legality",
       "category": "VIDEOGRAPHY",
       "title": "Estelle's Legality",
       "description": "Colored Pencils",
@@ -1079,6 +1176,7 @@
       "remarks": []
     },
     {
+      "id": "sneaker-youtuber-edit",
       "category": "VIDEOGRAPHY",
       "title": "Sneaker Youtuber Edit",
       "description": "Colored Pencils",
@@ -1089,6 +1187,4 @@
       "media":  ["0px_5awnAPs","5tNX1zEtmm0","fRu9dv-eb3o","b7OWv9NQ83Y","LqKqcwSTbGA?si0","Dr-UXYgkZE0","MpxwEA_Negg"],
       "remarks": []
     }
-    
   ]
-  

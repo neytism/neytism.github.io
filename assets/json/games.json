@@ -1,5 +1,6 @@
 [
     {
+        "id": "stain",
         "title": "ST:AIN",
         "description": "A 3D third-person adventure game featuring SAINT 1, a sanitation robot tasked with collecting and properly disposing of trash. Focuses on exploration, story, and raising awareness about waste management.",
         "year": "2025",
@@ -64,6 +65,7 @@
         ]
     },
     {
+        "id": "interweave",
         "title": "Interweave",
         "description": "A VR horror game for Meta Quest set in a college campus where players collect clues, solve puzzles, and evade a lurking monster. Designed for an immersive and tense experience with interactive environments.",
         "year": "2023",
@@ -127,6 +129,7 @@
         ]
     },
     {
+        "id": "sudoku-showdown",
         "title": "Sudoku Showdown!",
         "description": "A competitive local multiplayer party game where players race to solve a Sudoku-inspired puzzle by picking up and placing numbers correctly.",
         "year": "2024",
@@ -168,6 +171,7 @@
         ]
     },
     {
+        "id": "cup-it",
         "title": "Cup It!",
         "description": "A mobile game inspired by the classic party game beer pong. Players must aim, measure force and angle, and overcome obstacles to land the ball in the cup while using the fewest attempts and collecting all stars in each level.",
         "year": "2024",
@@ -183,7 +187,7 @@
             "Developed using Unity and C#",
             "Independently developed",
             "Designed and modeled all 3D game elements",
-            "Utilized Unity’s physics system"
+            "Utilized Unity's physics system"
         ],
         "filePath": "/assets/img/Games/cupit",
         "media": [
@@ -210,6 +214,7 @@
         ]
     },
     {
+        "id": "bare-minimum-pool-game",
         "title": "Bare Minimum Pool Game",
         "description": "A simplified 8-ball pool game with core mechanics and a functional multiple-view system. Built for a straightforward and playable experience.",
         "year": "2024",
@@ -225,7 +230,7 @@
             "Developed using Unity and C#",
             "Independently developed",
             "Implemented all 8-ball pool mechanics",
-            "Utilized Unity’s physics system",
+            "Utilized Unity's physics system",
             "Designed and modeled all 3D game elements",
             "Implemented a multiple-view system"
         ],
@@ -257,6 +262,7 @@
         ]
     },
     {
+        "id": "mistake",
         "title": "Mistake",
         "description": "A story-driven game about morality, where players recall past events during an investigation, gather clues, and uncover the truth.",
         "year": "2023",
@@ -275,7 +281,7 @@
             "Collaborative project",
             "Developer and programmer",
             "Created 3D models for the map",
-            "Utilized Pixel Crusher’s dialogue system",
+            "Utilized Pixel Crusher's dialogue system",
             "Handled event branching",
             "Developed a custom sound manager"
         ],
@@ -309,6 +315,7 @@
         "remarks": []
     },
     {
+        "id": "paper-towns",
         "title": "Paper Towns",
         "description": "A 2D top-down survival game where players defeat enemies, gain experience, and level up stats. Developed as a challenge project without using built-in physics, colliders, or vector functions.",
         "year": "2023",
@@ -349,6 +356,7 @@
         ]
     },
     {
+        "id": "pong-dot-product",
         "title": "Pong (Dot Product)",
         "description": "A 2D game based on the classic Pong, developed as a challenge project without using built-in physics, colliders, or vector functions. Features both player vs. AI (with difficulty settings) and player vs. player modes.",
         "year": "2024",
@@ -390,6 +398,7 @@
         "remarks": []
     },
     {
+        "id": "drift",
         "title": "Drift",
         "description": "A 2D top-down classic racing game, developed as a challenge project implementing AI in other racers. Players can select difficulty for variation, with leaderboards for tracking. Features include drifting and responsive driving controls.",
         "year": "2023",
@@ -434,6 +443,7 @@
         "remarks": []
     },
     {
+        "id": "reverto",
         "title": "REVERTO",
         "description": "A 2D top-down roguelike survival game where players defeat enemies, gain experience, and level up stats. Features various enemy types and weapon options.",
         "year": "2023",
@@ -477,6 +487,7 @@
         "remarks": []
     },
     {
+        "id": "scoreboard",
         "title": "Scoreboard",
         "description": "A customizable scoreboard tool designed for basketball games, developed as a challenge project to enhance Unity UI skills. This solo project includes a tutorial for easy use and features shortcut keys for efficient operation. Users can configure various settings such as colors, time, names, and logos for a personalized experience.",
         "year": "2023",
@@ -520,6 +531,7 @@
         ]
     },
     {
+        "id": "starship",
         "title": "STARSHIP",
         "description": "A 2D top-down survival bullet-hell game set in space, where players battle different enemy types using various skills and characters. Includes an achievement system and save/load functionality.",
         "year": "2022",

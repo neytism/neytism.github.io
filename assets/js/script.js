@@ -50,8 +50,8 @@ var spans = [];
 let spanIndex = -1;
 
 //json
-let lastJsonID = 0;
-const randomString = 'cfVxKfWxtG'; //https://www.random.org/strings/
+let lastJsonIdx = 0;
+const randomString = 'DnXgZIAlHd'; //https://www.random.org/strings/
 
 function loadJson(type) {
     const typeMap = {
@@ -92,11 +92,11 @@ function loadJson(type) {
         .then(data => {
             if (debugMode) console.log(`loading new data`);
 
-            let lastJsonID = 0;
+            let lastJsonIdx = 0;
             let portfolio = [];
             data.forEach(item => {
                 if (!item.remarks.includes("hide")) {
-                    item.id = ++lastJsonID;
+                    item.idx = ++lastJsonIdx;
                     portfolio.push(item);
                   }
             });
@@ -1259,10 +1259,10 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
             }
         });
     }
-    createPageItemNavigator(type, galleryContainer, item.id, maxId);
+    createPageItemNavigator(type, galleryContainer, item, maxId);
 }
 
-function createPageItemNavigator(type, parentElement, currentItemId, maxId){
+function createPageItemNavigator(type, parentElement, currentItem, maxId){
     
     const pageNavDiv = createNewElement('div', "", parentElement, 'game-details-container game-info', '', '');
     pageNavDiv.style.flex = 'column';
@@ -1287,19 +1287,27 @@ function createPageItemNavigator(type, parentElement, currentItemId, maxId){
     if(type == 'artwork') itemCategory = 'artworks';
     if(type == 'website') itemCategory = 'websites';
     
-    if(currentItemId != 1){
+    if(currentItem.idx != 1){
         const prevGameButton = createNewElement('div', "", pageNavButtonHolder, 'hoverable page-nav-button prev floating-button shuffle', '', '[ PREV ]');     
         prevGameButton.addEventListener('click', (e) => {
-            loadItem(itemCategory, currentItemId - 1);
+            findItem(itemCategory, currentItem.idx - 1).then(prevItem => {
+                loadItem(itemCategory, prevItem.id);
+            });
         });
     }
     
-    if(currentItemId != maxId){
+    if(currentItem.idx != maxId){
         const nextGameButton = createNewElement('div', "", pageNavButtonHolder, 'hoverable page-nav-button next floating-button shuffle', '', '[ NEXT ]');
         nextGameButton.addEventListener('click', (e) => {
-            loadItem(itemCategory, currentItemId + 1);
+            findItem(itemCategory, currentItem.idx + 1).then(nextItem => {
+                loadItem(itemCategory, nextItem.id);
+            });
         });
     }
+}
+
+function findItem(category, idx) {
+    return loadJson(category).then((data) => data?.find(a => a.idx === idx));
 }
 
 function loadItem(category, id) {
