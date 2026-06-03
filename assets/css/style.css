@@ -1391,6 +1391,7 @@ opacity: 1;
 }
 
 .bullet {
+    flex: 0 0 15px;
     padding-right: 15px; /* Space between bullet and text */
     user-select: none; 
 }
@@ -1502,6 +1503,10 @@ opacity: 1;
         font-size: clamp(13px, 2vw, 1vw);
     }
 
+    .bullet-desc {
+        padding-left: 15px;
+    }
+    
     .about-left{
         padding-bottom: 0;
     }

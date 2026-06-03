@@ -765,7 +765,9 @@ function populateFeaturedWorks(games, artworks, websites){
         createNewElement('p', "", galleryRight, 'details-description','', `${game.description}<br><br>`);
         
         game.additional.slice(0, 5).forEach(additionalInfo =>{
-            createNewElement('p', "", galleryRight, 'details-description','', `<b>•&nbsp;&nbsp;${additionalInfo}`);
+            const bulletHolder = createNewElement('div', "", galleryRight, 'bullet-desc',{style:`padding-left: 0px;`}, '');
+            createNewElement('span', "", bulletHolder, 'bullet','', `<b>`);
+            createNewElement('p', "", bulletHolder, 'details-description','', `<b>${additionalInfo}`);
         });
         
         createNewElement('div', "", section, 'background','', '');        
@@ -1083,7 +1085,9 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
     }
     
     item.additional.forEach(additionalInfo =>{
-        createNewElement('p', "", mainDetails, 'details-description', '', `<b>•&nbsp;&nbsp;${additionalInfo}`);
+        const bulletHolder = createNewElement('div', "", mainDetails, 'bullet-desc', {style:`padding-left: 0px;`}, '');
+        createNewElement('span', "", bulletHolder, 'bullet', '', `<b>`);
+        createNewElement('p', "", bulletHolder, 'details-description', '', `<b>${additionalInfo}`);
     });
     
     if(monoPage) return; 

@@ -294,7 +294,8 @@
         loadJson('games').then((games) => {
             loadJson('artworks').then((artworks) => {
                 loadJson('websites').then((websites) => {
-                    populateFeaturedWorks(games, artworks, websites); Awake();
+                    populateFeaturedWorks(games, artworks, websites);
+                    Awake();
                 })
             })
         });
