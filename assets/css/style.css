@@ -1380,6 +1380,30 @@ opacity: 1;
     cursor: default;
 }
 
+.about-item {
+    margin-bottom: 25px; 
+}
+
+.bullet-desc {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 25px;
+}
+
+.bullet {
+    padding-right: 15px; /* Space between bullet and text */
+    user-select: none; 
+}
+
+.bullet::before{
+    content: "•"; /* • ● ◦ ○ */
+}
+
+.bullet-desc p {
+    margin: 0;
+    line-height: 1.5;
+}
+
 @media (max-width: 820px) {
     
     .grain-overlay {

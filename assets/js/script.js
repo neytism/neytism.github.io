@@ -1172,6 +1172,34 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
         const youtubeContainerInfo = createNewElement('div', "", youtubeLinkDiv, 'youtube-embed', '', '');
         createNewElement('iframe', "", youtubeContainerInfo, '', { src: `https://www.youtube.com/embed/${item.videoLink}`, width: '1080', height: '1920', frameborder: '0', allowfullscreen: ''}, "");
     }
+     
+     if(type == "game" && item.downloadLink[0] != "" && item.downloadLink[1] != "hide"){
+        const downloadDiv = createNewElement('div', "", galleryContainer, 'game-details-container game-info', '', '');
+        downloadDiv.style.flexDirection = 'column';
+        downloadDiv.style.marginTop = '50px';
+        if(item.collaborators && !item.remarks.includes("solo")){
+            downloadDiv.style.marginBottom = '-50px';
+        }
+        
+    
+        const downloadList = createNewElement('div', "", downloadDiv, 'word-list', '', '');
+        downloadList.style.justifyContent = 'left';
+
+        const url = item.downloadLink[0];
+        const linkText = item.downloadLink[1];
+
+        const downloadText = createNewElement('p', "", downloadList, 'shuffle', '', '');
+        downloadText.classList.add('hoverable');
+        if(linkText != ""){
+            downloadText.innerHTML = `<u>${linkText}</u>`;
+        }else{
+            downloadText.innerHTML = `<u>Download Link</u>`;
+        }
+        downloadText.addEventListener('click', () => {
+            window.open(url, '_blank');
+        });
+            
+    }
 
     if(item.additionalMedia){
         const additionalMedia = item.additionalMedia;
@@ -1203,34 +1231,6 @@ function createItemInfoSection(type, parentElement, item, maxId, monoPage){
                 }
             });
         });
-    }
-     
-     if(type == "game" && item.downloadLink[0] != "" && item.downloadLink[1] != "hide"){
-        const downloadDiv = createNewElement('div', "", galleryContainer, 'game-details-container game-info', '', '');
-        downloadDiv.style.flexDirection = 'column';
-        downloadDiv.style.marginTop = '50px';
-        if(item.collaborators && !item.remarks.includes("solo")){
-            downloadDiv.style.marginBottom = '-50px';
-        }
-        
-    
-        const downloadList = createNewElement('div', "", downloadDiv, 'word-list', '', '');
-        downloadList.style.justifyContent = 'left';
-
-        const url = item.downloadLink[0];
-        const linkText = item.downloadLink[1];
-
-        const downloadText = createNewElement('p', "", downloadList, 'shuffle', '', '');
-        downloadText.classList.add('hoverable');
-        if(linkText != ""){
-            downloadText.innerHTML = `<u>${linkText}</u>`;
-        }else{
-            downloadText.innerHTML = `<u>Download Link</u>`;
-        }
-        downloadText.addEventListener('click', () => {
-            window.open(url, '_blank');
-        });
-            
     }
     
     if(item.collaborators && !item.remarks.includes("solo")){

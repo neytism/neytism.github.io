@@ -15,6 +15,9 @@
             "Animator"
         ],
        "additional": [
+            "Interactive and Immersive Game Innovation Winner (3rd Inabel Awards 2026)",
+            "Kabataang Tagapagtaguyod ng Pandaigdigang Layunin Winner (3rd Inabel Awards 2026)",
+            "Best BSEMC Capstone Project (2025)",
             "Developed using Unity and C#",
             "Collaborative project",
             "Sole Programmer",
@@ -55,6 +58,14 @@
         "platforms": [
             "Windows, Android"
         ],
+        "additionalMedia": {
+            "3rd Inabel Awards 2026" : [
+                "18.jpg"
+            ],
+            "Meet the Devs: JENK GAMES" : [
+                "19.jpg"
+            ]
+        },
         "collaborators": {
             "EJ Andres": "https://www.linkedin.com/in/ediel-justine-andres-3a349234a/",
             "Jayem Lasquite": "https://www.linkedin.com/in/jay-lasquite/",
