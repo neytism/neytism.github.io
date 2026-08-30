@@ -15,6 +15,8 @@
             "Animator"
         ],
        "additional": [
+            "Top Award in Sustainability Communications and Breakthroughs and Innovations (22nd Philippine Quill Awards)",
+            "Award of Excellence: Sustainability Communications and Breakthroughs and Innovations (12th Philippine Student Quill Awards)",
             "Interactive and Immersive Game Innovation Winner (3rd Inabel Awards 2026)",
             "Kabataang Tagapagtaguyod ng Pandaigdigang Layunin Winner (3rd Inabel Awards 2026)",
             "Best BSEMC Capstone Project (2025)",
@@ -25,7 +27,6 @@
             "Used Substance Painter, Photoshop, and Blender for asset creation",
             "Intuitive system for level designers",
             "Event-based systems and organized coding",
-            "Utilized Yarn Spinner for dialogue",
             "Animated all NPC and player animations",
             "Designed UI",
             "Optimized for both PC and Android platforms",
@@ -59,6 +60,12 @@
             "Windows, Android"
         ],
         "additionalMedia": {
+            "22nd Philippine Quill Awards" : [
+                "20.jpg"
+            ],
+            "22nd Philippine Quill Awards (Event)" : [
+                "21.jpg"
+            ],
             "3rd Inabel Awards 2026" : [
                 "18.jpg"
             ],
