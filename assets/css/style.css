@@ -1277,7 +1277,7 @@ opacity: 1;
 }
 
 .front {
-    background-image: url('/assets/img/ccf3.gif');
+    background-image: url('/assets/img/ccf4.gif');
 }
 
 .back {
@@ -1480,7 +1480,6 @@ opacity: 1;
         max-height: 45px;
     }
     
-
     .game-images-container, .game-details-container {
         width: 100%;
     }

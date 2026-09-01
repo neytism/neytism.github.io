@@ -51,7 +51,7 @@ let spanIndex = -1;
 
 //json
 let lastJsonIdx = 0;
-const randomString = 'DnPgQIAlHd'; //https://www.random.org/strings/
+const randomString = 'DnPgQIClHd'; //https://www.random.org/strings/
 
 function loadJson(type) {
     const typeMap = {
